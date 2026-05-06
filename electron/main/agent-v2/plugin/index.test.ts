@@ -2,10 +2,58 @@ import { describe, expect, it, vi } from 'vitest'
 
 import type { LuminaPluginContext } from './context.js'
 import {
+  clampLuminaChatMaxOutputTokens,
   pickDefaultProvider,
   resolveEffectiveModelId,
   resolveProviderForRequest,
 } from './index.js'
+
+describe('clampLuminaChatMaxOutputTokens', () => {
+  it('caps official MiMo chat requests below opencode global max', () => {
+    const output = { maxOutputTokens: 32_000 }
+
+    clampLuminaChatMaxOutputTokens(
+      {
+        model: {
+          providerID: 'xiaomi',
+        },
+      },
+      output,
+    )
+
+    expect(output.maxOutputTokens).toBe(16_384)
+  })
+
+  it('caps regional MiMo Token Plan chat requests', () => {
+    const output = { maxOutputTokens: 131_072 }
+
+    clampLuminaChatMaxOutputTokens(
+      {
+        model: {
+          providerID: 'xiaomi-token-plan-sgp',
+        },
+      },
+      output,
+    )
+
+    expect(output.maxOutputTokens).toBe(16_384)
+  })
+
+  it('does not change other providers', () => {
+    const output = { maxOutputTokens: 32_000 }
+
+    clampLuminaChatMaxOutputTokens(
+      {
+        model: {
+          providerID: 'deepseek',
+        },
+      },
+      output,
+    )
+
+    expect(output.maxOutputTokens).toBe(32_000)
+  })
+})
 
 describe('pickDefaultProvider', () => {
   it('uses the first configured image provider instead of hard-coding Google', async () => {

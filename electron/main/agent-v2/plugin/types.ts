@@ -66,6 +66,17 @@ export const tool: ToolHelper = Object.assign(
 
 export interface Hooks {
   tool?: Record<string, ToolDefinition>
+  "chat.params"?: (
+    input: {
+      model: {
+        providerID: string
+        modelID: string
+      }
+    },
+    output: {
+      maxOutputTokens: number | undefined
+    },
+  ) => Promise<void>
   // Other opencode hooks exist but we don't use them yet. Add as needed.
 }
 

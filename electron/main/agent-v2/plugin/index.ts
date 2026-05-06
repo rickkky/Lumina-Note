@@ -25,6 +25,8 @@ import { dispatchImageGeneration } from './providers.js'
 import { writeImageToVault } from './output.js'
 import { tool, type Plugin, type PluginModule, type ToolContext } from './types.js'
 
+const MIMO_DEFAULT_OUTPUT_TOKEN_BUDGET = 16_384
+
 const VALID_PROVIDERS: readonly PluginImageProviderId[] = [
   'openai-image',
   'google-image',
@@ -54,8 +56,26 @@ Errors:
 - "no vault open" → ask the user to open a vault first.
 - Network/proxy failures are classified and retried by Lumina where safe. If generate_image returns a network/proxy timeout or connection-closed error, explain it once and do not call generate_image again unless the user explicitly asks to retry.`
 
+function isMimoProviderId(providerId: string): boolean {
+  return providerId === 'xiaomi' || providerId.startsWith('xiaomi-token-plan-')
+}
+
+export function clampLuminaChatMaxOutputTokens(
+  input: { model: { providerID: string } },
+  output: { maxOutputTokens: number | undefined },
+): void {
+  if (!isMimoProviderId(input.model.providerID)) return
+  output.maxOutputTokens = Math.min(
+    output.maxOutputTokens ?? MIMO_DEFAULT_OUTPUT_TOKEN_BUDGET,
+    MIMO_DEFAULT_OUTPUT_TOKEN_BUDGET,
+  )
+}
+
 const pluginFn: Plugin = async () => {
   return {
+    'chat.params': async (input, output) => {
+      clampLuminaChatMaxOutputTokens(input, output)
+    },
     tool: {
       generate_image: tool({
         description: GENERATE_IMAGE_DESCRIPTION,
