@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { shell } from "electron";
+import ignore, { type Ignore } from "ignore";
 
 export interface FileEntry {
   name: string;
@@ -13,70 +14,279 @@ export interface FileEntry {
   children: FileEntry[] | null;
 }
 
-// Directories to always skip during recursive listing (aligned with Tauri side)
-const IGNORED_DIRS = new Set(["node_modules", "target", ".git"]);
+export interface WorkspaceListing {
+  entries: FileEntry[];
+  /** Total entries discovered before truncation. */
+  totalEntries: number;
+  /** True when the walker stopped early because the cap was hit. */
+  truncated: boolean;
+  /** Directories that were skipped due to permission/EMFILE errors. */
+  unreadableDirCount: number;
+}
 
-function shouldSkipEntry(name: string): boolean {
+// Hard cap on how many entries (files + dirs combined) a workspace listing
+// will return. Beyond this, the walker stops and reports `truncated: true`
+// so the renderer can warn instead of OOM-ing on serialisation. 50k is well
+// past any reasonable note vault but small enough to keep the IPC payload
+// under ~5MB without per-file stat data.
+const MAX_WORKSPACE_ENTRIES = 50_000;
+
+// Directories that are almost never useful to surface in a notes/editor
+// workspace. Hard-coded for the common cases; .gitignore (when present) is
+// layered on top.
+const IGNORED_DIRS = new Set([
+  "node_modules",
+  ".git",
+  "target",
+  "dist",
+  "build",
+  ".next",
+  ".nuxt",
+  ".turbo",
+  ".cache",
+  ".venv",
+  "__pycache__",
+  ".pnpm-store",
+  "out",
+  "coverage",
+  ".idea",
+  ".vscode",
+  ".gradle",
+]);
+
+const IGNORED_FILES = new Set([".DS_Store", "Thumbs.db"]);
+
+function shouldSkipByName(name: string): boolean {
   if (IGNORED_DIRS.has(name)) return true;
+  if (IGNORED_FILES.has(name)) return true;
   // Skip hidden files/dirs, but keep .lumina (app config)
   if (name.startsWith(".") && name !== ".lumina") return true;
   return false;
 }
 
-async function listDirRecursive(dirPath: string): Promise<FileEntry[]> {
-  let entries: fs.Dirent[];
+/**
+ * Build an ignore matcher seeded with .gitignore at the given root, if it
+ * exists. Returns null when no .gitignore is present so callers can skip
+ * the per-entry matching cost.
+ */
+async function loadGitignore(rootPath: string): Promise<Ignore | null> {
   try {
-    entries = await fs.promises.readdir(dirPath, { withFileTypes: true });
-  } catch (err: unknown) {
-    // Gracefully handle permission errors and EMFILE — return empty instead of crashing
-    const code = (err as NodeJS.ErrnoException).code;
-    if (code === "EPERM" || code === "EACCES" || code === "EMFILE") {
-      return [];
-    }
-    throw err;
+    const content = await fs.promises.readFile(
+      path.join(rootPath, ".gitignore"),
+      "utf-8",
+    );
+    return ignore().add(content);
+  } catch {
+    return null;
   }
+}
 
-  const result: FileEntry[] = [];
-  for (const entry of entries) {
-    if (shouldSkipEntry(entry.name)) continue;
+interface WalkOptions {
+  /** Cap on number of entries to collect. */
+  maxEntries: number;
+  /** Optional .gitignore-style matcher (paths checked relative to root). */
+  ignoreMatcher: Ignore | null;
+}
 
-    const fullPath = path.join(dirPath, entry.name);
-    if (entry.isDirectory()) {
-      const children = await listDirRecursive(fullPath);
-      result.push({
-        name: entry.name,
+/**
+ * Iterative DFS walk of the workspace. Iterative (not recursive) so deep or
+ * pathological trees can't blow the call stack. Symlinks are not followed —
+ * `Dirent.isDirectory()` only returns true for real directories, so symlink
+ * loops are impossible by construction.
+ */
+async function walkWorkspace(
+  rootPath: string,
+  opts: WalkOptions,
+): Promise<WorkspaceListing> {
+  const root: FileEntry = {
+    name: path.basename(rootPath) || rootPath,
+    path: rootPath,
+    is_dir: true,
+    isDirectory: true,
+    size: null,
+    modified_at: null,
+    created_at: null,
+    children: [],
+  };
+
+  // Stack of dirs to descend into. Each frame carries the parent's
+  // children array so we can splice this dir's results in place.
+  const stack: Array<{ dirPath: string; parent: FileEntry[] }> = [
+    { dirPath: rootPath, parent: root.children! },
+  ];
+
+  let totalEntries = 0;
+  let unreadableDirCount = 0;
+  let truncated = false;
+
+  while (stack.length > 0 && !truncated) {
+    const { dirPath, parent } = stack.pop()!;
+
+    let dirents: fs.Dirent[];
+    try {
+      dirents = await fs.promises.readdir(dirPath, { withFileTypes: true });
+    } catch (err: unknown) {
+      const code = (err as NodeJS.ErrnoException).code;
+      if (
+        code === "EPERM" ||
+        code === "EACCES" ||
+        code === "EMFILE" ||
+        code === "ENOENT"
+      ) {
+        unreadableDirCount++;
+        continue;
+      }
+      throw err;
+    }
+
+    const localEntries: FileEntry[] = [];
+    const dirsToDescend: Array<{ entry: FileEntry; fullPath: string }> = [];
+
+    for (const dirent of dirents) {
+      if (shouldSkipByName(dirent.name)) continue;
+
+      const fullPath = path.join(dirPath, dirent.name);
+
+      if (opts.ignoreMatcher) {
+        // ignore matches against POSIX-style relative paths; trailing
+        // slash signals "this is a directory" so dir-only patterns
+        // (e.g. "foo/") match.
+        const rel = path
+          .relative(rootPath, fullPath)
+          .split(path.sep)
+          .join("/");
+        const candidate = dirent.isDirectory() ? rel + "/" : rel;
+        if (rel && opts.ignoreMatcher.ignores(candidate)) continue;
+      }
+
+      if (totalEntries >= opts.maxEntries) {
+        truncated = true;
+        break;
+      }
+      totalEntries++;
+
+      const entry: FileEntry = {
+        name: dirent.name,
         path: fullPath,
-        is_dir: true,
-        isDirectory: true,
+        is_dir: dirent.isDirectory(),
+        isDirectory: dirent.isDirectory(),
         size: null,
         modified_at: null,
         created_at: null,
-        children,
-      });
-    } else {
-      let stat: fs.Stats | null = null;
-      try {
-        stat = await fs.promises.stat(fullPath);
-      } catch {}
-      result.push({
-        name: entry.name,
-        path: fullPath,
-        is_dir: false,
-        isDirectory: false,
-        size: stat?.size ?? null,
-        modified_at: stat ? Math.floor(stat.mtimeMs) : null,
-        created_at: stat ? Math.floor(stat.birthtimeMs) : null,
-        children: null,
-      });
+        children: dirent.isDirectory() ? [] : null,
+      };
+      localEntries.push(entry);
+
+      if (entry.is_dir) dirsToDescend.push({ entry, fullPath });
+    }
+
+    // Sort within this directory: dirs first, then files, alphabetical.
+    localEntries.sort((a, b) => {
+      if (a.is_dir !== b.is_dir) return a.is_dir ? -1 : 1;
+      return a.name.localeCompare(b.name);
+    });
+
+    parent.push(...localEntries);
+
+    // Descend into subdirs (push in reverse so DFS order matches sort).
+    for (let i = dirsToDescend.length - 1; i >= 0; i--) {
+      const { entry, fullPath } = dirsToDescend[i];
+      stack.push({ dirPath: fullPath, parent: entry.children! });
     }
   }
 
-  // Sort: directories first, then files, alphabetically
-  result.sort((a, b) => {
-    if (a.is_dir !== b.is_dir) return a.is_dir ? -1 : 1;
-    return a.name.localeCompare(b.name);
-  });
-  return result;
+  return {
+    entries: root.children!,
+    totalEntries,
+    truncated,
+    unreadableDirCount,
+  };
+}
+
+interface WalkPathsOptions {
+  /** File extensions to keep, e.g. [".md"]. Lower-cased, matched suffix. */
+  extensions?: string[];
+  /** Cap on number of paths returned. Default 50k. */
+  maxPaths?: number;
+  /** Skip files larger than this. Default unlimited (size not checked unless > 0). */
+  maxFileSizeBytes?: number;
+}
+
+export interface WalkPathsResult {
+  paths: string[];
+  truncated: boolean;
+  /** Files that matched extension but were skipped due to size cap. */
+  skippedOversize: number;
+}
+
+/**
+ * Server-side flat enumeration for the indexer. Returns a list of file
+ * paths matching `extensions`, walking the workspace iteratively with the
+ * same ignore rules as `walkWorkspace`. Bounded; no tree shape, no stat
+ * unless `maxFileSizeBytes` is set.
+ */
+async function walkPaths(
+  rootPath: string,
+  opts: WalkPathsOptions,
+): Promise<WalkPathsResult> {
+  const exts = (opts.extensions ?? []).map((e) => e.toLowerCase());
+  const matchExt = (name: string) =>
+    exts.length === 0 || exts.some((e) => name.toLowerCase().endsWith(e));
+  const maxPaths = opts.maxPaths ?? MAX_WORKSPACE_ENTRIES;
+  const maxSize = opts.maxFileSizeBytes ?? 0;
+
+  const ignoreMatcher = await loadGitignore(rootPath);
+  const stack: string[] = [rootPath];
+  const paths: string[] = [];
+  let truncated = false;
+  let skippedOversize = 0;
+
+  while (stack.length > 0 && !truncated) {
+    const dirPath = stack.pop()!;
+    let dirents: fs.Dirent[];
+    try {
+      dirents = await fs.promises.readdir(dirPath, { withFileTypes: true });
+    } catch {
+      continue;
+    }
+
+    for (const dirent of dirents) {
+      if (shouldSkipByName(dirent.name)) continue;
+      const fullPath = path.join(dirPath, dirent.name);
+
+      if (ignoreMatcher) {
+        const rel = path
+          .relative(rootPath, fullPath)
+          .split(path.sep)
+          .join("/");
+        const candidate = dirent.isDirectory() ? rel + "/" : rel;
+        if (rel && ignoreMatcher.ignores(candidate)) continue;
+      }
+
+      if (dirent.isDirectory()) {
+        stack.push(fullPath);
+      } else if (dirent.isFile() && matchExt(dirent.name)) {
+        if (maxSize > 0) {
+          try {
+            const st = await fs.promises.stat(fullPath);
+            if (st.size > maxSize) {
+              skippedOversize++;
+              continue;
+            }
+          } catch {
+            continue;
+          }
+        }
+        if (paths.length >= maxPaths) {
+          truncated = true;
+          break;
+        }
+        paths.push(fullPath);
+      }
+    }
+  }
+
+  return { paths, truncated, skippedOversize };
 }
 
 export const fsHandlers: Record<
@@ -102,7 +312,30 @@ export const fsHandlers: Record<
   },
 
   async list_directory({ path: p }) {
-    return listDirRecursive(p as string);
+    const rootPath = p as string;
+    const ignoreMatcher = await loadGitignore(rootPath);
+    const result = await walkWorkspace(rootPath, {
+      maxEntries: MAX_WORKSPACE_ENTRIES,
+      ignoreMatcher,
+    });
+    return result.entries;
+  },
+
+  async list_workspace({ path: p }) {
+    const rootPath = p as string;
+    const ignoreMatcher = await loadGitignore(rootPath);
+    return walkWorkspace(rootPath, {
+      maxEntries: MAX_WORKSPACE_ENTRIES,
+      ignoreMatcher,
+    });
+  },
+
+  async fs_walk_paths({ path: p, extensions, maxPaths, maxFileSizeBytes }) {
+    return walkPaths(p as string, {
+      extensions: extensions as string[] | undefined,
+      maxPaths: maxPaths as number | undefined,
+      maxFileSizeBytes: maxFileSizeBytes as number | undefined,
+    });
   },
 
   async create_file({ path: p }) {

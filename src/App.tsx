@@ -662,12 +662,18 @@ function App() {
     };
   }, []);
 
-  // Build note index when file tree changes
+  // Build the note index whenever the vault changes. Triggered by vaultPath
+  // (not fileTree) so a single rename or external edit doesn't kick off a
+  // full re-index. The build itself is deferred via requestIdleCallback,
+  // bounded in size, and runs with a fixed-concurrency reader pool — see
+  // useNoteIndexStore.buildIndex for the cancellation/yield contract.
   useEffect(() => {
-    if (fileTree.length > 0) {
-      buildIndex(fileTree);
-    }
-  }, [fileTree, buildIndex]);
+    if (!vaultPath) return;
+    buildIndex(vaultPath);
+    return () => {
+      useNoteIndexStore.getState().cancelIndex();
+    };
+  }, [vaultPath, buildIndex]);
 
   // Prevent accidental close when there are unsaved changes
   useEffect(() => {

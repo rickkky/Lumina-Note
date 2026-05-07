@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import {
   FileEntry,
-  listDirectory,
+  listWorkspace,
   readFile,
   saveFile,
   createFile,
@@ -455,8 +455,19 @@ export const useFileStore = create<FileState>()(
               context: { path },
             });
           }
-          const tree = await listDirectory(path);
-          set({ fileTree: tree, isLoadingTree: false });
+          const listing = await listWorkspace(path);
+          set({ fileTree: listing.entries, isLoadingTree: false });
+          if (listing.truncated) {
+            reportOperationError({
+              source: "FileStore.setVaultPath",
+              action: "Open workspace",
+              error: new Error(
+                `Workspace has more than ${listing.totalEntries} entries; some paths were not loaded. Add ignore rules (.gitignore) to scope the vault.`,
+              ),
+              level: "warning",
+              context: { path, totalEntries: listing.totalEntries },
+            });
+          }
           await get().syncMobileWorkspace({ path, force: true });
         } catch (error) {
           reportOperationError({
@@ -476,9 +487,9 @@ export const useFileStore = create<FileState>()(
 
         set({ isLoadingTree: true });
         try {
-          const tree = await listDirectory(vaultPath);
-          set({ fileTree: tree, isLoadingTree: false });
-          useFavoriteStore.getState().pruneMissing(tree);
+          const listing = await listWorkspace(vaultPath);
+          set({ fileTree: listing.entries, isLoadingTree: false });
+          useFavoriteStore.getState().pruneMissing(listing.entries);
           void get().syncMobileWorkspace();
         } catch (error) {
           reportOperationError({

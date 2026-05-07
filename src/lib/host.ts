@@ -73,6 +73,42 @@ export async function listDirectory(path: string): Promise<FileEntry[]> {
   return invoke<FileEntry[]>("list_directory", { path });
 }
 
+export interface WorkspaceListing {
+  entries: FileEntry[];
+  totalEntries: number;
+  truncated: boolean;
+  unreadableDirCount: number;
+}
+
+export async function listWorkspace(path: string): Promise<WorkspaceListing> {
+  return invoke<WorkspaceListing>("list_workspace", { path });
+}
+
+export interface WalkPathsOptions {
+  extensions?: string[];
+  maxPaths?: number;
+  maxFileSizeBytes?: number;
+}
+
+export interface WalkPathsResult {
+  paths: string[];
+  truncated: boolean;
+  skippedOversize: number;
+}
+
+/**
+ * Server-side flat enumeration of files under `root` matching the given
+ * extensions, with the same default-deny + .gitignore rules as the
+ * workspace listing. Use this for indexers and scanners — never walk a
+ * lazily-loaded fileTree to discover files.
+ */
+export async function walkPaths(
+  root: string,
+  options: WalkPathsOptions = {},
+): Promise<WalkPathsResult> {
+  return invoke<WalkPathsResult>("fs_walk_paths", { path: root, ...options });
+}
+
 export async function createFile(path: string): Promise<void> {
   return invoke("create_file", { path });
 }

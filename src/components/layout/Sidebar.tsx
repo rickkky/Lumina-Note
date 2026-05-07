@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useMemo, useRef } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import { useFileStore } from "@/stores/useFileStore";
 import { useLocaleStore } from "@/stores/useLocaleStore";
 import { getDragData, setDragData } from "@/lib/dragState";
@@ -68,6 +68,54 @@ const FILE_TREE_ICON_PASSIVE_CLASS =
   "ui-tree-icon text-muted-foreground shrink-0 pointer-events-none";
 const FILE_TREE_LABEL_CLASS =
   "ui-tree-label truncate pointer-events-none";
+
+// Pixel height per row in the virtualized tree. Rows have py-1.5 padding
+// plus icon (~16px), so ~28-30px in practice. We err toward the upper
+// bound so the virtualizer never undersizes (avoids visible jumps).
+const FILE_TREE_ROW_HEIGHT = 30;
+
+export type FileTreeRow =
+  | { kind: "entry"; entry: FileEntry; level: number; key: string }
+  | {
+      kind: "creating";
+      parentPath: string;
+      level: number;
+      key: string;
+    };
+
+/**
+ * Flatten the file tree into a single ordered list of rows that respect
+ * the user's current expansion state. Inline create-input rows are
+ * inserted at the top of their parent folder so the user-visible order
+ * matches the pre-virtualization layout. The root-level create row is
+ * injected by the caller before this runs.
+ */
+export function flattenFileTree(
+  tree: FileEntry[],
+  expanded: Set<string>,
+  creating: CreatingState | null,
+  level: number,
+  out: FileTreeRow[],
+): FileTreeRow[] {
+  for (const entry of tree) {
+    out.push({ kind: "entry", entry, level, key: entry.path });
+
+    if (entry.is_dir && expanded.has(entry.path)) {
+      if (creating && creating.parentPath === entry.path) {
+        out.push({
+          kind: "creating",
+          parentPath: entry.path,
+          level: level + 1,
+          key: `__creating__:${entry.path}`,
+        });
+      }
+      if (entry.children && entry.children.length > 0) {
+        flattenFileTree(entry.children, expanded, creating, level + 1, out);
+      }
+    }
+  }
+  return out;
+}
 
 export function Sidebar({ onSwitchVault }: SidebarProps) {
   const { t } = useLocaleStore();
@@ -156,6 +204,25 @@ export function Sidebar({ onSwitchVault }: SidebarProps) {
   const [isExternalDragOver, setIsExternalDragOver] = useState(false);
   const [isFileTreeScrollActive, setIsFileTreeScrollActive] = useState(false);
   const fileTreeScrollFadeTimerRef = useRef<number | null>(null);
+  const fileTreeScrollRef = useRef<HTMLDivElement | null>(null);
+
+  // Flatten the (eagerly-loaded, ignore-filtered) tree into the visible
+  // ordered list of rows the virtualizer renders. We include a synthetic
+  // root-level "creating" row when the user is creating directly under
+  // the vault, so all rows go through one rendering path.
+  const fileTreeRows = useMemo<FileTreeRow[]>(() => {
+    const rows: FileTreeRow[] = [];
+    if (creating && creating.parentPath === vaultPath) {
+      rows.push({
+        kind: "creating",
+        parentPath: vaultPath ?? "",
+        level: 0,
+        key: `__creating__:root`,
+      });
+    }
+    flattenFileTree(fileTree, expandedPaths, creating, 0, rows);
+    return rows;
+  }, [fileTree, expandedPaths, creating, vaultPath]);
 
   const handleContextMenu = useCallback(
     (e: React.MouseEvent, entry: FileEntry) => {
@@ -434,9 +501,13 @@ export function Sidebar({ onSwitchVault }: SidebarProps) {
         onOpenFile={openFile}
       />
 
-      {/* File Tree */}
-      <div
-        className={cn(
+      {/* File Tree (virtualized) */}
+      <FileTreeVirtualized
+        scrollRef={fileTreeScrollRef}
+        rows={fileTreeRows}
+        empty={fileTree.length === 0 && !creating}
+        emptyLabel={t.file.emptyFolder}
+        scrollClass={cn(
           "sidebar-file-tree-scroll flex-1 overflow-auto py-2 px-2",
           "transition-[box-shadow,background-color] duration-fast ease-out-subtle",
           isFileTreeScrollActive && "is-scroll-active",
@@ -448,50 +519,27 @@ export function Sidebar({ onSwitchVault }: SidebarProps) {
         onDragOver={handleExternalDragOver}
         onDragLeave={handleExternalDragLeave}
         onDrop={handleExternalDrop}
-      >
-        {/* Root create input */}
-        {creating && creating.parentPath === vaultPath && (
-          <CreateInputRow
-            type={creating.type}
-            value={createValue}
-            onChange={setCreateValue}
-            onSubmit={handleCreateSubmit}
-            onCancel={handleCreateCancel}
-            level={0}
-          />
-        )}
-        {fileTree.length === 0 && !creating ? (
-          <div className="px-4 py-8 text-center text-muted-foreground ui-tree-label">
-            {t.file.emptyFolder}
-          </div>
-        ) : (
-          fileTree.map((entry) => (
-            <FileTreeItem
-              key={entry.path}
-              entry={entry}
-              currentFile={currentFile}
-              selectedPath={selectedPath}
-              onSelect={handleSelect}
-              onPermanentOpen={handlePermanentOpen}
-              onContextMenu={handleContextMenu}
-              level={0}
-              renamingPath={renamingPath}
-              renameValue={renameValue}
-              setRenameValue={setRenameValue}
-              onRenameSubmit={handleRename}
-              onRenameCancel={() => setRenamingPath(null)}
-              expandedPaths={expandedPaths}
-              toggleExpanded={toggleExpanded}
-              creating={creating}
-              createValue={createValue}
-              setCreateValue={setCreateValue}
-              onCreateSubmit={handleCreateSubmit}
-              onCreateCancel={handleCreateCancel}
-              vaultPath={vaultPath}
-            />
-          ))
-        )}
-      </div>
+        rowProps={{
+          currentFile,
+          selectedPath,
+          onSelect: handleSelect,
+          onPermanentOpen: handlePermanentOpen,
+          onContextMenu: handleContextMenu,
+          renamingPath,
+          renameValue,
+          setRenameValue,
+          onRenameSubmit: handleRename,
+          onRenameCancel: () => setRenamingPath(null),
+          expandedPaths,
+          toggleExpanded,
+          creating,
+          createValue,
+          setCreateValue,
+          onCreateSubmit: handleCreateSubmit,
+          onCreateCancel: handleCreateCancel,
+          vaultPath,
+        }}
+      />
 
       {/* Context Menu */}
       {contextMenu && contextMenu.entry && (
@@ -760,6 +808,130 @@ function CreateInputRow({
   );
 }
 
+// ─── FileTreeVirtualized ────────────────────────────────────────────────
+// Owns the scroll viewport and the @tanstack/react-virtual bridge.
+// Receives a pre-flattened rows array so all of the tree-shape logic
+// (expansion state, inline create rows, ordering) stays in one place
+// (`flattenFileTree`) and the renderer only worries about positioning.
+
+interface FileTreeRowProps {
+  currentFile: string | null;
+  selectedPath: string | null;
+  onSelect: (entry: FileEntry) => void;
+  onPermanentOpen: (entry: FileEntry) => void;
+  onContextMenu: (e: React.MouseEvent, entry: FileEntry) => void;
+  renamingPath: string | null;
+  renameValue: string;
+  setRenameValue: (value: string) => void;
+  onRenameSubmit: () => void;
+  onRenameCancel: () => void;
+  expandedPaths: Set<string>;
+  toggleExpanded: (path: string) => void;
+  creating: CreatingState | null;
+  createValue: string;
+  setCreateValue: (value: string) => void;
+  onCreateSubmit: () => void;
+  onCreateCancel: () => void;
+  vaultPath: string | null;
+}
+
+interface FileTreeVirtualizedProps {
+  scrollRef: React.MutableRefObject<HTMLDivElement | null>;
+  rows: FileTreeRow[];
+  empty: boolean;
+  emptyLabel: string;
+  scrollClass: string;
+  onScroll: () => void;
+  onClick: (e: React.MouseEvent) => void;
+  onDragOver: (e: React.DragEvent) => void;
+  onDragLeave: (e: React.DragEvent) => void;
+  onDrop: (e: React.DragEvent) => void;
+  rowProps: FileTreeRowProps;
+}
+
+function FileTreeVirtualized({
+  scrollRef,
+  rows,
+  empty,
+  emptyLabel,
+  scrollClass,
+  onScroll,
+  onClick,
+  onDragOver,
+  onDragLeave,
+  onDrop,
+  rowProps,
+}: FileTreeVirtualizedProps) {
+  const virtualizer = useVirtualizer({
+    count: rows.length,
+    getScrollElement: () => scrollRef.current,
+    estimateSize: () => FILE_TREE_ROW_HEIGHT,
+    overscan: 12,
+    getItemKey: (index) => rows[index]?.key ?? index,
+  });
+
+  return (
+    <div
+      ref={scrollRef}
+      className={scrollClass}
+      onScroll={onScroll}
+      onClick={onClick}
+      onDragOver={onDragOver}
+      onDragLeave={onDragLeave}
+      onDrop={onDrop}
+    >
+      {empty ? (
+        <div className="px-4 py-8 text-center text-muted-foreground ui-tree-label">
+          {emptyLabel}
+        </div>
+      ) : (
+        <div
+          style={{
+            height: virtualizer.getTotalSize(),
+            position: "relative",
+            width: "100%",
+          }}
+        >
+          {virtualizer.getVirtualItems().map((vi) => {
+            const row = rows[vi.index];
+            return (
+              <div
+                key={vi.key}
+                ref={virtualizer.measureElement}
+                data-index={vi.index}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  transform: `translateY(${vi.start}px)`,
+                }}
+              >
+                {row.kind === "entry" ? (
+                  <FileTreeItem
+                    entry={row.entry}
+                    level={row.level}
+                    {...rowProps}
+                  />
+                ) : (
+                  <CreateInputRow
+                    type={rowProps.creating!.type}
+                    value={rowProps.createValue}
+                    onChange={rowProps.setCreateValue}
+                    onSubmit={rowProps.onCreateSubmit}
+                    onCancel={rowProps.onCreateCancel}
+                    level={row.level}
+                  />
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── FileTreeItem ────────────────────────────────────────────────────────
 
 interface FileTreeItemProps {
@@ -777,12 +949,6 @@ interface FileTreeItemProps {
   onRenameCancel: () => void;
   expandedPaths: Set<string>;
   toggleExpanded: (path: string) => void;
-  creating: CreatingState | null;
-  createValue: string;
-  setCreateValue: (value: string) => void;
-  onCreateSubmit: () => void;
-  onCreateCancel: () => void;
-  vaultPath: string | null;
 }
 
 function FileTreeItem({
@@ -800,15 +966,8 @@ function FileTreeItem({
   onRenameCancel,
   expandedPaths,
   toggleExpanded,
-  creating,
-  createValue,
-  setCreateValue,
-  onCreateSubmit,
-  onCreateCancel,
-  vaultPath,
 }: FileTreeItemProps) {
   const [isDragOver, setIsDragOver] = useState(false);
-  const reduceMotion = useReducedMotion();
   const { moveFileToFolder, moveFolderToFolder } = useFileStore(
     useShallow((state) => ({
       moveFileToFolder: state.moveFileToFolder,
@@ -826,8 +985,6 @@ function FileTreeItem({
   const showActive =
     (isActive && (!selectedIsFile || selectedPath === currentFile)) ||
     (isSelected && !entry.is_dir);
-
-  const isCreatingHere = creating && creating.parentPath === entry.path;
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
@@ -922,104 +1079,50 @@ function FileTreeItem({
       );
     }
 
+    // Single-row render: children are rendered separately by the
+    // virtualizer based on flattenFileTree output, which is keyed off
+    // expandedPaths. Expand/collapse becomes an O(1) state flip rather
+    // than mounting/unmounting a subtree, and the chevron rotation is
+    // enough motion on its own.
     return (
-      <div>
-        <div
-          role="button"
-          tabIndex={0}
-          data-file-tree-item="true"
-          data-folder-path={entry.path}
-          onMouseDown={handleFolderMouseDown}
-          onClick={() => {
-            onSelect(entry);
+      <div
+        role="button"
+        tabIndex={0}
+        data-file-tree-item="true"
+        data-folder-path={entry.path}
+        onMouseDown={handleFolderMouseDown}
+        onClick={() => {
+          onSelect(entry);
+          toggleExpanded(entry.path);
+        }}
+        onContextMenu={(e) => onContextMenu(e, entry)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
             toggleExpanded(entry.path);
-          }}
-          onContextMenu={(e) => onContextMenu(e, entry)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              toggleExpanded(entry.path);
-            }
-          }}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          }
+        }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className={cn(
+          FILE_TREE_ROW_CLASS,
+          isSelected ? "bg-primary/10 text-primary" : "hover:bg-accent",
+          isDragOver && "bg-primary/10",
+        )}
+        style={{ paddingLeft }}
+      >
+        <ChevronRight
           className={cn(
-            FILE_TREE_ROW_CLASS,
-            isSelected ? "bg-primary/10 text-primary" : "hover:bg-accent",
-            isDragOver && "bg-primary/10",
+            FILE_TREE_ICON_PASSIVE_CLASS,
+            "transition-transform duration-150 ease-out motion-reduce:transition-none",
+            isExpanded && "rotate-90",
           )}
-          style={{ paddingLeft }}
-        >
-          <ChevronRight
-            className={cn(
-              FILE_TREE_ICON_PASSIVE_CLASS,
-              "transition-transform duration-150 ease-out motion-reduce:transition-none",
-              isExpanded && "rotate-90",
-            )}
-          />
-          {isExpanded ? (
-            <FolderOpen className={FILE_TREE_ICON_PASSIVE_CLASS} />
-          ) : (
-            <Folder className={FILE_TREE_ICON_PASSIVE_CLASS} />
-          )}
-          <span className={FILE_TREE_LABEL_CLASS}>{entry.name}</span>
-        </div>
-
-        <AnimatePresence initial={false}>
-          {isExpanded && (
-            <motion.div
-              key="children"
-              initial={
-                reduceMotion ? { opacity: 1 } : { height: 0, opacity: 0 }
-              }
-              animate={
-                reduceMotion
-                  ? { opacity: 1 }
-                  : { height: "auto", opacity: 1 }
-              }
-              exit={
-                reduceMotion ? { opacity: 0 } : { height: 0, opacity: 0 }
-              }
-              transition={{ duration: 0.16, ease: [0.2, 0.9, 0.1, 1] }}
-              className="overflow-hidden"
-            >
-              {isCreatingHere && (
-                <CreateInputRow
-                  type={creating.type}
-                  value={createValue}
-                  onChange={setCreateValue}
-                  onSubmit={onCreateSubmit}
-                  onCancel={onCreateCancel}
-                  level={level + 1}
-                />
-              )}
-              {entry.children?.map((child) => (
-                <FileTreeItem
-                  key={child.path}
-                  entry={child}
-                  currentFile={currentFile}
-                  selectedPath={selectedPath}
-                  onSelect={onSelect}
-                  onPermanentOpen={onPermanentOpen}
-                  onContextMenu={onContextMenu}
-                  level={level + 1}
-                  renamingPath={renamingPath}
-                  renameValue={renameValue}
-                  setRenameValue={setRenameValue}
-                  onRenameSubmit={onRenameSubmit}
-                  onRenameCancel={onRenameCancel}
-                  expandedPaths={expandedPaths}
-                  toggleExpanded={toggleExpanded}
-                  creating={creating}
-                  createValue={createValue}
-                  setCreateValue={setCreateValue}
-                  onCreateSubmit={onCreateSubmit}
-                  onCreateCancel={onCreateCancel}
-                  vaultPath={vaultPath}
-                />
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        />
+        {isExpanded ? (
+          <FolderOpen className={FILE_TREE_ICON_PASSIVE_CLASS} />
+        ) : (
+          <Folder className={FILE_TREE_ICON_PASSIVE_CLASS} />
+        )}
+        <span className={FILE_TREE_LABEL_CLASS}>{entry.name}</span>
       </div>
     );
   }

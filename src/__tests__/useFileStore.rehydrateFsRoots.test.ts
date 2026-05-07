@@ -74,11 +74,16 @@ describe("useFileStore rehydrate runtime fs roots", () => {
           return undefined;
         }
 
-        if (cmd === "list_directory") {
+        if (cmd === "list_workspace") {
           if (!rootsSynced) {
             throw new Error(`Path not permitted: ${workspacePath}`);
           }
-          return tree;
+          return {
+            entries: tree,
+            totalEntries: tree.length,
+            truncated: false,
+            unreadableDirCount: 0,
+          };
         }
 
         if (cmd === "mobile_set_workspace") {
@@ -94,7 +99,7 @@ describe("useFileStore rehydrate runtime fs roots", () => {
       await flushAsyncWork();
 
       expect(callOrder).toContain("fs_set_allowed_roots");
-      expect(callOrder.indexOf("fs_set_allowed_roots")).toBeLessThan(callOrder.indexOf("list_directory"));
+      expect(callOrder.indexOf("fs_set_allowed_roots")).toBeLessThan(callOrder.indexOf("list_workspace"));
       expect(useFileStore.getState().vaultPath).toBe(workspacePath);
       expect(useFileStore.getState().fileTree).toEqual(tree);
     }

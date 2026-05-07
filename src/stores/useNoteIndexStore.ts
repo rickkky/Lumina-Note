@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { FileEntry, readFile } from "@/lib/host";
+import { readFile, walkPaths } from "@/lib/host";
 
 // Extract [[wikilinks]] from content
 export function extractWikiLinks(content: string): string[] {
@@ -15,7 +15,7 @@ export function extractWikiLinks(content: string): string[] {
 // Extract #tags from content
 export function extractTags(content: string): string[] {
   // Match #tag but not inside code blocks or URLs
-  const regex = /(?:^|\s)#([a-zA-Z\u4e00-\u9fa5][a-zA-Z0-9\u4e00-\u9fa5_-]*)/g;
+  const regex = /(?:^|\s)#([a-zA-Z一-龥][a-zA-Z0-9一-龥_-]*)/g;
   const tags: string[] = [];
   let match;
   while ((match = regex.exec(content)) !== null) {
@@ -49,24 +49,23 @@ export interface TagInfo {
 }
 
 interface NoteIndexState {
-  // Index of all notes
   noteIndex: Map<string, NoteIndex>;
-
-  // Backlinks cache: targetName -> backlinks[]
   backlinksCache: Map<string, Backlink[]>;
-
-  // All tags
   allTags: TagInfo[];
-
-  // Loading state
   isIndexing: boolean;
   lastIndexTime: number;
+  /** Number of notes the last build attempted to index. */
+  totalNotes: number;
+  /** Indexed-so-far counter; updates during a build. */
+  indexedCount: number;
+  /** True when the walker hit the path cap and stopped early. */
+  truncated: boolean;
 
-  // Actions
-  buildIndex: (fileTree: FileEntry[]) => Promise<void>;
+  buildIndex: (vaultPath: string) => Promise<void>;
+  cancelIndex: () => void;
   getBacklinks: (noteName: string) => Backlink[];
   getTagFiles: (tag: string) => string[];
-  searchContent: (query: string, files: FileEntry[]) => Promise<SearchResult[]>;
+  searchContent: (query: string, vaultPath: string) => Promise<SearchResult[]>;
 }
 
 export interface SearchResult {
@@ -83,50 +82,130 @@ export interface SearchMatch {
   matchEnd: number;
 }
 
+// Hard cap on individual note size — anything bigger is almost certainly
+// not a note (a paste-buffer dump, a binary mistakenly named .md, etc.)
+// and would balloon the index for no real query value.
+const MAX_NOTE_BYTES = 2_000_000;
+
+// Cap on total notes the in-memory indexer will read. Above this we stop
+// and surface `truncated`. 50k is well past any reasonable vault.
+const MAX_INDEXED_NOTES = 50_000;
+
+// Concurrent readFile() calls during build. Each is one IPC round-trip
+// to the main process; ~16 saturates a fast SSD without flooding the
+// IPC channel.
+const READ_CONCURRENCY = 16;
+
+// After this many files, yield to the event loop so the renderer can
+// service input/animation frames during a build.
+const YIELD_EVERY = 200;
+
+// Track the latest in-flight build so we can cancel on vault switch
+// without exposing AbortController to callers.
+let currentBuild: { abort: AbortController; vault: string } | null = null;
+
+function nameFromPath(p: string): string {
+  const slash = Math.max(p.lastIndexOf("/"), p.lastIndexOf("\\"));
+  const base = slash >= 0 ? p.slice(slash + 1) : p;
+  return base.endsWith(".md") ? base.slice(0, -3) : base;
+}
+
+function nextIdle(): Promise<void> {
+  return new Promise((resolve) => {
+    const w = window as unknown as {
+      requestIdleCallback?: (cb: () => void) => void;
+    };
+    if (typeof w.requestIdleCallback === "function") {
+      w.requestIdleCallback(() => resolve());
+    } else {
+      setTimeout(resolve, 0);
+    }
+  });
+}
+
+function nextMicroBreak(): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, 0));
+}
+
 export const useNoteIndexStore = create<NoteIndexState>((set, get) => ({
   noteIndex: new Map(),
   backlinksCache: new Map(),
   allTags: [],
   isIndexing: false,
   lastIndexTime: 0,
+  totalNotes: 0,
+  indexedCount: 0,
+  truncated: false,
 
-  buildIndex: async (fileTree: FileEntry[]) => {
-    set({ isIndexing: true });
+  cancelIndex: () => {
+    currentBuild?.abort.abort();
+    currentBuild = null;
+  },
+
+  buildIndex: async (vaultPath: string) => {
+    // Cancel any prior build for a different vault, or restart cleanly.
+    if (currentBuild) {
+      currentBuild.abort.abort();
+      currentBuild = null;
+    }
+    const abort = new AbortController();
+    currentBuild = { abort, vault: vaultPath };
+
+    set({
+      isIndexing: true,
+      totalNotes: 0,
+      indexedCount: 0,
+      truncated: false,
+    });
+
+    // Step 1: defer the build off the critical path. The vault has just
+    // opened; let the sidebar paint first.
+    await nextIdle();
+    if (abort.signal.aborted) return;
+
+    // Step 2: enumerate .md files via the server-side walker. This
+    // respects .gitignore and the default deny set, returns a flat list,
+    // and skips oversized files at the source — the renderer never
+    // touches them.
+    let walk;
+    try {
+      walk = await walkPaths(vaultPath, {
+        extensions: [".md"],
+        maxPaths: MAX_INDEXED_NOTES,
+        maxFileSizeBytes: MAX_NOTE_BYTES,
+      });
+    } catch (error) {
+      console.error("[NoteIndex] walkPaths failed:", error);
+      set({ isIndexing: false });
+      currentBuild = null;
+      return;
+    }
+    if (abort.signal.aborted) return;
+
+    const allFiles = walk.paths.map((p) => ({ path: p, name: nameFromPath(p) }));
+    set({ totalNotes: allFiles.length, truncated: walk.truncated });
 
     const noteIndex = new Map<string, NoteIndex>();
     const backlinksMap = new Map<string, Backlink[]>();
     const tagsMap = new Map<string, { count: number; files: string[] }>();
 
-    // Flatten file tree
-    const allFiles: { path: string; name: string }[] = [];
-    const flattenTree = (entries: FileEntry[]) => {
-      for (const entry of entries) {
-        if (entry.is_dir && entry.children) {
-          flattenTree(entry.children);
-        } else if (!entry.is_dir && entry.name.endsWith(".md")) {
-          allFiles.push({
-            path: entry.path,
-            name: entry.name.replace(".md", "")
-          });
-        }
-      }
-    };
-    flattenTree(fileTree);
+    let processed = 0;
 
-    // Build note name to path map for resolving links
-    const nameToPath = new Map<string, string>();
-    allFiles.forEach(f => {
-      nameToPath.set(f.name.toLowerCase(), f.path);
-    });
+    // Step 3: read + parse with bounded concurrency. We don't use a full
+    // p-limit dep — a hand-rolled fixed-size worker pool over a queue is
+    // ~20 lines and avoids adding a runtime dep. The pool yields to the
+    // event loop every YIELD_EVERY files so input/animation stays
+    // responsive even mid-build.
+    const queue = allFiles.slice();
+    const workers: Promise<void>[] = [];
 
-    // Index each file
-    for (const file of allFiles) {
+    const indexOne = async (file: { path: string; name: string }) => {
+      if (abort.signal.aborted) return;
       try {
         const content = await readFile(file.path);
         const outgoingLinks = extractWikiLinks(content);
         const tags = extractTags(content);
 
-        // Store note index
         noteIndex.set(file.path, {
           path: file.path,
           name: file.name,
@@ -135,50 +214,76 @@ export const useNoteIndexStore = create<NoteIndexState>((set, get) => ({
           lastModified: Date.now(),
         });
 
-        // Build backlinks
+        // Build backlinks: for each outgoing link, record this file as
+        // a referrer of the linked note name.
         const lines = content.split("\n");
         for (const linkName of outgoingLinks) {
-          // Find the line containing this link
           let contextLine = "";
           let lineNum = 0;
+          const target = `[[${linkName}`;
+          const targetLower = target.toLowerCase();
           for (let i = 0; i < lines.length; i++) {
-            if (lines[i].includes(`[[${linkName}`) ||
-              lines[i].toLowerCase().includes(`[[${linkName.toLowerCase()}`)) {
-              contextLine = lines[i].trim();
+            const line = lines[i];
+            if (
+              line.includes(target) ||
+              line.toLowerCase().includes(targetLower)
+            ) {
+              contextLine = line.trim();
               lineNum = i + 1;
               break;
             }
           }
-
           const backlink: Backlink = {
             path: file.path,
             name: file.name,
             context: contextLine,
             line: lineNum,
           };
-
-          const normalizedLinkName = linkName.toLowerCase();
-          if (!backlinksMap.has(normalizedLinkName)) {
-            backlinksMap.set(normalizedLinkName, []);
-          }
-          backlinksMap.get(normalizedLinkName)!.push(backlink);
+          const key = linkName.toLowerCase();
+          const list = backlinksMap.get(key);
+          if (list) list.push(backlink);
+          else backlinksMap.set(key, [backlink]);
         }
 
-        // Build tags index
         for (const tag of tags) {
-          if (!tagsMap.has(tag)) {
-            tagsMap.set(tag, { count: 0, files: [] });
+          const info = tagsMap.get(tag);
+          if (info) {
+            info.count++;
+            info.files.push(file.path);
+          } else {
+            tagsMap.set(tag, { count: 1, files: [file.path] });
           }
-          const tagInfo = tagsMap.get(tag)!;
-          tagInfo.count++;
-          tagInfo.files.push(file.path);
         }
       } catch (error) {
-        console.error(`Failed to index ${file.path}:`, error);
+        // Silently skip unreadable files — they shouldn't block the
+        // overall index and the user sees them in the sidebar anyway.
+        if (import.meta.env.DEV) {
+          console.warn(`[NoteIndex] skip ${file.path}:`, error);
+        }
       }
-    }
 
-    // Convert tags map to sorted array
+      processed++;
+      if (processed % YIELD_EVERY === 0) {
+        set({ indexedCount: processed });
+        await nextMicroBreak();
+      }
+    };
+
+    const runWorker = async () => {
+      while (queue.length > 0 && !abort.signal.aborted) {
+        const file = queue.shift();
+        if (!file) break;
+        await indexOne(file);
+      }
+    };
+
+    for (let i = 0; i < READ_CONCURRENCY; i++) {
+      workers.push(runWorker());
+    }
+    await Promise.all(workers);
+
+    if (abort.signal.aborted) return;
+
     const allTags: TagInfo[] = Array.from(tagsMap.entries())
       .map(([tag, info]) => ({ tag, count: info.count, files: info.files }))
       .sort((a, b) => b.count - a.count);
@@ -189,11 +294,17 @@ export const useNoteIndexStore = create<NoteIndexState>((set, get) => ({
       allTags,
       isIndexing: false,
       lastIndexTime: Date.now(),
+      indexedCount: processed,
     });
 
-    // Debug log only in development
+    if (currentBuild?.abort === abort) currentBuild = null;
+
     if (import.meta.env.DEV) {
-      console.log(`[Index] Built index for ${noteIndex.size} notes, ${allTags.length} tags`);
+      console.log(
+        `[Index] Built index for ${noteIndex.size} notes, ${allTags.length} tags${
+          walk.truncated ? ` (truncated at ${MAX_INDEXED_NOTES})` : ""
+        }`,
+      );
     }
   },
 
@@ -204,29 +315,36 @@ export const useNoteIndexStore = create<NoteIndexState>((set, get) => ({
 
   getTagFiles: (tag: string) => {
     const { allTags } = get();
-    const tagInfo = allTags.find(t => t.tag === tag.toLowerCase());
+    const tagInfo = allTags.find((t) => t.tag === tag.toLowerCase());
     return tagInfo?.files || [];
   },
 
-  searchContent: async (query: string, files: FileEntry[]) => {
+  searchContent: async (query: string, vaultPath: string) => {
     if (!query.trim()) return [];
 
     const results: SearchResult[] = [];
-    const pattern = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
+    const pattern = new RegExp(
+      query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+      "gi",
+    );
 
-    const allFiles: { path: string; name: string }[] = [];
-    const flattenTree = (entries: FileEntry[]) => {
-      for (const entry of entries) {
-        if (entry.is_dir && entry.children) {
-          flattenTree(entry.children);
-        } else if (!entry.is_dir) {
-          allFiles.push({ path: entry.path, name: entry.name.replace(".md", "") });
-        }
-      }
-    };
-    flattenTree(files);
+    let walk;
+    try {
+      walk = await walkPaths(vaultPath, {
+        extensions: [".md"],
+        maxPaths: MAX_INDEXED_NOTES,
+        maxFileSizeBytes: MAX_NOTE_BYTES,
+      });
+    } catch {
+      return [];
+    }
 
-    for (const file of allFiles) {
+    // Search reads files sequentially with a small concurrency pool —
+    // identical structure to indexing but without the wikilink/tag work.
+    const allFiles = walk.paths.map((p) => ({ path: p, name: nameFromPath(p) }));
+    const queue = allFiles.slice();
+
+    const searchOne = async (file: { path: string; name: string }) => {
       try {
         const content = await readFile(file.path);
         const lines = content.split("\n");
@@ -247,10 +365,10 @@ export const useNoteIndexStore = create<NoteIndexState>((set, get) => ({
         });
 
         if (matches.length > 0) {
-          // Score based on matches in title and content
-          const titleMatch = file.name.toLowerCase().includes(query.toLowerCase());
+          const titleMatch = file.name
+            .toLowerCase()
+            .includes(query.toLowerCase());
           const score = (titleMatch ? 100 : 0) + matches.length;
-
           results.push({
             path: file.path,
             name: file.name,
@@ -258,12 +376,23 @@ export const useNoteIndexStore = create<NoteIndexState>((set, get) => ({
             score,
           });
         }
-      } catch (error) {
+      } catch {
         // Skip unreadable files
       }
-    }
+    };
 
-    // Sort by score
+    const runWorker = async () => {
+      while (queue.length > 0) {
+        const file = queue.shift();
+        if (!file) break;
+        await searchOne(file);
+      }
+    };
+
+    const workers: Promise<void>[] = [];
+    for (let i = 0; i < READ_CONCURRENCY; i++) workers.push(runWorker());
+    await Promise.all(workers);
+
     return results.sort((a, b) => b.score - a.score);
   },
 }));

@@ -1,5 +1,10 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { createDir, estimateDirSize, invoke, listDirectory } from "@/lib/host";
+import {
+  createDir,
+  estimateDirSize,
+  invoke,
+  listWorkspace,
+} from "@/lib/host";
 import {
   initializeAgentVault,
   syncWorkspaceAccessRoots,
@@ -11,6 +16,7 @@ import { useWorkspaceStore } from "@/stores/useWorkspaceStore";
 vi.mock("@/lib/host", () => ({
   invoke: vi.fn(),
   listDirectory: vi.fn(),
+  listWorkspace: vi.fn(),
   readFile: vi.fn(),
   saveFile: vi.fn(),
   createFile: vi.fn(),
@@ -22,7 +28,12 @@ describe("syncWorkspaceAccessRoots timing", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(invoke).mockResolvedValue(undefined);
-    vi.mocked(listDirectory).mockResolvedValue([]);
+    vi.mocked(listWorkspace).mockResolvedValue({
+      entries: [],
+      totalEntries: 0,
+      truncated: false,
+      unreadableDirCount: 0,
+    });
     vi.mocked(createDir).mockResolvedValue(undefined);
     vi.mocked(estimateDirSize).mockResolvedValue({
       warning: false,
@@ -217,9 +228,14 @@ describe("syncWorkspaceAccessRoots timing", () => {
       callOrder.push(cmd);
       return undefined;
     });
-    vi.mocked(listDirectory).mockImplementation(async () => {
-      callOrder.push("list_directory");
-      return [];
+    vi.mocked(listWorkspace).mockImplementation(async () => {
+      callOrder.push("list_workspace");
+      return {
+        entries: [],
+        totalEntries: 0,
+        truncated: false,
+        unreadableDirCount: 0,
+      };
     });
     vi.mocked(createDir).mockImplementation(async () => {
       callOrder.push("create_dir");
@@ -235,7 +251,7 @@ describe("syncWorkspaceAccessRoots timing", () => {
       callOrder.indexOf("vault_initialize"),
     );
     expect(callOrder.indexOf("vault_initialize")).toBeLessThan(
-      callOrder.indexOf("list_directory"),
+      callOrder.indexOf("list_workspace"),
     );
   });
 
