@@ -14,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { isIMEComposing } from "@/lib/imeUtils";
 import { useFileStore } from "@/stores/useFileStore";
 import {
   cancelSlashAIInlineTask,
@@ -609,6 +610,9 @@ export function SlashMenu({ view }: SlashMenuProps) {
     if (!visible || !view) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (isIMEComposing(e)) {
+        return;
+      }
       if (aiPromptOpen) {
         if (e.key === "Escape") {
           e.preventDefault();
@@ -782,6 +786,9 @@ export function SlashMenu({ view }: SlashMenuProps) {
                   }
                 }}
                 onKeyDown={(e) => {
+                  if (isIMEComposing(e)) {
+                    return;
+                  }
                   if (e.key === "Enter" && !e.shiftKey && aiStatus !== "preview") {
                     e.preventDefault();
                     void startAIGeneration();
