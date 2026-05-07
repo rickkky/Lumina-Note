@@ -2,7 +2,7 @@
  * Markdown 解析测试
  */
 import { describe, it, expect } from 'vitest';
-import { parseMarkdown, htmlToMarkdown, editorToMarkdown } from './markdown';
+import { parseMarkdown, parseInlineMarkdown, htmlToMarkdown, editorToMarkdown } from './markdown';
 
 describe('parseMarkdown', () => {
   describe('basic markdown', () => {
@@ -228,6 +228,64 @@ describe('parseMarkdown', () => {
     it('should handle undefined input', () => {
       expect(parseMarkdown(undefined as any)).toBe('');
     });
+  });
+});
+
+describe('parseInlineMarkdown', () => {
+  it('renders bold/italic/code/strikethrough/link', () => {
+    const html = parseInlineMarkdown('**B** *I* `c` ~~s~~ [a](https://x)');
+    expect(html).toContain('<strong>B</strong>');
+    expect(html).toContain('<em>I</em>');
+    expect(html).toContain('<code>c</code>');
+    expect(html).toContain('<del>s</del>');
+    expect(html).toContain('<a href="https://x">a</a>');
+  });
+
+  it('renders wiki links and aliases', () => {
+    const simple = parseInlineMarkdown('[[Note]]');
+    expect(simple).toContain('class="wikilink"');
+    expect(simple).toContain('data-wikilink="Note"');
+
+    const aliased = parseInlineMarkdown('[[Page|alias]]');
+    expect(aliased).toContain('data-wikilink="Page"');
+    expect(aliased).toContain('alias');
+  });
+
+  it('renders tags and highlights', () => {
+    expect(parseInlineMarkdown('#todo bar')).toContain('class="tag"');
+    expect(parseInlineMarkdown('==hi==')).toContain('<mark>hi</mark>');
+  });
+
+  it('renders inline math via katex', () => {
+    expect(parseInlineMarkdown('$a^2$')).toContain('katex');
+  });
+
+  it('renders wiki image embeds', () => {
+    const html = parseInlineMarkdown('![[img.png|caption]]');
+    expect(html).toContain('<img');
+    expect(html).toContain('src="img.png"');
+    expect(html).toContain('alt="caption"');
+  });
+
+  it('does NOT render block tokens like headings or lists', () => {
+    expect(parseInlineMarkdown('# heading')).not.toContain('<h1');
+    expect(parseInlineMarkdown('- item')).not.toContain('<li>');
+  });
+
+  it('preserves raw <br> for in-cell line breaks', () => {
+    expect(parseInlineMarkdown('l1<br>l2')).toContain('<br>');
+  });
+
+  it('returns empty string for empty/undefined input', () => {
+    expect(parseInlineMarkdown('')).toBe('');
+    expect(parseInlineMarkdown(undefined as any)).toBe('');
+  });
+
+  it('does not transform tags inside inline code', () => {
+    const html = parseInlineMarkdown('`#nope` and #yes');
+    expect(html).toContain('<code>#nope</code>');
+    expect(html).toContain('class="tag"');
+    expect(html).toContain('data-tag="yes"');
   });
 });
 

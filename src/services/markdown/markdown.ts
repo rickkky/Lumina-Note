@@ -225,6 +225,112 @@ turndownService.addRule("katexBlock", {
 // }
 
 /**
+ * Inline-only Markdown parser for cramped contexts (table cells, etc.).
+ * Mirrors parseMarkdown's preprocessing pipeline (math, wikilinks, tags,
+ * highlights, wiki images) but defers to marked's parseInline so block
+ * tokens like headings or lists are rendered as literal text.
+ */
+export function parseInlineMarkdown(markdown: string): string {
+  try {
+    if (!markdown) return "";
+
+    const mathPlaceholderPrefix = "⟦MATH_INLINE_";
+    const mathPlaceholderSuffix = "⟧";
+    const codePlaceholderPrefix = "⟦CODE_INLINE_";
+    const codePlaceholderSuffix = "⟧";
+    const highlightPrefix = "⟦HIGHLIGHT_INLINE_";
+    const highlightSuffix = "⟧";
+
+    const mathPlaceholders: string[] = [];
+    const codePlaceholders: string[] = [];
+    const highlightPlaceholders: string[] = [];
+
+    let processed = markdown;
+
+    // Inline math $...$ — block math is meaningless inside a cell.
+    const inlineMathRegex =
+      /(?<!\\|\$)\$(?!\$)((?:[^$\n]|\n(?!\n))+?)(?<!\\|\$)\$(?!\$)/g;
+    processed = processed.replace(inlineMathRegex, (_match, formula) => {
+      try {
+        const html = katex.renderToString(formula.trim(), {
+          displayMode: false,
+          throwOnError: false,
+          trust: true,
+          strict: false,
+          output: "html",
+        });
+        mathPlaceholders.push(html);
+        return `${mathPlaceholderPrefix}${mathPlaceholders.length - 1}${mathPlaceholderSuffix}`;
+      } catch {
+        return formula;
+      }
+    });
+
+    // Protect inline code so wiki/tag/highlight regexes don't touch its body.
+    processed = processed.replace(/`[^`\n]+`/g, (match) => {
+      codePlaceholders.push(match);
+      return `${codePlaceholderPrefix}${codePlaceholders.length - 1}${codePlaceholderSuffix}`;
+    });
+
+    // Wiki image embeds ![[path|alt]]
+    processed = processed.replace(
+      /!\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,
+      (_match, assetPath, altText) => {
+        const safePath = String(assetPath).trim();
+        const safeAlt = String(altText || assetPath).trim();
+        return `<img src="${safePath}" alt="${safeAlt}" class="markdown-image" loading="lazy" />`;
+      },
+    );
+
+    // Wiki links [[Note]] / [[Note|alias]]
+    processed = processed.replace(
+      /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,
+      (_match, link, display) => {
+        const displayText = display || link;
+        const linkName = link.trim();
+        return `<span class="wikilink" data-wikilink="${linkName}">${displayText}</span>`;
+      },
+    );
+
+    // Tags
+    processed = processed.replace(
+      /(?<![`\w\/])#([a-zA-Z一-龥][a-zA-Z0-9一-龥_-]*)/g,
+      (_match, tag) => `<span class="tag" data-tag="${tag}">#${tag}</span>`,
+    );
+
+    // Highlights ==text==
+    processed = processed.replace(/==([^=\n]+)==/g, (_match, text) => {
+      highlightPlaceholders.push(text);
+      return `${highlightPrefix}${highlightPlaceholders.length - 1}${highlightSuffix}`;
+    });
+
+    // Restore inline code before marked sees the input.
+    codePlaceholders.forEach((code, index) => {
+      const placeholder = `${codePlaceholderPrefix}${index}${codePlaceholderSuffix}`;
+      processed = processed.split(placeholder).join(code);
+    });
+
+    let html = markedInstance.parseInline(processed);
+    if (typeof html !== "string") html = "";
+
+    mathPlaceholders.forEach((mathHtml, index) => {
+      const placeholder = `${mathPlaceholderPrefix}${index}${mathPlaceholderSuffix}`;
+      html = (html as string).split(placeholder).join(mathHtml);
+    });
+
+    highlightPlaceholders.forEach((text, index) => {
+      const placeholder = `${highlightPrefix}${index}${highlightSuffix}`;
+      html = (html as string).split(placeholder).join(`<mark>${text}</mark>`);
+    });
+
+    return html;
+  } catch (error) {
+    console.error("Inline markdown parse error:", error);
+    return markdown;
+  }
+}
+
+/**
  * Parse Markdown to HTML
  */
 export function parseMarkdown(markdown: string): string {
