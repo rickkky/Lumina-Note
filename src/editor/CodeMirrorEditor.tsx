@@ -849,6 +849,7 @@ const createEditorTheme = (fontSize: number) =>
       fontWeight: "700",
       lineHeight: "1.3",
       letterSpacing: "-0.02em",
+      marginLeft: "-0.04em",
       color: "hsl(var(--md-heading, var(--foreground)))",
     },
     ".cm-header-2": {
@@ -856,6 +857,7 @@ const createEditorTheme = (fontSize: number) =>
       fontWeight: "600",
       lineHeight: "1.4",
       letterSpacing: "-0.015em",
+      marginLeft: "-0.04em",
       color: "hsl(var(--md-heading, var(--foreground)))",
     },
     ".cm-header-3": {
@@ -863,6 +865,7 @@ const createEditorTheme = (fontSize: number) =>
       fontWeight: "600",
       lineHeight: "1.5",
       letterSpacing: "-0.01em",
+      marginLeft: "-0.04em",
       color: "hsl(var(--md-heading, var(--foreground)))",
     },
     ".cm-header-4, .cm-header-5": {
