@@ -444,7 +444,7 @@ const createEditorTheme = (fontSize: number) =>
       paddingRight: "var(--lumina-block-text-right) !important",
       color: "hsl(var(--md-blockquote, var(--muted-foreground)))",
       fontStyle: "italic",
-      backgroundColor: "transparent",
+      backgroundColor: "hsl(var(--muted) / 0.12)",
     },
     ".cm-readable-source, .cm-readable-source-line": {
       color: "hsl(var(--muted-foreground))",
@@ -586,7 +586,7 @@ const createEditorTheme = (fontSize: number) =>
       borderBottom: "0",
     },
     ".cm-table-widget th, .cm-table-editor th": {
-      backgroundColor: "hsl(var(--muted) / 0.1)",
+      backgroundColor: "hsl(var(--muted) / 0.35)",
       fontWeight: "600",
     },
     ".cm-table-row-selected > th, .cm-table-row-selected > td": {
@@ -848,18 +848,21 @@ const createEditorTheme = (fontSize: number) =>
       fontSize: "2em",
       fontWeight: "700",
       lineHeight: "1.3",
+      letterSpacing: "-0.02em",
       color: "hsl(var(--md-heading, var(--foreground)))",
     },
     ".cm-header-2": {
       fontSize: "1.5em",
       fontWeight: "600",
       lineHeight: "1.4",
+      letterSpacing: "-0.015em",
       color: "hsl(var(--md-heading, var(--foreground)))",
     },
     ".cm-header-3": {
       fontSize: "1.25em",
       fontWeight: "600",
       lineHeight: "1.5",
+      letterSpacing: "-0.01em",
       color: "hsl(var(--md-heading, var(--foreground)))",
     },
     ".cm-header-4, .cm-header-5": {
@@ -885,10 +888,8 @@ const createEditorTheme = (fontSize: number) =>
       backgroundColor: "hsl(var(--muted))",
       padding: "2px 4px",
       borderRadius: "3px",
-      // Use the design-token mono stack (JetBrains Mono → fallbacks) so
-      // inline code renders in the same family as `.prose code` instead of
-      // the browser's generic `monospace` default.
       fontFamily: "var(--font-mono)",
+      border: "1px solid hsl(var(--border) / 0.45)",
     },
     ".cm-wikilink": {
       color: "hsl(var(--primary))",
