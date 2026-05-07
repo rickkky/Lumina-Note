@@ -233,6 +233,47 @@ describe("CodeMirror live markdown rendering polish", () => {
     expect(editorText(container)).toContain("---");
   });
 
+  it("renders inline markdown inside table cells in reading mode", async () => {
+    // Note: a literal `|` inside a cell terminates the column by GFM rule,
+    // so wikilink aliases inside cells must escape it: `[[Page\|alias]]`.
+    const content =
+      "| Item | Note |\n| --- | --- |\n| **bold** *it* `code` | [link](https://x) |\n| ==hi== | [[Page\\|alias]] #todo |";
+    const { container } = setupEditor(content, "reading");
+
+    // queueMicrotask in the plugin defers DOM mutation; flush it.
+    await Promise.resolve();
+    await Promise.resolve();
+
+    const widget = container.querySelector<HTMLElement>(".cm-table-widget");
+    expect(widget).not.toBeNull();
+
+    const html = widget!.innerHTML;
+    expect(html).toContain("<strong>bold</strong>");
+    expect(html).toContain("<em>it</em>");
+    expect(html).toContain("<code>code</code>");
+    expect(html).toContain('<a href="https://x">link</a>');
+    expect(html).toContain("<mark>hi</mark>");
+    expect(html).toContain('class="wikilink"');
+    expect(html).toContain('data-wikilink="Page"');
+    expect(html).toContain('class="tag"');
+  });
+
+  it("does NOT render markdown inside live-mode editable table cells", async () => {
+    const content = "| H |\n| --- |\n| **bold** |";
+    const { container } = setupEditor(content, "live");
+
+    await Promise.resolve();
+    await Promise.resolve();
+
+    const editor = container.querySelector<HTMLElement>(".cm-table-editor");
+    expect(editor).not.toBeNull();
+    const cell = editor!.querySelector<HTMLElement>("td");
+    expect(cell).not.toBeNull();
+    // Editable cell preserves the raw markdown source so editing stays sane.
+    expect(cell!.innerHTML).not.toContain("<strong>");
+    expect(cell!.textContent).toBe("**bold**");
+  });
+
   it("does not show the table markdown toggle in live render mode", () => {
     const content = "| A | B |\n| --- | --- |\n| 1 | 2 |";
     const { container } = setupEditor(content, "live");
