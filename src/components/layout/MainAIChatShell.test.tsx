@@ -5,6 +5,7 @@ import { useFileStore } from "@/stores/useFileStore";
 import { useAIStore } from "@/stores/useAIStore";
 import { useOpencodeAgent } from "@/stores/useOpencodeAgent";
 import { useLocaleStore } from "@/stores/useLocaleStore";
+import { useErrorBanner } from "@/stores/useErrorBanner";
 
 describe("MainAIChatShell", () => {
   const originalStartTask = useOpencodeAgent.getState().startTask;
@@ -18,6 +19,7 @@ describe("MainAIChatShell", () => {
       currentSessionId: null,
       startTask: originalStartTask,
     });
+    useErrorBanner.setState({ active: null });
   });
 
   it("renders textarea in agent mode", () => {
@@ -336,6 +338,47 @@ describe("MainAIChatShell", () => {
       workspace_path: "/tmp",
       display_message: "继续追问",
     });
+  });
+
+  it("retries the failed send intent instead of the last rendered user message", async () => {
+    const startTask = vi.fn(async () => undefined);
+    useOpencodeAgent.setState({
+      currentSessionId: "test-session",
+      status: "idle",
+      startTask: startTask as typeof originalStartTask,
+      messages: [
+        {
+          id: "previous-user",
+          role: "user",
+          content: "previous prompt",
+          rawParts: [],
+        },
+      ],
+    });
+
+    render(<MainAIChatShell />);
+
+    const input = screen.getByRole("textbox") as HTMLTextAreaElement;
+    fireEvent.change(input, { target: { value: "failed prompt" } });
+    const { t } = useLocaleStore.getState();
+    fireEvent.click(screen.getByTitle(t.ai.send));
+
+    await waitFor(() => expect(startTask).toHaveBeenCalledTimes(1));
+    useErrorBanner.setState({
+      active: {
+        id: "err-1",
+        kind: "task.start",
+        severity: "blocker",
+        message: "send failed",
+        retryable: true,
+        timestamp: Date.now(),
+      },
+    });
+
+    fireEvent.click(await screen.findByText(t.agentMessage.errors.retry));
+
+    await waitFor(() => expect(startTask).toHaveBeenCalledTimes(2));
+    expect(startTask.mock.calls[1][0]).toBe("failed prompt");
   });
 
   it("appends a lumina prompt link to existing draft instead of sending", () => {

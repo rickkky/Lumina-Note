@@ -354,6 +354,11 @@ export function MainAIChatShell() {
     llmRetryState,
     retryTimeout,
   } = useOpencodeAgent();
+  type AgentSendIntent = {
+    task: string;
+    context: Parameters<typeof startAgentTask>[1];
+  };
+  const lastAgentSendIntentRef = useRef<AgentSendIntent | null>(null);
 
   // 阻塞型错误信封 — 取代旧的 agentStatus==="error" 门控
   const bannerError = useErrorBanner((s) => s.active);
@@ -1056,14 +1061,19 @@ export function MainAIChatShell() {
           )
         : fullMessage;
 
-      await startAgentTask(wrappedFullMessage, {
+      const startContext: Parameters<typeof startAgentTask>[1] = {
         workspace_path: vaultPath || "",
         active_note_path: currentFile || undefined,
         active_note_content: currentFile ? currentContent : undefined,
         display_message: displayMessage,
         attachments,
         fileParts: imageFileParts,
-      });
+      };
+      lastAgentSendIntentRef.current = {
+        task: wrappedFullMessage,
+        context: startContext,
+      };
+      await startAgentTask(wrappedFullMessage, startContext);
       setSelectedSkills([]);
       finalizePerf();
     },
@@ -1623,6 +1633,11 @@ export function MainAIChatShell() {
                   onDismiss={dismissBanner}
                   onRetry={() => {
                     dismissBanner();
+                    const retryIntent = lastAgentSendIntentRef.current;
+                    if (retryIntent) {
+                      void startAgentTask(retryIntent.task, retryIntent.context);
+                      return;
+                    }
                     const lastUser = [...agentMessages]
                       .reverse()
                       .find((m) => m.role === "user");
