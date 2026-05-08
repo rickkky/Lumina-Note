@@ -143,6 +143,13 @@ function imageAttachmentToFilePart(
   };
 }
 
+function imageMimeExtension(mime: ChatImageAttachment["mime"]): string {
+  if (mime === "image/jpeg") return "jpg";
+  if (mime === "image/webp") return "webp";
+  if (mime === "image/gif") return "gif";
+  return "png";
+}
+
 export type AgentVisionMode = "vision" | "metadata-only" | "unknown";
 
 export function isAgentConfigUsableForImageMode(
@@ -1159,6 +1166,37 @@ export function MainAIChatShell() {
     window.requestAnimationFrame(() => textareaRef.current?.focus());
   }, []);
 
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const { detail } = event as CustomEvent<{
+        data?: string;
+        mediaType?: string;
+        preview?: string;
+      }>;
+      if (!detail?.data || !detail.mediaType) return;
+      if (!isSupportedChatImageMime(detail.mediaType)) return;
+
+      const mime = detail.mediaType;
+      const url =
+        detail.preview && detail.preview.startsWith("data:")
+          ? detail.preview
+          : `data:${mime};base64,${detail.data}`;
+      const next: ChatImageAttachment = {
+        id: `img_${Date.now()}_${Math.random().toString(36).slice(2)}`,
+        filename: `attached-image.${imageMimeExtension(mime)}`,
+        mime,
+        url,
+      };
+      setAttachedImages((prev) =>
+        prev.some((image) => image.url === next.url) ? prev : [...prev, next],
+      );
+      window.requestAnimationFrame(() => textareaRef.current?.focus());
+    };
+
+    window.addEventListener("lumina:attach-image", handler);
+    return () => window.removeEventListener("lumina:attach-image", handler);
+  }, []);
+
   const handlePaste = useCallback(
     (event: React.ClipboardEvent<HTMLTextAreaElement>) => {
       const items = Array.from(event.clipboardData?.items ?? []);
@@ -1972,7 +2010,8 @@ export function MainAIChatShell() {
                   const hasPayload = Boolean(
                     input.trim() ||
                     referencedFiles.length > 0 ||
-                    textSelections.length > 0,
+                    textSelections.length > 0 ||
+                    attachedImages.length > 0,
                   );
                   const queueSend = agentStatus === "running" && hasPayload;
                   const stopCurrent = isLoading && !queueSend;

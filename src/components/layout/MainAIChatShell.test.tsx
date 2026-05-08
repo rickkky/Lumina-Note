@@ -106,6 +106,87 @@ describe("MainAIChatShell", () => {
     );
   });
 
+  it("sends pasted screenshots without requiring text", async () => {
+    const startTask = vi.fn(async () => undefined);
+    useOpencodeAgent.setState({
+      currentSessionId: "test-session",
+      status: "idle",
+      startTask: startTask as typeof originalStartTask,
+    });
+
+    render(<MainAIChatShell />);
+
+    const input = screen.getByRole("textbox") as HTMLTextAreaElement;
+    const file = new File(["image-bytes"], "clip.png", { type: "image/png" });
+    fireEvent.paste(input, {
+      clipboardData: {
+        items: [
+          {
+            type: "image/png",
+            getAsFile: () => file,
+          },
+        ],
+      },
+    });
+
+    await waitFor(() => expect(screen.getByAltText("clip.png")).toBeTruthy());
+
+    const { t } = useLocaleStore.getState();
+    fireEvent.click(screen.getByTitle(t.ai.send));
+
+    await waitFor(() => expect(startTask).toHaveBeenCalledTimes(1));
+    const [task, context] = startTask.mock.calls[0] as unknown as Parameters<
+      typeof originalStartTask
+    >;
+    expect(task).toBe("");
+    expect(context?.fileParts).toHaveLength(1);
+    expect(context?.fileParts?.[0]).toMatchObject({
+      type: "file",
+      mime: "image/png",
+      filename: "clip.png",
+    });
+  });
+
+  it("attaches generated images from assistant message click events", async () => {
+    const startTask = vi.fn(async () => undefined);
+    useOpencodeAgent.setState({
+      currentSessionId: "test-session",
+      status: "idle",
+      startTask: startTask as typeof originalStartTask,
+    });
+
+    render(<MainAIChatShell />);
+
+    fireEvent(
+      window,
+      new CustomEvent("lumina:attach-image", {
+        detail: {
+          data: "aW1hZ2UtYnl0ZXM=",
+          mediaType: "image/png",
+          preview: "data:image/png;base64,aW1hZ2UtYnl0ZXM=",
+        },
+      }),
+    );
+
+    await waitFor(() =>
+      expect(screen.getByAltText("attached-image.png")).toBeTruthy(),
+    );
+
+    const { t } = useLocaleStore.getState();
+    fireEvent.click(screen.getByTitle(t.ai.send));
+
+    await waitFor(() => expect(startTask).toHaveBeenCalledTimes(1));
+    const [_task, context] = startTask.mock.calls[0] as unknown as Parameters<
+      typeof originalStartTask
+    >;
+    expect(context?.fileParts?.[0]).toMatchObject({
+      type: "file",
+      mime: "image/png",
+      filename: "attached-image.png",
+      url: "data:image/png;base64,aW1hZ2UtYnl0ZXM=",
+    });
+  });
+
   // Thinking-mode + effort selectors are not exposed in chat controls. The "+"
   // menu is: Reference file / Skills / AI settings.
   it("only renders Reference / Skills / Settings rows in the + popover", () => {
