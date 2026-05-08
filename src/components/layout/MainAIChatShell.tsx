@@ -150,6 +150,15 @@ function imageMimeExtension(mime: ChatImageAttachment["mime"]): string {
   return "png";
 }
 
+function compactTaskPreview(text: string): string {
+  const firstLine = text
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .find(Boolean);
+  if (!firstLine) return "";
+  return firstLine.length > 96 ? `${firstLine.slice(0, 93)}...` : firstLine;
+}
+
 export type AgentVisionMode = "vision" | "metadata-only" | "unknown";
 
 export function isAgentConfigUsableForImageMode(
@@ -347,8 +356,6 @@ export function MainAIChatShell() {
     pendingTool: pendingAgentPermission,
     approveTool: approve,
     rejectTool: reject,
-    queuedTasks: queuedAgentTasks,
-    activeTaskPreview: activeAgentTaskPreview,
     debugPromptStack,
     llmRequestStartTime,
     llmRetryState,
@@ -357,8 +364,23 @@ export function MainAIChatShell() {
   type AgentSendIntent = {
     task: string;
     context: Parameters<typeof startAgentTask>[1];
+    preview: string;
   };
   const lastAgentSendIntentRef = useRef<AgentSendIntent | null>(null);
+  type QueuedAgentTask = {
+    id: string;
+    position: number;
+    task: string;
+    intent: AgentSendIntent;
+  };
+  const [queuedAgentTasks, setQueuedAgentTasks] = useState<QueuedAgentTask[]>(
+    [],
+  );
+  const queuedAgentTasksRef = useRef<QueuedAgentTask[]>([]);
+  const [activeAgentTaskPreview, setActiveAgentTaskPreview] = useState<
+    string | null
+  >(null);
+  const currentAgentTaskPreviewRef = useRef<string | null>(null);
 
   // 阻塞型错误信封 — 取代旧的 agentStatus==="error" 门控
   const bannerError = useErrorBanner((s) => s.active);
@@ -384,6 +406,61 @@ export function MainAIChatShell() {
     [rawAgentMessages],
   );
 
+  useEffect(() => {
+    queuedAgentTasksRef.current = queuedAgentTasks;
+  }, [queuedAgentTasks]);
+
+  const dispatchAgentIntent = useCallback(
+    async (intent: AgentSendIntent) => {
+      lastAgentSendIntentRef.current = intent;
+      currentAgentTaskPreviewRef.current = intent.preview;
+      await startAgentTask(intent.task, intent.context);
+    },
+    [startAgentTask],
+  );
+
+  const queueAgentIntent = useCallback((intent: AgentSendIntent) => {
+    const queuedTask: QueuedAgentTask = {
+      id: `queued-agent-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      position: queuedAgentTasksRef.current.length + 1,
+      task: intent.preview,
+      intent,
+    };
+    const next = [...queuedAgentTasksRef.current, queuedTask];
+    queuedAgentTasksRef.current = next;
+    setQueuedAgentTasks(next);
+    setActiveAgentTaskPreview(currentAgentTaskPreviewRef.current);
+  }, []);
+
+  useEffect(() => {
+    if (
+      agentStatus === "running" ||
+      agentStatus === "waiting_approval" ||
+      agentStatus === "error"
+    ) {
+      return;
+    }
+    if (agentStatus !== "idle" && agentStatus !== "completed") return;
+
+    const [nextTask, ...remainingTasks] = queuedAgentTasksRef.current;
+    if (!nextTask) {
+      currentAgentTaskPreviewRef.current = null;
+      setActiveAgentTaskPreview(null);
+      return;
+    }
+
+    const remaining = remainingTasks.map((item, index) => ({
+      ...item,
+      position: index + 1,
+    }));
+    queuedAgentTasksRef.current = remaining;
+    setQueuedAgentTasks(remaining);
+    setActiveAgentTaskPreview(
+      remaining.length > 0 ? nextTask.intent.preview : null,
+    );
+    void dispatchAgentIntent(nextTask.intent);
+  }, [agentStatus, dispatchAgentIntent]);
+
   // AI store — text selections + input appends. Model/effort are owned by the
   // ModelEffortPicker which subscribes to the store directly.
   const {
@@ -400,6 +477,33 @@ export function MainAIChatShell() {
       pendingInputAppends: state.pendingInputAppends,
       consumeInputAppends: state.consumeInputAppends,
     })),
+  );
+
+  const makeSendPreview = useCallback(
+    (
+      displayMessage: string,
+      files: ReferencedFile[],
+      quotedSelections: typeof textSelections,
+      images: ChatImageAttachment[],
+    ) => {
+      const textPreview = compactTaskPreview(displayMessage);
+      if (textPreview) return textPreview;
+      const quote = quotedSelections[0];
+      const quotePreview = quote
+        ? compactTaskPreview(quote.summary || quote.text)
+        : "";
+      if (quotePreview) return quotePreview;
+      if (files.length === 1) return files[0].name;
+      if (files.length > 1) {
+        return t.ai.filesCount.replace("{count}", String(files.length));
+      }
+      if (images.length === 1) return images[0].filename;
+      if (images.length > 1) {
+        return t.ai.imageAttached.replace("{count}", String(images.length));
+      }
+      return t.common.untitled;
+    },
+    [t],
   );
 
   // Image mode is agent-assisted when the chat provider is usable: the
@@ -444,6 +548,11 @@ export function MainAIChatShell() {
   // Wrap session hooks with local state side effects
   const handleSwitchSession = useCallback(
     (id: string, type: "agent" | "chat") => {
+      queuedAgentTasksRef.current = [];
+      setQueuedAgentTasks([]);
+      setActiveAgentTaskPreview(null);
+      currentAgentTaskPreviewRef.current = null;
+      lastAgentSendIntentRef.current = null;
       _sessionSwitch(id, type);
       setShowHistory(false);
     },
@@ -454,6 +563,11 @@ export function MainAIChatShell() {
     setIsExportSelectionMode(false);
     setSelectedExportIds([]);
     setSelectedSkills([]);
+    queuedAgentTasksRef.current = [];
+    setQueuedAgentTasks([]);
+    setActiveAgentTaskPreview(null);
+    currentAgentTaskPreviewRef.current = null;
+    lastAgentSendIntentRef.current = null;
     _sessionNewChat();
     setShowHistory(false);
   }, [_sessionNewChat, setSelectedSkills]);
@@ -1069,11 +1183,23 @@ export function MainAIChatShell() {
         attachments,
         fileParts: imageFileParts,
       };
-      lastAgentSendIntentRef.current = {
+      const intent: AgentSendIntent = {
         task: wrappedFullMessage,
         context: startContext,
+        preview: makeSendPreview(
+          displayMessage,
+          files,
+          quotedSelections,
+          attachedImages,
+        ),
       };
-      await startAgentTask(wrappedFullMessage, startContext);
+      if (agentStatus === "running") {
+        queueAgentIntent(intent);
+        setSelectedSkills([]);
+        finalizePerf();
+        return;
+      }
+      await dispatchAgentIntent(intent);
       setSelectedSkills([]);
       finalizePerf();
     },
@@ -1088,16 +1214,19 @@ export function MainAIChatShell() {
       attachedImages,
       textSelections,
       clearTextSelections,
-      startAgentTask,
+      dispatchAgentIntent,
+      queueAgentIntent,
       selectedSkills,
       isExportSelectionMode,
       imageMode,
+      agentStatus,
       isAgentConfigured,
       agentVisionMode,
       imageProviders,
       imageProvidersLoaded,
       refreshImageProviders,
       refreshFileTree,
+      makeSendPreview,
       t,
     ],
   );
@@ -1635,7 +1764,7 @@ export function MainAIChatShell() {
                     dismissBanner();
                     const retryIntent = lastAgentSendIntentRef.current;
                     if (retryIntent) {
-                      void startAgentTask(retryIntent.task, retryIntent.context);
+                      void dispatchAgentIntent(retryIntent);
                       return;
                     }
                     const lastUser = [...agentMessages]

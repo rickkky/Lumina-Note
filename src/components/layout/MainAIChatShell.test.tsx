@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { MainAIChatShell } from "./MainAIChatShell";
 import { useFileStore } from "@/stores/useFileStore";
@@ -379,6 +379,53 @@ describe("MainAIChatShell", () => {
 
     await waitFor(() => expect(startTask).toHaveBeenCalledTimes(2));
     expect(startTask.mock.calls[1][0]).toBe("failed prompt");
+  });
+
+  it("queues sends while the agent is running and dispatches them after idle", async () => {
+    const startTask = vi.fn(async () => undefined);
+    useOpencodeAgent.setState({
+      currentSessionId: "test-session",
+      status: "running",
+      startTask: startTask as typeof originalStartTask,
+      messages: [
+        {
+          id: "current-user",
+          role: "user",
+          content: "current prompt",
+          rawParts: [],
+        },
+      ],
+    });
+
+    render(<MainAIChatShell />);
+
+    const input = screen.getByRole("textbox") as HTMLTextAreaElement;
+    fireEvent.change(input, { target: { value: "queued prompt" } });
+    const { t } = useLocaleStore.getState();
+    fireEvent.click(screen.getByTitle(t.ai.sendToQueue));
+
+    expect(startTask).not.toHaveBeenCalled();
+    await waitFor(() =>
+      expect(
+        screen.getByText((content) =>
+          content.includes("#1") && content.includes("queued prompt"),
+        ),
+      ).toBeTruthy(),
+    );
+
+    act(() => {
+      useOpencodeAgent.setState({ status: "idle" });
+    });
+
+    await waitFor(() => expect(startTask).toHaveBeenCalledTimes(1));
+    expect(startTask.mock.calls[0][0]).toBe("queued prompt");
+    await waitFor(() =>
+      expect(
+        screen.queryByText((content) =>
+          content.includes("#1") && content.includes("queued prompt"),
+        ),
+      ).toBeNull(),
+    );
   });
 
   it("appends a lumina prompt link to existing draft instead of sending", () => {
