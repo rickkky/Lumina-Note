@@ -750,7 +750,7 @@ export function TabBar() {
     setDragOffsetX(0);
   }, []);
 
-  const updateTabDrag = useCallback((pointerId: number, clientX: number) => {
+  const updateTabDrag = useCallback((pointerId: number, clientX: number, captureTarget?: HTMLElement) => {
     const dragState = dragStateRef.current;
     if (!dragState || dragState.pointerId !== pointerId) return;
 
@@ -759,6 +759,19 @@ export function TabBar() {
     if (!dragState.isDragging && Math.abs(offsetX) > 3) {
       dragState.hasMoved = true;
       dragState.isDragging = true;
+      // Capture only once movement crosses the drag threshold. Capturing on
+      // pointerdown locks the browser's :hover to the captured tab for the
+      // duration of every click, which intermittently prevented hover state
+      // from updating on neighboring tabs after a click+move.
+      if (captureTarget && !captureTarget.hasPointerCapture(pointerId)) {
+        try {
+          captureTarget.setPointerCapture(pointerId);
+        } catch {
+          // Pointer capture can fail if the element was unmounted between
+          // the threshold crossing and this call; the drag logic doesn't
+          // depend on capture succeeding.
+        }
+      }
       setDraggingTabId(dragState.tabId);
       dragStartLayoutsRef.current = new Map(tabLayouts);
       dragStartOpenTabsRef.current = openTabsForLayout;
@@ -1088,11 +1101,10 @@ export function TabBar() {
                           }}
                           onPointerDown={(e) => {
                             if (isClosing || e.button !== 0) return;
-                            (e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId);
                             beginTabDrag(tab.id, e.pointerId, e.clientX);
                           }}
                           onPointerMove={(e) => {
-                            updateTabDrag(e.pointerId, e.clientX);
+                            updateTabDrag(e.pointerId, e.clientX, e.currentTarget as HTMLElement);
                           }}
                           onPointerUp={(e) => {
                             if (isClosing) return;
