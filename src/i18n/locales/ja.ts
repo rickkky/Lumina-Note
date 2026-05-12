@@ -1528,10 +1528,28 @@ export default {
         "ネットワーク接続に失敗しました。接続を確認してから再試行してください。",
       sendAuth: "API キーが無効か期限切れです。設定を確認してください。",
       sendGeneric: "メッセージを送信できませんでした。もう一度お試しください。",
+      providerAuthFailed:
+        "API Key が無効または期限切れです。AI 設定を確認してください。",
+      providerQuotaExhausted:
+        "このアカウントの利用枠が不足しています。プロバイダーの残高、請求、利用制限を確認してください。",
+      providerRateLimited:
+        "リクエストが多すぎます。プロバイダーから後で再試行するよう求められました。",
+      providerRateLimitedWithDelay:
+        "リクエストが多すぎます。{seconds} 秒後に再試行してください。",
+      providerModelNotFound:
+        "現在のモデルが見つかりません。モデル ID を確認するか、このアカウントで利用できるモデルに変更してください。",
+      providerModelAccessDenied:
+        "このアカウントでは現在のモデルを利用できません。別のモデルに変更するか、プロバイダー側のモデル権限を確認してください。",
+      providerContextTooLarge:
+        "このリクエストのコンテキストが長すぎます。参照ファイルを減らす、内容を短くする、またはより大きなコンテキストのモデルに変更してください。",
       providerThinkingNotSupported:
         "このモデルは拡張思考に対応していません。設定でモデルを切り替えるか、思考を無効にしてください。",
       providerStreamLost:
         "接続が切断されました。リロードまたは再送信してください。",
+      providerNetwork:
+        "ネットワーク接続に失敗しました。ネットワークまたはプロキシを確認してから再試行してください。",
+      providerOverloaded:
+        "プロバイダーが混み合っています。しばらくしてから再試行するか、別のモデルに切り替えてください。",
       providerGeneric: "AI が応答しませんでした。もう一度お試しください。",
       runtimeMissingApiKey:
         "{provider} の API Key がまだ設定されていないため送信できません。",

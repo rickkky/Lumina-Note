@@ -1500,9 +1500,27 @@ export default {
       sendAuth: "API 密钥无效或已过期，请到设置中检查",
       sendGeneric: "发送消息失败，请重试",
       // AI 服务返回的错误
+      providerAuthFailed:
+        "API Key 无效或已过期，请检查 AI 设置。",
+      providerQuotaExhausted:
+        "当前账号额度不足，AI 暂时不能继续使用。请检查服务商后台的余额、账单或用量限制。",
+      providerRateLimited:
+        "请求太频繁，服务商要求稍后再试。",
+      providerRateLimitedWithDelay:
+        "请求太频繁，服务商要求 {seconds} 秒后再试。",
+      providerModelNotFound:
+        "找不到当前模型。请检查模型 ID，或换一个当前账号可用的模型。",
+      providerModelAccessDenied:
+        "当前账号不能使用这个模型。请换一个模型，或检查服务商后台的模型权限。",
+      providerContextTooLarge:
+        "这次发送的上下文太长。请减少引用文件、缩短内容，或换用更大上下文的模型。",
       providerThinkingNotSupported:
         "当前模型不支持深度思考，请在设置里切换模型或关闭深度思考",
       providerStreamLost: "连接已断开，请刷新或重新发送消息",
+      providerNetwork:
+        "网络连接失败，AI 请求没有完成。请检查网络或代理后重试。",
+      providerOverloaded:
+        "服务商当前繁忙，Lumina 暂时无法获得回复。可以稍后重试，或切换到其他模型。",
       providerGeneric: "AI 暂时无法响应，请稍后重试",
       // 运行前配置检查
       runtimeMissingApiKey:

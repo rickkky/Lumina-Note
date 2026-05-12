@@ -12,6 +12,7 @@
  */
 
 import { getCurrentTranslations } from "@/stores/useLocaleStore";
+import { classifyProviderRuntimeError } from "@/services/ai/provider-runtime-error";
 
 import { classifyHttpError } from "./retry";
 import type { ErrorEnvelope } from "./types";
@@ -44,21 +45,42 @@ export function formatEnvelope(env: ErrorEnvelope): FormattedError {
     }
 
     case "session.provider_error": {
-      const causeMsg = causeText(env).toLowerCase();
-      if (
-        causeMsg.includes("reasoning_content") ||
-        causeMsg.includes("thinking mode") ||
-        causeMsg.includes("thinking_content")
-      ) {
-        return { text: e.providerThinkingNotSupported };
+      const classified = classifyProviderRuntimeError(
+        env.cause ?? env.message,
+      );
+      switch (classified.type) {
+        case "auth_failed":
+          return { text: e.providerAuthFailed };
+        case "quota_exhausted":
+          return { text: e.providerQuotaExhausted };
+        case "rate_limited":
+          return {
+            text:
+              classified.retryAfterSeconds !== undefined
+                ? e.providerRateLimitedWithDelay.replace(
+                    "{seconds}",
+                    String(classified.retryAfterSeconds),
+                  )
+                : e.providerRateLimited,
+            action: "retry",
+          };
+        case "model_not_found":
+          return { text: e.providerModelNotFound };
+        case "model_access_denied":
+          return { text: e.providerModelAccessDenied };
+        case "context_too_large":
+          return { text: e.providerContextTooLarge };
+        case "thinking_not_supported":
+          return { text: e.providerThinkingNotSupported };
+        case "stream_lost":
+          return { text: e.providerStreamLost, action: "reload" };
+        case "network_unreachable":
+          return { text: e.providerNetwork, action: "retry" };
+        case "provider_overloaded":
+          return { text: e.providerOverloaded, action: "retry" };
+        case "unknown":
+          return { text: e.providerGeneric, action: "retry" };
       }
-      if (
-        causeMsg.includes("event stream") ||
-        causeMsg.includes("connection failed")
-      ) {
-        return { text: e.providerStreamLost, action: "reload" };
-      }
-      return { text: e.providerGeneric, action: "retry" };
     }
 
     case "permission.reply":
@@ -87,27 +109,4 @@ export function formatEnvelope(env: ErrorEnvelope): FormattedError {
     default:
       return { text: e.generic, action: "retry" };
   }
-}
-
-function causeText(env: ErrorEnvelope): string {
-  // Combine envelope.message (often the technical text) with any
-  // string-shaped cause body. We only inspect the *content* to detect
-  // known provider-side error patterns; we never display this string
-  // to the user directly.
-  const parts: string[] = [];
-  if (env.message) parts.push(env.message);
-  const c = env.cause;
-  if (typeof c === "string") parts.push(c);
-  else if (c && typeof c === "object") {
-    const obj = c as { message?: unknown; data?: { message?: unknown } };
-    if (typeof obj.message === "string") parts.push(obj.message);
-    if (
-      obj.data &&
-      typeof obj.data === "object" &&
-      typeof obj.data.message === "string"
-    ) {
-      parts.push(obj.data.message);
-    }
-  }
-  return parts.join(" ");
 }

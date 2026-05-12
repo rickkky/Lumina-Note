@@ -1538,9 +1538,27 @@ export default {
       sendNetwork: "Connection failed. Check your network and try again.",
       sendAuth: "Your API key is invalid or expired. Check Settings.",
       sendGeneric: "Couldn't send your message. Please try again.",
+      providerAuthFailed:
+        "The API key is invalid or expired. Check AI Settings.",
+      providerQuotaExhausted:
+        "This account is out of quota. Check the provider's billing, balance, or usage limits.",
+      providerRateLimited:
+        "Too many requests. The provider asked Lumina to try again later.",
+      providerRateLimitedWithDelay:
+        "Too many requests. The provider asked Lumina to try again in {seconds}s.",
+      providerModelNotFound:
+        "The current model could not be found. Check the model ID or choose a model your account can use.",
+      providerModelAccessDenied:
+        "This account cannot use the current model. Choose another model or check model access in the provider dashboard.",
+      providerContextTooLarge:
+        "This request has too much context. Remove referenced files, shorten the prompt, or choose a larger-context model.",
       providerThinkingNotSupported:
         "This model doesn't support extended thinking. Switch model or disable thinking in Settings.",
       providerStreamLost: "Connection lost. Refresh or resend your message.",
+      providerNetwork:
+        "Network connection failed. Check your network or proxy and try again.",
+      providerOverloaded:
+        "The provider is busy right now. Try again later or switch to another model.",
       providerGeneric: "The AI didn't respond. Please try again.",
       runtimeMissingApiKey:
         "{provider} does not have an API key configured yet.",

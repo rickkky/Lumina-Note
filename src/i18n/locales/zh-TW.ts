@@ -1499,9 +1499,27 @@ export default {
       sendNetwork: "網路連線失敗，請檢查網路後重試",
       sendAuth: "API 金鑰無效或已過期，請至設定檢查",
       sendGeneric: "傳送訊息失敗，請重試",
+      providerAuthFailed:
+        "API Key 無效或已過期，請檢查 AI 設定。",
+      providerQuotaExhausted:
+        "目前帳號額度不足，AI 暫時不能繼續使用。請檢查服務商後台的餘額、帳單或用量限制。",
+      providerRateLimited:
+        "請求太頻繁，服務商要求稍後再試。",
+      providerRateLimitedWithDelay:
+        "請求太頻繁，服務商要求 {seconds} 秒後再試。",
+      providerModelNotFound:
+        "找不到目前模型。請檢查模型 ID，或換一個目前帳號可用的模型。",
+      providerModelAccessDenied:
+        "目前帳號不能使用這個模型。請換一個模型，或檢查服務商後台的模型權限。",
+      providerContextTooLarge:
+        "這次傳送的上下文太長。請減少引用檔案、縮短內容，或換用更大上下文的模型。",
       providerThinkingNotSupported:
         "目前模型不支援深度思考，請於設定中切換模型或關閉深度思考",
       providerStreamLost: "連線已中斷，請重新整理或重新傳送訊息",
+      providerNetwork:
+        "網路連線失敗，AI 請求沒有完成。請檢查網路或代理後重試。",
+      providerOverloaded:
+        "服務商目前繁忙，Lumina 暫時無法取得回覆。可以稍後重試，或切換到其他模型。",
       providerGeneric: "AI 暫時無法回應，請稍後重試",
       runtimeMissingApiKey:
         "{provider} 還沒有設定 API Key，暫時不能傳送。",
