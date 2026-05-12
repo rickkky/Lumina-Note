@@ -16,7 +16,7 @@ import {
   useRef,
   type MouseEvent,
 } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
   useLocaleStore,
   getCurrentTranslations,
@@ -279,6 +279,29 @@ function isWorkSessionInProgress(items: WorkItem[]): boolean {
       return item.tools.some((t) => t.result === undefined);
     return false;
   });
+}
+
+function getActiveWorkPhase(items: WorkItem[]): "thinking" | "tool" | "working" {
+  for (let i = items.length - 1; i >= 0; i--) {
+    const item = items[i];
+    if (item.type === "tool" && item.tool.result === undefined) return "tool";
+    if (
+      item.type === "tool_group" &&
+      item.tools.some((tool) => tool.result === undefined)
+    ) {
+      return "tool";
+    }
+    if (item.type === "thinking" && item.status === "streaming") {
+      return "thinking";
+    }
+    if (
+      item.type === "thinking_group" &&
+      item.items.some((thinking) => thinking.status === "streaming")
+    ) {
+      return "thinking";
+    }
+  }
+  return "working";
 }
 
 /**
@@ -1266,6 +1289,61 @@ function formatElapsed(seconds: number): string {
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
+const STATUS_TYPEWRITER_STEP_MS = 24;
+
+const AnimatedStatusText = memo(function AnimatedStatusText({
+  text,
+  className = "",
+}: {
+  text: string;
+  className?: string;
+}) {
+  const reduceMotion = useReducedMotion();
+  const [displayText, setDisplayText] = useState(text);
+  const [isTyping, setIsTyping] = useState(false);
+  const mountedRef = useRef(false);
+
+  useEffect(() => {
+    if (!mountedRef.current) {
+      mountedRef.current = true;
+      setDisplayText(text);
+      return;
+    }
+
+    if (reduceMotion) {
+      setDisplayText(text);
+      setIsTyping(false);
+      return;
+    }
+
+    let index = 0;
+    setDisplayText("");
+    setIsTyping(true);
+    const id = window.setInterval(() => {
+      index += 1;
+      setDisplayText(text.slice(0, index));
+      if (index >= text.length) {
+        window.clearInterval(id);
+        setIsTyping(false);
+      }
+    }, STATUS_TYPEWRITER_STEP_MS);
+
+    return () => window.clearInterval(id);
+  }, [reduceMotion, text]);
+
+  return (
+    <span className={`inline-flex min-w-[4.5em] items-center ${className}`}>
+      <span className="whitespace-nowrap">{displayText}</span>
+      {isTyping && (
+        <span
+          aria-hidden
+          className="ml-0.5 inline-block h-3 w-px bg-current opacity-55 motion-reduce:hidden"
+        />
+      )}
+    </span>
+  );
+});
+
 /**
  * 连续思考块的外层折叠
  */
@@ -1705,6 +1783,8 @@ const GeneratedImageCard = memo(function GeneratedImageCard({
  *   timer; completed rows show "Completed" plus the step count.
  * - The running timer always uses the full turn start time, so internal
  *   thinking/tool transitions do not reset the user-facing wait time.
+ * - The live status follows the active phase and types in on phase changes,
+ *   so "Thinking" -> "Executing" does not look like a hard text swap.
  * - Expanded content keeps ThinkingCollapsible / ToolCallCollapsible and
  *   grouped collapsibles in place behind one quiet outer shell.
  * - "In progress" is inferred from child items: streaming thinking or any
@@ -1758,20 +1838,27 @@ const WorkSession = memo(function WorkSession({
   );
 
   const isComplete = !inProgress;
+  const activePhase = inProgress ? getActiveWorkPhase(items) : null;
+  const liveStatusLabel =
+    activePhase === "thinking"
+      ? t.agentMessage.thinking
+      : activePhase === "tool"
+        ? t.agentMessage.executing
+        : t.agentMessage.working;
   let statusLabel: string;
   let metaLabel: string | null = null;
   const metaIsDuration = showLive;
 
   if (showLive) {
-    statusLabel = t.agentMessage.working;
+    statusLabel = liveStatusLabel;
     metaLabel = formatElapsed(elapsed);
   } else if (inProgress && isRunning) {
-    statusLabel = t.agentMessage.working;
+    statusLabel = liveStatusLabel;
   } else if (isComplete) {
     statusLabel = t.agentMessage.workCompleted;
     metaLabel = stepsLabel;
   } else {
-    statusLabel = t.agentMessage.working;
+    statusLabel = liveStatusLabel;
     metaLabel = stepsLabel;
   }
 
@@ -1808,7 +1895,7 @@ const WorkSession = memo(function WorkSession({
         ) : (
           <Check size={12} className="shrink-0 text-success" />
         )}
-        <span className="font-medium">{statusLabel}</span>
+        <AnimatedStatusText text={statusLabel} className="font-medium" />
         {metaLabel && (
           <span className="inline-flex min-w-0 items-center gap-1 text-ui-meta text-muted-foreground/70">
             <span className="text-muted-foreground/45">·</span>

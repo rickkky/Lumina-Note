@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { createElement } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -139,7 +139,7 @@ describe("AgentMessageRenderer", () => {
     const progress = container.querySelector(".image-generation-progress");
     expect(progress).not.toBeNull();
 
-    const workSummary = screen.getByRole("button", { name: /正在工作中/ });
+    const workSummary = screen.getByRole("button", { name: /执行中/ });
     expect(
       workSummary.compareDocumentPosition(progress as Element) &
         Node.DOCUMENT_POSITION_FOLLOWING,
@@ -186,11 +186,103 @@ describe("AgentMessageRenderer", () => {
     );
 
     expect(
-      screen.getByRole("button", { name: /正在工作中.*0:30/ }),
+      screen.getByRole("button", { name: /执行中.*0:30/ }),
     ).toBeInTheDocument();
     expect(
-      screen.queryByRole("button", { name: /正在工作中.*0:02/ }),
+      screen.queryByRole("button", { name: /执行中.*0:02/ }),
     ).not.toBeInTheDocument();
+  });
+
+  it("types the work status when the active phase changes", () => {
+    const now = new Date("2026-05-12T00:00:30.000Z");
+    vi.useFakeTimers();
+    vi.setSystemTime(now);
+
+    const baseUser = {
+      id: "msg-user",
+      role: "user" as const,
+      content: "Read the current note",
+      rawParts: [],
+    };
+    const { rerender } = render(
+      createElement(AgentMessageRenderer, {
+        isRunning: true,
+        llmRequestStartTime: now.getTime() - 30_000,
+        messages: [
+          baseUser,
+          {
+            id: "msg-assistant",
+            role: "assistant",
+            content: "",
+            rawParts: [
+              {
+                id: "part-reasoning",
+                sessionID: "test-session",
+                messageID: "msg-assistant",
+                type: "reasoning",
+                text: "Inspecting context",
+                time: { start: now.getTime() - 10_000 },
+              } as never,
+            ],
+          },
+        ],
+      }),
+    );
+
+    expect(
+      screen.getByRole("button", { name: /思考中.*0:30/ }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("思考中...")).toBeInTheDocument();
+
+    rerender(
+      createElement(AgentMessageRenderer, {
+        isRunning: true,
+        llmRequestStartTime: now.getTime() - 30_000,
+        messages: [
+          baseUser,
+          {
+            id: "msg-assistant",
+            role: "assistant",
+            content: "",
+            rawParts: [
+              {
+                id: "part-reasoning",
+                sessionID: "test-session",
+                messageID: "msg-assistant",
+                type: "reasoning",
+                text: "Inspecting context",
+                time: {
+                  start: now.getTime() - 10_000,
+                  end: now.getTime() - 8_000,
+                },
+              } as never,
+              {
+                id: "part-tool",
+                sessionID: "test-session",
+                messageID: "msg-assistant",
+                type: "tool",
+                tool: "read",
+                state: {
+                  status: "running",
+                  input: { file: "note.md" },
+                  time: { start: now.getTime() - 2_000 },
+                },
+              } as never,
+            ],
+          },
+        ],
+      }),
+    );
+
+    expect(
+      screen.getByRole("button", { name: /执行中.*0:30/ }),
+    ).toBeInTheDocument();
+    expect(screen.queryByText("执行中...")).not.toBeInTheDocument();
+
+    act(() => {
+      vi.advanceTimersByTime(200);
+    });
+    expect(screen.getByText("执行中...")).toBeInTheDocument();
   });
 
   it("keeps internal work duration out of the completed summary", () => {
