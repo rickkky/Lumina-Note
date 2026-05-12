@@ -59,6 +59,7 @@ import { SelectableConversationList } from "../chat/SelectableConversationList";
 import { getTextFromContent } from "../chat/messageContentUtils";
 import {
   observeContentResize,
+  scrollStickyContainerToBottom,
   updateStickyScrollState,
 } from "../chat/stickyScroll";
 import {
@@ -769,6 +770,17 @@ export function MainAIChatShell() {
       isNearBottom,
     );
   }, []);
+
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer || !isNearBottom.current) return;
+    const rafId = requestAnimationFrame(() => {
+      const current = scrollContainerRef.current;
+      if (!current || !isNearBottom.current) return;
+      scrollStickyContainerToBottom(current, lastScrollTopRef);
+    });
+    return () => cancelAnimationFrame(rafId);
+  }, [agentMessages]);
 
   useEffect(() => {
     if (!import.meta.env.DEV || typeof performance === "undefined") {

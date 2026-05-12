@@ -286,7 +286,7 @@ describe("MainAIChatShell", () => {
     render(<MainAIChatShell />);
 
     const { t } = useLocaleStore.getState();
-    const workSessionToggle = screen.getByText(/1 个步骤/);
+    const workSessionToggle = screen.getByText(t.agentMessage.workCompleted);
     expect(screen.queryByText("step by step")).toBeNull();
     fireEvent.click(workSessionToggle);
     const thinkingToggle = screen.getByText(t.agentMessage.thinkingDone);
@@ -294,6 +294,100 @@ describe("MainAIChatShell", () => {
     fireEvent.click(thinkingToggle);
     expect(screen.getByText("step by step")).toBeTruthy();
     expect(screen.getByText("final answer")).toBeTruthy();
+  });
+
+  it("keeps the chat pinned to bottom when agent parts update without resize events", async () => {
+    const requestAnimationFrameSpy = vi
+      .spyOn(window, "requestAnimationFrame")
+      .mockImplementation((callback) => {
+        callback(performance.now());
+        return 1;
+      });
+    const cancelAnimationFrameSpy = vi
+      .spyOn(window, "cancelAnimationFrame")
+      .mockImplementation(() => undefined);
+
+    try {
+      useOpencodeAgent.setState({
+        currentSessionId: "test-session",
+        status: "running",
+        messages: [
+          {
+            id: "msg-user",
+            role: "user",
+            content: "hello",
+            rawParts: [],
+          },
+          {
+            id: "msg-assistant",
+            role: "assistant",
+            content: "",
+            rawParts: [
+              {
+                id: "part-reasoning",
+                sessionID: "test-session",
+                messageID: "msg-assistant",
+                type: "reasoning",
+                text: "thinking",
+                time: { start: 1 },
+              } as never,
+            ],
+          },
+        ],
+      });
+
+      render(<MainAIChatShell />);
+
+      const scrollContainer = document.querySelector(
+        ".scrollbar-thin",
+      ) as HTMLElement | null;
+      expect(scrollContainer).toBeTruthy();
+
+      let scrollHeight = 1000;
+      Object.defineProperty(scrollContainer, "scrollHeight", {
+        configurable: true,
+        get: () => scrollHeight,
+      });
+      Object.defineProperty(scrollContainer, "clientHeight", {
+        configurable: true,
+        get: () => 500,
+      });
+      scrollContainer!.scrollTop = 500;
+
+      scrollHeight = 1200;
+      act(() => {
+        useOpencodeAgent.setState({
+          messages: [
+            {
+              id: "msg-user",
+              role: "user",
+              content: "hello",
+              rawParts: [],
+            },
+            {
+              id: "msg-assistant",
+              role: "assistant",
+              content: "",
+              rawParts: [
+                {
+                  id: "part-reasoning",
+                  sessionID: "test-session",
+                  messageID: "msg-assistant",
+                  type: "reasoning",
+                  text: "thinking\nstill thinking",
+                  time: { start: 1 },
+                } as never,
+              ],
+            },
+          ],
+        });
+      });
+
+      await waitFor(() => expect(scrollContainer!.scrollTop).toBe(700));
+    } finally {
+      requestAnimationFrameSpy.mockRestore();
+      cancelAnimationFrameSpy.mockRestore();
+    }
   });
 
   it("sends a lumina prompt link through opencode when input is empty", async () => {
