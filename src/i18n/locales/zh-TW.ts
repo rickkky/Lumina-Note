@@ -1496,6 +1496,7 @@ export default {
       copied: "已複製",
       panelCrashed: "此面板出錯了",
       reloadPanel: "重新載入",
+      openSettings: "開啟 AI 設定",
       sendNetwork: "網路連線失敗，請檢查網路後重試",
       sendAuth: "API 金鑰無效或已過期，請至設定檢查",
       sendGeneric: "傳送訊息失敗，請重試",

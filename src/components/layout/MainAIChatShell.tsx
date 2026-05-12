@@ -1830,6 +1830,10 @@ export function MainAIChatShell() {
                     dismissBanner();
                     window.location.reload();
                   }}
+                  onSettings={() => {
+                    dismissBanner();
+                    setShowSettings(true);
+                  }}
                 />
               )}
 

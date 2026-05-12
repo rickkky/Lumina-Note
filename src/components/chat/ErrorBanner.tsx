@@ -11,7 +11,14 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { AlertCircle, X, RefreshCw, Copy, Check } from "lucide-react";
+import {
+  AlertCircle,
+  X,
+  RefreshCw,
+  Copy,
+  Check,
+  Settings,
+} from "lucide-react";
 
 import { formatEnvelope, type ErrorEnvelope } from "@/services/errors";
 import { useLocaleStore } from "@/stores/useLocaleStore";
@@ -23,13 +30,21 @@ type Props = {
   onRetry?: () => void;
   /** Wired by parent — only invoked for action="reload" envelopes. */
   onReload?: () => void;
+  /** Wired by parent — only invoked for action="settings" envelopes. */
+  onSettings?: () => void;
 };
 
 function getKindLabel(kind: string, kindLabels: Record<string, string>): string {
   return kindLabels[kind] || kind;
 }
 
-export function ErrorBanner({ envelope, onDismiss, onRetry, onReload }: Props) {
+export function ErrorBanner({
+  envelope,
+  onDismiss,
+  onRetry,
+  onReload,
+  onSettings,
+}: Props) {
   const { t } = useLocaleStore();
   const e = t.agentMessage.errors;
   const [copied, setCopied] = useState(false);
@@ -57,11 +72,15 @@ export function ErrorBanner({ envelope, onDismiss, onRetry, onReload }: Props) {
 
   const actionLabel =
     formatted.action === "retry" ? e.retry :
-    formatted.action === "reload" ? e.reloadPanel : null;
+    formatted.action === "reload" ? e.reloadPanel :
+    formatted.action === "settings" ? e.openSettings : null;
+
+  const ActionIcon = formatted.action === "settings" ? Settings : RefreshCw;
 
   const handleAction = () => {
     if (formatted.action === "retry") onRetry?.();
     else if (formatted.action === "reload") onReload?.();
+    else if (formatted.action === "settings") onSettings?.();
   };
 
   return (
@@ -84,7 +103,7 @@ export function ErrorBanner({ envelope, onDismiss, onRetry, onReload }: Props) {
               onClick={handleAction}
               className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-destructive/10 hover:bg-destructive/20 transition-colors"
             >
-              <RefreshCw className="w-3 h-3" />
+              <ActionIcon className="w-3 h-3" />
               {actionLabel}
             </button>
           )}

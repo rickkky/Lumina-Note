@@ -1535,6 +1535,7 @@ export default {
       copied: "Copied",
       panelCrashed: "This panel ran into a problem.",
       reloadPanel: "Reload",
+      openSettings: "Open AI Settings",
       sendNetwork: "Connection failed. Check your network and try again.",
       sendAuth: "Your API key is invalid or expired. Check Settings.",
       sendGeneric: "Couldn't send your message. Please try again.",

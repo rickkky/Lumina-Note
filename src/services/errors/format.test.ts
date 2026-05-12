@@ -26,6 +26,7 @@ vi.mock("@/stores/useLocaleStore", () => ({
         sessionSwitch: "session switch",
         sessionDelete: "session delete",
         panelCrashed: "panel crashed",
+        openSettings: "open settings",
         generic: "generic",
       },
     },
@@ -51,13 +52,13 @@ describe("formatEnvelope", () => {
   it("shows auth-specific provider errors", () => {
     expect(
       formatEnvelope(providerEnvelope({ response: { status: 401 } })),
-    ).toEqual({ text: "provider auth" });
+    ).toEqual({ text: "provider auth", action: "settings" });
   });
 
   it("shows missing-key provider errors separately from invalid keys", () => {
     expect(
       formatEnvelope(providerEnvelope("You did not provide an API key.")),
-    ).toEqual({ text: "provider key missing" });
+    ).toEqual({ text: "provider key missing", action: "settings" });
   });
 
   it("does not offer retry for quota exhaustion", () => {
@@ -83,5 +84,18 @@ describe("formatEnvelope", () => {
     expect(
       formatEnvelope(providerEnvelope("context_length_exceeded")),
     ).toEqual({ text: "provider context" });
+  });
+
+  it("routes readiness errors to settings", () => {
+    expect(
+      formatEnvelope({
+        id: "err-1",
+        kind: "runtime.readiness",
+        severity: "blocker",
+        message: "missing key",
+        retryable: false,
+        timestamp: 1,
+      }),
+    ).toEqual({ text: "missing key", action: "settings" });
   });
 });

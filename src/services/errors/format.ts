@@ -20,7 +20,7 @@ import {
 import { classifyHttpError } from "./retry";
 import type { ErrorEnvelope } from "./types";
 
-export type ErrorAction = "retry" | "reload";
+export type ErrorAction = "retry" | "reload" | "settings";
 
 export type FormattedError = {
   text: string;
@@ -42,7 +42,7 @@ export function formatEnvelope(env: ErrorEnvelope): FormattedError {
         return { text: e.sendNetwork, action: "retry" };
       }
       if (cls.reason === "401" || cls.reason === "403") {
-        return { text: e.sendAuth };
+        return { text: e.sendAuth, action: "settings" };
       }
       return { text: e.sendGeneric, action: "retry" };
     }
@@ -56,13 +56,13 @@ export function formatEnvelope(env: ErrorEnvelope): FormattedError {
         e.providerGeneric;
       switch (classified.type) {
         case "api_key_missing":
-          return { text };
         case "auth_failed":
-        case "quota_exhausted":
         case "model_not_found":
         case "model_access_denied":
-        case "context_too_large":
         case "thinking_not_supported":
+          return { text, action: "settings" };
+        case "quota_exhausted":
+        case "context_too_large":
           return { text };
         case "rate_limited":
           return {
@@ -83,7 +83,7 @@ export function formatEnvelope(env: ErrorEnvelope): FormattedError {
       return { text: e.permissionFailed };
 
     case "runtime.readiness":
-      return { text: env.message };
+      return { text: env.message, action: "settings" };
 
     case "session.abort":
       return { text: e.abortFailed };

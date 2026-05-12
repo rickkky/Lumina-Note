@@ -1495,6 +1495,7 @@ export default {
       copied: "已复制",
       panelCrashed: "该面板出错了",
       reloadPanel: "重新加载",
+      openSettings: "打开 AI 设置",
       // 发送消息相关
       sendNetwork: "网络连接失败，请检查网络后重试",
       sendAuth: "API 密钥无效或已过期，请到设置中检查",

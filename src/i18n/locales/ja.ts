@@ -1524,6 +1524,7 @@ export default {
       copied: "コピーしました",
       panelCrashed: "このパネルで問題が発生しました",
       reloadPanel: "再読み込み",
+      openSettings: "AI 設定を開く",
       sendNetwork:
         "ネットワーク接続に失敗しました。接続を確認してから再試行してください。",
       sendAuth: "API キーが無効か期限切れです。設定を確認してください。",
