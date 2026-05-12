@@ -198,6 +198,32 @@ describe("buildOpencodeBridge", () => {
     });
   });
 
+  it("allows OpenAI-compatible providers without an API key", async () => {
+    const bridge = await buildOpencodeBridge(
+      makeProviderSettings({
+        provider: "openai-compatible",
+        modelId: "local-model",
+        all: {
+          "openai-compatible": {
+            modelId: "local-model",
+            baseUrl: "http://localhost:1234/v1",
+          },
+        },
+        keys: {
+          "openai-compatible": "",
+        },
+      }),
+    );
+
+    const config = JSON.parse(bridge?.config ?? "{}");
+    const auth = JSON.parse(bridge?.auth ?? "{}");
+    expect(config.model).toBe("lumina-compat/local-model");
+    expect(config.provider["lumina-compat"].options.baseURL).toBe(
+      "http://localhost:1234/v1",
+    );
+    expect(auth["lumina-compat"]).toBeUndefined();
+  });
+
   it("uses MiMo's long-output limits for official endpoint models", async () => {
     const bridge = await buildOpencodeBridge(
       makeProviderSettings({

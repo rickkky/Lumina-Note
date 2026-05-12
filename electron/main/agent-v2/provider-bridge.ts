@@ -543,8 +543,10 @@ async function buildProviderEntry(input: {
     return null;
   }
 
-  // Local-only providers (Ollama) don't need a key; everything else does.
-  const keyRequired = luminaId !== "ollama";
+  // Local/self-hosted providers may not need a key. OpenAI-compatible
+  // covers LM Studio, vLLM, and internal gateways as well as hosted presets;
+  // let the upstream service return 401 if it actually requires auth.
+  const keyRequired = luminaId !== "ollama" && luminaId !== "openai-compatible";
   if (keyRequired && !apiKey) {
     if (!silent) console.log(`[opencode-bridge] skip: provider '${luminaId}' has no apiKey in keychain`);
     return null;

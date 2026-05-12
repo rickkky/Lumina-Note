@@ -683,4 +683,77 @@ describe("useOpencodeAgent.startTask", () => {
       model: "gpt-5.4",
     });
   });
+
+  it("allows OpenAI-compatible sends without an API key when base URL and model are set", async () => {
+    const promptAsync = vi.fn(async () => ({ data: {} }));
+    vi.mocked(invoke).mockImplementation(async (cmd: string) => {
+      if (cmd === "agent_has_provider_api_key") return false;
+      return true;
+    });
+    mocks.getAIConfig.mockReturnValue({
+      provider: "openai-compatible",
+      apiKey: "",
+      apiKeyConfigured: false,
+      model: "custom",
+      customModelId: "local-model",
+      baseUrl: "http://localhost:1234/v1",
+    });
+    mocks.getOpencodeClient.mockResolvedValue({
+      event: {
+        subscribe: vi.fn(async () => ({ stream: emptyStream() })),
+      },
+      session: {
+        create: vi.fn(async () => ({ data: { id: "session-1" } })),
+        list: vi.fn(async () => ({ data: [] })),
+        promptAsync,
+      },
+    });
+
+    await useOpencodeAgent
+      .getState()
+      .startTask("hello", { workspace_path: "/tmp/vault" });
+
+    expect(promptAsync).toHaveBeenCalledWith(
+      expect.objectContaining({
+        body: expect.objectContaining({
+          model: {
+            providerID: "lumina-compat",
+            modelID: "local-model",
+          },
+        }),
+      }),
+    );
+  });
+
+  it("blocks OpenAI-compatible sends that are missing a Base URL", async () => {
+    const promptAsync = vi.fn(async () => ({ data: {} }));
+    mocks.getAIConfig.mockReturnValue({
+      provider: "openai-compatible",
+      apiKey: "",
+      apiKeyConfigured: false,
+      model: "custom",
+      customModelId: "local-model",
+      baseUrl: "",
+    });
+    mocks.getOpencodeClient.mockResolvedValue({
+      event: {
+        subscribe: vi.fn(async () => ({ stream: emptyStream() })),
+      },
+      session: {
+        create: vi.fn(async () => ({ data: { id: "session-1" } })),
+        list: vi.fn(async () => ({ data: [] })),
+        promptAsync,
+      },
+    });
+
+    await useOpencodeAgent
+      .getState()
+      .startTask("hello", { workspace_path: "/tmp/vault" });
+
+    expect(promptAsync).not.toHaveBeenCalled();
+    expect(useOpencodeAgent.getState().error).toBe(
+      getCurrentTranslations().agentMessage.errors.runtimeMissingBaseUrl,
+    );
+    expect(useOpencodeAgent.getState().messages).toEqual([]);
+  });
 });

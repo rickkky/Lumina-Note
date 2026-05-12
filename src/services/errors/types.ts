@@ -25,6 +25,7 @@ export type ErrorSeverity =
 export type ErrorKind =
   | "permission.reply"
   | "render.boundary"
+  | "runtime.readiness"
   | "session.abort"
   | "session.create"
   | "session.delete"

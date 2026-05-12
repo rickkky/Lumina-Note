@@ -42,6 +42,13 @@ import {
 import { useFileStore } from "@/stores/useFileStore";
 import { getAIConfig } from "@/services/ai/ai";
 import { waitForAIConfigSync } from "@/services/ai/config-sync";
+import {
+  formatRuntimeReadinessIssue,
+  runtimeProviderRequiresApiKey,
+  validateRuntimeReadiness,
+  type RuntimeReadiness,
+  type RuntimeSelectionLike,
+} from "@/services/ai/runtime-readiness";
 import { getCurrentTranslations } from "@/stores/useLocaleStore";
 import type { LLMConfig, LLMProviderType } from "@/services/llm";
 import { useAIStore, type RuntimeModelSelection } from "@/stores/useAIStore";
@@ -160,15 +167,11 @@ function resolveRuntimeSelection(
   };
 }
 
-function requiresStoredApiKey(provider: LLMProviderType): boolean {
-  return provider !== "ollama";
-}
-
 function localProviderApiKeyState(
   provider: LLMProviderType,
   activeConfig: LLMConfig,
 ): boolean | undefined {
-  if (!requiresStoredApiKey(provider)) return true;
+  if (!runtimeProviderRequiresApiKey(provider)) return true;
   if (provider !== activeConfig.provider) return undefined;
   return !!activeConfig.apiKey?.trim() || !!activeConfig.apiKeyConfigured;
 }
@@ -186,6 +189,81 @@ async function hasProviderApiKey(
   } catch {
     return false;
   }
+}
+
+function runtimeReadinessSelection(
+  selection: RuntimeModelSelection,
+  activeConfig: LLMConfig,
+  apiKeyConfigured: boolean,
+): RuntimeSelectionLike {
+  return {
+    provider: selection.provider,
+    model: selection.model,
+    customModelId: selection.customModelId,
+    baseUrl: selection.baseUrl,
+    apiKey:
+      selection.provider === activeConfig.provider ? activeConfig.apiKey : "",
+    apiKeyConfigured,
+  };
+}
+
+function resolveRuntimeReadinessSync(
+  selection: RuntimeModelSelection,
+  activeConfig: LLMConfig,
+): RuntimeReadiness | null {
+  const localKeyState = localProviderApiKeyState(
+    selection.provider,
+    activeConfig,
+  );
+  if (localKeyState === undefined) return null;
+  return validateRuntimeReadiness(
+    runtimeReadinessSelection(selection, activeConfig, localKeyState),
+  );
+}
+
+async function resolveRuntimeReadiness(
+  selection: RuntimeModelSelection,
+  activeConfig: LLMConfig,
+): Promise<RuntimeReadiness> {
+  const localReadiness = resolveRuntimeReadinessSync(selection, activeConfig);
+  if (localReadiness) return localReadiness;
+  const apiKeyConfigured =
+    await hasProviderApiKey(selection.provider, activeConfig);
+  return validateRuntimeReadiness(
+    runtimeReadinessSelection(selection, activeConfig, apiKeyConfigured),
+  );
+}
+
+function applyRuntimeReadinessFailure(
+  readiness: Extract<RuntimeReadiness, { ok: false }>,
+  traceId: string,
+  set: (
+    patch:
+      | Partial<OpencodeAgentStore>
+      | ((s: OpencodeAgentStore) => Partial<OpencodeAgentStore>),
+  ) => void,
+  optimisticId?: string | null,
+): void {
+  const issue = readiness.issues[0];
+  const message = issue
+    ? formatRuntimeReadinessIssue(issue)
+    : getCurrentTranslations().agentMessage.errors.generic;
+  reportError({
+    kind: "runtime.readiness",
+    severity: "blocker",
+    message,
+    cause: issue,
+    retryable: false,
+    traceId,
+  });
+  set((state) => ({
+    status: "idle",
+    error: message,
+    llmRequestStartTime: null,
+    ...(optimisticId
+      ? { messages: state.messages.filter((m) => m.id !== optimisticId) }
+      : {}),
+  }));
 }
 
 // Shape-parity with the legacy store so existing UI code that reaches into
@@ -1238,22 +1316,11 @@ export const useOpencodeAgent = create<OpencodeAgentStore>((set, get) => {
         initialCfg,
         useAIStore.getState().runtimeModelSelection,
       );
-      const localKeyState = localProviderApiKeyState(
-        initialSelection.provider,
-        initialCfg,
-      );
-      const selectedProviderHasKey =
-        localKeyState ?? (await hasProviderApiKey(initialSelection.provider, initialCfg));
-      if (!selectedProviderHasKey) {
-        const t = getCurrentTranslations();
-        reportError({
-          kind: "task.start",
-          severity: "blocker",
-          message: t.ai.apiKeyRequired,
-          retryable: false,
-          traceId,
-        });
-        set({ status: "idle", error: t.ai.apiKeyRequired });
+      const initialReadiness =
+        resolveRuntimeReadinessSync(initialSelection, initialCfg) ??
+        (await resolveRuntimeReadiness(initialSelection, initialCfg));
+      if (!initialReadiness.ok) {
+        applyRuntimeReadinessFailure(initialReadiness, traceId, set);
         return;
       }
 
@@ -1290,25 +1357,12 @@ export const useOpencodeAgent = create<OpencodeAgentStore>((set, get) => {
           cfg,
           useAIStore.getState().runtimeModelSelection,
         );
-        const selectedProviderHasKeyAfterSync = await hasProviderApiKey(
-          selection.provider,
+        const readiness = await resolveRuntimeReadiness(
+          selection,
           cfg,
         );
-        if (!selectedProviderHasKeyAfterSync) {
-          const t = getCurrentTranslations();
-          reportError({
-            kind: "task.start",
-            severity: "blocker",
-            message: t.ai.apiKeyRequired,
-            retryable: false,
-            traceId,
-          });
-          set((state) => ({
-            status: "idle",
-            error: t.ai.apiKeyRequired,
-            llmRequestStartTime: null,
-            messages: state.messages.filter((m) => m.id !== optimisticId),
-          }));
+        if (!readiness.ok) {
+          applyRuntimeReadinessFailure(readiness, traceId, set, optimisticId);
           return;
         }
         resetOpencodeClient();

@@ -1533,6 +1533,13 @@ export default {
       providerStreamLost:
         "接続が切断されました。リロードまたは再送信してください。",
       providerGeneric: "AI が応答しませんでした。もう一度お試しください。",
+      runtimeMissingApiKey:
+        "{provider} の API Key がまだ設定されていないため送信できません。",
+      runtimeMissingBaseUrl:
+        "OpenAI Compatible には Base URL が必要です。リクエスト先を指定してください。",
+      runtimeMissingModel:
+        "{provider} のモデル ID が未入力です。プロバイダーが対応するモデル名を入力してください。",
+      runtimeUnsupportedProvider: "未対応の AI provider です：{provider}",
       permissionFailed:
         "ツールの承認に失敗しました。エージェントが停止しました。",
       abortFailed: "現在の会話を停止できませんでした。",
@@ -1545,6 +1552,7 @@ export default {
         "session.provider_error": "AI サービス",
         "permission.reply": "ツール権限",
         "session.abort": "セッション停止",
+        "runtime.readiness": "AI 設定",
         "session.create": "セッション作成",
         "session.switch": "セッション切替",
         "session.delete": "セッション削除",

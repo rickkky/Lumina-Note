@@ -1542,6 +1542,13 @@ export default {
         "This model doesn't support extended thinking. Switch model or disable thinking in Settings.",
       providerStreamLost: "Connection lost. Refresh or resend your message.",
       providerGeneric: "The AI didn't respond. Please try again.",
+      runtimeMissingApiKey:
+        "{provider} does not have an API key configured yet.",
+      runtimeMissingBaseUrl:
+        "OpenAI Compatible needs a Base URL so Lumina knows where to send requests.",
+      runtimeMissingModel:
+        "{provider} does not have a model ID yet. Enter a model name supported by the provider.",
+      runtimeUnsupportedProvider: "Unsupported AI provider: {provider}",
       permissionFailed: "Couldn't approve the tool. The agent has stopped.",
       abortFailed: "Couldn't stop the current run.",
       sessionCreate: "Couldn't create a new chat.",
@@ -1553,6 +1560,7 @@ export default {
         "session.provider_error": "AI Service",
         "permission.reply": "Tool Permission",
         "session.abort": "Stop Session",
+        "runtime.readiness": "AI Settings",
         "session.create": "Create Session",
         "session.switch": "Switch Session",
         "session.delete": "Delete Session",

@@ -663,7 +663,7 @@ export const PROVIDER_MODELS: Record<string, ProviderMeta> = {
     id: 'openai-compatible',
     label: 'OpenAI Compatible',
     description: 'OpenAI protocol compatible (Qwen / vLLM / self-hosted)',
-    requiresApiKey: true,
+    requiresApiKey: false,
     supportsBaseUrl: true,
     models: [],
   },

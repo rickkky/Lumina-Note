@@ -1504,6 +1504,14 @@ export default {
         "当前模型不支持深度思考，请在设置里切换模型或关闭深度思考",
       providerStreamLost: "连接已断开，请刷新或重新发送消息",
       providerGeneric: "AI 暂时无法响应，请稍后重试",
+      // 运行前配置检查
+      runtimeMissingApiKey:
+        "{provider} 还没有配置 API Key，暂时不能发送。",
+      runtimeMissingBaseUrl:
+        "OpenAI Compatible 需要填写 Base URL，才能知道请求发到哪里。",
+      runtimeMissingModel:
+        "还没有填写 {provider} 的模型 ID。请输入服务商支持的模型名称。",
+      runtimeUnsupportedProvider: "当前 AI provider 不受支持：{provider}",
       // 其他
       permissionFailed: "工具批准失败，AI 已停止",
       abortFailed: "无法停止当前对话",
@@ -1516,6 +1524,7 @@ export default {
         "session.provider_error": "AI 服务",
         "permission.reply": "工具权限",
         "session.abort": "停止对话",
+        "runtime.readiness": "AI 配置",
         "session.create": "创建对话",
         "session.switch": "切换对话",
         "session.delete": "删除对话",

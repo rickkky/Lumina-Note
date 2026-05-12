@@ -40,9 +40,9 @@ describe('providers/metadata', () => {
     }
   })
 
-  it('ollama is the only provider that does not require an apiKey', () => {
+  it('marks local and generic OpenAI-compatible providers as API-key optional', () => {
     for (const p of listProviderModels()) {
-      if (p.id === 'ollama') {
+      if (p.id === 'ollama' || p.id === 'openai-compatible') {
         expect(p.requiresApiKey).toBe(false)
       } else {
         expect(p.requiresApiKey).toBe(true)

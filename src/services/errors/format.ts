@@ -64,6 +64,9 @@ export function formatEnvelope(env: ErrorEnvelope): FormattedError {
     case "permission.reply":
       return { text: e.permissionFailed };
 
+    case "runtime.readiness":
+      return { text: env.message };
+
     case "session.abort":
       return { text: e.abortFailed };
 
