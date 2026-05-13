@@ -804,36 +804,40 @@ function CreateInputRow({
       ) : (
         <File className={FILE_TREE_ICON_CLASS} />
       )}
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onBlur={() => {
-          setTimeout(() => {
-            if (value.trim()) {
-              onSubmit();
-            } else {
-              onCancel();
-            }
-          }, 100);
-        }}
-        onKeyDown={handleKeyDown}
-        autoFocus
-        placeholder={
-          type === "folder"
-            ? t.file.folderNamePlaceholder
-            : t.file.fileNamePlaceholder
-        }
-        className="flex-1 ui-input h-6 px-1.5"
-      />
-      {type === "file" && (
-        <span className="ui-tree-label text-muted-foreground">.md</span>
-      )}
-      {type === "diagram" && (
-        <span className="ui-tree-label text-muted-foreground">
-          .diagram.json
-        </span>
-      )}
+      <div className="flex h-6 min-w-0 flex-1 items-center rounded-ui-sm border border-border/70 bg-background/70 px-1.5 transition-[border-color,box-shadow,background-color] duration-fast ease-out-subtle focus-within:border-primary/45 focus-within:bg-background focus-within:ring-1 focus-within:ring-primary/15">
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onBlur={() => {
+            setTimeout(() => {
+              if (value.trim()) {
+                onSubmit();
+              } else {
+                onCancel();
+              }
+            }, 100);
+          }}
+          onKeyDown={handleKeyDown}
+          autoFocus
+          placeholder={
+            type === "folder"
+              ? t.file.folderNamePlaceholder
+              : t.file.fileNamePlaceholder
+          }
+          className="ui-tree-label min-w-0 flex-1 border-0 bg-transparent p-0 text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
+        />
+        {type === "file" && (
+          <span className="ui-tree-label shrink-0 pl-0.5 text-muted-foreground/70">
+            .md
+          </span>
+        )}
+        {type === "diagram" && (
+          <span className="ui-tree-label shrink-0 pl-0.5 text-muted-foreground/70">
+            .diagram.json
+          </span>
+        )}
+      </div>
     </div>
   );
 }
