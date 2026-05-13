@@ -21,14 +21,11 @@ const updateStoreState = {
   isChecking: false,
 };
 
-const setSkillManagerOpen = vi.hoisted(() => vi.fn());
-
 vi.mock("@/stores/useUIStore", () => ({
   useUIStore: () => ({
     isDarkMode: false,
     toggleTheme: () => undefined,
     setRightPanelTab: () => undefined,
-    setSkillManagerOpen,
   }),
 }));
 
@@ -118,9 +115,9 @@ vi.mock("@/lib/host", () => ({
   openExternal: async () => undefined,
 }));
 
-vi.mock("@/components/plugins/InstalledPluginsModal", () => ({
-  InstalledPluginsModal: ({ isOpen }: { isOpen: boolean }) =>
-    isOpen ? <div>Plugins Modal</div> : null,
+vi.mock("@/components/extensions/ExtensionsCenterModal", () => ({
+  ExtensionsCenterModal: ({ isOpen }: { isOpen: boolean }) =>
+    isOpen ? <div>Extensions Center</div> : null,
 }));
 
 vi.mock("./SettingsModal", () => ({
@@ -153,7 +150,6 @@ describe("Ribbon", () => {
     fileStoreState.activeTabIndex = -1;
     fileStoreState.currentFile = null;
     window.localStorage.clear();
-    setSkillManagerOpen.mockClear();
   });
 
   it("does not render a macOS traffic-light safe area by default", () => {
@@ -256,20 +252,20 @@ describe("Ribbon", () => {
     expect(screen.queryByText("Settings Modal")).not.toBeInTheDocument();
   });
 
+  it("opens the extensions center from the plugins ribbon entry", () => {
+    render(<Ribbon />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Plugins" }));
+
+    expect(screen.getByText("Extensions Center")).toBeInTheDocument();
+  });
+
   it("renders the image manager ribbon entry", () => {
     render(<Ribbon />);
 
     expect(
       screen.getByRole("button", { name: "Image Manager" }),
     ).toBeInTheDocument();
-  });
-
-  it("opens the skill manager from the ribbon", () => {
-    render(<Ribbon />);
-
-    fireEvent.click(screen.getByRole("button", { name: "Skills" }));
-
-    expect(setSkillManagerOpen).toHaveBeenCalledWith(true);
   });
 
   it("uses the stronger active-state emphasis for the current section", () => {

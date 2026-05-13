@@ -694,6 +694,7 @@ export default {
   // Plugins
   plugins: {
     modalTitle: "Plugins",
+    centerDescription: "Manage Lumina plugins and agent skills from one place.",
     pluginSettingsTitle: "Plugin Settings",
     title: "Plugins",
     intro: "Manage installed plugins, appearance plugins, and system plugins.",

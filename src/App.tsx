@@ -28,7 +28,7 @@ import {
 } from "@/components/search/CommandPalette";
 import { TabBar } from "@/components/layout/TabBar";
 import { DiffView } from "@/components/effects/DiffView";
-import { SkillManagerModal } from "@/components/ai/SkillManagerModal";
+import { ExtensionsCenterModal } from "@/components/extensions/ExtensionsCenterModal";
 import { CommandMenu, CommandMenuProvider } from "@/components/ui";
 import { PDFViewer } from "@/components/pdf";
 import { ImageManagerView } from "@/components/images/ImageManagerView";
@@ -1300,10 +1300,11 @@ function App() {
         onModeChange={setPaletteMode}
       />
 
-      {/* Skill Manager */}
-      <SkillManagerModal
+      {/* Extensions Center (opens on Skills tab from skill-specific commands) */}
+      <ExtensionsCenterModal
         isOpen={isSkillManagerOpen}
         onClose={() => setSkillManagerOpen(false)}
+        initialTab="skills"
       />
 
       {/* Cmd+K command palette */}

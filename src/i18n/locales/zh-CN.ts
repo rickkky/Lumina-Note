@@ -679,6 +679,7 @@ export default {
   // 插件
   plugins: {
     modalTitle: "插件",
+    centerDescription: "在一个地方管理 Lumina 插件和 AI 技能。",
     pluginSettingsTitle: "插件设置",
     title: "插件",
     intro: "管理已安装插件、外观插件和系统插件。",

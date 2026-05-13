@@ -12,7 +12,6 @@ import {
   Puzzle,
   Search,
   Settings,
-  Sparkles,
   Sun,
   Moon,
   Bot,
@@ -39,7 +38,7 @@ import {
   type PluginRibbonItem,
   usePluginUiStore,
 } from "@/stores/usePluginUiStore";
-import { InstalledPluginsModal } from "@/components/plugins/InstalledPluginsModal";
+import { ExtensionsCenterModal } from "@/components/extensions/ExtensionsCenterModal";
 import { useUpdateStore } from "@/stores/useUpdateStore";
 import { getRibbonUpdateState } from "./ribbonUpdateState";
 
@@ -64,7 +63,6 @@ export function Ribbon({
     isDarkMode,
     toggleTheme,
     setRightPanelTab,
-    setSkillManagerOpen,
     leftSidebarMode,
     setLeftSidebarMode,
     leftSidebarOpen,
@@ -431,22 +429,6 @@ export function Ribbon({
             <Network size={20} />
           </button>
 
-          {/* Skills */}
-          <button
-            onClick={() => setSkillManagerOpen(true)}
-            className="w-9 h-9 ui-icon-btn"
-            title={
-              (t.ribbon as typeof t.ribbon & { skills?: string }).skills ??
-              "Skills"
-            }
-            aria-label={
-              (t.ribbon as typeof t.ribbon & { skills?: string }).skills ??
-              "Skills"
-            }
-          >
-            <Sparkles size={20} />
-          </button>
-
           {/* Plugins */}
           <button
             onClick={() => setShowPlugins(true)}
@@ -551,7 +533,7 @@ export function Ribbon({
         onOpenUpdateModal={handleOpenUpdateFromSettings}
       />
       <UpdateModal isOpen={showUpdateModal} onClose={closeUpdateModal} />
-      <InstalledPluginsModal isOpen={showPlugins} onClose={closePlugins} />
+      <ExtensionsCenterModal isOpen={showPlugins} onClose={closePlugins} />
     </div>
   );
 }

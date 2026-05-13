@@ -36,6 +36,10 @@ interface SkillManagerModalProps {
   onClose: () => void;
 }
 
+interface SkillManagerContentProps {
+  active?: boolean;
+}
+
 type View =
   | { kind: "list" }
   | { kind: "installer" }
@@ -45,6 +49,14 @@ type View =
 const SOURCE_ORDER: SkillSource[] = ["vault", "builtin", "external"];
 
 export function SkillManagerModal({ isOpen, onClose }: SkillManagerModalProps) {
+  return (
+    <Dialog open={isOpen} onOpenChange={(v) => !v && onClose()} width={600}>
+      <SkillManagerContent active={isOpen} />
+    </Dialog>
+  );
+}
+
+export function SkillManagerContent({ active = true }: SkillManagerContentProps) {
   const { t } = useLocaleStore();
   const { vaultPath } = useFileStore();
   const tSk = (t.ai as Record<string, unknown>).skillsManager as
@@ -85,11 +97,11 @@ export function SkillManagerModal({ isOpen, onClose }: SkillManagerModalProps) {
   }, [vaultPath, tSk]);
 
   useEffect(() => {
-    if (isOpen) {
+    if (active) {
       void refresh();
       setView({ kind: "list" });
     }
-  }, [isOpen, refresh]);
+  }, [active, refresh]);
 
   const grouped = useMemo(() => {
     const map = new Map<SkillSource, ClassifiedSkill[]>();
@@ -135,7 +147,7 @@ export function SkillManagerModal({ isOpen, onClose }: SkillManagerModalProps) {
   );
 
   return (
-    <Dialog open={isOpen} onOpenChange={(v) => !v && onClose()} width={600}>
+    <>
       <DialogHeader
         title={
           <span className="flex items-center gap-2">
@@ -233,7 +245,7 @@ export function SkillManagerModal({ isOpen, onClose }: SkillManagerModalProps) {
           />
         )}
       </DialogBody>
-    </Dialog>
+    </>
   );
 }
 

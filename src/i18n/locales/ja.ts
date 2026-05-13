@@ -687,6 +687,8 @@ export default {
   // プラグイン
   plugins: {
     modalTitle: "プラグイン",
+    centerDescription:
+      "Lumina プラグインと AI スキルを 1 か所で管理します。",
     pluginSettingsTitle: "プラグイン設定",
     title: "プラグイン",
     intro:
