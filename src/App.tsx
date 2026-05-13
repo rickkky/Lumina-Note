@@ -11,7 +11,6 @@ import { getVersion } from "@/lib/host";
 import { listen } from "@/lib/host";
 import { invoke } from "@/lib/host";
 import { createDir } from "@/lib/host";
-import { useRecentVaultStore } from "@/stores/useRecentVaultStore";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { RightPanel } from "@/components/layout/RightPanel";
 import { ResizeHandle } from "@/components/toolbar/ResizeHandle";
@@ -894,12 +893,9 @@ function App() {
     };
   }, [save, vaultPath, createNewFile]);
 
-  const addRecentVault = useRecentVaultStore((s) => s.addVault);
-
   const handleOpenVault = useCallback(
     async (path?: string) => {
       if (path) {
-        addRecentVault(path);
         await setVaultPath(path);
         return;
       }
@@ -911,7 +907,6 @@ function App() {
         });
 
         if (selected && typeof selected === "string") {
-          addRecentVault(selected);
           await setVaultPath(selected);
         }
       } catch (error) {
@@ -921,7 +916,7 @@ function App() {
         );
       }
     },
-    [setVaultPath, t.welcome.openFolder, addRecentVault],
+    [setVaultPath, t.welcome.openFolder],
   );
 
   const handleCreateVault = useCallback(
@@ -936,13 +931,12 @@ function App() {
         await createDir(await join(vaultPath, ".lumina"));
         await createDir(await join(vaultPath, ".lumina", "skills"));
         await createDir(await join(vaultPath, ".lumina", "plugins"));
-        addRecentVault(vaultPath);
         await setVaultPath(vaultPath);
       } catch (error) {
         console.error("[App.handleCreateVault] Failed to create vault:", error);
       }
     },
-    [setVaultPath, addRecentVault],
+    [setVaultPath],
   );
 
   // Listen for window-level entry actions dispatched from top-level chrome
@@ -1321,7 +1315,12 @@ function App() {
       {/* Hidden welcome preview: tap top-right corner 5 times to activate */}
       {welcomePreview && (
         <div className="fixed inset-0 z-[200]">
-          <WelcomeScreen onOpenVault={() => setWelcomePreview(false)} />
+          <WelcomeScreen
+            onOpenVault={async (path) => {
+              await handleOpenVault(path);
+              setWelcomePreview(false);
+            }}
+          />
         </div>
       )}
       <div

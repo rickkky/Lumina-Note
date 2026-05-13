@@ -38,7 +38,6 @@ export const useRecentVaultStore = create<RecentVaultState>()(
     {
       name: "lumina-recent-vaults",
       partialize: (state) => ({ vaults: state.vaults }),
-      skipHydration: true,
     },
   ),
 );

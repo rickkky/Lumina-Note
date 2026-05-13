@@ -12,6 +12,7 @@ import {
 } from "@/lib/host";
 import { invoke } from "@/lib/host";
 import { useFavoriteStore } from "@/stores/useFavoriteStore";
+import { useRecentVaultStore } from "@/stores/useRecentVaultStore";
 import { useWorkspaceStore } from "@/stores/useWorkspaceStore";
 import { getCurrentTranslations } from "@/stores/useLocaleStore";
 import { reportOperationError } from "@/lib/reportError";
@@ -113,7 +114,7 @@ interface FileState {
   setMobileWorkspaceSync: (patch: Partial<MobileWorkspaceSyncStatus>) => void;
 
   // Actions
-  setVaultPath: (path: string) => Promise<void>;
+  setVaultPath: (path: string) => Promise<boolean>;
   refreshFileTree: () => Promise<void>;
   expandDirectory: (path: string) => Promise<void>;
   openFile: (
@@ -504,7 +505,7 @@ export const useFileStore = create<FileState>()(
                 );
             // Non-blocking: user can choose to proceed
             const proceed = window.confirm(reason);
-            if (!proceed) return;
+            if (!proceed) return false;
           }
         } catch {
           // Pre-check failure is non-fatal — continue with vault open
@@ -521,7 +522,7 @@ export const useFileStore = create<FileState>()(
             context: { path },
           });
         }
-        set({ vaultPath: path, isLoadingTree: true });
+        set({ isLoadingTree: true });
         try {
           await initializeAgentVault(path);
         } catch (error) {
@@ -569,20 +570,20 @@ export const useFileStore = create<FileState>()(
           }
           const entries = await listDirShallow(path, path);
           set({
+            vaultPath: path,
             fileTree: entries,
             loadingDirectoryPaths: [],
             isLoadingTree: false,
           });
+          useRecentVaultStore.getState().addVault(path);
           await get().syncMobileWorkspace({ path, force: true });
+          return true;
         } catch (error) {
           const tooLarge = parseWorkspaceTooLargeError(error);
           if (tooLarge) {
-            // Don't replace any previously-loaded fileTree on this kind
-            // of failure — the user is mid-vault-switch and seeing the
-            // old tree briefly is better than a flash of empty state.
-            // setVaultPath is the one entry point where there's no
-            // previous tree to preserve, so we still clear loading.
-            set({ vaultPath: null, isLoadingTree: false });
+            // Keep the current workspace visible when a attempted switch
+            // fails. Recents are only updated after a successful tree load.
+            set({ isLoadingTree: false });
             reportOperationError({
               source: "FileStore.setVaultPath",
               action:
@@ -597,7 +598,7 @@ export const useFileStore = create<FileState>()(
                 entriesScanned: tooLarge.entriesScanned,
               },
             });
-            return;
+            return false;
           }
           reportOperationError({
             source: "FileStore.setVaultPath",
@@ -606,6 +607,7 @@ export const useFileStore = create<FileState>()(
             context: { path },
           });
           set({ isLoadingTree: false });
+          return false;
         }
       },
 

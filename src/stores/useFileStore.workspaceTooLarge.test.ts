@@ -72,10 +72,11 @@ describe("useFileStore — WorkspaceTooLargeError handling", () => {
       ),
     );
 
-    await useFileStore.getState().setVaultPath("/test/huge");
+    const opened = await useFileStore.getState().setVaultPath("/test/huge");
 
     const state = useFileStore.getState();
     // Vault is rolled back; store doesn't pretend the open succeeded.
+    expect(opened).toBe(false);
     expect(state.vaultPath).toBeNull();
     expect(state.isLoadingTree).toBe(false);
     expect(state.fileTree).toEqual([]);
@@ -94,8 +95,9 @@ describe("useFileStore — WorkspaceTooLargeError handling", () => {
       ),
     );
 
-    await useFileStore.getState().setVaultPath("/test/slow");
+    const opened = await useFileStore.getState().setVaultPath("/test/slow");
 
+    expect(opened).toBe(false);
     expect(pushNotice).toHaveBeenCalled();
     const notice = pushNotice.mock.calls[0][0];
     expect(notice.level).toBe("warning");
@@ -142,8 +144,9 @@ describe("useFileStore — WorkspaceTooLargeError handling", () => {
       new Error("EACCES: permission denied"),
     );
 
-    await useFileStore.getState().setVaultPath("/test/locked");
+    const opened = await useFileStore.getState().setVaultPath("/test/locked");
 
+    expect(opened).toBe(false);
     expect(pushNotice).toHaveBeenCalled();
     const notice = pushNotice.mock.calls[0][0];
     // Generic path uses "failed", not "warning".

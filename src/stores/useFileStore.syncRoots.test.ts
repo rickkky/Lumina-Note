@@ -5,6 +5,7 @@ import {
   syncWorkspaceAccessRoots,
   useFileStore,
 } from "@/stores/useFileStore";
+import { useRecentVaultStore } from "@/stores/useRecentVaultStore";
 import { useWorkspaceStore } from "@/stores/useWorkspaceStore";
 
 // Mock Tauri invoke
@@ -27,6 +28,13 @@ vi.mock("@/lib/host", async () => {
 describe("syncWorkspaceAccessRoots timing", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    localStorage.clear();
+    useRecentVaultStore.setState({ vaults: [] });
+    useFileStore.setState({
+      vaultPath: null,
+      fileTree: [],
+      isLoadingTree: false,
+    });
     vi.mocked(invoke).mockResolvedValue(undefined);
     vi.mocked(listDirShallow).mockResolvedValue([]);
     vi.mocked(createDir).mockResolvedValue(undefined);
@@ -234,8 +242,13 @@ describe("syncWorkspaceAccessRoots timing", () => {
       return undefined;
     });
 
-    await useFileStore.getState().setVaultPath(mockPath);
+    const opened = await useFileStore.getState().setVaultPath(mockPath);
 
+    expect(opened).toBe(true);
+    expect(useRecentVaultStore.getState().vaults[0]).toMatchObject({
+      path: mockPath,
+      name: "vault",
+    });
     expect(invoke).toHaveBeenCalledWith("vault_initialize", {
       workspacePath: mockPath,
     });
@@ -253,5 +266,35 @@ describe("syncWorkspaceAccessRoots timing", () => {
     expect(invoke).toHaveBeenCalledWith("vault_initialize", {
       workspacePath: "/test/vault",
     });
+  });
+
+  it("does not add a workspace to recents when opening fails", async () => {
+    const previousTree = [
+      {
+        name: "old.md",
+        path: "/test/old/old.md",
+        is_dir: false,
+        isDirectory: false,
+        size: null,
+        modified_at: null,
+        created_at: null,
+        children: null,
+      },
+    ];
+    useFileStore.setState({
+      vaultPath: "/test/old",
+      fileTree: previousTree,
+      isLoadingTree: false,
+    });
+    vi.mocked(listDirShallow).mockRejectedValueOnce(
+      new Error("EACCES: permission denied"),
+    );
+
+    const opened = await useFileStore.getState().setVaultPath("/test/locked");
+
+    expect(opened).toBe(false);
+    expect(useFileStore.getState().vaultPath).toBe("/test/old");
+    expect(useFileStore.getState().fileTree).toBe(previousTree);
+    expect(useRecentVaultStore.getState().vaults).toEqual([]);
   });
 });
