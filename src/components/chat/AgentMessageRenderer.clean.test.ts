@@ -193,7 +193,7 @@ describe("AgentMessageRenderer", () => {
     ).not.toBeInTheDocument();
   });
 
-  it("types the work status when the active phase changes", () => {
+  it("smooths the work status when the active phase changes", () => {
     const now = new Date("2026-05-12T00:00:30.000Z");
     vi.useFakeTimers();
     vi.setSystemTime(now);
@@ -278,6 +278,17 @@ describe("AgentMessageRenderer", () => {
       screen.getByRole("button", { name: /执行中.*0:30/ }),
     ).toBeInTheDocument();
     expect(screen.queryByText("执行中...")).not.toBeInTheDocument();
+
+    act(() => {
+      vi.advanceTimersByTime(200);
+    });
+    expect(screen.getByText("思考中...")).toBeInTheDocument();
+    expect(screen.queryByText("执行中...")).not.toBeInTheDocument();
+
+    act(() => {
+      vi.advanceTimersByTime(650);
+    });
+    expect(screen.queryByText("思考中...")).not.toBeInTheDocument();
 
     act(() => {
       vi.advanceTimersByTime(200);

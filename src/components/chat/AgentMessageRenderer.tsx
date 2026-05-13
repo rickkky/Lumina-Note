@@ -15,6 +15,7 @@ import {
   memo,
   useRef,
   type MouseEvent,
+  type ReactNode,
 } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import {
@@ -1290,6 +1291,71 @@ function formatElapsed(seconds: number): string {
 }
 
 const STATUS_TYPEWRITER_STEP_MS = 24;
+const WORK_STATUS_MIN_VISIBLE_MS = 650;
+
+function useSmoothedStatusText(
+  text: string,
+  enabled: boolean,
+  minVisibleMs = WORK_STATUS_MIN_VISIBLE_MS,
+) {
+  const [visibleText, setVisibleText] = useState(text);
+  const visibleSinceRef = useRef(Date.now());
+  const pendingTextRef = useRef<string | null>(null);
+  const timeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const clearPending = () => {
+      if (timeoutRef.current !== null) {
+        window.clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      pendingTextRef.current = null;
+    };
+
+    if (!enabled) {
+      clearPending();
+      visibleSinceRef.current = Date.now();
+      setVisibleText(text);
+      return;
+    }
+
+    if (text === visibleText) {
+      clearPending();
+      return;
+    }
+
+    // This is intentionally presentation state. Opencode can flip between
+    // reasoning/tool parts many times in a single turn, but the compact
+    // work-session label is only a user-facing summary. Keeping each label
+    // visible briefly avoids typewriter restarts and status flicker without
+    // delaying the underlying timeline, tool rows, or completion state.
+    pendingTextRef.current = text;
+    const elapsed = Date.now() - visibleSinceRef.current;
+    const remaining = Math.max(0, minVisibleMs - elapsed);
+
+    if (timeoutRef.current !== null) {
+      window.clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = window.setTimeout(() => {
+      timeoutRef.current = null;
+      const next = pendingTextRef.current;
+      pendingTextRef.current = null;
+      if (next === null) return;
+      visibleSinceRef.current = Date.now();
+      setVisibleText(next);
+    }, remaining);
+
+    return () => {
+      if (timeoutRef.current !== null) {
+        window.clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+    };
+  }, [enabled, minVisibleMs, text, visibleText]);
+
+  return visibleText;
+}
 
 const AnimatedStatusText = memo(function AnimatedStatusText({
   text,
@@ -1848,18 +1914,26 @@ const WorkSession = memo(function WorkSession({
   let statusLabel: string;
   let metaLabel: string | null = null;
   const metaIsDuration = showLive;
+  let metaContent: ReactNode = null;
 
   if (showLive) {
     statusLabel = liveStatusLabel;
     metaLabel = formatElapsed(elapsed);
+    metaContent = metaLabel;
   } else if (inProgress && isRunning) {
     statusLabel = liveStatusLabel;
   } else if (isComplete) {
     statusLabel = t.agentMessage.workCompleted;
     metaLabel = stepsLabel;
+    metaContent = (
+      <StepMetaLabel count={stepCount} template={t.agentMessage.steps} />
+    );
   } else {
     statusLabel = liveStatusLabel;
     metaLabel = stepsLabel;
+    metaContent = (
+      <StepMetaLabel count={stepCount} template={t.agentMessage.steps} />
+    );
   }
 
   const workDurationTemplate =
@@ -1873,6 +1947,7 @@ const WorkSession = memo(function WorkSession({
           formatElapsed(finalDurationSec),
         )
       : null;
+  const displayStatusLabel = useSmoothedStatusText(statusLabel, showLive);
 
   return (
     <div className="text-ui-control text-muted-foreground">
@@ -1895,8 +1970,8 @@ const WorkSession = memo(function WorkSession({
         ) : (
           <Check size={12} className="shrink-0 text-success" />
         )}
-        <AnimatedStatusText text={statusLabel} className="font-medium" />
-        {metaLabel && (
+        <AnimatedStatusText text={displayStatusLabel} className="font-medium" />
+        {metaLabel && metaContent && (
           <span className="inline-flex min-w-0 items-center gap-1 text-ui-meta text-muted-foreground/70">
             <span className="text-muted-foreground/45">·</span>
             <span
@@ -1904,7 +1979,7 @@ const WorkSession = memo(function WorkSession({
                 metaIsDuration ? "font-mono tabular-nums leading-none" : ""
               }
             >
-              {metaLabel}
+              {metaContent}
             </span>
           </span>
         )}
@@ -1961,6 +2036,42 @@ const WorkSession = memo(function WorkSession({
         )}
       </AnimatePresence>
     </div>
+  );
+});
+
+const StepMetaLabel = memo(function StepMetaLabel({
+  count,
+  template,
+}: {
+  count: number;
+  template: string;
+}) {
+  const reduceMotion = useReducedMotion();
+  const [prefix, suffix] = template.split("{count}");
+
+  // Step count is live progress, so it should not be debounced like the
+  // phase label. The visual jitter comes from replacing the whole meta text;
+  // keep the layout stable and animate only the numeral as it increments.
+  // WIP: this area can still feel slightly awkward visually, but leave the
+  // remaining polish for a focused pass instead of expanding this change.
+  return (
+    <span className="inline-flex min-w-[4.5em] items-center justify-end">
+      {prefix}
+      <span className="relative inline-flex min-w-[1.4ch] justify-end overflow-hidden font-mono tabular-nums leading-none">
+        <AnimatePresence initial={false} mode="wait">
+          <motion.span
+            key={count}
+            initial={reduceMotion ? false : { y: 3, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={reduceMotion ? undefined : { y: -3, opacity: 0 }}
+            transition={{ duration: 0.14, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {count}
+          </motion.span>
+        </AnimatePresence>
+      </span>
+      {suffix}
+    </span>
   );
 });
 
