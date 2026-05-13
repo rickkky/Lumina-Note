@@ -17,7 +17,7 @@ describe("App sidebar motion", () => {
       appSource.match(/<div className=\{MAIN_CONTENT_PANE_CLASS\}>/g) ?? [];
     const extendedPaneUses =
       appSource.match(/<div\s+className=\{`?\$\{MAIN_CONTENT_PANE_CLASS\}/g) ?? [];
-    expect(plainPaneUses.length + extendedPaneUses.length).toBe(5);
+    expect(plainPaneUses.length + extendedPaneUses.length).toBe(6);
   });
 
   it("wraps both sidebars in animated shells with fixed-width inner content", () => {
