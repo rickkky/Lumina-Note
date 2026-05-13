@@ -331,6 +331,7 @@ export default {
       sourceVault: "In your vault (.claude/skills/)",
       sourceBuiltin: "Built-in",
       sourceExternal: "External",
+      install: "Install",
       new: "New",
       edit: "Edit",
       delete: "Delete",
@@ -338,6 +339,15 @@ export default {
       backToList: "Back",
       editorTitleNew: "New skill",
       editorTitleEdit: "Edit skill",
+      installTitle: "Install skill",
+      installSourceLabel: "Source",
+      installSourceHint:
+        "Paste a GitHub/raw URL or the full SKILL.md content. The skill is installed into this vault.",
+      installButton: "Install",
+      installInvalid:
+        "Skill content must include YAML frontmatter with name and description.",
+      installDuplicate: "A skill named '{name}' already exists.",
+      installFetchError: "Failed to install skill: {error}",
       nameLabel: "Name (id)",
       nameHint:
         "Lowercase a-z, digits, hyphens. Used as the skill's stable id.",
@@ -672,6 +682,7 @@ export default {
     flashcardReview: "Flashcard Review",
     imageManager: "Image Manager",
     browser: "Browser",
+    skills: "Skills",
     plugins: "Plugins",
     softwareUpdateChecking: "Checking for updates",
     starProject: "Star Lumina Note on GitHub",

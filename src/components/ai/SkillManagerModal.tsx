@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ArrowLeft,
+  Download,
   Pencil,
   Plus,
   RefreshCcw,
   Sparkles,
   Trash2,
 } from "lucide-react";
+import { parse as parseYaml } from "yaml";
 
 import {
   classifySkill,
@@ -36,6 +38,7 @@ interface SkillManagerModalProps {
 
 type View =
   | { kind: "list" }
+  | { kind: "installer" }
   | { kind: "editor"; mode: "create" }
   | { kind: "editor"; mode: "edit"; original: ClassifiedSkill };
 
@@ -136,7 +139,7 @@ export function SkillManagerModal({ isOpen, onClose }: SkillManagerModalProps) {
       <DialogHeader
         title={
           <span className="flex items-center gap-2">
-            {view.kind === "editor" ? (
+            {view.kind !== "list" ? (
               <button
                 onClick={() => setView({ kind: "list" })}
                 className="rounded-ui-sm p-1 text-muted-foreground hover:bg-accent hover:text-foreground transition-colors duration-fast ease-out-subtle"
@@ -147,11 +150,13 @@ export function SkillManagerModal({ isOpen, onClose }: SkillManagerModalProps) {
             ) : (
               <Sparkles size={16} className="text-muted-foreground" />
             )}
-            {view.kind === "editor"
-              ? view.mode === "create"
-                ? (tSk?.editorTitleNew ?? "New skill")
-                : `${tSk?.editorTitleEdit ?? "Edit skill"} · ${view.original.name}`
-              : (tSk?.title ?? "Skills")}
+            {view.kind === "installer"
+              ? (tSk?.installTitle ?? "Install skill")
+              : view.kind === "editor"
+                ? view.mode === "create"
+                  ? (tSk?.editorTitleNew ?? "New skill")
+                  : `${tSk?.editorTitleEdit ?? "Edit skill"} · ${view.original.name}`
+                : (tSk?.title ?? "Skills")}
           </span>
         }
         description={view.kind === "list" ? tSk?.desc : undefined}
@@ -166,6 +171,15 @@ export function SkillManagerModal({ isOpen, onClose }: SkillManagerModalProps) {
               >
                 <RefreshCcw size={12} className={loading ? "animate-spin" : ""} />
                 {loading ? (tSk?.loading ?? "Loading…") : (tSk?.refresh ?? "Refresh")}
+              </button>
+              <button
+                onClick={() => setView({ kind: "installer" })}
+                disabled={!vaultPath}
+                title={!vaultPath ? (tSk?.noVaultOpen ?? "Open a vault first") : undefined}
+                className="flex items-center gap-1.5 rounded-ui-md border border-border bg-background px-2.5 h-7 text-xs text-foreground transition-colors duration-fast ease-out-subtle hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-popover disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <Download size={12} />
+                {tSk?.install ?? "Install"}
               </button>
               <button
                 onClick={() => setView({ kind: "editor", mode: "create" })}
@@ -192,6 +206,17 @@ export function SkillManagerModal({ isOpen, onClose }: SkillManagerModalProps) {
             vaultPath={vaultPath}
             onEdit={(skill) => setView({ kind: "editor", mode: "edit", original: skill })}
             onDelete={handleDelete}
+          />
+        ) : view.kind === "installer" ? (
+          <SkillInstaller
+            existingNames={new Set(skills.map((s) => s.name))}
+            vaultPath={vaultPath}
+            tSk={tSk}
+            onCancel={() => setView({ kind: "list" })}
+            onInstalled={async () => {
+              await refresh();
+              setView({ kind: "list" });
+            }}
           />
         ) : (
           <SkillEditor
@@ -222,6 +247,7 @@ type SkillsManagerStrings = {
   sourceVault: string;
   sourceBuiltin: string;
   sourceExternal: string;
+  install?: string;
   new: string;
   edit: string;
   delete: string;
@@ -229,6 +255,13 @@ type SkillsManagerStrings = {
   backToList: string;
   editorTitleNew: string;
   editorTitleEdit: string;
+  installTitle?: string;
+  installSourceLabel?: string;
+  installSourceHint?: string;
+  installButton?: string;
+  installInvalid?: string;
+  installDuplicate?: string;
+  installFetchError?: string;
   nameLabel: string;
   nameHint: string;
   descriptionLabel: string;
@@ -352,6 +385,135 @@ function SkillsList({
         })}
       </div>
     </>
+  );
+}
+
+interface ParsedSkillMarkdown {
+  name: string;
+  description: string;
+  body: string;
+}
+
+interface SkillInstallerProps {
+  existingNames: Set<string>;
+  vaultPath: string | null;
+  tSk: SkillsListProps["tSk"];
+  onCancel: () => void;
+  onInstalled: () => void | Promise<void>;
+}
+
+function SkillInstaller({
+  existingNames,
+  vaultPath,
+  tSk,
+  onCancel,
+  onInstalled,
+}: SkillInstallerProps) {
+  const [source, setSource] = useState("");
+  const [installing, setInstalling] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleInstall = useCallback(async () => {
+    if (!vaultPath) return;
+    setInstalling(true);
+    setError(null);
+    try {
+      const markdown = await resolveSkillInstallSource(source);
+      const parsed = parseSkillMarkdown(markdown);
+      if (!parsed) {
+        setError(
+          tSk?.installInvalid ??
+            "Skill content must include YAML frontmatter with name and description.",
+        );
+        return;
+      }
+      if (
+        existingNames.has(parsed.name) ||
+        Array.from(existingNames).some(
+          (name) => name.toLowerCase() === parsed.name.toLowerCase(),
+        )
+      ) {
+        setError(
+          (tSk?.installDuplicate ?? "A skill named '{name}' already exists.")
+            .replace("{name}", parsed.name),
+        );
+        return;
+      }
+      await writeSkill({
+        vaultPath,
+        name: parsed.name,
+        frontmatter: {
+          name: parsed.name,
+          description: parsed.description,
+        },
+        body: parsed.body,
+      });
+      await onInstalled();
+    } catch (err) {
+      const message =
+        err instanceof Error ? err.message : String(err);
+      setError(
+        (tSk?.installFetchError ?? "Failed to install skill: {error}").replace(
+          "{error}",
+          message,
+        ),
+      );
+      reportOperationError({
+        source: "SkillInstaller.handleInstall",
+        action: "Install skill",
+        error: err,
+        level: "warning",
+      });
+    } finally {
+      setInstalling(false);
+    }
+  }, [existingNames, onInstalled, source, tSk, vaultPath]);
+
+  return (
+    <div className="space-y-4">
+      {error && (
+        <div className="rounded-ui-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-xs text-destructive">
+          {error}
+        </div>
+      )}
+      <Field
+        label={tSk?.installSourceLabel ?? "Source"}
+        hint={
+          tSk?.installSourceHint ??
+          "Paste a GitHub/raw URL or the full SKILL.md content. The skill is installed into this vault."
+        }
+      >
+        {(id) => (
+          <textarea
+            id={id}
+            value={source}
+            onChange={(e) => setSource(e.target.value)}
+            rows={12}
+            spellCheck={false}
+            placeholder="https://github.com/org/repo/blob/main/skills/example/SKILL.md"
+            className="w-full rounded-ui-md border border-border bg-background px-3 py-2 font-mono text-ui-control text-foreground placeholder:text-muted-foreground/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:border-primary/60 transition-colors duration-fast ease-out-subtle resize-y min-h-[260px]"
+            autoFocus
+          />
+        )}
+      </Field>
+
+      <div className="flex justify-end gap-2 pt-2">
+        <button
+          onClick={onCancel}
+          disabled={installing}
+          className="rounded-ui-md border border-border bg-background px-3 py-1.5 text-sm text-foreground transition-colors duration-fast ease-out-subtle hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-popover"
+        >
+          {tSk?.cancelButton ?? "Cancel"}
+        </button>
+        <button
+          onClick={() => void handleInstall()}
+          disabled={installing || !vaultPath || source.trim().length === 0}
+          className="rounded-ui-md border border-primary bg-primary px-3 py-1.5 text-sm text-primary-foreground transition-colors duration-fast ease-out-subtle hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-popover"
+        >
+          {installing ? "…" : (tSk?.installButton ?? "Install")}
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -572,4 +734,49 @@ function SkillEditor({
  */
 function extractBodyFromContent(content: string): string {
   return content;
+}
+
+async function resolveSkillInstallSource(source: string): Promise<string> {
+  const trimmed = source.trim();
+  if (!/^https?:\/\//i.test(trimmed)) return trimmed;
+
+  const url = toRawSkillUrl(trimmed);
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status}`);
+  }
+  return await res.text();
+}
+
+function toRawSkillUrl(url: string): string {
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname !== "github.com") return url;
+    const parts = parsed.pathname.split("/").filter(Boolean);
+    const blobIndex = parts.indexOf("blob");
+    if (parts.length < 5 || blobIndex !== 2) return url;
+    const [owner, repo, , branch, ...pathParts] = parts;
+    return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${pathParts.join("/")}`;
+  } catch {
+    return url;
+  }
+}
+
+function parseSkillMarkdown(markdown: string): ParsedSkillMarkdown | null {
+  const match = markdown.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+  if (!match) return null;
+
+  const frontmatter = parseYaml(match[1]);
+  if (!frontmatter || typeof frontmatter !== "object") return null;
+
+  const record = frontmatter as Record<string, unknown>;
+  const name = typeof record.name === "string" ? record.name.trim() : "";
+  const description =
+    typeof record.description === "string" ? record.description.trim() : "";
+  const body = match[2].trim();
+
+  if (!NAME_RE.test(name) || description.length === 0 || body.length === 0) {
+    return null;
+  }
+  return { name, description, body };
 }

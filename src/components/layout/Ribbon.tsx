@@ -12,6 +12,7 @@ import {
   Puzzle,
   Search,
   Settings,
+  Sparkles,
   Sun,
   Moon,
   Bot,
@@ -63,6 +64,7 @@ export function Ribbon({
     isDarkMode,
     toggleTheme,
     setRightPanelTab,
+    setSkillManagerOpen,
     leftSidebarMode,
     setLeftSidebarMode,
     leftSidebarOpen,
@@ -427,6 +429,22 @@ export function Ribbon({
             title={t.graph.title}
           >
             <Network size={20} />
+          </button>
+
+          {/* Skills */}
+          <button
+            onClick={() => setSkillManagerOpen(true)}
+            className="w-9 h-9 ui-icon-btn"
+            title={
+              (t.ribbon as typeof t.ribbon & { skills?: string }).skills ??
+              "Skills"
+            }
+            aria-label={
+              (t.ribbon as typeof t.ribbon & { skills?: string }).skills ??
+              "Skills"
+            }
+          >
+            <Sparkles size={20} />
           </button>
 
           {/* Plugins */}

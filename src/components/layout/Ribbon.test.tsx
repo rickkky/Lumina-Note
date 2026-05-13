@@ -21,11 +21,14 @@ const updateStoreState = {
   isChecking: false,
 };
 
+const setSkillManagerOpen = vi.hoisted(() => vi.fn());
+
 vi.mock("@/stores/useUIStore", () => ({
   useUIStore: () => ({
     isDarkMode: false,
     toggleTheme: () => undefined,
     setRightPanelTab: () => undefined,
+    setSkillManagerOpen,
   }),
 }));
 
@@ -60,6 +63,7 @@ vi.mock("@/stores/useLocaleStore", () => ({
         imageManager: "Image Manager",
         database: "Database",
         flashcardReview: "Flashcards",
+        skills: "Skills",
         plugins: "Plugins",
         softwareUpdateChecking: "Checking for updates",
         starProject: "Star project",
@@ -149,6 +153,7 @@ describe("Ribbon", () => {
     fileStoreState.activeTabIndex = -1;
     fileStoreState.currentFile = null;
     window.localStorage.clear();
+    setSkillManagerOpen.mockClear();
   });
 
   it("does not render a macOS traffic-light safe area by default", () => {
@@ -257,6 +262,14 @@ describe("Ribbon", () => {
     expect(
       screen.getByRole("button", { name: "Image Manager" }),
     ).toBeInTheDocument();
+  });
+
+  it("opens the skill manager from the ribbon", () => {
+    render(<Ribbon />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Skills" }));
+
+    expect(setSkillManagerOpen).toHaveBeenCalledWith(true);
   });
 
   it("uses the stronger active-state emphasis for the current section", () => {
