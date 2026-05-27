@@ -4,9 +4,9 @@
 
 # Lumina Note
 
-**Local-first AI workspace for Markdown knowledge bases**
+**Human-editable notes with an agent that can work across your vault**
 
-Lumina Note combines a local Markdown vault, WikiLinks, a knowledge graph, and an opencode-backed agent that can read, write, organize, and research with your permission.
+Lumina Note starts as a fast, local Markdown workspace that stays comfortable for people to read and edit directly. On top of that, it embeds an agent powered by the opencode SDK, giving AI the ability to understand and operate across the whole note vault with your permission.
 
 [![GitHub Release](https://img.shields.io/github/v/release/blueberrycongee/Lumina-Note?style=flat-square)](https://github.com/blueberrycongee/Lumina-Note/releases)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=flat-square)](LICENSE)
@@ -25,12 +25,12 @@ Lumina Note combines a local Markdown vault, WikiLinks, a knowledge graph, and a
 
 ## Why Lumina Note
 
-Lumina is built for people who want AI help without turning their notes into someone else's database.
+Lumina is built around a simple idea: notes should remain human-owned and human-editable, while AI should be able to help with real work inside the same workspace.
 
-- **Local-first vault**: your notes are normal files on disk. You choose when model providers, sync services, or cloud features receive data.
-- **Knowledge-native editing**: Markdown, `[[WikiLinks]]`, backlinks, local graph, global graph, PDFs, annotations, and flashcards live in one workspace.
-- **An agent that can act**: the AI agent can inspect relevant vault files, edit notes, run skills, use tools, and keep its work visible instead of staying in a chat-only box.
-- **Bring your own model**: use OpenAI, Anthropic Claude, Google Gemini, DeepSeek, Moonshot Kimi, Zhipu GLM, MiMo, Qwen through compatible routes, Groq, OpenRouter, Ollama, or any OpenAI-compatible endpoint.
+- **Human-first editing**: your vault is plain Markdown on disk. You can open, read, edit, move, and back it up without depending on Lumina or any model provider.
+- **Agent-native assistance**: Lumina embeds an opencode-powered agent that can read, write, reorganize, summarize, connect, and research notes across the vault when you ask it to.
+- **Knowledge structure that stays visible**: WikiLinks, backlinks, graph views, PDFs, annotations, images, and flashcards are normal workspace surfaces, not hidden AI-only state.
+- **Flexible AI routing**: bring your own provider, use local models through Ollama, connect an OpenAI-compatible endpoint, or use Lumina Cloud if you have a license.
 
 ## Screenshots
 
@@ -46,39 +46,12 @@ Lumina is built for people who want AI help without turning their notes into som
   <img src="docs/screenshots/editor-latex.png" alt="Markdown editor with LaTeX" width="800" />
 </p>
 
-## Core Features
+## What It Does
 
-### AI workspace
-
-- Agent mode for editing, planning, research, and task automation.
-- Embedded opencode runtime: Electron main starts an in-process opencode HTTP/WS server, and the renderer talks to it through `@opencode-ai/sdk/client`.
-- Provider settings bridge: Lumina maps the provider, model, API key, base URL, and license-gated options into the isolated opencode runtime.
-- Tool and permission flow for file edits, generated images, skills, and future agent extensions.
-- Optional Lumina Cloud provider for licensed users who do not want to configure their own model API keys.
-
-### Notes and knowledge graph
-
-- Markdown source, live preview, and reading modes.
-- `[[WikiLinks]]`, backlinks, hover previews, and note-aware autocomplete.
-- Global knowledge graph plus local graph for the current note.
-- LaTeX, Mermaid, code highlighting, images, and PDF reading.
-- Highlight, underline, and annotate PDFs, then save annotations as Markdown.
-
-### Workflow tools
-
-- Full-vault search and image management.
-- Selection toolbar actions, conversation export, and custom slash commands.
-- Flashcard generation and review.
-- Real-time voice input.
-- 15 built-in themes plus custom appearance controls.
-- WebDAV sync, same-LAN mobile pairing, and optional self-hosted relay sync.
-
-### Extension ecosystem
-
-- Developer-preview plugin runtime with workspace, user, and built-in plugin roots.
-- Runtime permissions for plugin capabilities.
-- Slash command, command palette, ribbon, status bar, editor, render, theme, storage, network, and timer APIs.
-- Agent skills from workspace, user, and built-in locations.
+- Edit notes directly in Markdown with live preview, reading mode, WikiLinks, backlinks, and graph views.
+- Ask the built-in agent to work on the vault: draft pages, reorganize folders, summarize PDFs, connect related notes, generate flashcards, or clean up messy knowledge.
+- Keep control of model routing with OpenAI, Anthropic Claude, Google Gemini, DeepSeek, Moonshot Kimi, Zhipu GLM, MiMo, Groq, OpenRouter, Ollama, OpenAI-compatible endpoints, or optional Lumina Cloud.
+- Build other uses on the same foundation through agent skills, custom commands, and the developer-preview plugin system when you need to extend the app.
 
 ## Download
 
@@ -135,18 +108,11 @@ npm run dist:linux
 
 For more detail on the agent runtime setup, see [`docs/agent-runtime-setup.md`](docs/agent-runtime-setup.md).
 
-## Architecture
+## For Developers
 
-| Layer | Implementation |
-| --- | --- |
-| Desktop shell | Electron 41, Chromium, Node.js main process |
-| Renderer | React 18, TypeScript, Tailwind CSS, Zustand |
-| Editor | CodeMirror 6 plus Lumina's Markdown, WikiLink, PDF, and graph surfaces |
-| Agent runtime | Embedded opencode server in Electron main, exposed to the renderer through `@opencode-ai/sdk/client` |
-| Provider bridge | Lumina settings store -> opencode config/auth environment, isolated from the user's own opencode CLI config |
-| Plugins | First-party plugin runtime plus `@lumina/plugin-api` and `@lumina/plugin-ui` packages |
-| Mobile | Native iOS SwiftUI and Android Kotlin + Jetpack Compose apps under `mobile/` |
-| Optional relay | Rust + axum + sqlx + Yjs CRDT server under `server/` |
+Lumina is an Electron 41 desktop app with a React 18 / TypeScript renderer and a CodeMirror-based Markdown editor. The agent layer is built on an embedded opencode server and the opencode SDK, with Lumina mapping app settings, vault access, and permission flow into that runtime.
+
+See [`docs/agent-runtime-setup.md`](docs/agent-runtime-setup.md) for the opencode setup, [`docs/plugin-ecosystem.md`](docs/plugin-ecosystem.md) for plugin work, and [`mobile/README.md`](mobile/README.md) for the native iOS / Android companions.
 
 ## Documentation
 
