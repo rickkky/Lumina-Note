@@ -1,7 +1,13 @@
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+
+vi.mock("electron", () => ({
+  shell: {
+    openPath: vi.fn(),
+  },
+}));
 
 import {
   fsHandlers,

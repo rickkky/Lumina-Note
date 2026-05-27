@@ -1,5 +1,23 @@
 import { describe, expect, it, vi } from 'vitest'
 
+vi.mock('electron', () => ({
+  app: {
+    exit: vi.fn(),
+    getPath: vi.fn((name: string) => `/mock/${name}`),
+    getVersion: vi.fn(() => '0.0.0-test'),
+    relaunch: vi.fn(),
+  },
+  shell: {
+    openExternal: vi.fn(),
+  },
+  dialog: {
+    showMessageBox: vi.fn(),
+    showOpenDialog: vi.fn(),
+    showSaveDialog: vi.fn(),
+  },
+  BrowserWindow: vi.fn(),
+}))
+
 import { platformHandlers } from './platform.js'
 
 describe('platformHandlers', () => {
