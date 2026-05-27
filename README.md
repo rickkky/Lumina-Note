@@ -4,53 +4,35 @@
 
 # Lumina Note
 
-**Local-first AI note-taking app**
+**Local-first AI workspace for Markdown knowledge bases**
 
-Your notes stay on your device. Lumina Note helps you write, connect, search, and refine knowledge with AI while keeping data ownership in your hands.
+Lumina Note combines a local Markdown vault, WikiLinks, a knowledge graph, and an opencode-backed agent that can read, write, organize, and research with your permission.
 
 [![GitHub Release](https://img.shields.io/github/v/release/blueberrycongee/Lumina-Note?style=flat-square)](https://github.com/blueberrycongee/Lumina-Note/releases)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=flat-square)](LICENSE)
 [![Electron](https://img.shields.io/badge/Electron-41-47848F?style=flat-square&logo=electron&logoColor=white)](https://www.electronjs.org/)
-
 [![CI](https://img.shields.io/github/actions/workflow/status/blueberrycongee/Lumina-Note/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/blueberrycongee/Lumina-Note/actions/workflows/ci.yml)
 [![Security Audit](https://img.shields.io/github/actions/workflow/status/blueberrycongee/Lumina-Note/security-audit.yml?branch=main&style=flat-square&label=Security%20Audit)](https://github.com/blueberrycongee/Lumina-Note/actions/workflows/security-audit.yml)
 [![Downloads](https://img.shields.io/github/downloads/blueberrycongee/Lumina-Note/total?style=flat-square)](https://github.com/blueberrycongee/Lumina-Note/releases)
-[![Last Commit](https://img.shields.io/github/last-commit/blueberrycongee/Lumina-Note?style=flat-square)](https://github.com/blueberrycongee/Lumina-Note/commits/main)
 [![GitHub Stars](https://img.shields.io/github/stars/blueberrycongee/Lumina-Note?style=flat-square)](https://github.com/blueberrycongee/Lumina-Note/stargazers)
-[![Commit Activity](https://img.shields.io/github/commit-activity/m/blueberrycongee/Lumina-Note?style=flat-square)](https://github.com/blueberrycongee/Lumina-Note/commits/main)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=flat-square)
 
-**Language**: English (default) · [简体中文](./README.zh-CN.md) · [繁體中文](./README.zh-TW.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Deutsch](./README.de.md) · [Italiano](./README.it.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
+**Languages**: English (canonical) · [简体中文](./README.zh-CN.md) · [繁體中文](./README.zh-TW.md) · [日本語](./README.ja.md) · [한국어](./README.ko.md) · [Español](./README.es.md) · [Français](./README.fr.md) · [Deutsch](./README.de.md) · [Italiano](./README.it.md) · [Português (Brasil)](./README.pt-BR.md) · [Русский](./README.ru.md)
 
 </div>
 
 ---
 
-<h2 align="center">Why Lumina Note</h2>
+## Why Lumina Note
 
-- **Local-first by design**: your vault is local, and you decide what gets sent to model providers.
-- **Knowledge-centered workflow**: Markdown editing, WikiLinks, graph view, and AI agents work as one system.
-- **AI that can actually act**: Agent mode supports real editing, planning, and automation tasks.
+Lumina is built for people who want AI help without turning their notes into someone else's database.
 
----
+- **Local-first vault**: your notes are normal files on disk. You choose when model providers, sync services, or cloud features receive data.
+- **Knowledge-native editing**: Markdown, `[[WikiLinks]]`, backlinks, local graph, global graph, PDFs, annotations, and flashcards live in one workspace.
+- **An agent that can act**: the AI agent can inspect relevant vault files, edit notes, run skills, use tools, and keep its work visible instead of staying in a chat-only box.
+- **Bring your own model**: use OpenAI, Anthropic Claude, Google Gemini, DeepSeek, Moonshot Kimi, Zhipu GLM, MiMo, Qwen through compatible routes, Groq, OpenRouter, Ollama, or any OpenAI-compatible endpoint.
 
-<h2 align="center">Download</h2>
-
-<div align="center">
-
-Get the latest build from [Releases](https://github.com/blueberrycongee/Lumina-Note/releases):
-
-| Platform | Package |
-|----------|---------|
-| Windows | `.exe` (NSIS) |
-| macOS (Universal) | `.dmg` / `.zip` |
-| Linux | `.AppImage` |
-
-</div>
-
----
-
-<h2 align="center">Screenshots</h2>
+## Screenshots
 
 <p align="center">
   <img src="docs/screenshots/ai-agent.png" alt="AI Agent" width="800" />
@@ -61,129 +43,136 @@ Get the latest build from [Releases](https://github.com/blueberrycongee/Lumina-N
 </p>
 
 <p align="center">
-  <img src="docs/screenshots/editor-latex.png" alt="Editor" width="800" />
+  <img src="docs/screenshots/editor-latex.png" alt="Markdown editor with LaTeX" width="800" />
 </p>
 
----
+## Core Features
 
-<h2 align="center">Features</h2>
+### AI workspace
 
-<h3 align="center">AI workspace</h3>
+- Agent mode for editing, planning, research, and task automation.
+- Embedded opencode runtime: Electron main starts an in-process opencode HTTP/WS server, and the renderer talks to it through `@opencode-ai/sdk/client`.
+- Provider settings bridge: Lumina maps the provider, model, API key, base URL, and license-gated options into the isolated opencode runtime.
+- Tool and permission flow for file edits, generated images, skills, and future agent extensions.
+- Optional Lumina Cloud provider for licensed users who do not want to configure their own model API keys.
 
-- Agent mode for editing, planning, and task automation
-- Multi-provider: OpenAI, Anthropic (Claude), Google (Gemini), DeepSeek, Moonshot (Kimi), Zhipu (GLM), MiMo, Qwen, Groq, OpenRouter, Ollama, plus any OpenAI-compatible endpoint
-- opencode-backed agent runtime for heavier tasks, with a fast path for simpler requests
+### Notes and knowledge graph
 
-<h3 align="center">Editor and knowledge graph</h3>
+- Markdown source, live preview, and reading modes.
+- `[[WikiLinks]]`, backlinks, hover previews, and note-aware autocomplete.
+- Global knowledge graph plus local graph for the current note.
+- LaTeX, Mermaid, code highlighting, images, and PDF reading.
+- Highlight, underline, and annotate PDFs, then save annotations as Markdown.
 
-- Markdown source / live preview / reading modes
-- Bidirectional links with `[[WikiLinks]]`
-- LaTeX, Mermaid, and code highlighting
-- Knowledge graph (global) and local graph (per-note neighborhood)
+### Workflow tools
 
-<h3 align="center">Reading and capture</h3>
+- Full-vault search and image management.
+- Selection toolbar actions, conversation export, and custom slash commands.
+- Flashcard generation and review.
+- Real-time voice input.
+- 15 built-in themes plus custom appearance controls.
+- WebDAV sync, same-LAN mobile pairing, and optional self-hosted relay sync.
 
-- Built-in PDF reader with highlight, underline, and annotations
-- Save annotation output as Markdown
-- Send selected content directly into AI context
+### Extension ecosystem
 
-<h3 align="center">Extra capabilities</h3>
+- Developer-preview plugin runtime with workspace, user, and built-in plugin roots.
+- Runtime permissions for plugin capabilities.
+- Slash command, command palette, ribbon, status bar, editor, render, theme, storage, network, and timer APIs.
+- Agent skills from workspace, user, and built-in locations.
 
-- Real-time voice input
-- WebDAV sync
-- Flashcard review
-- Conversation export
-- Skill manager (workspace / user / built-in agent skills)
-- 15 themes
+## Download
 
-<h3 align="center">Mobile companions</h3>
+Get the latest build from [Releases](https://github.com/blueberrycongee/Lumina-Note/releases).
 
-- Native iOS app (SwiftUI) and Android app (Kotlin + Jetpack Compose) under `mobile/`
-- Pair to your desktop with the built-in Mobile Gateway (QR code + token) for direct LAN sync
-- Cross-network access through the optional self-hosted relay — see `docs/self-host.md`
+| Platform | Package |
+| --- | --- |
+| Windows | `.exe` NSIS installer |
+| macOS Apple Silicon / Intel | `.dmg` / `.zip` |
+| Linux x64 | `.AppImage` |
 
-<h3 align="center">Plugin ecosystem (Developer Preview)</h3>
-
-- Load plugins from workspace / user / built-in directories
-- Runtime permission model for plugin capabilities
-- Slash command extension API
-- Developer guide: `docs/plugin-ecosystem.md`
-
----
-
-<h2 align="center">Quick Start</h2>
+## Quick Start
 
 1. Install Lumina Note from Releases.
-2. Choose a local folder as your vault on first launch.
-3. Configure a model provider and API key in the AI panel, then optionally choose your preferred model.
-4. Create your first note and start linking with `[[WikiLinks]]`.
+2. Choose a local folder as your vault.
+3. Open **Settings -> AI** and configure a model provider. Use your own API key, Ollama, an OpenAI-compatible endpoint, or a Lumina Cloud license if you have one.
+4. Create a note, link it with `[[WikiLinks]]`, and open the graph.
+5. Open the AI panel and ask the agent to help with a note, a folder, or a specific writing task.
 
----
-
-<h2 align="center">Guides</h2>
-
-<h3 align="center">Recommended user guides</h3>
-
-- English: `docs/user-flow.md`
-- 简体中文: `docs/user-flow.zh-CN.md`
-- 日本語: `docs/user-flow.ja.md`
-
-<h3 align="center">Self-hosted relay (cross-network mobile access)</h3>
-
-- English: `docs/self-host.md`
-- 简体中文: `docs/self-host.zh-CN.md`
-
----
-
-<h2 align="center">Build from Source</h2>
+## Build from Source
 
 Requirements:
 
 - Node.js 22+
+- npm
+- Bun, only for building the embedded opencode server bundle
+
+Fresh checkout setup:
 
 ```bash
 git clone https://github.com/blueberrycongee/Lumina-Note.git
 cd Lumina-Note
 npm install
-npm run dev          # dev (electron-vite + Electron)
-npm run build        # production bundle into out/
-npm run dist:mac     # sign + package a dmg/zip (also dist:win, dist:linux)
+
+# Required before npm run dev can resolve virtual:opencode-server.
+git clone https://github.com/anomalyco/opencode thirdparty/opencode
+(cd thirdparty/opencode && bun install)
+npm run opencode:bundle
+
+npm run dev
 ```
 
----
+Common commands:
 
-<h2 align="center">Tech Stack</h2>
+```bash
+npm run typecheck
+npm run test:run
+npm run build
+npm run stage:native
+npm run dist:mac
+npm run dist:win
+npm run dist:linux
+```
 
-- Desktop: Electron 41 (Chromium + Node.js main process)
-- Frontend: React 18, TypeScript, Tailwind CSS
-- Editor: CodeMirror 6
-- State: Zustand
-- Agent runtime: embedded opencode server + `@opencode-ai/sdk` client
-- Mobile: SwiftUI (iOS), Kotlin + Jetpack Compose (Android) — `mobile/`
-- Self-host relay (optional): Rust + axum + sqlx + Yjs CRDT — `server/`
+For more detail on the agent runtime setup, see [`docs/agent-runtime-setup.md`](docs/agent-runtime-setup.md).
 
----
+## Architecture
 
-<h2 align="center">Open Source Components</h2>
+| Layer | Implementation |
+| --- | --- |
+| Desktop shell | Electron 41, Chromium, Node.js main process |
+| Renderer | React 18, TypeScript, Tailwind CSS, Zustand |
+| Editor | CodeMirror 6 plus Lumina's Markdown, WikiLink, PDF, and graph surfaces |
+| Agent runtime | Embedded opencode server in Electron main, exposed to the renderer through `@opencode-ai/sdk/client` |
+| Provider bridge | Lumina settings store -> opencode config/auth environment, isolated from the user's own opencode CLI config |
+| Plugins | First-party plugin runtime plus `@lumina/plugin-api` and `@lumina/plugin-ui` packages |
+| Mobile | Native iOS SwiftUI and Android Kotlin + Jetpack Compose apps under `mobile/` |
+| Optional relay | Rust + axum + sqlx + Yjs CRDT server under `server/` |
+
+## Documentation
+
+- User guide: [`docs/user-flow.md`](docs/user-flow.md)
+- 简体中文用户指南: [`docs/user-flow.zh-CN.md`](docs/user-flow.zh-CN.md)
+- Agent runtime setup: [`docs/agent-runtime-setup.md`](docs/agent-runtime-setup.md)
+- Self-hosted relay: [`docs/self-host.md`](docs/self-host.md)
+- Plugin ecosystem: [`docs/plugin-ecosystem.md`](docs/plugin-ecosystem.md)
+- Appearance plugin guide: [`docs/appearance-plugin-guide.md`](docs/appearance-plugin-guide.md)
+- Mobile apps: [`mobile/README.md`](mobile/README.md)
+
+## Open Source Components
 
 - Editor core: [codemirror-live-markdown](https://github.com/blueberrycongee/codemirror-live-markdown)
+- Agent runtime foundation: [opencode](https://github.com/anomalyco/opencode)
 
----
-
-<h2 align="center">Contributors</h2>
+## Contributors
 
 <a href="https://github.com/blueberrycongee/Lumina-Note/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=blueberrycongee/Lumina-Note" />
 </a>
 
----
-
-<h2 align="center">License</h2>
+## License
 
 [Apache License 2.0](LICENSE)
 
----
-
-<h2 align="center">Star History</h2>
+## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=blueberrycongee/Lumina-Note&type=Date)](https://star-history.com/#blueberrycongee/Lumina-Note&Date)
