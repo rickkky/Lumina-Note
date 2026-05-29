@@ -129,6 +129,51 @@ describe("useFileStore reloadFileIfOpen", () => {
     expect(useFileStore.getState().tabs[0].diskStatus).toBe("modified");
   });
 
+  it("does not treat a delayed self-save watcher event as an external conflict", async () => {
+    const path = "/path/to/file.md";
+    const savedVersion = { size: 10, mtimeMs: 200 };
+    vi.mocked(getFileVersion).mockResolvedValue(savedVersion);
+
+    useFileStore.setState({
+      tabs: [
+        {
+          id: path,
+          type: "file",
+          path,
+          name: "file",
+          content: "Typing again",
+          isDirty: true,
+          lastSavedContent: "Saved once",
+          diskStatus: "clean",
+          diskVersion: savedVersion,
+          undoStack: [],
+          redoStack: [],
+        },
+      ],
+      activeTabIndex: 0,
+      currentFile: path,
+      currentContent: "Typing again",
+      lastSavedContent: "Saved once",
+      isDirty: true,
+      isSaving: false,
+    });
+
+    await useFileStore.getState().reloadFileIfOpen(path, {
+      skipIfDirty: true,
+      changeKind: "modified",
+    });
+
+    expect(useFileStore.getState().tabs[0].diskStatus).toBe("clean");
+
+    const saved = await useFileStore.getState().save();
+
+    expect(saved).toBe(true);
+    expect(saveFile).toHaveBeenCalledWith(path, "Typing again", {
+      expectedVersion: savedVersion,
+      overwrite: false,
+    });
+  });
+
   it("marks open file as deleted on disk without reading", async () => {
     useFileStore.setState({
       tabs: [

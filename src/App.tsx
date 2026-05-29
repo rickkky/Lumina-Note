@@ -79,6 +79,7 @@ import {
 import { isTauriAvailable } from "@/lib/host";
 import { hydrateProxyConfigOnStartup } from "@/lib/proxyStartup";
 import { useReducedMotion } from "framer-motion";
+import { getDirtyFileCount } from "@/lib/dirtyFiles";
 
 // Debug logging is enabled via a runtime toggle (or always in dev).
 
@@ -717,10 +718,8 @@ function App() {
   // Prevent accidental close when there are unsaved changes
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      const { isDirty, tabs } = useFileStore.getState();
-      const hasDirty =
-        isDirty || tabs.some((t) => t.isDirty && t.type === "file");
-      if (hasDirty) {
+      const { currentFile, isDirty, tabs } = useFileStore.getState();
+      if (getDirtyFileCount({ currentFile, isDirty, tabs }) > 0) {
         e.preventDefault();
         e.returnValue = "";
       }
@@ -734,10 +733,8 @@ function App() {
     if (!isTauriAvailable()) return;
 
     const sendDirtyState = () => {
-      const { isDirty, tabs } = useFileStore.getState();
-      const count =
-        tabs.filter((t) => t.isDirty && t.type === "file").length +
-        (isDirty ? 1 : 0);
+      const { currentFile, isDirty, tabs } = useFileStore.getState();
+      const count = getDirtyFileCount({ currentFile, isDirty, tabs });
       invoke("set_dirty_state", { count });
     };
 

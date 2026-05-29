@@ -4,7 +4,7 @@
 // freeze the paths before we get a chance to redirect them.
 import "./agent-v2/opencode-xdg.js";
 
-import { app, BrowserWindow, Menu } from "electron";
+import { app, BrowserWindow, dialog, Menu } from "electron";
 import path from "path";
 
 // Force overlay scrollbars so custom ::-webkit-scrollbar CSS does not
@@ -41,6 +41,7 @@ import { setLuminaPluginContext } from "./agent-v2/plugin/context.js";
 import { WikiSettingsStore } from "./wiki/settings-store.js";
 import { WikiManager } from "./wiki/manager.js";
 import { createMainWindowOptions } from "./window-config.js";
+import { handleDirtyWindowClose } from "./window-close.js";
 
 // ── State ──────────────────────────────────────────────────────────────────
 let mainWindow: BrowserWindow | null = null;
@@ -80,23 +81,27 @@ export default function createWindow(): BrowserWindow {
   });
 
   win.on("close", (e) => {
-    if (dirtyFileCount > 0) {
-      const { dialog } = require("electron");
-      const choice = dialog.showMessageBoxSync(win, {
-        type: "warning",
-        buttons: ["Cancel", "Close Without Saving"],
-        defaultId: 0,
-        cancelId: 0,
-        title: "Unsaved Changes",
-        message: `You have ${dirtyFileCount} file(s) with unsaved changes.`,
-        detail: "Your changes will be lost if you close without saving.",
-      });
-
-      if (choice === 0) {
-        e.preventDefault();
-      }
-      // choice === 1: allow close
-    }
+    handleDirtyWindowClose(e, {
+      getDirtyFileCount: () => dirtyFileCount,
+      showDiscardDialog: (count) =>
+        dialog.showMessageBoxSync(win, {
+          type: "warning",
+          buttons: ["Cancel", "Close Without Saving"],
+          defaultId: 0,
+          cancelId: 0,
+          title: "Unsaved Changes",
+          message: `You have ${count} file(s) with unsaved changes.`,
+          detail: "Your changes will be lost if you close without saving.",
+        }),
+      clearDirtyFileCount: () => {
+        dirtyFileCount = 0;
+      },
+      forceClose: () => {
+        setImmediate(() => {
+          if (!win.isDestroyed()) win.destroy();
+        });
+      },
+    });
   });
 
   mainWindow = win;

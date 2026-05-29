@@ -576,6 +576,13 @@ async function readFileSnapshot(
   };
 }
 
+function fileVersionsEqual(
+  a: FileVersion | null | undefined,
+  b: FileVersion | null | undefined,
+): boolean {
+  return Boolean(a && b && a.size === b.size && a.mtimeMs === b.mtimeMs);
+}
+
 export const useFileStore = create<FileState>()(
   persist(
     (set, get) => ({
@@ -2903,6 +2910,22 @@ export const useFileStore = create<FileState>()(
           }
 
           if (skipIfDirty && isTargetDirty) {
+            const diskVersion =
+              changeKind === "modified" ? await getFileVersion(path) : null;
+            if (fileVersionsEqual(diskVersion, targetTab.diskVersion)) {
+              const updatedTabs = tabs.map((candidate, i) =>
+                i === tabIndex
+                  ? {
+                      ...candidate,
+                      diskStatus: "clean" as const,
+                      diskVersion,
+                    }
+                  : candidate,
+              );
+              set({ tabs: updatedTabs });
+              return;
+            }
+
             const updatedTabs = tabs.map((tab, i) =>
               i === tabIndex
                 ? {
