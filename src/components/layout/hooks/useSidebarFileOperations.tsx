@@ -716,29 +716,33 @@ export function useSidebarFileOperations() {
 
   const handleSelect = useCallback(
     (entry: FileEntry) => {
-      setSelectedPath(entry.path);
-      if (!entry.is_dir) {
-        const name = entry.name.toLowerCase();
-        if (
-          name.endsWith(".excalidraw.json") ||
-          name.endsWith(".diagram.json") ||
-          name.endsWith(".drawio.json")
-        ) {
-          openDiagramTab(entry.path, { preview: true });
-        } else if (name.endsWith(".pdf")) {
-          if (splitView && activePane === "secondary") {
-            openSecondaryPdf(entry.path);
-          } else {
-            openPDFTab(entry.path, { preview: true });
-          }
-        } else if (isImageEntryName(name)) {
-          openImageTab(entry.path, { preview: true });
+      if (entry.is_dir) {
+        setSelectedPath(entry.path);
+        return;
+      }
+
+      const name = entry.name.toLowerCase();
+      if (
+        name.endsWith(".excalidraw.json") ||
+        name.endsWith(".diagram.json") ||
+        name.endsWith(".drawio.json")
+      ) {
+        openDiagramTab(entry.path, { preview: true });
+      } else if (name.endsWith(".pdf")) {
+        if (splitView && activePane === "secondary") {
+          setSelectedPath(entry.path);
+          openSecondaryPdf(entry.path);
         } else {
-          if (splitView && activePane === "secondary") {
-            openSecondaryFile(entry.path);
-          } else {
-            openFile(entry.path, { preview: true });
-          }
+          openPDFTab(entry.path, { preview: true });
+        }
+      } else if (isImageEntryName(name)) {
+        openImageTab(entry.path, { preview: true });
+      } else {
+        if (splitView && activePane === "secondary") {
+          setSelectedPath(entry.path);
+          openSecondaryFile(entry.path);
+        } else {
+          openFile(entry.path, { preview: true });
         }
       }
     },
