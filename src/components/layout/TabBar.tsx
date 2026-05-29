@@ -942,7 +942,7 @@ export function TabBar() {
     <>
       <div
         className={cn(
-          "relative flex h-11 shrink-0 items-stretch bg-popover dark:bg-background [--tab-active-fill:hsl(var(--popover))] dark:[--tab-active-fill:hsl(var(--background))]",
+          "lumina-tabbar relative flex h-11 shrink-0 items-stretch bg-popover dark:bg-background [--tab-active-fill:hsl(var(--popover))] dark:[--tab-active-fill:hsl(var(--background))]",
           isDarkDiagramTab &&
             "!bg-[hsl(var(--diagram-surface))] [--tab-active-fill:hsl(var(--diagram-surface))]",
         )}

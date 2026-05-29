@@ -401,7 +401,7 @@ export function WebDAVSettings({ compact = false }: WebDAVSettingsProps) {
             className={`relative w-11 h-6 rounded-full transition-colors ${autoSync ? 'bg-primary' : 'bg-muted/60'}`}
           >
             <div
-              className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow transition-transform ${autoSync ? 'left-6' : 'left-1'}`}
+              className={`absolute top-1 w-4 h-4 rounded-full bg-popover shadow-elev-1 transition-transform ${autoSync ? 'left-6' : 'left-1'}`}
             />
           </button>
         </div>

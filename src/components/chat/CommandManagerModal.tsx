@@ -55,11 +55,11 @@ export function CommandManagerModal({
     return (
         <div
             role="dialog"
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+            className="lumina-floating-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/50"
             onClick={onClose}
         >
             <div
-                className="w-full max-w-md bg-popover border border-border rounded-ui-lg shadow-elev-3 overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+                className="lumina-floating-surface w-full max-w-md bg-popover border border-border rounded-ui-lg shadow-elev-3 overflow-hidden animate-in fade-in zoom-in-95 duration-200"
                 onClick={(event) => event.stopPropagation()}
             >
                 <div className="flex items-center justify-between px-4 py-3 border-b border-border/60 bg-muted/30">

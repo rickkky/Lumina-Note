@@ -736,7 +736,7 @@ export function SlashMenu({ view }: SlashMenuProps) {
     <div
       ref={menuRef}
       className={cn(
-        "fixed z-50 overflow-hidden border bg-popover text-popover-foreground",
+        "lumina-floating-surface fixed z-50 overflow-hidden border bg-popover text-popover-foreground",
         aiPromptOpen
           ? "rounded-lg border-border/70 bg-popover shadow-elev-2"
           : "rounded-lg border-border shadow-elev-2",

@@ -176,11 +176,11 @@ export function ThemeEditor({ isOpen, onClose, editingTheme, onSave }: ThemeEdit
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      className="lumina-floating-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/50"
       onClick={onClose}
     >
       <div
-        className="bg-popover border border-border rounded-ui-lg shadow-elev-3 w-[900px] max-h-[85vh] flex flex-col"
+        className="lumina-floating-surface bg-popover border border-border rounded-ui-lg shadow-elev-3 w-[900px] max-h-[85vh] flex flex-col"
         onClick={(event) => event.stopPropagation()}
       >
         {/* 头部 */}

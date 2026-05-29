@@ -1,27 +1,22 @@
-import { useEffect, useState } from "react";
 import { useUIStore } from "@/stores/useUIStore";
-import { useFileStore } from "@/stores/useFileStore";
+import type { AppBackgroundPreset } from "@/stores/useUIStore";
 import { useLocaleStore } from "@/stores/useLocaleStore";
 import { SUPPORTED_LOCALES, type Locale } from "@/i18n";
-import { OFFICIAL_THEMES, Theme } from "@/config/themes";
-import {
-  loadUserThemes,
-  getUserThemes,
-  deleteUserTheme,
-} from "@/config/themePlugin";
-import { Check, Plus, Trash2, Palette } from "lucide-react";
+import { openDialog } from "@/lib/host";
+import { basename } from "@/lib/path";
+import { Check, ImagePlus, RotateCcw, X } from "lucide-react";
 import { Select } from "@/components/ui";
-import { ThemeEditor } from "../ai/ThemeEditor";
+import {
+  APP_BACKGROUND_PRESETS,
+  APP_BACKGROUND_PRESET_STYLES,
+} from "@/config/appBackgrounds";
 
-interface GeneralSectionProps {
-  isOpen: boolean;
-}
-
-export function GeneralSection({ isOpen }: GeneralSectionProps) {
+export function GeneralSection() {
   const { t, locale, setLocale } = useLocaleStore();
   const {
-    themeId,
-    setThemeId,
+    appBackground,
+    setAppBackground,
+    resetAppBackground,
     editorMode,
     setEditorMode,
     editorFontSize,
@@ -29,170 +24,252 @@ export function GeneralSection({ isOpen }: GeneralSectionProps) {
     blockEditorEnabled,
     setBlockEditorEnabled,
   } = useUIStore();
-  const { vaultPath } = useFileStore();
 
-  const [showThemeEditor, setShowThemeEditor] = useState(false);
-  const [editingTheme, setEditingTheme] = useState<Theme | undefined>();
-  const [userThemes, setUserThemes] = useState<Theme[]>([]);
+  const backgroundPresetLabels: Record<AppBackgroundPreset, string> = {
+    paper: t.settingsModal.backgroundPresetPaper,
+    mist: t.settingsModal.backgroundPresetMist,
+    sakura: t.settingsModal.backgroundPresetSakura,
+    dusk: t.settingsModal.backgroundPresetDusk,
+  };
 
-  useEffect(() => {
-    if (isOpen && vaultPath) {
-      loadUserThemes(vaultPath).then((themes) => {
-        setUserThemes(themes);
-      });
-    }
-  }, [isOpen, vaultPath]);
+  const handleChooseBackgroundImage = async () => {
+    const selected = await openDialog({
+      multiple: false,
+      title: t.settingsModal.chooseBackgroundImage,
+      filters: [
+        {
+          name: "Images",
+          extensions: ["png", "jpg", "jpeg", "webp", "gif", "bmp", "avif"],
+        },
+      ],
+    });
 
-  const handleDeleteTheme = async (theme: Theme) => {
-    if (!vaultPath) return;
-    if (
-      confirm(t.settingsModal.confirmDeleteTheme.replace("{name}", theme.name))
-    ) {
-      await deleteUserTheme(vaultPath, theme.id);
-      setUserThemes(getUserThemes());
-      if (themeId === theme.id) {
-        setThemeId("default");
-      }
+    if (typeof selected === "string") {
+      setAppBackground({ kind: "image", imagePath: selected });
     }
   };
 
-  const handleEditTheme = (theme: Theme) => {
-    setEditingTheme(theme);
-    setShowThemeEditor(true);
-  };
-
-  const handleNewTheme = () => {
-    setEditingTheme(undefined);
-    setShowThemeEditor(true);
-  };
-
-  const handleThemeSaved = () => {
-    setUserThemes(getUserThemes());
-  };
+  const imageName = appBackground.imagePath
+    ? basename(appBackground.imagePath)
+    : null;
+  const previewBackground =
+    appBackground.kind === "preset"
+      ? APP_BACKGROUND_PRESET_STYLES[appBackground.preset]
+      : "linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%)";
 
   return (
     <>
-      {/* 主题设置 */}
+      {/* Appearance settings */}
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-            {t.settingsModal.theme}
+            {t.settingsModal.appearance}
           </h3>
           <button
-            onClick={handleNewTheme}
+            type="button"
+            onClick={resetAppBackground}
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg border border-border/60 bg-background/60 hover:bg-muted transition-colors"
-            title={t.settingsModal.createTheme}
+            title={t.settingsModal.resetBackground}
           >
-            <Plus size={14} />
-            {t.settingsModal.createTheme}
+            <RotateCcw size={14} />
+            {t.settingsModal.resetBackground}
           </button>
         </div>
 
-        {/* 用户主题 */}
-        {userThemes.length > 0 && (
-          <>
-            <p className="text-xs text-muted-foreground mt-4">
-              {t.settingsModal.myThemes}
-            </p>
-            <div className="grid grid-cols-3 gap-3">
-              {userThemes.map((theme) => (
-                <div
-                  key={theme.id}
-                  className={`relative p-3 rounded-xl transition-colors text-left group border border-border/60 ${
-                    themeId === theme.id
-                      ? "ring-2 ring-primary bg-primary/10"
-                      : "bg-background/60 hover:bg-muted/50"
-                  }`}
-                >
-                  <button
-                    onClick={() => setThemeId(theme.id)}
-                    className="w-full text-left"
-                    title={t.settingsModal.applyTheme.replace(
-                      "{name}",
-                      theme.name,
-                    )}
-                  >
-                    <div className="flex gap-1 mb-2">
-                      <div
-                        className="w-4 h-4 rounded-full border border-border/60"
-                        style={{
-                          backgroundColor: `hsl(${theme.light.primary})`,
-                        }}
-                      />
-                      <div
-                        className="w-4 h-4 rounded-full border border-border/60"
-                        style={{
-                          backgroundColor: `hsl(${theme.dark.primary})`,
-                        }}
-                      />
-                    </div>
-                    <p className="font-medium text-sm">{theme.name}</p>
-                  </button>
+        <div className="relative overflow-hidden rounded-lg border border-border/60">
+          <div
+            className="h-24"
+            style={{
+              background: previewBackground,
+              opacity: appBackground.kind === "none" ? 1 : appBackground.opacity,
+              filter:
+                appBackground.blur > 0
+                  ? `blur(${appBackground.blur / 2}px)`
+                  : undefined,
+              transform: appBackground.blur > 0 ? "scale(1.03)" : undefined,
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundColor:
+                appBackground.kind === "none"
+                  ? "transparent"
+                  : `hsl(var(--background) / ${Math.max(appBackground.dim - 0.18, 0.18)})`,
+            }}
+          />
+          <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-background/70 px-3 py-2 backdrop-blur">
+            <span className="text-sm font-medium">
+              {appBackground.kind === "none"
+                ? t.settingsModal.backgroundNone
+                : appBackground.kind === "image"
+                  ? imageName || t.settingsModal.backgroundImage
+                  : backgroundPresetLabels[appBackground.preset]}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              {Math.round(appBackground.opacity * 100)}%
+            </span>
+          </div>
+        </div>
 
-                  <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button
-                      onClick={() => handleEditTheme(theme)}
-                      className="p-1 rounded hover:bg-muted"
-                      title={t.common.edit}
-                    >
-                      <Palette size={12} />
-                    </button>
-                    <button
-                      onClick={() => handleDeleteTheme(theme)}
-                      className="p-1 rounded hover:bg-destructive/20 text-destructive"
-                      title={t.common.delete}
-                    >
-                      <Trash2 size={12} />
-                    </button>
-                  </div>
-
-                  {themeId === theme.id && (
-                    <div className="absolute bottom-2 right-2">
-                      <Check size={16} className="text-primary" />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-
-        {/* 官方主题 */}
-        {userThemes.length > 0 && (
-          <p className="text-xs text-muted-foreground mt-4">
-            {t.settingsModal.officialThemes}
-          </p>
-        )}
-        <div className="grid grid-cols-3 gap-3">
-          {OFFICIAL_THEMES.map((theme) => (
+        <div className="space-y-3">
+          <p className="font-medium">{t.settingsModal.background}</p>
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
             <button
-              key={theme.id}
-              onClick={() => setThemeId(theme.id)}
-              className={`relative p-3 rounded-xl transition-colors text-left border border-border/60 ${
-                themeId === theme.id
+              type="button"
+              onClick={() => setAppBackground({ kind: "none" })}
+              className={`relative h-20 rounded-lg border border-border/60 bg-background/60 p-2 text-left transition-colors hover:bg-muted/50 ${
+                appBackground.kind === "none"
                   ? "ring-2 ring-primary bg-primary/10"
-                  : "bg-background/60 hover:bg-muted/50"
+                  : ""
               }`}
-              title={t.settingsModal.applyTheme.replace("{name}", theme.name)}
+              title={t.settingsModal.backgroundNone}
             >
-              <div className="flex gap-1 mb-2">
-                <div
-                  className="w-4 h-4 rounded-full border border-border/60"
-                  style={{ backgroundColor: `hsl(${theme.light.primary})` }}
-                />
-                <div
-                  className="w-4 h-4 rounded-full border border-border/60"
-                  style={{ backgroundColor: `hsl(${theme.dark.primary})` }}
-                />
-              </div>
-              <p className="font-medium text-sm">{theme.name}</p>
-              {themeId === theme.id && (
-                <div className="absolute top-2 right-2">
+              <div className="mb-2 h-8 rounded-md border border-border/50 bg-background" />
+              <p className="truncate text-xs font-medium">
+                {t.settingsModal.backgroundNone}
+              </p>
+              {appBackground.kind === "none" && (
+                <div className="absolute right-2 top-2">
                   <Check size={16} className="text-primary" />
                 </div>
               )}
             </button>
-          ))}
+
+            {APP_BACKGROUND_PRESETS.map((preset) => {
+              const isActive =
+                appBackground.kind === "preset" &&
+                appBackground.preset === preset;
+              return (
+                <button
+                  key={preset}
+                  type="button"
+                  onClick={() => setAppBackground({ kind: "preset", preset })}
+                  className={`relative h-20 rounded-lg border border-border/60 bg-background/60 p-2 text-left transition-colors hover:bg-muted/50 ${
+                    isActive ? "ring-2 ring-primary bg-primary/10" : ""
+                  }`}
+                  title={backgroundPresetLabels[preset]}
+                >
+                  <div
+                    className="mb-2 h-8 rounded-md border border-border/50"
+                    style={{ background: APP_BACKGROUND_PRESET_STYLES[preset] }}
+                  />
+                  <p className="truncate text-xs font-medium">
+                    {backgroundPresetLabels[preset]}
+                  </p>
+                  {isActive && (
+                    <div className="absolute right-2 top-2">
+                      <Check size={16} className="text-primary" />
+                    </div>
+                  )}
+                </button>
+              );
+            })}
+
+            <button
+              type="button"
+              onClick={handleChooseBackgroundImage}
+              className={`relative h-20 rounded-lg border border-border/60 bg-background/60 p-2 text-left transition-colors hover:bg-muted/50 ${
+                appBackground.kind === "image"
+                  ? "ring-2 ring-primary bg-primary/10"
+                  : ""
+              }`}
+              title={t.settingsModal.backgroundImage}
+            >
+              <div className="mb-2 flex h-8 items-center justify-center rounded-md border border-dashed border-border/70 bg-muted/40">
+                <ImagePlus size={16} className="text-muted-foreground" />
+              </div>
+              <p className="truncate text-xs font-medium">
+                {t.settingsModal.backgroundImage}
+              </p>
+              {appBackground.kind === "image" && (
+                <div className="absolute right-2 top-2">
+                  <Check size={16} className="text-primary" />
+                </div>
+              )}
+            </button>
+          </div>
+
+          {appBackground.kind === "image" && imageName && (
+            <div className="flex items-center justify-between gap-3 rounded-lg border border-border/60 bg-background/60 px-3 py-2">
+              <span className="min-w-0 truncate text-sm text-muted-foreground">
+                {imageName}
+              </span>
+              <button
+                type="button"
+                onClick={() =>
+                  setAppBackground({ kind: "none", imagePath: null })
+                }
+                className="flex shrink-0 items-center gap-1.5 rounded-lg px-2 py-1 text-xs text-muted-foreground hover:bg-muted hover:text-foreground"
+                title={t.settingsModal.clearBackgroundImage}
+              >
+                <X size={13} />
+                {t.settingsModal.clearBackgroundImage}
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div className="space-y-3">
+          <div className="flex items-center justify-between gap-4">
+            <p className="font-medium">{t.settingsModal.backgroundOpacity}</p>
+            <span className="w-12 text-right text-sm font-mono text-muted-foreground">
+              {Math.round(appBackground.opacity * 100)}%
+            </span>
+          </div>
+          <input
+            type="range"
+            min={8}
+            max={60}
+            value={Math.round(appBackground.opacity * 100)}
+            disabled={appBackground.kind === "none"}
+            onChange={(e) =>
+              setAppBackground({ opacity: Number(e.target.value) / 100 })
+            }
+            className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-muted accent-primary disabled:cursor-not-allowed disabled:opacity-50"
+          />
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between gap-4">
+              <p className="font-medium">{t.settingsModal.backgroundBlur}</p>
+              <span className="w-12 text-right text-sm font-mono text-muted-foreground">
+                {appBackground.blur}px
+              </span>
+            </div>
+            <input
+              type="range"
+              min={0}
+              max={24}
+              value={appBackground.blur}
+              disabled={appBackground.kind === "none"}
+              onChange={(e) =>
+                setAppBackground({ blur: Number(e.target.value) })
+              }
+              className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-muted accent-primary disabled:cursor-not-allowed disabled:opacity-50"
+            />
+          </div>
+
+          <div className="space-y-3">
+            <div className="flex items-center justify-between gap-4">
+              <p className="font-medium">{t.settingsModal.backgroundDim}</p>
+              <span className="w-12 text-right text-sm font-mono text-muted-foreground">
+                {Math.round(appBackground.dim * 100)}%
+              </span>
+            </div>
+            <input
+              type="range"
+              min={20}
+              max={95}
+              value={Math.round(appBackground.dim * 100)}
+              disabled={appBackground.kind === "none"}
+              onChange={(e) =>
+                setAppBackground({ dim: Number(e.target.value) / 100 })
+              }
+              className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-muted accent-primary disabled:cursor-not-allowed disabled:opacity-50"
+            />
+          </div>
         </div>
       </section>
 
@@ -260,7 +337,7 @@ export function GeneralSection({ isOpen }: GeneralSectionProps) {
             }`}
           >
             <span
-              className={`inline-block h-3.5 w-3.5 rounded-full bg-white transition-transform ${
+              className={`inline-block h-3.5 w-3.5 rounded-full bg-popover shadow-elev-1 transition-transform ${
                 blockEditorEnabled ? "translate-x-[18px]" : "translate-x-[2px]"
               }`}
             />
@@ -307,16 +384,6 @@ export function GeneralSection({ isOpen }: GeneralSectionProps) {
         </div>
       </section>
 
-      {/* 主题编辑器 */}
-      <ThemeEditor
-        isOpen={showThemeEditor}
-        onClose={() => {
-          setShowThemeEditor(false);
-          setEditingTheme(undefined);
-        }}
-        editingTheme={editingTheme}
-        onSave={handleThemeSaved}
-      />
     </>
   );
 }

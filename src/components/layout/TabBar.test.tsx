@@ -456,6 +456,10 @@ describe("TabBar", () => {
     expect(tabBarSource).not.toContain("y: isDragging ? -");
   });
 
+  it("exposes the tab bar surface for app background skin overrides", () => {
+    expect(tabBarSource).toContain("lumina-tabbar");
+  });
+
   it("projects tab order from drag position within the same pin group", () => {
     const tabs = [
       { id: "pinned", name: "Pinned.md", type: "file", isPinned: true, isDirty: false },

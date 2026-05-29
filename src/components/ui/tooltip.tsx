@@ -260,7 +260,7 @@ export function AutoTooltipHost() {
       }}
       className={cn(
         "px-2 py-1 text-ui-meta leading-tight rounded-md border border-border",
-        "bg-foreground text-background shadow-elev-2",
+        "lumina-tooltip bg-foreground text-background shadow-elev-2",
         "max-w-[260px] whitespace-normal",
       )}
     >

@@ -219,6 +219,178 @@ body.resizing iframe[data-codex-iframe="true"] {
 }
 
 @layer components {
+  html[data-lumina-skin="preset"] {
+    --background: var(--lumina-skin-background) !important;
+    --popover: var(--lumina-skin-popover) !important;
+    --muted: var(--lumina-skin-muted) !important;
+    --accent: var(--lumina-skin-accent) !important;
+    --ui-surface: var(--lumina-skin-background) !important;
+    --ui-panel: var(--lumina-skin-muted) !important;
+    --ui-panel-2: var(--lumina-skin-accent) !important;
+    --ui-ribbon: var(--lumina-skin-ribbon) !important;
+    --border: var(--lumina-skin-border) !important;
+  }
+
+  html[data-lumina-skin="image"] {
+    --background: var(--lumina-skin-background) !important;
+    --foreground: var(--lumina-skin-foreground) !important;
+    --muted: var(--lumina-skin-muted) !important;
+    --muted-foreground: var(--lumina-skin-muted-foreground) !important;
+    --accent: var(--lumina-skin-accent) !important;
+    --accent-foreground: var(--lumina-skin-accent-foreground) !important;
+    --popover: var(--lumina-skin-popover) !important;
+    --popover-foreground: var(--lumina-skin-popover-foreground) !important;
+    --primary: var(--lumina-skin-primary) !important;
+    --primary-foreground: var(--lumina-skin-primary-foreground) !important;
+    --border: var(--lumina-skin-border) !important;
+    --ui-surface: var(--lumina-skin-background) !important;
+    --ui-panel: var(--lumina-skin-muted) !important;
+    --ui-panel-2: var(--lumina-skin-accent) !important;
+    --ui-ribbon: var(--lumina-skin-ribbon) !important;
+    --diagram-surface: var(--lumina-skin-background) !important;
+    --md-heading: var(--lumina-skin-md-heading) !important;
+    --md-link: var(--lumina-skin-primary) !important;
+    --md-link-hover: var(--lumina-skin-primary) !important;
+    --md-list-marker: var(--lumina-skin-primary) !important;
+    --md-blockquote-border: var(--lumina-skin-primary) !important;
+    --md-hr: var(--lumina-skin-border) !important;
+    --md-table-border: var(--lumina-skin-border) !important;
+    --lumina-floating-surface: hsl(var(--popover) / 0.96);
+    --lumina-floating-surface-strong: hsl(var(--popover) / 0.985);
+    --lumina-floating-hover: hsl(var(--primary) / 0.09);
+    --lumina-floating-selected: hsl(var(--primary) / 0.14);
+    --lumina-floating-border: hsl(var(--border) / 0.9);
+    --lumina-floating-overlay: hsl(0 0% 0% / 0.46);
+  }
+
+  html[data-lumina-skin="image"] .lumina-floating-overlay {
+    background: var(--lumina-floating-overlay) !important;
+    backdrop-filter: blur(2px);
+  }
+
+  html[data-lumina-skin="image"] .lumina-floating-surface {
+    color: hsl(var(--foreground)) !important;
+    border-color: var(--lumina-floating-border) !important;
+    background-color: var(--lumina-floating-surface) !important;
+    background-image: none !important;
+    box-shadow:
+      0 18px 48px hsl(0 0% 0% / 0.24),
+      0 2px 10px hsl(0 0% 0% / 0.12) !important;
+    backdrop-filter: blur(22px) saturate(1.04);
+  }
+
+  html[data-lumina-skin="image"] .lumina-floating-surface .bg-muted,
+  html[data-lumina-skin="image"] .lumina-floating-surface [class*="bg-muted/"] {
+    background-color: var(--lumina-floating-hover) !important;
+  }
+
+  html[data-lumina-skin="image"] .lumina-floating-surface .bg-accent,
+  html[data-lumina-skin="image"] .lumina-floating-surface [aria-selected="true"],
+  html[data-lumina-skin="image"] .lumina-floating-surface [data-selected="true"],
+  html[data-lumina-skin="image"] .lumina-floating-surface [class*="bg-primary/"] {
+    background-color: var(--lumina-floating-selected) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+
+  html[data-lumina-skin="image"] .lumina-floating-surface [class*="hover:bg-muted"]:hover,
+  html[data-lumina-skin="image"] .lumina-floating-surface [class*="hover:bg-accent"]:hover,
+  html[data-lumina-skin="image"] .lumina-floating-surface [class*="hover:bg-foreground"]:hover {
+    background-color: var(--lumina-floating-hover) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+
+  html[data-lumina-skin="image"] .lumina-tooltip {
+    background: hsl(var(--foreground) / 0.96) !important;
+    color: hsl(var(--background)) !important;
+    border-color: hsl(var(--foreground) / 0.22) !important;
+  }
+
+  html[data-lumina-skin="image"] [data-sonner-toaster] {
+    --normal-bg: var(--lumina-floating-surface);
+    --normal-border: var(--lumina-floating-border);
+    --normal-text: hsl(var(--foreground));
+    --success-bg: hsl(var(--success) / 0.16);
+    --success-border: hsl(var(--success) / 0.38);
+    --success-text: hsl(var(--foreground));
+    --info-bg: hsl(var(--info) / 0.16);
+    --info-border: hsl(var(--info) / 0.38);
+    --info-text: hsl(var(--foreground));
+    --warning-bg: hsl(var(--warning) / 0.18);
+    --warning-border: hsl(var(--warning) / 0.42);
+    --warning-text: hsl(var(--foreground));
+    --error-bg: hsl(var(--destructive) / 0.16);
+    --error-border: hsl(var(--destructive) / 0.4);
+    --error-text: hsl(var(--foreground));
+  }
+
+  html[data-lumina-skin="image"] [data-sonner-toast][data-styled="true"] {
+    border-color: var(--lumina-floating-border) !important;
+    color: hsl(var(--foreground)) !important;
+    box-shadow:
+      0 12px 28px hsl(0 0% 0% / 0.22),
+      0 1px 4px hsl(0 0% 0% / 0.12) !important;
+    backdrop-filter: blur(20px) saturate(1.04);
+  }
+
+  html[data-lumina-skin="image"] [data-sonner-toast][data-styled="true"] [data-description] {
+    color: hsl(var(--muted-foreground)) !important;
+  }
+
+  html[data-lumina-skin="image"] [data-sonner-toast][data-styled="true"] [data-close-button] {
+    background: var(--lumina-floating-surface-strong) !important;
+    border-color: var(--lumina-floating-border) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+
+  html[data-lumina-skin="image"] .lumina-app-shell,
+  html[data-lumina-skin="image"] .lumina-app-shell .bg-background,
+  html[data-lumina-skin="image"] .lumina-app-shell .bg-popover,
+  html[data-lumina-skin="image"] .lumina-app-shell .bg-muted,
+  html[data-lumina-skin="image"] .lumina-app-shell .bg-ribbon,
+  html[data-lumina-skin="image"] .lumina-app-shell:is(.bg-background),
+  html[data-lumina-skin="image"] .lumina-app-shell .app-sidebar-shell,
+  html[data-lumina-skin="image"] .lumina-app-shell .app-sidebar-inner,
+  html[data-lumina-skin="image"] .lumina-app-shell [class*="bg-background/"],
+  html[data-lumina-skin="image"] .lumina-app-shell [class*="bg-popover/"],
+  html[data-lumina-skin="image"] .lumina-app-shell [class*="bg-muted/"] {
+    background-color: transparent !important;
+    background-image:
+      linear-gradient(
+        var(--lumina-skin-surface, hsl(var(--background) / 0.84)),
+        var(--lumina-skin-surface, hsl(var(--background) / 0.84))
+      ),
+      var(--lumina-skin-image) !important;
+    background-attachment: scroll, fixed !important;
+    background-position: center, center !important;
+    background-repeat: no-repeat, no-repeat !important;
+    background-size: auto, cover !important;
+    backdrop-filter: blur(16px);
+  }
+
+  html[data-lumina-skin="image"] .lumina-app-shell .bg-popover,
+  html[data-lumina-skin="image"] .lumina-app-shell [class*="bg-popover/"] {
+    --lumina-skin-surface: hsl(var(--popover) / 0.9);
+  }
+
+  html[data-lumina-skin="image"] .lumina-app-shell .lumina-tabbar {
+    --lumina-skin-surface: hsl(var(--popover) / 0.68);
+    --tab-active-fill: transparent !important;
+  }
+
+  html[data-lumina-skin="image"] .lumina-app-shell .bg-muted,
+  html[data-lumina-skin="image"] .lumina-app-shell .bg-ribbon,
+  html[data-lumina-skin="image"] .lumina-app-shell .app-sidebar-shell,
+  html[data-lumina-skin="image"] .lumina-app-shell .app-sidebar-inner,
+  html[data-lumina-skin="image"] .lumina-app-shell [class*="bg-muted/"] {
+    --lumina-skin-surface: hsl(var(--muted) / 0.82);
+  }
+
+  html[data-lumina-skin="image"] .lumina-app-shell .codemirror-wrapper .cm-editor,
+  html[data-lumina-skin="image"] .lumina-app-shell .codemirror-wrapper .cm-gutters,
+  html[data-lumina-skin="image"] .lumina-app-shell .editor-scroll-shell {
+    background-color: transparent !important;
+  }
+
   .ui-card {
     @apply rounded-ui-lg border border-border bg-background;
   }

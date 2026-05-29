@@ -291,7 +291,7 @@ export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
             }}
             style={{ ...style, transformOrigin }}
             className={cn(
-              "overflow-hidden rounded-ui-lg border border-border bg-popover text-popover-foreground shadow-elev-2",
+              "lumina-floating-surface overflow-hidden rounded-ui-lg border border-border bg-popover text-popover-foreground shadow-elev-2",
               className,
             )}
             {...motionProps}

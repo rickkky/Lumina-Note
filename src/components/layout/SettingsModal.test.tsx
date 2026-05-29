@@ -2,15 +2,24 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SettingsModal } from "./SettingsModal";
 
-const { getVersionMock, setBlockEditorEnabledMock } = vi.hoisted(() => ({
+const {
+  getVersionMock,
+  openDialogMock,
+  resetAppBackgroundMock,
+  setAppBackgroundMock,
+  setBlockEditorEnabledMock,
+} = vi.hoisted(() => ({
   getVersionMock: vi.fn(async () => "1.2.3"),
+  openDialogMock: vi.fn(),
+  resetAppBackgroundMock: vi.fn(),
+  setAppBackgroundMock: vi.fn(),
   setBlockEditorEnabledMock: vi.fn(),
 }));
 
 vi.mock("@/lib/host", async () => {
   const actual =
     await vi.importActual<typeof import("@/lib/host")>("@/lib/host");
-  return { ...actual, getVersion: getVersionMock };
+  return { ...actual, getVersion: getVersionMock, openDialog: openDialogMock };
 });
 
 vi.mock("@/config/themes", () => ({
@@ -27,6 +36,16 @@ vi.mock("@/stores/useUIStore", () => ({
   useUIStore: () => ({
     themeId: "default",
     setThemeId: () => undefined,
+    appBackground: {
+      kind: "none",
+      preset: "paper",
+      imagePath: null,
+      opacity: 0.26,
+      blur: 0,
+      dim: 0.72,
+    },
+    setAppBackground: setAppBackgroundMock,
+    resetAppBackground: resetAppBackgroundMock,
     editorMode: "live",
     setEditorMode: () => undefined,
     editorFontSize: 16,
@@ -82,6 +101,20 @@ vi.mock("@/stores/useLocaleStore", () => ({
         createTheme: "Create Theme",
         myThemes: "My Themes",
         officialThemes: "Official Themes",
+        appearance: "Appearance",
+        background: "Background",
+        backgroundNone: "None",
+        backgroundImage: "Local Image",
+        chooseBackgroundImage: "Choose Background Image",
+        clearBackgroundImage: "Remove Image",
+        resetBackground: "Reset Background",
+        backgroundOpacity: "Background Strength",
+        backgroundBlur: "Blur",
+        backgroundDim: "Overlay",
+        backgroundPresetPaper: "Paper",
+        backgroundPresetMist: "Mist",
+        backgroundPresetSakura: "Sakura",
+        backgroundPresetDusk: "Dusk",
         themes: {},
         editor: "Editor",
         defaultEditMode: "Default Edit Mode",
@@ -209,6 +242,9 @@ describe("SettingsModal", () => {
 
   beforeEach(() => {
     getVersionMock.mockClear();
+    openDialogMock.mockReset();
+    resetAppBackgroundMock.mockClear();
+    setAppBackgroundMock.mockClear();
     onOpenUpdateModal.mockClear();
   });
 
@@ -244,7 +280,7 @@ describe("SettingsModal", () => {
     expect(screen.getByText("CloudUsagePanel")).toBeInTheDocument();
   });
 
-  it("defaults to general tab showing theme and editor", () => {
+  it("defaults to general tab showing appearance and editor", () => {
     render(
       <SettingsModal
         isOpen
@@ -253,8 +289,30 @@ describe("SettingsModal", () => {
       />,
     );
 
-    expect(screen.getByText("Theme")).toBeInTheDocument();
+    expect(screen.getByText("Appearance")).toBeInTheDocument();
+    expect(screen.queryByText("Create Theme")).not.toBeInTheDocument();
     expect(screen.getByText("Editor")).toBeInTheDocument();
+  });
+
+  it("selects a local image background from the general tab", async () => {
+    openDialogMock.mockResolvedValue("/vault/assets/bg.png");
+
+    render(
+      <SettingsModal
+        isOpen
+        onClose={() => undefined}
+        onOpenUpdateModal={onOpenUpdateModal}
+      />,
+    );
+
+    fireEvent.click(screen.getByText("Local Image"));
+
+    await waitFor(() => {
+      expect(setAppBackgroundMock).toHaveBeenCalledWith({
+        kind: "image",
+        imagePath: "/vault/assets/bg.png",
+      });
+    });
   });
 
   it("switches to system tab and shows update section", async () => {

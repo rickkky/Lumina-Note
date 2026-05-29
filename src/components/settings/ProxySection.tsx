@@ -102,7 +102,7 @@ export function ProxySection() {
             }`}
           >
             <span
-              className={`inline-block h-3.5 w-3.5 rounded-full bg-white transition-transform ${
+              className={`inline-block h-3.5 w-3.5 rounded-full bg-popover shadow-elev-1 transition-transform ${
                 proxyEnabled ? "translate-x-4.5" : "translate-x-0.5"
               }`}
             />
@@ -120,7 +120,7 @@ export function ProxySection() {
         </button>
 
         {testResult && (
-          <p className={`text-xs ${testResult.ok ? "text-green-500" : "text-red-500"}`}>
+          <p className={`text-xs ${testResult.ok ? "text-success" : "text-destructive"}`}>
             {testResult.msg}
           </p>
         )}

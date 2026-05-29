@@ -355,13 +355,13 @@ export function CommandPalette({ isOpen, mode, onClose, onModeChange }: CommandP
     <>
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-black/50 z-50 animate-spotlight-overlay"
+        className="lumina-floating-overlay fixed inset-0 bg-black/50 z-50 animate-spotlight-overlay"
         onClick={onClose}
       />
       
       {/* Palette */}
       <div className="fixed top-[20%] left-1/2 -translate-x-1/2 w-full max-w-xl z-50">
-        <div className="bg-popover border border-border rounded-xl shadow-elev-3 overflow-hidden animate-spotlight-in">
+        <div className="lumina-floating-surface bg-popover border border-border rounded-xl shadow-elev-3 overflow-hidden animate-spotlight-in">
           {/* Input area */}
           <div className="flex items-center gap-2 px-4 py-3 border-b border-border/60">
             <Command size={16} className="text-muted-foreground shrink-0" />
@@ -434,6 +434,7 @@ export function CommandPalette({ isOpen, mode, onClose, onModeChange }: CommandP
                       )}
                       <button
                         data-index={index}
+                        data-selected={index === selectedIndex ? true : undefined}
                         onClick={() => executeItem(index)}
                         className={cn(
                           "w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors",
@@ -477,6 +478,7 @@ export function CommandPalette({ isOpen, mode, onClose, onModeChange }: CommandP
                     <button
                       key={file.path}
                       data-index={index}
+                      data-selected={index === selectedIndex ? true : undefined}
                       onClick={() => executeItem(index)}
                       className={cn(
                         "w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors",

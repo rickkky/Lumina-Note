@@ -13,6 +13,33 @@ interface LocalGraphProps {
   className?: string;
 }
 
+const resolveLocalGraphHslVar = (
+  styles: CSSStyleDeclaration,
+  name: string,
+  fallback: string,
+  alpha?: number,
+) => {
+  const raw = styles.getPropertyValue(name).trim() || fallback;
+  const match = raw.match(/^(-?\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%$/);
+  if (!match) return fallback;
+  const [, hue, saturation, lightness] = match;
+  return alpha === undefined
+    ? `hsl(${hue}, ${saturation}%, ${lightness}%)`
+    : `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
+};
+
+const resolveLocalGraphPalette = (element: HTMLElement) => {
+  const styles = getComputedStyle(element);
+  return {
+    current: resolveLocalGraphHslVar(styles, "--primary", "hsl(220, 46%, 38%)"),
+    outgoing: resolveLocalGraphHslVar(styles, "--info", "hsl(217, 85%, 55%)"),
+    backlink: resolveLocalGraphHslVar(styles, "--success", "hsl(145, 55%, 40%)"),
+    edge: resolveLocalGraphHslVar(styles, "--muted-foreground", "hsl(222, 10%, 30%)", 0.38),
+    foreground: resolveLocalGraphHslVar(styles, "--foreground", "hsl(222, 18%, 8%)"),
+    labelHalo: resolveLocalGraphHslVar(styles, "--popover", "hsl(220, 16%, 98%)", 0.92),
+  };
+};
+
 export function LocalGraph({ className = "" }: LocalGraphProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -210,6 +237,7 @@ export function LocalGraph({ className = "" }: LocalGraphProps) {
 
     const { width, height } = dimensions;
     const dpr = window.devicePixelRatio || 1;
+    const palette = resolveLocalGraphPalette(canvas);
 
     canvas.width = width * dpr;
     canvas.height = height * dpr;
@@ -233,8 +261,8 @@ export function LocalGraph({ className = "" }: LocalGraphProps) {
       ctx.moveTo(u.x, u.y);
       ctx.lineTo(v.x, v.y);
       ctx.strokeStyle = isHighlighted
-        ? '#3b82f6'
-        : 'rgba(128, 128, 128, 0.3)';
+        ? palette.current
+        : palette.edge;
       ctx.lineWidth = isHighlighted ? 1.5 : 1;
       ctx.stroke();
 
@@ -269,25 +297,28 @@ export function LocalGraph({ className = "" }: LocalGraphProps) {
       ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI);
 
       if (node.isCurrent) {
-        ctx.fillStyle = '#3b82f6'; // 蓝色 - 当前笔记
+        ctx.fillStyle = palette.current;
       } else if (node.isBacklink) {
-        ctx.fillStyle = '#22c55e'; // 绿色 - 反向链接
+        ctx.fillStyle = palette.backlink;
       } else {
-        ctx.fillStyle = '#60a5fa'; // 浅蓝色 - 出链
+        ctx.fillStyle = palette.outgoing;
       }
       ctx.fill();
 
       if (isHovered) {
-        ctx.strokeStyle = '#333';
+        ctx.strokeStyle = palette.foreground;
         ctx.lineWidth = 2;
         ctx.stroke();
       }
 
       // 标签
       if (isHovered || node.isCurrent) {
-        ctx.fillStyle = '#333';
         ctx.font = `${node.isCurrent ? 'bold ' : ''}10px -apple-system, BlinkMacSystemFont, sans-serif`;
         ctx.textAlign = 'center';
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = palette.labelHalo;
+        ctx.strokeText(node.label, node.x, node.y + radius + 12);
+        ctx.fillStyle = palette.foreground;
         ctx.fillText(node.label, node.x, node.y + radius + 12);
       }
     });
@@ -362,15 +393,15 @@ export function LocalGraph({ className = "" }: LocalGraphProps) {
       />
       {/* 图例 */}
       <div className="absolute bottom-1 left-1 text-[9px] text-muted-foreground opacity-80">
-        <span className="inline-block w-2 h-2 rounded-full mr-1" style={{ background: '#3b82f6' }} />当前
+        <span className="inline-block w-2 h-2 rounded-full mr-1 bg-primary" />当前
         {outLinkCount > 0 && (
           <>
-            <span className="inline-block w-2 h-2 rounded-full ml-2 mr-1" style={{ background: '#60a5fa' }} />出链({outLinkCount})
+            <span className="inline-block w-2 h-2 rounded-full ml-2 mr-1 bg-info" />出链({outLinkCount})
           </>
         )}
         {backLinkCount > 0 && (
           <>
-            <span className="inline-block w-2 h-2 rounded-full ml-2 mr-1" style={{ background: '#22c55e' }} />入链({backLinkCount})
+            <span className="inline-block w-2 h-2 rounded-full ml-2 mr-1 bg-success" />入链({backLinkCount})
           </>
         )}
         {isIndexing && <span className="ml-2">索引中</span>}

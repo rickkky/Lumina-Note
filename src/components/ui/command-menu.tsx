@@ -145,7 +145,7 @@ export function CommandMenu() {
           className="fixed inset-0 z-[100] flex items-start justify-center p-4 pt-[15vh]"
         >
           <motion.div
-            className="absolute inset-0 bg-foreground/40"
+            className="lumina-floating-overlay absolute inset-0 bg-foreground/40"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -167,7 +167,7 @@ export function CommandMenu() {
             transition={{ duration: 0.16, ease: [0.2, 0.9, 0.1, 1] }}
             className={cn(
               "relative w-full max-w-lg",
-              "rounded-ui-xl border border-border bg-popover text-popover-foreground",
+              "lumina-floating-surface rounded-ui-xl border border-border bg-popover text-popover-foreground",
               "shadow-elev-3",
               "flex max-h-[min(60vh,32rem)] flex-col overflow-hidden",
             )}

@@ -36,13 +36,13 @@ export function InstalledPluginsModal({
   const modal = (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
-        className="absolute inset-0 bg-black/30 animate-spotlight-overlay"
+        className="lumina-floating-overlay absolute inset-0 bg-black/30 animate-spotlight-overlay"
         onClick={onClose}
         aria-hidden="true"
       />
 
       <div
-        className={`relative ${MODAL_SIZES.management.panel} rounded-xl shadow-elev-3 overflow-hidden border border-border bg-popover animate-spotlight-in flex flex-col`}
+        className={`lumina-floating-surface relative ${MODAL_SIZES.management.panel} rounded-xl shadow-elev-3 overflow-hidden border border-border bg-popover animate-spotlight-in flex flex-col`}
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-border/60 bg-muted/50">
           <h2 className="text-lg font-semibold text-foreground/90">

@@ -50,3 +50,70 @@ describe("Selectable content regions", () => {
     expect(globalsCss).toContain(".react-pdf__Page__textContent :is(span, br)");
   });
 });
+
+describe("App background skin", () => {
+  it("remaps app color tokens for preset skins", () => {
+    expect(globalsCss).toContain('html[data-lumina-skin="preset"]');
+    expect(globalsCss).toContain(
+      "--background: var(--lumina-skin-background) !important;",
+    );
+    expect(globalsCss).toContain(
+      "--ui-ribbon: var(--lumina-skin-ribbon) !important;",
+    );
+  });
+
+  it("makes opaque layout shells translucent for image skins", () => {
+    expect(globalsCss).toContain(
+      "--foreground: var(--lumina-skin-foreground) !important;",
+    );
+    expect(globalsCss).toContain(
+      "--primary: var(--lumina-skin-primary) !important;",
+    );
+    expect(globalsCss).toContain(
+      "--muted-foreground: var(--lumina-skin-muted-foreground) !important;",
+    );
+    expect(globalsCss).toContain(
+      "--md-table-border: var(--lumina-skin-border) !important;",
+    );
+    expect(globalsCss).toContain(
+      "--lumina-floating-overlay: hsl(0 0% 0% / 0.46);",
+    );
+    expect(globalsCss).toContain(
+      'html[data-lumina-skin="image"] .lumina-floating-surface',
+    );
+    expect(globalsCss).toContain("background-image: none !important;");
+    expect(globalsCss).toContain(
+      'html[data-lumina-skin="image"] [data-sonner-toast][data-styled="true"]',
+    );
+    expect(globalsCss).toContain(
+      'html[data-lumina-skin="image"] .lumina-tooltip',
+    );
+    expect(globalsCss).toContain(
+      'html[data-lumina-skin="image"] .lumina-app-shell .app-sidebar-shell',
+    );
+    expect(globalsCss).toContain(
+      'html[data-lumina-skin="image"] .lumina-app-shell .bg-ribbon',
+    );
+    expect(globalsCss).toContain(
+      'html[data-lumina-skin="image"] .lumina-app-shell .lumina-tabbar',
+    );
+    expect(globalsCss).toContain(
+      'html[data-lumina-skin="image"] .lumina-app-shell [class*="bg-background/"]',
+    );
+    expect(globalsCss).toContain(
+      "--tab-active-fill: transparent !important;",
+    );
+    expect(globalsCss).toContain("hsl(var(--background) / 0.84)");
+    expect(globalsCss).toContain(
+      "--lumina-skin-surface: hsl(var(--popover) / 0.9);",
+    );
+    expect(globalsCss).toContain(
+      "--lumina-skin-surface: hsl(var(--muted) / 0.82);",
+    );
+    expect(globalsCss).toContain("var(--lumina-skin-image) !important;");
+    expect(globalsCss).toContain("background-attachment: scroll, fixed !important;");
+    expect(globalsCss).toContain(
+      'html[data-lumina-skin="image"] .lumina-app-shell .codemirror-wrapper .cm-editor',
+    );
+  });
+});

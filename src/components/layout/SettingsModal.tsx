@@ -59,7 +59,7 @@ export function SettingsModal({
   const renderContent = () => {
     switch (activeTab) {
       case "general":
-        return <GeneralSection isOpen={isOpen} />;
+        return <GeneralSection />;
       case "ai":
         return <AISettingsContent />;
       case "sync":
@@ -92,13 +92,13 @@ export function SettingsModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* 背景遮罩 */}
       <div
-        className="absolute inset-0 bg-black/30 animate-spotlight-overlay"
+        className="lumina-floating-overlay absolute inset-0 bg-black/30 animate-spotlight-overlay"
         onClick={onClose}
       />
 
       {/* 设置面板 */}
       <div
-        className={`relative ${MODAL_SIZES.settings.panel} rounded-xl shadow-elev-3 overflow-hidden border border-border bg-popover animate-spotlight-in flex flex-col`}
+        className={`lumina-floating-surface relative ${MODAL_SIZES.settings.panel} rounded-xl shadow-elev-3 overflow-hidden border border-border bg-popover animate-spotlight-in flex flex-col`}
       >
         {/* 标题栏 */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-border/60 bg-muted/50">

@@ -35,11 +35,11 @@ export function VaultNamePrompt({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      className="lumina-floating-overlay fixed inset-0 z-50 flex items-center justify-center bg-black/50"
       onClick={handleCancel}
     >
       <div
-        className="w-full max-w-sm p-6 rounded-ui-xl bg-popover border border-border shadow-elev-3"
+        className="lumina-floating-surface w-full max-w-sm p-6 rounded-ui-xl bg-popover border border-border shadow-elev-3"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex items-center gap-3 mb-4">

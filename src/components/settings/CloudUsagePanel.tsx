@@ -54,24 +54,24 @@ export function CloudUsagePanel(): JSX.Element | null {
       <h3 className="text-sm font-medium">Cloud usage this month</h3>
 
       {usage ? (
-        <p className="text-sm text-neutral-700 dark:text-neutral-300">
+        <p className="text-sm text-foreground">
           <span className="font-mono">{formatTokens(usage.tokens_used)}</span>
           {' / '}
           <span className="font-mono">{formatTokens(usage.tokens_quota)}</span>
           {' tokens used. Resets on '}
           {formatResetDate(usage.period_end)}.
           {retrying && (
-            <span className="ml-2 text-xs text-neutral-500" role="status">
+            <span className="ml-2 text-xs text-muted-foreground" role="status">
               Retrying…
             </span>
           )}
         </p>
       ) : retrying ? (
-        <p className="text-sm text-neutral-500" role="status">
+        <p className="text-sm text-muted-foreground" role="status">
           Could not fetch usage. Retrying…
         </p>
       ) : (
-        <p className="text-sm text-neutral-500" role="status">
+        <p className="text-sm text-muted-foreground" role="status">
           Loading usage…
         </p>
       )}

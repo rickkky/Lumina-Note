@@ -26,6 +26,40 @@ import {
 const KNOWLEDGE_GRAPH_ICON_BUTTON_CLASS =
   "flex h-7 w-7 shrink-0 items-center justify-center rounded-ui-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40";
 
+interface CanvasPalette {
+  primary: string;
+  foreground: string;
+  mutedForeground: string;
+  popover: string;
+  labelHalo: string;
+}
+
+const resolveHslVar = (
+  styles: CSSStyleDeclaration,
+  name: string,
+  fallback: string,
+  alpha?: number,
+) => {
+  const raw = styles.getPropertyValue(name).trim() || fallback;
+  const match = raw.match(/^(-?\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%$/);
+  if (!match) return fallback;
+  const [, hue, saturation, lightness] = match;
+  return alpha === undefined
+    ? `hsl(${hue}, ${saturation}%, ${lightness}%)`
+    : `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
+};
+
+const resolveCanvasPalette = (element: HTMLElement): CanvasPalette => {
+  const styles = getComputedStyle(element);
+  return {
+    primary: resolveHslVar(styles, "--primary", "hsl(220, 46%, 38%)"),
+    foreground: resolveHslVar(styles, "--foreground", "hsl(222, 18%, 8%)"),
+    mutedForeground: resolveHslVar(styles, "--muted-foreground", "hsl(222, 10%, 30%)"),
+    popover: resolveHslVar(styles, "--popover", "hsl(220, 16%, 98%)"),
+    labelHalo: resolveHslVar(styles, "--popover", "hsl(220, 16%, 98%)", 0.92),
+  };
+};
+
 // Extract [[wikilinks]] from content
 export function extractWikiLinks(content: string): string[] {
   const regex = /\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g;
@@ -383,6 +417,7 @@ export function KnowledgeGraph({ className = "", isolatedNode }: KnowledgeGraphP
 
     const { width, height } = dimensions;
     const dpr = window.devicePixelRatio || 1;
+    const canvasPalette = resolveCanvasPalette(canvas);
 
     // Set canvas size for high DPI
     canvas.width = width * dpr;
@@ -479,10 +514,10 @@ export function KnowledgeGraph({ className = "", isolatedNode }: KnowledgeGraphP
       ctx.lineTo(v.x, v.y);
 
       ctx.strokeStyle = edgeEmphasis > 0.2
-        ? (isHierarchy ? (u.color || "hsl(var(--primary))") : "hsl(var(--primary))")
+        ? (isHierarchy ? (u.color || canvasPalette.primary) : canvasPalette.primary)
         : isHierarchy
-          ? (u.color || "hsl(var(--muted-foreground))")
-          : "hsl(var(--muted-foreground))";
+          ? (u.color || canvasPalette.mutedForeground)
+          : canvasPalette.mutedForeground;
       ctx.globalAlpha = effectiveAlpha;
       ctx.lineWidth = lineWidth;
       ctx.stroke();
@@ -530,12 +565,12 @@ export function KnowledgeGraph({ className = "", isolatedNode }: KnowledgeGraphP
       ctx.globalAlpha = nodeAlpha;
 
       // 确定节点颜色
-      let nodeColor = node.color || "hsl(var(--muted-foreground))";
+      let nodeColor = node.color || canvasPalette.mutedForeground;
       if (isCurrent) {
-        nodeColor = "hsl(var(--primary))";
+        nodeColor = canvasPalette.primary;
       } else if (nodeEmphasis > 0.2 && !node.isFolder) {
         // 高亮时稍微调亮
-        nodeColor = node.color || "hsl(var(--primary) / 0.8)";
+        nodeColor = node.color || canvasPalette.primary;
       }
 
       if (node.isFolder) {
@@ -562,7 +597,7 @@ export function KnowledgeGraph({ className = "", isolatedNode }: KnowledgeGraphP
 
         // 文件夹节点边框 — tiered: hover 2.5, first-degree 1.8, second-degree none
         if (nodeEmphasis > 0.5 || isCurrent) {
-          ctx.strokeStyle = "hsl(var(--foreground))";
+          ctx.strokeStyle = canvasPalette.foreground;
           ctx.lineWidth = nodeEmphasis > 0.85 ? 2.5 / zoom : 1.8 / zoom;
           ctx.stroke();
         } else if (nodeEmphasis <= 0.2) {
@@ -574,7 +609,7 @@ export function KnowledgeGraph({ className = "", isolatedNode }: KnowledgeGraphP
         // 中心小圆
         ctx.beginPath();
         ctx.arc(node.x, node.y, innerRadius * 0.5, 0, 2 * Math.PI);
-        ctx.fillStyle = "hsl(var(--popover))";
+        ctx.fillStyle = canvasPalette.popover;
         ctx.fill();
       } else {
         // 普通文件节点 - 圆形
@@ -585,7 +620,7 @@ export function KnowledgeGraph({ className = "", isolatedNode }: KnowledgeGraphP
 
         // Node border — tiered: hover 2.5, first-degree 1.8, second-degree none
         if (nodeEmphasis > 0.5 || isCurrent) {
-          ctx.strokeStyle = "hsl(var(--foreground))";
+          ctx.strokeStyle = canvasPalette.foreground;
           ctx.lineWidth = nodeEmphasis > 0.85 ? 2.5 / zoom : 1.8 / zoom;
           ctx.stroke();
         }
@@ -600,7 +635,7 @@ export function KnowledgeGraph({ className = "", isolatedNode }: KnowledgeGraphP
           : nodeEmphasis > 0.2 ? 0.45
           : baseLabelAlpha;
         ctx.globalAlpha = Math.min(1, labelAlpha);
-        ctx.fillStyle = "hsl(var(--foreground))";
+        ctx.fillStyle = canvasPalette.foreground;
         const fontSize = isHoveredOrSelected
           ? (node.isFolder ? Math.max(14, 16 / zoom) : Math.max(13, 15 / zoom))
           : (node.isFolder ? Math.max(11, 13 / zoom) : Math.max(10, 12 / zoom));
@@ -620,7 +655,7 @@ export function KnowledgeGraph({ className = "", isolatedNode }: KnowledgeGraphP
           const bgH = fontSize + padY * 2;
           const savedAlpha = ctx.globalAlpha;
           ctx.globalAlpha = 0.75;
-          ctx.fillStyle = "hsl(var(--popover))";
+          ctx.fillStyle = canvasPalette.popover;
           const r = 3 / zoom;
           ctx.beginPath();
           ctx.moveTo(bgX + r, bgY);
@@ -635,9 +670,16 @@ export function KnowledgeGraph({ className = "", isolatedNode }: KnowledgeGraphP
           ctx.closePath();
           ctx.fill();
           ctx.globalAlpha = savedAlpha;
-          ctx.fillStyle = "hsl(var(--foreground))";
+          ctx.fillStyle = canvasPalette.foreground;
         }
 
+        ctx.save();
+        ctx.lineWidth = Math.max(2, 3 / zoom);
+        ctx.strokeStyle = canvasPalette.labelHalo;
+        ctx.lineJoin = "round";
+        ctx.strokeText(node.label, node.x, labelY);
+        ctx.restore();
+        ctx.fillStyle = canvasPalette.foreground;
         ctx.fillText(node.label, node.x, labelY);
       }
     });
@@ -1140,7 +1182,7 @@ export function KnowledgeGraph({ className = "", isolatedNode }: KnowledgeGraphP
           {/* 右键菜单 */}
           {contextMenu && (
             <div
-              className="fixed z-50 bg-popover border border-border/60 rounded-md shadow-elev-2 py-1 min-w-[140px]"
+              className="lumina-floating-surface fixed z-50 bg-popover border border-border/60 rounded-md shadow-elev-2 py-1 min-w-[140px]"
               style={{ left: contextMenu.x, top: contextMenu.y }}
             >
               <div className="px-3 py-1.5 text-xs text-muted-foreground border-b border-border/60 mb-1">

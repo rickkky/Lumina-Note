@@ -3,6 +3,15 @@ import { persist } from "zustand/middleware";
 import { createLegacyKeyJSONStorage } from "@/lib/persistStorage";
 import { applyTheme, getThemeById } from "@/config/themePlugin";
 import { pluginThemeRuntime } from "@/services/plugins/themeRuntime";
+import {
+  DEFAULT_APP_BACKGROUND,
+  type AppBackgroundSettings,
+} from "@/config/appBackgrounds";
+export type {
+  AppBackgroundKind,
+  AppBackgroundPreset,
+  AppBackgroundSettings,
+} from "@/config/appBackgrounds";
 
 // Editor modes similar to Obsidian
 export type EditorMode = "reading" | "live" | "source";
@@ -19,6 +28,11 @@ interface UIState {
   themeId: string;
   toggleTheme: () => void;
   setThemeId: (id: string) => void;
+
+  // App background skin
+  appBackground: AppBackgroundSettings;
+  setAppBackground: (settings: Partial<AppBackgroundSettings>) => void;
+  resetAppBackground: () => void;
 
   // Panels
   leftSidebarOpen: boolean;
@@ -106,9 +120,32 @@ const getDefaultFloatingBallPosition = () => ({
   y: window.innerHeight - 120,
 });
 
+const clampAppBackground = (
+  settings?: Partial<AppBackgroundSettings>,
+): AppBackgroundSettings => {
+  const next = {
+    ...DEFAULT_APP_BACKGROUND,
+    ...(settings || {}),
+  };
+  const usesLegacySoftDefaults =
+    next.opacity === 0.26 && next.blur === 0 && next.dim === 0.72;
+
+  return {
+    ...next,
+    opacity: usesLegacySoftDefaults
+      ? DEFAULT_APP_BACKGROUND.opacity
+      : Math.max(0.08, Math.min(0.6, next.opacity)),
+    blur: Math.max(0, Math.min(24, next.blur)),
+    dim: usesLegacySoftDefaults
+      ? DEFAULT_APP_BACKGROUND.dim
+      : Math.max(0.2, Math.min(0.95, next.dim)),
+  };
+};
+
 const partializeUIState = (state: UIState) => ({
   isDarkMode: state.isDarkMode,
   themeId: state.themeId,
+  appBackground: state.appBackground,
   leftSidebarOpen: state.leftSidebarOpen,
   rightSidebarOpen: state.rightSidebarOpen,
   leftSidebarWidth: state.leftSidebarWidth,
@@ -134,6 +171,7 @@ export const useUIStore = create<UIState>()(
       // Theme - default to light mode
       isDarkMode: false,
       themeId: "default",
+      appBackground: DEFAULT_APP_BACKGROUND,
       toggleTheme: () =>
         set((state) => {
           const newMode = !state.isDarkMode;
@@ -160,6 +198,16 @@ export const useUIStore = create<UIState>()(
           }
           return { themeId: id };
         }),
+      setAppBackground: (settings) =>
+        set((state) => {
+          const next = clampAppBackground({
+            ...state.appBackground,
+            ...settings,
+          });
+          return { appBackground: next };
+        }),
+      resetAppBackground: () =>
+        set({ appBackground: DEFAULT_APP_BACKGROUND }),
 
       // Panels
       leftSidebarOpen: true,
@@ -270,6 +318,7 @@ export const useUIStore = create<UIState>()(
           // Re-enable slash commands for existing persisted state from
           // the previous release where the feature was disabled by default.
           state.slashCommandsEnabled = true;
+          state.appBackground = clampAppBackground(state.appBackground);
           state.isSettingsOpen = false;
           state.isSkillManagerOpen = false;
           state.floatingPanelOpen = false;

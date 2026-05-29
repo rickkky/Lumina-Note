@@ -70,10 +70,46 @@ describe("useUIStore", () => {
     const { useUIStore } = await loadStore();
 
     useUIStore.getState().setThemeId("ocean");
+    useUIStore.getState().setAppBackground({
+      kind: "preset",
+      preset: "sakura",
+      opacity: 0.34,
+      blur: 8,
+      dim: 0.65,
+    });
 
     expect(localStorage.getItem("neurone-ui")).toBeNull();
     const persisted = parsePersistedState("lumina-ui");
     expect(persisted.themeId).toBe("ocean");
+    expect(persisted.appBackground).toEqual({
+      kind: "preset",
+      preset: "sakura",
+      imagePath: null,
+      opacity: 0.34,
+      blur: 8,
+      dim: 0.65,
+    });
+  });
+
+  it("clamps background skin controls to readable ranges", async () => {
+    const { useUIStore } = await loadStore();
+
+    useUIStore.getState().setAppBackground({
+      kind: "image",
+      imagePath: "/vault/bg.png",
+      opacity: 1,
+      blur: 99,
+      dim: 0,
+    });
+
+    expect(useUIStore.getState().appBackground).toEqual({
+      kind: "image",
+      preset: "paper",
+      imagePath: "/vault/bg.png",
+      opacity: 0.6,
+      blur: 24,
+      dim: 0.2,
+    });
   });
 
   it("does not persist temporary modal and floating panel state", async () => {
@@ -108,12 +144,43 @@ describe("useUIStore", () => {
     const { useUIStore } = await loadStore();
 
     expect(useUIStore.getState().themeId).toBe("legacy-theme");
+    expect(useUIStore.getState().appBackground.kind).toBe("none");
     expect(useUIStore.getState().isSettingsOpen).toBe(false);
     expect(useUIStore.getState().floatingPanelOpen).toBe(false);
     expect(localStorage.getItem("neurone-ui")).toBeNull();
     const persisted = parsePersistedState("lumina-ui");
     expect(persisted.themeId).toBe("legacy-theme");
     expect(persisted.isSettingsOpen).toBeUndefined();
+  });
+
+  it("upgrades the old barely visible background defaults on rehydrate", async () => {
+    localStorage.setItem(
+      "lumina-ui",
+      JSON.stringify({
+        state: {
+          appBackground: {
+            kind: "preset",
+            preset: "sakura",
+            imagePath: null,
+            opacity: 0.26,
+            blur: 0,
+            dim: 0.72,
+          },
+        },
+        version: 0,
+      }),
+    );
+
+    const { useUIStore } = await loadStore();
+
+    expect(useUIStore.getState().appBackground).toEqual({
+      kind: "preset",
+      preset: "sakura",
+      imagePath: null,
+      opacity: 0.46,
+      blur: 0,
+      dim: 0.52,
+    });
   });
 
   it("defaults blockEditorEnabled to false and persists changes", async () => {

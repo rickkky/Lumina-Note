@@ -103,7 +103,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
         >
           {/* Backdrop */}
           <motion.div
-            className="absolute inset-0 bg-foreground/40"
+            className="lumina-floating-overlay absolute inset-0 bg-foreground/40"
             initial={reduceMotion ? { opacity: 0 } : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -131,7 +131,7 @@ export const Dialog = forwardRef<HTMLDivElement, DialogProps>(function Dialog(
             style={{ width }}
             className={cn(
               "relative max-w-[calc(100vw-2rem)]",
-              "rounded-ui-xl border border-border bg-popover text-popover-foreground",
+              "lumina-floating-surface rounded-ui-xl border border-border bg-popover text-popover-foreground",
               "shadow-elev-3",
               "flex max-h-[calc(100vh-4rem)] flex-col",
               className,

@@ -2379,7 +2379,7 @@ export function MainAIChatShell() {
             const fullMessages = rawAgentMessages; // Opencode Agent 消息
 
             return (
-              <div className="fixed inset-4 z-50 bg-popover border border-border rounded-xl shadow-elev-3 flex flex-col overflow-hidden">
+              <div className="lumina-floating-surface fixed inset-4 z-50 bg-popover border border-border rounded-xl shadow-elev-3 flex flex-col overflow-hidden">
                 <div className="flex items-center justify-between px-4 py-3 border-b border-border/60 bg-muted/50">
                   <h2 className="font-bold text-lg">
                     🐛 {t.ai.agentDebugPanel} (opencode)

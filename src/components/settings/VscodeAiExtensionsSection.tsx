@@ -400,8 +400,8 @@ export function VscodeAiExtensionsSection() {
         })}
       </div>
       {hostSession ? (
-        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/35 p-4">
-          <div className="flex h-[82vh] w-[min(1120px,96vw)] flex-col overflow-hidden rounded-xl border border-border bg-background shadow-elev-3">
+        <div className="lumina-floating-overlay fixed inset-0 z-[70] flex items-center justify-center bg-black/35 p-4">
+          <div className="lumina-floating-surface flex h-[82vh] w-[min(1120px,96vw)] flex-col overflow-hidden rounded-xl border border-border bg-background shadow-elev-3">
             <div className="flex items-center justify-between border-b border-border/60 px-4 py-2">
               <div className="min-w-0">
                 <p className="truncate text-sm font-medium">

@@ -68,6 +68,7 @@ import { PluginContextMenuHost } from "@/components/plugins/PluginContextMenuHos
 import { PluginShellSlotHost } from "@/components/plugins/PluginShellSlotHost";
 import { ErrorNotifications } from "@/components/layout/ErrorNotifications";
 import { SidebarStateIcon } from "@/components/layout/SidebarStateIcon";
+import { AppBackground } from "@/components/layout/AppBackground";
 import { reportOperationError, reportUnhandledError } from "@/lib/reportError";
 import {
   initAutoUpdateCheck,
@@ -1079,27 +1080,60 @@ function App() {
   // Welcome screen when no vault is open
   if (!vaultPath) {
     return (
-      <>
-        <WelcomeScreen
-          onOpenVault={handleOpenVault}
-          onCreateVault={handleCreateVault}
-        />
+      <div className="lumina-app-shell relative h-full overflow-hidden bg-background">
+        <AppBackground />
+        <div className="relative z-10 h-full">
+          <WelcomeScreen
+            onOpenVault={handleOpenVault}
+            onCreateVault={handleCreateVault}
+          />
+        </div>
         <AutoTooltipHost />
-        <Toaster position="bottom-right" theme="system" richColors closeButton />
-      </>
+        <Toaster
+          position="bottom-right"
+          theme="system"
+          richColors
+          closeButton
+          className="lumina-toaster"
+          toastOptions={{
+            classNames: {
+              toast: "lumina-toast",
+              title: "text-foreground",
+              description: "text-muted-foreground",
+              closeButton: "text-foreground",
+            },
+          }}
+        />
+      </div>
     );
   }
 
   return (
-    <div className="h-full flex flex-col bg-background">
-      <TitleBar />
-      <PluginShellSlotHost slotId="app-top" />
-      <AutoTooltipHost />
-      <Toaster position="bottom-right" theme="system" richColors closeButton />
-      <div
-        ref={layoutRef}
-        className="flex-1 flex overflow-hidden transition-colors duration-300"
-      >
+    <div className="lumina-app-shell relative h-full overflow-hidden bg-background">
+      <AppBackground />
+      <div className="relative z-10 flex h-full flex-col">
+        <TitleBar />
+        <PluginShellSlotHost slotId="app-top" />
+        <AutoTooltipHost />
+        <Toaster
+          position="bottom-right"
+          theme="system"
+          richColors
+          closeButton
+          className="lumina-toaster"
+          toastOptions={{
+            classNames: {
+              toast: "lumina-toast",
+              title: "text-foreground",
+              description: "text-muted-foreground",
+              closeButton: "text-foreground",
+            },
+          }}
+        />
+        <div
+          ref={layoutRef}
+          className="flex-1 flex overflow-hidden transition-colors duration-300"
+        >
         <div className="flex min-h-0 flex-shrink-0 flex-col">
           {showMacLeftPaneTopBar ? <MacLeftPaneTopBar /> : null}
 
@@ -1298,53 +1332,54 @@ function App() {
             </DevProfiler>
           </div>
         </div>
-      </div>
-
-      {/* Command Palette */}
-      <CommandPalette
-        isOpen={paletteOpen}
-        mode={paletteMode}
-        onClose={() => setPaletteOpen(false)}
-        onModeChange={setPaletteMode}
-      />
-
-      {/* Cmd+K command palette */}
-      <CommandMenuProvider />
-      <CommandMenu />
-
-      {/* Hidden welcome preview: tap top-right corner 5 times to activate */}
-      {welcomePreview && (
-        <div className="fixed inset-0 z-[200]">
-          <WelcomeScreen
-            onOpenVault={async (path) => {
-              await handleOpenVault(path);
-              setWelcomePreview(false);
-            }}
-          />
         </div>
-      )}
-      <div
-        className="fixed top-0 right-0 w-4 h-4 z-[99]"
-        onClick={() => {
-          const ref = welcomeTapRef.current;
-          ref.count++;
-          if (ref.timer) clearTimeout(ref.timer);
-          if (ref.count >= 5) {
-            ref.count = 0;
-            setWelcomePreview(true);
-          } else {
-            ref.timer = setTimeout(() => {
-              ref.count = 0;
-            }, 2000);
-          }
-        }}
-      />
 
-      <PluginStatusBar />
-      <PluginShellSlotHost slotId="app-bottom" />
-      <PluginContextMenuHost />
-      <ErrorNotifications />
-      <PluginPanelDock />
+        {/* Command Palette */}
+        <CommandPalette
+          isOpen={paletteOpen}
+          mode={paletteMode}
+          onClose={() => setPaletteOpen(false)}
+          onModeChange={setPaletteMode}
+        />
+
+        {/* Cmd+K command palette */}
+        <CommandMenuProvider />
+        <CommandMenu />
+
+        {/* Hidden welcome preview: tap top-right corner 5 times to activate */}
+        {welcomePreview && (
+          <div className="fixed inset-0 z-[200]">
+            <WelcomeScreen
+              onOpenVault={async (path) => {
+                await handleOpenVault(path);
+                setWelcomePreview(false);
+              }}
+            />
+          </div>
+        )}
+        <div
+          className="fixed top-0 right-0 w-4 h-4 z-[99]"
+          onClick={() => {
+            const ref = welcomeTapRef.current;
+            ref.count++;
+            if (ref.timer) clearTimeout(ref.timer);
+            if (ref.count >= 5) {
+              ref.count = 0;
+              setWelcomePreview(true);
+            } else {
+              ref.timer = setTimeout(() => {
+                ref.count = 0;
+              }, 2000);
+            }
+          }}
+        />
+
+        <PluginStatusBar />
+        <PluginShellSlotHost slotId="app-bottom" />
+        <PluginContextMenuHost />
+        <ErrorNotifications />
+        <PluginPanelDock />
+      </div>
     </div>
   );
 }
