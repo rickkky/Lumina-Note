@@ -1,8 +1,12 @@
 import type { ForwardedRef } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { act, cleanup, render, screen } from "@testing-library/react";
 
 import { Editor } from "./Editor";
+import {
+  EDITOR_MODE_CHANGE_EVENT,
+  type EditorModeChangeDetail,
+} from "./editorModeEvents";
 import { useFileStore } from "@/stores/useFileStore";
 import { useUIStore } from "@/stores/useUIStore";
 
@@ -97,6 +101,15 @@ async function flushModeScrollRestore() {
   });
 }
 
+function requestEditorMode(mode: EditorModeChangeDetail["mode"]) {
+  window.dispatchEvent(
+    new CustomEvent<EditorModeChangeDetail>(EDITOR_MODE_CHANGE_EVENT, {
+      detail: { mode },
+      cancelable: true,
+    }),
+  );
+}
+
 function seedEditorState(content = "Line 1\nLine 2\nLine 3") {
   useUIStore.setState({
     editorMode: "live",
@@ -151,7 +164,7 @@ describe("Editor mode scroll preservation", () => {
       scrollTop: 600,
     });
 
-    fireEvent.click(screen.getByTitle("实时"));
+    requestEditorMode("reading");
 
     await flushModeScrollRestore();
 
@@ -167,11 +180,11 @@ describe("Editor mode scroll preservation", () => {
       scrollTop: 600,
     });
 
-    fireEvent.click(screen.getByTitle("实时"));
+    requestEditorMode("reading");
 
     editorScroll.scrollTop = 300;
 
-    fireEvent.click(screen.getByTitle("阅读"));
+    requestEditorMode("source");
     await flushModeScrollRestore();
 
     expect(editorScroll.scrollTop).toBeCloseTo(300, 0);

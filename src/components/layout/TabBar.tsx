@@ -1,8 +1,12 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useFileStore, Tab } from "@/stores/useFileStore";
 import { useLocaleStore } from "@/stores/useLocaleStore";
-import { useUIStore } from "@/stores/useUIStore";
+import { useUIStore, type EditorMode } from "@/stores/useUIStore";
 import {
+  BookOpen,
+  Code2,
+  Columns,
+  Eye,
   X,
   FileText,
   Network,
@@ -21,6 +25,10 @@ import { useShallow } from "zustand/react/shallow";
 import { useMacTopChromeEnabled } from "./MacTopChrome";
 import { SidebarStateIcon } from "./SidebarStateIcon";
 import { Popover, PopoverContent, PopoverList, Row } from "@/components/ui";
+import {
+  EDITOR_MODE_CHANGE_EVENT,
+  type EditorModeChangeDetail,
+} from "@/editor/editorModeEvents";
 
 const MAC_TRAFFIC_LIGHT_SAFE_AREA_WIDTH = 64;
 const MAC_COLLAPSED_RIBBON_WIDTH = 64;
@@ -61,6 +69,19 @@ const TABBAR_ICON_BUTTON_CLASS =
   "relative flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-ui-sm text-muted-foreground transition-[background-color,color,box-shadow] duration-200 ease-out hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40";
 const TABBAR_ICON_BUTTON_OPEN_CLASS =
   "text-primary hover:text-primary";
+const EDITOR_MODE_ORDER: EditorMode[] = ["live", "reading", "source"];
+
+function EditorModeIcon({ mode }: { mode: EditorMode }) {
+  switch (mode) {
+    case "reading":
+      return <BookOpen size={14} />;
+    case "source":
+      return <Code2 size={14} />;
+    case "live":
+    default:
+      return <Eye size={14} />;
+  }
+}
 
 function tabShapeSegments(width: number, height: number): string[] {
   const w = Math.max(width, TAB_SHAPE_TOP_RADIUS * 2 + TAB_SHAPE_EAR_RADIUS * 2);
@@ -456,22 +477,64 @@ export function TabBar() {
     leftSidebarOpen,
     rightSidebarOpen,
     isDarkMode,
+    editorMode,
+    setEditorMode,
+    splitView,
     toggleLeftSidebar,
     toggleRightSidebar,
+    toggleSplitView,
   } = useUIStore(
     useShallow((state) => ({
       leftSidebarOpen: state.leftSidebarOpen,
       rightSidebarOpen: state.rightSidebarOpen,
       isDarkMode: state.isDarkMode,
+      editorMode: state.editorMode,
+      setEditorMode: state.setEditorMode,
+      splitView: state.splitView,
       toggleLeftSidebar: state.toggleLeftSidebar,
       toggleRightSidebar: state.toggleRightSidebar,
+      toggleSplitView: state.toggleSplitView,
     })),
   );
   const activeTab = activeTabIndex >= 0 ? tabs[activeTabIndex] : null;
   const isDarkDiagramTab = isDarkMode && activeTab?.type === "diagram";
+  const showEditorTools = activeTab?.type === "file";
+  const editorModeLabels: Record<EditorMode, string> = {
+    reading: t.editor.reading,
+    live: t.editor.live,
+    source: t.editor.source,
+  };
   const showMacTrafficLightInset = showMacTopActions && !leftSidebarOpen;
   const reduceMotion = useReducedMotion();
   const reorderTabs = useFileStore((state) => state.reorderTabs);
+
+  const requestEditorModeChange = useCallback(
+    (mode: EditorMode) => {
+      if (mode === editorMode) return;
+
+      if (typeof window !== "undefined") {
+        const event = new CustomEvent<EditorModeChangeDetail>(
+          EDITOR_MODE_CHANGE_EVENT,
+          {
+            detail: { mode },
+            cancelable: true,
+          },
+        );
+        if (!window.dispatchEvent(event)) return;
+      }
+
+      setEditorMode(mode);
+    },
+    [editorMode, setEditorMode],
+  );
+
+  const cycleEditorMode = useCallback(() => {
+    const next =
+      EDITOR_MODE_ORDER[
+        (EDITOR_MODE_ORDER.indexOf(editorMode) + 1) % EDITOR_MODE_ORDER.length
+      ];
+    requestEditorModeChange(next);
+  }, [editorMode, requestEditorModeChange]);
 
   useEffect(() => {
     tabsRef.current = tabs;
@@ -1205,6 +1268,39 @@ export function TabBar() {
             </div>
           </div>
         </div>
+        {showEditorTools ? (
+          <div
+            className="relative z-10 flex h-full shrink-0 items-center gap-1 px-1 pt-1.5"
+            data-testid="mac-tabbar-editor-tools"
+            data-tauri-drag-region="false"
+          >
+            <button
+              type="button"
+              data-testid="mac-tabbar-editor-mode"
+              data-tauri-drag-region="false"
+              onClick={cycleEditorMode}
+              aria-label={editorModeLabels[editorMode]}
+              title={editorModeLabels[editorMode]}
+              className={TABBAR_ICON_BUTTON_CLASS}
+            >
+              <EditorModeIcon mode={editorMode} />
+            </button>
+            <button
+              type="button"
+              data-testid="mac-tabbar-split-view"
+              data-tauri-drag-region="false"
+              onClick={toggleSplitView}
+              aria-label={t.editor.splitView}
+              title={t.editor.splitView}
+              className={cn(
+                TABBAR_ICON_BUTTON_CLASS,
+                splitView && TABBAR_ICON_BUTTON_OPEN_CLASS,
+              )}
+            >
+              <Columns size={16} />
+            </button>
+          </div>
+        ) : null}
         <div
           className={cn(TABBAR_EDGE_SLOT_CLASS, "relative z-10")}
           data-testid="mac-tabbar-right-sidebar-slot"

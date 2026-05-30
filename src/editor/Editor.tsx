@@ -16,30 +16,15 @@ import {
 } from "./CodeMirrorEditor";
 import { SelectionToolbar } from "@/components/toolbar/SelectionToolbar";
 import { SelectionContextMenu } from "@/components/toolbar/SelectionContextMenu";
+import { Network, X } from "lucide-react";
 import {
-  BookOpen,
-  Eye,
-  Code2,
-  ChevronLeft,
-  ChevronRight,
-  Columns,
-  Download,
-  Network,
-  X,
-  Check,
-  Loader2,
-} from "lucide-react";
-import { exportToPdf, getExportFileName } from "@/services/pdf/exportPdf";
-import { cn } from "@/lib/utils";
+  EDITOR_MODE_CHANGE_EVENT,
+  type EditorModeChangeDetail,
+} from "./editorModeEvents";
 
-const EDITOR_ICON_BUTTON_CLASS =
-  "flex h-7 w-7 shrink-0 items-center justify-center rounded-ui-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 disabled:cursor-not-allowed disabled:text-muted-foreground/60 disabled:hover:bg-transparent disabled:hover:text-muted-foreground/60";
-
-const modeIcons: Record<EditorMode, React.ReactNode> = {
-  reading: <BookOpen size={14} />,
-  live: <Eye size={14} />,
-  source: <Code2 size={14} />,
-};
+function isEditorMode(value: unknown): value is EditorMode {
+  return value === "reading" || value === "live" || value === "source";
+}
 
 // 局部图谱展开状态（组件外部以保持状态）
 let localGraphExpandedState = false;
@@ -105,12 +90,6 @@ function LiveEditorWikiHover({ hostRef }: { hostRef: RefObject<HTMLDivElement | 
 export function Editor() {
   const { t } = useLocaleStore();
 
-  const modeLabels: Record<EditorMode, string> = {
-    reading: t.editor.reading,
-    live: t.editor.live,
-    source: t.editor.source,
-  };
-
   const {
     tabs,
     activeTabIndex,
@@ -119,11 +98,8 @@ export function Editor() {
     updateContent,
     save,
     isDirty,
-    isSaving,
     goBack,
     goForward,
-    canGoBack,
-    canGoForward,
     undo,
     redo,
     canUndo,
@@ -137,11 +113,8 @@ export function Editor() {
       updateContent: state.updateContent,
       save: state.save,
       isDirty: state.isDirty,
-      isSaving: state.isSaving,
       goBack: state.goBack,
       goForward: state.goForward,
-      canGoBack: state.canGoBack,
-      canGoForward: state.canGoForward,
       undo: state.undo,
       redo: state.redo,
       canUndo: state.canUndo,
@@ -152,7 +125,6 @@ export function Editor() {
   const {
     editorMode,
     setEditorMode,
-    toggleSplitView,
   } = useUIStore();
 
   const editorRef = useRef<CodeMirrorEditorRef>(null);
@@ -395,6 +367,24 @@ export function Editor() {
     ],
   );
 
+  useEffect(() => {
+    const handleEditorModeRequest = (event: Event) => {
+      const detail = (event as CustomEvent<EditorModeChangeDetail>).detail;
+      if (!isEditorMode(detail?.mode)) return;
+
+      event.preventDefault();
+      handleModeChange(detail.mode);
+    };
+
+    window.addEventListener(EDITOR_MODE_CHANGE_EVENT, handleEditorModeRequest);
+    return () => {
+      window.removeEventListener(
+        EDITOR_MODE_CHANGE_EVENT,
+        handleEditorModeRequest,
+      );
+    };
+  }, [handleModeChange]);
+
   // 全局键盘快捷键
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -513,96 +503,6 @@ export function Editor() {
 
   return (
     <div className="flex-1 flex flex-col overflow-hidden bg-popover dark:bg-background transition-colors duration-300">
-      {/* Top Navigation Bar — 非 AI 聊天模式下显示 */}
-      {activeTab?.type !== "ai-chat" && (
-        <div className="ui-compact-row h-10 flex items-center px-1.5 justify-between select-none border-b border-border shrink-0">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground min-w-0 overflow-hidden">
-            {/* Navigation buttons */}
-            <div className="flex items-center gap-0.5 shrink-0">
-              <button
-                onClick={goBack}
-                disabled={!canGoBack()}
-                className={EDITOR_ICON_BUTTON_CLASS}
-                title={t.editor.goBackShortcut}
-              >
-                <ChevronLeft size={16} />
-              </button>
-              <button
-                onClick={goForward}
-                disabled={!canGoForward()}
-                className={EDITOR_ICON_BUTTON_CLASS}
-                title={t.editor.goForwardShortcut}
-              >
-                <ChevronRight size={16} />
-              </button>
-            </div>
-
-          </div>
-          <div className="flex items-center gap-3 shrink-0">
-            {/* Mode Switcher — single button cycling live → reading → source */}
-            <button
-              onClick={() => {
-                const order: EditorMode[] = ["live", "reading", "source"];
-                const next =
-                  order[(order.indexOf(editorMode) + 1) % order.length];
-                handleModeChange(next);
-              }}
-              className={EDITOR_ICON_BUTTON_CLASS}
-              title={modeLabels[editorMode]}
-            >
-              {modeIcons[editorMode]}
-            </button>
-
-            {/* Save state — icon-led so it's glanceable, label kept for
-                clarity. Dirty state uses a small primary-tinted dot that
-                breathes; saving is a spinning ring; saved is a faint
-                check. The whole row is muted-foreground so it never
-                competes with the mode toggle next to it. */}
-            <span
-              className={cn(
-                "ui-compact-hide flex h-7 items-center gap-1.5 text-xs transition-colors",
-                isDirty || isSaving ? "text-foreground/70" : "text-muted-foreground",
-              )}
-              aria-live="polite"
-            >
-              {isSaving ? (
-                <Loader2 size={11} className="animate-spin text-primary/80 shrink-0" />
-              ) : isDirty ? (
-                <span
-                  aria-hidden
-                  className="w-1.5 h-1.5 rounded-full bg-primary/80 shrink-0 animate-pulse"
-                />
-              ) : (
-                <Check size={11} className="text-muted-foreground/70 shrink-0" />
-              )}
-              <span>
-                {isSaving
-                  ? t.editor.saving
-                  : isDirty
-                    ? t.editor.edited
-                    : t.common.saved}
-              </span>
-            </span>
-            <button
-              onClick={toggleSplitView}
-              className={EDITOR_ICON_BUTTON_CLASS}
-              title={t.editor.splitView}
-            >
-              <Columns size={16} />
-            </button>
-            <button
-              onClick={() =>
-                exportToPdf(currentContent, getExportFileName(currentFile))
-              }
-              className={EDITOR_ICON_BUTTON_CLASS}
-              title={t.editor.exportPdf}
-            >
-              <Download size={16} />
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* Main content area */}
       {activeTab?.type === "ai-chat" ? (
         // 主视图区 AI 聊天视图

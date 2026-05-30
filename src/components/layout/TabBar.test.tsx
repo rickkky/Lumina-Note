@@ -14,6 +14,8 @@ const rightSidebarOpenState = vi.hoisted(() => ({ value: true }));
 const openNewTab = vi.hoisted(() => vi.fn());
 const toggleLeftSidebar = vi.hoisted(() => vi.fn());
 const toggleRightSidebar = vi.hoisted(() => vi.fn());
+const setEditorMode = vi.hoisted(() => vi.fn());
+const toggleSplitView = vi.hoisted(() => vi.fn());
 const switchTab = vi.hoisted(() => vi.fn());
 const closeTab = vi.hoisted(() => vi.fn(() => Promise.resolve()));
 const closeOtherTabs = vi.hoisted(() => vi.fn());
@@ -22,6 +24,8 @@ const reorderTabs = vi.hoisted(() => vi.fn());
 const togglePinTab = vi.hoisted(() => vi.fn());
 const promotePreviewTab = vi.hoisted(() => vi.fn());
 const activeTabIndexState = vi.hoisted(() => ({ value: 0 }));
+const editorModeState = vi.hoisted(() => ({ value: "live" }));
+const splitViewState = vi.hoisted(() => ({ value: false }));
 const tab = vi.hoisted(() =>
   (overrides: Partial<Tab> & Pick<Tab, "id" | "name" | "type">): Tab => ({
     path: overrides.path ?? (overrides.type === "new-tab" ? "" : `/vault/${overrides.name}`),
@@ -59,6 +63,12 @@ vi.mock("@/stores/useLocaleStore", () => ({
       common: {
         aiChatTab: "AI Chat",
       },
+      editor: {
+        reading: "Reading",
+        live: "Live",
+        source: "Source",
+        splitView: "Split View",
+      },
       graph: {
         title: "Graph",
       },
@@ -90,8 +100,13 @@ vi.mock("@/stores/useUIStore", () => ({
     selector({
       leftSidebarOpen: leftSidebarOpenState.value,
       rightSidebarOpen: rightSidebarOpenState.value,
+      isDarkMode: false,
+      editorMode: editorModeState.value,
+      setEditorMode,
+      splitView: splitViewState.value,
       toggleLeftSidebar,
       toggleRightSidebar,
+      toggleSplitView,
     }),
 }));
 
@@ -109,6 +124,8 @@ describe("TabBar", () => {
     leftSidebarOpenState.value = true;
     rightSidebarOpenState.value = true;
     activeTabIndexState.value = 0;
+    editorModeState.value = "live";
+    splitViewState.value = false;
     fileStoreState.tabs = [tab({ id: "tab-1", name: "Daily Note.md", type: "file", isPinned: false })];
     openNewTab.mockClear();
     switchTab.mockClear();
@@ -120,6 +137,8 @@ describe("TabBar", () => {
     promotePreviewTab.mockClear();
     toggleLeftSidebar.mockClear();
     toggleRightSidebar.mockClear();
+    setEditorMode.mockClear();
+    toggleSplitView.mockClear();
   });
 
   it("does not render macOS top actions outside macOS overlay mode", () => {
@@ -247,6 +266,29 @@ describe("TabBar", () => {
 
     expect(toggleLeftSidebar).toHaveBeenCalledTimes(1);
     expect(toggleRightSidebar).toHaveBeenCalledTimes(1);
+  });
+
+  it("renders file editor mode and split controls in the tab bar", () => {
+    render(<TabBar />);
+
+    const modeButton = screen.getByTestId("mac-tabbar-editor-mode");
+    expect(modeButton).toHaveAttribute("title", "Live");
+
+    fireEvent.click(modeButton);
+    fireEvent.click(screen.getByTestId("mac-tabbar-split-view"));
+
+    expect(setEditorMode).toHaveBeenCalledWith("reading");
+    expect(toggleSplitView).toHaveBeenCalledTimes(1);
+  });
+
+  it("hides editor controls outside file tabs", () => {
+    fileStoreState.tabs = [
+      tab({ id: "tab-2", name: "Graph", type: "graph", isPinned: false }),
+    ];
+
+    render(<TabBar />);
+
+    expect(screen.queryByTestId("mac-tabbar-editor-tools")).not.toBeInTheDocument();
   });
 
   it("uses icon-only primary accent styling for open sidebar states", () => {
