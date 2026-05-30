@@ -10,10 +10,23 @@ A runner receives:
 - benchmark manifest: `benchmarks/note-work/benchmark.manifest.json`
 - task set id: `dev` for v0
 - fixture vault root: `benchmarks/note-work/fixtures/medium-vault`
-- task records from `tasks/dev.json`
+- runtime task records from `tasks/dev.runtime.json`
 
-All task paths are vault-relative. A runner may convert them to absolute paths
-internally, but it must emit absolute paths in run output evidence.
+`tasks/dev.json` is the gold/scoring file. Agent and baseline runners must not
+load it while solving tasks. Runtime task paths are vault-relative. A runner may
+convert them to absolute paths internally, but it must emit absolute paths in
+run output evidence.
+
+The runtime task view intentionally omits:
+
+- `expected_sources`
+- `expected_evidence`
+- `expected_links`
+- `expected_edits`
+- `rubric`
+- `judge_policy`
+- `source_profile_id`
+- `synthetic_generation`
 
 ## Required Output
 
@@ -41,8 +54,10 @@ vault-relative paths.
 
 The runner must treat task fields as permissions:
 
-- `allowed_sources`: files the task allows as source evidence.
-- `expected_sources`: gold source files for scoring.
+- `source_scope: full_vault_except_forbidden`: search the fixture vault, excluding `Private/` and explicit `forbidden_sources`.
+- `source_scope: specific_sources_only`: search only `allowed_sources`; use this only when the user explicitly scopes the request.
+- `source_scope: no_vault_scan`: do not scan the vault.
+- `allowed_sources`: runtime source scope only when `source_scope` is `specific_sources_only`; it is not a gold-label candidate list.
 - `forbidden_sources`: files that must not be read, scanned, cited, or edited.
 - `mutation_policy: none`: do not edit files.
 - `mutation_policy: suggest_only`: do not edit files; suggestions only.
@@ -68,9 +83,9 @@ explicitly permits that scope; v0 tasks do not grant that permission.
 
 ```text
 load manifest
-load task set
+load runtime task set
 for each task:
-  construct allowed vault scope from task fields
+  construct vault scope from source_scope and forbidden_sources
   run agent with read/edit permissions matching mutation_policy
   collect files read, scanned paths, edits, suggested links, cost, latency
   write a run record matching run-output schema
@@ -94,6 +109,7 @@ Future agent runner:
 node path/to/lumina-agent-runner.mjs \
   --benchmark benchmarks/note-work \
   --task-set dev \
+  --tasks benchmarks/note-work/tasks/dev.runtime.json \
   --out benchmarks/note-work/runs/lumina-agent-dev.json
 
 node benchmarks/note-work/scripts/score.mjs \

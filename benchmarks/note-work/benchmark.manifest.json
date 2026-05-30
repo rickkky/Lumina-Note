@@ -9,6 +9,7 @@
   "schemas": {
     "profile": "schemas/profile.schema.json",
     "task": "schemas/task.schema.json",
+    "runtime_task": "schemas/runtime-task.schema.json",
     "run_output": "schemas/run-output.schema.json",
     "score_report": "schemas/score-report.schema.json"
   },
@@ -31,6 +32,7 @@
     {
       "id": "dev",
       "path": "tasks/dev.json",
+      "runtime_path": "tasks/dev.runtime.json",
       "expected_task_count_min": 50,
       "expected_task_count_max": 80
     }

@@ -5,7 +5,7 @@ source_profile_id: profile-excalidraw-mcp-v0
 source_profile_ids:
   - profile-excalidraw-mcp-v0
   - profile-collabora-docs-v0
-synthetic_generation: note-work-fixture-generator-v0.1
+synthetic_generation: note-work-fixture-generator-v0.2
 tags:
   - isolated
   - links

@@ -1,10 +1,11 @@
 ---
 title: "Offline Scoring"
 type: concept
-source_profile_id: profile-collabora-docs-v0
+source_profile_id: profile-opencode-docs-v0
 source_profile_ids:
+  - profile-opencode-docs-v0
   - profile-collabora-docs-v0
-synthetic_generation: note-work-fixture-generator-v0.1
+synthetic_generation: note-work-fixture-generator-v0.2
 tags:
   - scoring
 ---
@@ -20,7 +21,7 @@ Fixture controls:
 - ordinary
 
 Profile-derived traits:
-- Folder and note type are derived from profile-collabora-docs-v0.
+- Folder and note type are derived from profile-opencode-docs-v0, profile-collabora-docs-v0.
 - Link, stale, duplicate, or boundary structure is synthetic and reviewable.
 
 Deterministic review:

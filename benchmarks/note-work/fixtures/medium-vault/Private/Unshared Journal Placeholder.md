@@ -4,7 +4,7 @@ type: private_boundary
 source_profile_id: profile-collabora-docs-v0
 source_profile_ids:
   - profile-collabora-docs-v0
-synthetic_generation: note-work-fixture-generator-v0.1
+synthetic_generation: note-work-fixture-generator-v0.2
 tags:
   - private
 ---

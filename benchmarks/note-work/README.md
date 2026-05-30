@@ -34,7 +34,8 @@ node benchmarks/note-work/scripts/validate.mjs
 - `profiles/`: safe real-knowledge-base profiles. v0 uses external licensed documentation snapshots only: Collabora Online, OpenClaw, OpenCode, and Excalidraw MCP.
 - `fixtures/medium-vault/`: synthetic Markdown vault derived from those profiles.
 - `fixtures/medium-vault.provenance.json`: per-note synthetic provenance and safety review.
-- `tasks/dev.json`: visible dev task set.
+- `tasks/dev.json`: visible gold dev task set for validation and scoring.
+- `tasks/dev.runtime.json`: runtime task view for runners; it omits gold labels such as expected sources, expected links, expected evidence, rubrics, and judge policy.
 - `runs/baseline-lexical-dev.json`: lexical baseline output.
 - `reports/example-score-report.json`: structured deterministic score report.
 - `reports/example-score-report.md`: human-readable example report.
@@ -67,12 +68,14 @@ node benchmarks/note-work/scripts/validate.mjs
 
 1. Add a task record to `tasks/dev.json` using vault-relative paths.
 2. Choose one family: `find`, `search_compare`, `synthesize`, `link`, `mutate`, or `boundary`.
-3. Fill `expected_sources`, `allowed_sources`, `forbidden_sources`, `mutation_policy`, and `rubric`.
-4. Add `expected_evidence` snippets that appear in the fixture Markdown.
-5. For link tasks, add `expected_links`.
-6. For mutate tasks, add `allowed_edits` and `expected_edits` when edits are allowed. Use `clarify_before_mutation` for destructive or ambiguous requests.
-7. Mark high-risk tasks with `high_risk: true` and risk buckets such as `privacy`, `mutation`, `stale-source`, `long-context`, `hallucinated-provenance`, or `boundary`.
-8. Run `npm run note-work:validate`.
+3. Set `evaluation_tier` to `deterministic_smoke` for harness checks or `dev_realistic` for natural note-work cases.
+4. Fill `expected_sources`, `allowed_sources`, `forbidden_sources`, `mutation_policy`, and `rubric`.
+5. Add `expected_evidence` snippets that appear in the fixture Markdown.
+6. For link tasks, add `expected_links`.
+7. For mutate tasks, add `allowed_edits` and `expected_edits` when edits are allowed. Use `clarify_before_mutation` for destructive or ambiguous requests.
+8. Mark high-risk tasks with `high_risk: true` and risk buckets such as `privacy`, `mutation`, `stale-source`, `long-context`, `hallucinated-provenance`, or `boundary`.
+9. Regenerate `tasks/dev.runtime.json` with `npm run note-work:generate`. Do not hand-copy gold labels into the runtime view.
+10. Run `npm run note-work:validate`.
 
 ## Running Baselines
 
@@ -87,13 +90,19 @@ The baseline is a lower bound, not a product score. Future Lumina agent and
 graph-assisted systems must emit the same run-output schema so the same scorer
 can compare them.
 
+The baseline reads `tasks/dev.runtime.json`, not the gold task file. For normal
+tasks it searches the full fixture vault minus `Private/` and explicit
+`forbidden_sources`; it does not use `allowed_sources` as a candidate whitelist.
+Only `source_scope: no_vault_scan` and `source_scope: specific_sources_only`
+runtime tasks narrow the candidate set.
+
 ## Running Or Connecting Agent Eval
 
 See `docs/agent-runner-interface.md`. A runner must:
 
-- read the same manifest and task set,
+- read the same manifest and runtime task set,
 - operate only inside the fixture vault,
-- honor allowed, forbidden, and mutation-policy fields,
+- honor source scope, forbidden paths, and mutation-policy fields,
 - emit `schemas/run-output.schema.json`,
 - preserve review evidence for sources read, scanned paths, edits, suggested links, cost, and latency.
 
@@ -105,6 +114,7 @@ Use `reports/example-score-report.json` for automated inspection and
 Do not rely on a single aggregate score. The report separates:
 
 - per-family metrics,
+- deterministic smoke versus dev-realistic metrics,
 - high-risk metrics,
 - source discovery,
 - link quality,
@@ -115,6 +125,10 @@ Do not rely on a single aggregate score. The report separates:
 
 High-risk failures must be read separately. They are not release-safe just
 because ordinary tasks have a higher average.
+
+`deterministic_smoke` tasks are useful for checking that schemas, runners, and
+scorers work. Use `dev_realistic` results when judging whether search behavior
+is improving.
 
 ## Privacy, Provenance, And Reporting Constraints
 

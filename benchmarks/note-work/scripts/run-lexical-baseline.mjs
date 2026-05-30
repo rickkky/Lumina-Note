@@ -115,9 +115,10 @@ function makeAnswer(task, rankedSources, suggestedLinks) {
 }
 
 function selectCandidatePaths(task, allNotePaths) {
-  if (task.allowed_sources.length > 0) return task.allowed_sources;
-  if (task.family === "boundary" && task.expected_sources.length === 0) return [];
-  return allNotePaths.filter((relativePath) => !relativePath.startsWith("Private/"));
+  if (task.source_scope === "no_vault_scan") return [];
+  if (task.source_scope === "specific_sources_only") return task.allowed_sources;
+  const forbidden = new Set(task.forbidden_sources ?? []);
+  return allNotePaths.filter((relativePath) => !relativePath.startsWith("Private/") && !forbidden.has(relativePath));
 }
 
 function suggestLinks(task, rankedSources, allNotePaths, sourceTexts) {
@@ -161,7 +162,8 @@ async function main() {
   const vaultRoot = path.resolve(benchmarkDir, vault.path);
   const allNoteAbsolutePaths = await listMarkdownFiles(vaultRoot);
   const allNotePaths = allNoteAbsolutePaths.map((absolutePath) => path.relative(vaultRoot, absolutePath).split(path.sep).join("/"));
-  const tasks = await readJson(path.join(benchmarkDir, taskSet.path));
+  const runtimeTaskPath = taskSet.runtime_path ?? taskSet.path;
+  const tasks = await readJson(path.join(benchmarkDir, runtimeTaskPath));
   const sourceTexts = new Map();
   for (const relativePath of allNotePaths) {
     sourceTexts.set(relativePath, await readFile(absolute(vaultRoot, relativePath), "utf8"));

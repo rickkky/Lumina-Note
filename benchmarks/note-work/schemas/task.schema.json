@@ -9,6 +9,7 @@
     "id",
     "family",
     "task_set",
+    "evaluation_tier",
     "high_risk",
     "risk_buckets",
     "vault",
@@ -40,6 +41,9 @@
       ]
     },
     "task_set": { "enum": ["dev", "private-test", "live-eval"] },
+    "evaluation_tier": {
+      "enum": ["deterministic_smoke", "dev_realistic"]
+    },
     "high_risk": { "type": "boolean" },
     "risk_buckets": {
       "type": "array",

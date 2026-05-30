@@ -7,6 +7,16 @@ const defaultBenchmarkDir = path.resolve(scriptDir, "..");
 const benchmarkDir = path.resolve(process.argv[2] ?? defaultBenchmarkDir);
 
 const requiredFamilies = new Set(["find", "search_compare", "synthesize", "link", "mutate", "boundary"]);
+const runtimeTaskForbiddenFields = new Set([
+  "expected_sources",
+  "expected_evidence",
+  "expected_links",
+  "expected_edits",
+  "rubric",
+  "judge_policy",
+  "source_profile_id",
+  "synthetic_generation"
+]);
 const requiredRiskBuckets = new Set([
   "privacy",
   "mutation",
@@ -191,14 +201,19 @@ function normalizeRunPath(runPath, vaultRoot) {
   return relative.startsWith("..") ? runPath : relative;
 }
 
+function titleForPath(relativePath) {
+  return path.basename(relativePath, ".md").replace(/^\d{4}-\d{2}\s+/, "").toLowerCase();
+}
+
 async function main() {
   const manifest = await readJson("benchmark.manifest.json");
   const profileSchema = await readJson(manifest.schemas.profile);
   const taskSchema = await readJson(manifest.schemas.task);
+  const runtimeTaskSchema = await readJson(manifest.schemas.runtime_task);
   const runSchema = await readJson(manifest.schemas.run_output);
   const scoreSchema = await readJson(manifest.schemas.score_report);
 
-  for (const [schemaName, schema] of Object.entries({ profileSchema, taskSchema, runSchema, scoreSchema })) {
+  for (const [schemaName, schema] of Object.entries({ profileSchema, taskSchema, runtimeTaskSchema, runSchema, scoreSchema })) {
     if (!schema.$schema || !schema.$id || !schema.title) fail(`${schemaName}: schema metadata is incomplete`);
   }
 
@@ -239,6 +254,7 @@ async function main() {
     fail("fixture provenance privacy flags must be false");
   }
   const provenanceByPath = new Map(provenance.notes.map((entry) => [entry.path, entry]));
+  const provenanceProfileCounts = new Map();
   for (const notePath of noteFiles) {
     const entry = provenanceByPath.get(notePath);
     if (!entry) {
@@ -252,6 +268,7 @@ async function main() {
     if (entry.safety.raw_private_content_committed || entry.safety.provider_payloads_committed) {
       fail(`${notePath}: unsafe provenance safety flag is true`);
     }
+    provenanceProfileCounts.set(entry.source_profile_id, (provenanceProfileCounts.get(entry.source_profile_id) ?? 0) + 1);
   }
   for (const provenanceEntry of provenance.notes) {
     if (!noteSet.has(provenanceEntry.path)) fail(`provenance references missing note ${provenanceEntry.path}`);
@@ -276,6 +293,8 @@ async function main() {
   const families = new Set();
   const riskBuckets = new Set();
   const highRiskTasks = [];
+  const taskProfileCounts = new Map();
+  const tierCounts = new Map();
 
   for (const task of tasks) {
     errors.push(...validateSchema(task, taskSchema, task.id ?? "<task>"));
@@ -285,6 +304,8 @@ async function main() {
     for (const bucket of task.risk_buckets) riskBuckets.add(bucket);
     if (task.high_risk) highRiskTasks.push(task.id);
     if (!profileIds.has(task.source_profile_id)) fail(`${task.id}: unknown source_profile_id ${task.source_profile_id}`);
+    taskProfileCounts.set(task.source_profile_id, (taskProfileCounts.get(task.source_profile_id) ?? 0) + 1);
+    tierCounts.set(task.evaluation_tier, (tierCounts.get(task.evaluation_tier) ?? 0) + 1);
     if (task.high_risk !== task.risk_buckets.some((bucket) => bucket !== "ordinary")) {
       fail(`${task.id}: high_risk flag does not match risk_buckets`);
     }
@@ -321,6 +342,16 @@ async function main() {
       if (!text.includes(evidence.snippet)) fail(`${task.id}: expected evidence snippet not found in ${evidence.path}`);
     }
 
+    if (task.evaluation_tier === "dev_realistic") {
+      const prompt = task.prompt.toLowerCase();
+      for (const sourcePath of task.expected_sources) {
+        const sourceTitle = titleForPath(sourcePath);
+        if (sourceTitle && prompt.includes(sourceTitle)) {
+          fail(`${task.id}: dev_realistic prompt directly contains expected source title "${sourceTitle}"`);
+        }
+      }
+    }
+
     if (task.family === "link" && (!task.expected_links || task.expected_links.length === 0)) {
       fail(`${task.id}: link tasks must define expected_links`);
     }
@@ -353,6 +384,43 @@ async function main() {
     if (!riskBuckets.has(bucket)) fail(`missing required high-risk bucket: ${bucket}`);
   }
   if (highRiskTasks.length === 0) fail("expected at least one high-risk task");
+  if ((tierCounts.get("dev_realistic") ?? 0) < 20) {
+    fail(`expected at least 20 dev_realistic tasks, found ${tierCounts.get("dev_realistic") ?? 0}`);
+  }
+  for (const profileId of profileIds) {
+    const noteCount = provenanceProfileCounts.get(profileId) ?? 0;
+    const taskCount = taskProfileCounts.get(profileId) ?? 0;
+    if (noteCount < 8) fail(`${profileId}: expected at least 8 primary fixture notes, found ${noteCount}`);
+    if (taskCount < 8) fail(`${profileId}: expected at least 8 primary tasks, found ${taskCount}`);
+  }
+
+  let runtimeById = new Map();
+  if (taskSet.runtime_path) {
+    const runtimeTasks = await readJson(taskSet.runtime_path);
+    if (!Array.isArray(runtimeTasks)) fail(`${taskSet.runtime_path}: expected a runtime task array`);
+    if (runtimeTasks.length !== tasks.length) fail(`${taskSet.runtime_path}: runtime task count must match gold task count`);
+    for (const runtimeTask of runtimeTasks) {
+      runtimeById.set(runtimeTask.id, runtimeTask);
+      errors.push(...validateSchema(runtimeTask, runtimeTaskSchema, `${taskSet.runtime_path}:${runtimeTask.id}`));
+      for (const forbiddenField of runtimeTaskForbiddenFields) {
+        if (Object.hasOwn(runtimeTask, forbiddenField)) {
+          fail(`${runtimeTask.id}: runtime task view must not expose gold field ${forbiddenField}`);
+        }
+      }
+      if (!["full_vault_except_forbidden", "specific_sources_only", "no_vault_scan"].includes(runtimeTask.source_scope)) {
+        fail(`${runtimeTask.id}: invalid runtime source_scope ${runtimeTask.source_scope}`);
+      }
+      for (const sourcePath of runtimeTask.allowed_sources ?? []) {
+        validateRelativePath(sourcePath, `${runtimeTask.id}.runtime.allowed_sources`);
+        if (!noteSet.has(sourcePath)) fail(`${runtimeTask.id}: runtime allowed source missing: ${sourcePath}`);
+      }
+    }
+    for (const task of tasks) {
+      if (!runtimeById.has(task.id)) fail(`${taskSet.runtime_path}: missing runtime task for ${task.id}`);
+    }
+  } else {
+    fail(`${taskSet.id}: runtime_path is required to prevent gold-label leakage`);
+  }
 
   const benchmarkFiles = await listFiles(benchmarkDir);
   for (const absolutePath of benchmarkFiles) {
@@ -375,6 +443,19 @@ async function main() {
     }
     for (const run of runOutput.runs) {
       if (!taskIds.has(run.task_id)) fail(`${manifest.default_run_output}: run references unknown task ${run.task_id}`);
+      const runtimeTask = runtimeById.get(run.task_id);
+      const normalizedScanned = run.candidate_paths_scanned.map((sourcePath) => normalizeRunPath(sourcePath, runOutput.vault_root_absolute_path));
+      if (runtimeTask?.source_scope === "full_vault_except_forbidden") {
+        if (normalizedScanned.length <= (runtimeTask.allowed_sources?.length ?? 0)) {
+          fail(`${manifest.default_run_output}: ${run.task_id} appears to use allowed_sources as a candidate whitelist`);
+        }
+        if (normalizedScanned.some((sourcePath) => sourcePath.startsWith("Private/"))) {
+          fail(`${manifest.default_run_output}: ${run.task_id} scanned Private/ despite full-vault-minus-private policy`);
+        }
+      }
+      if (runtimeTask?.source_scope === "no_vault_scan" && normalizedScanned.length > 0) {
+        fail(`${manifest.default_run_output}: ${run.task_id} scanned files despite no_vault_scan scope`);
+      }
       for (const sourcePath of [...run.sources_read, ...run.candidate_paths_scanned, ...run.files_edited]) {
         if (!path.isAbsolute(sourcePath)) fail(`${manifest.default_run_output}: run path must be absolute: ${sourcePath}`);
         const relative = normalizeRunPath(sourcePath, runOutput.vault_root_absolute_path);

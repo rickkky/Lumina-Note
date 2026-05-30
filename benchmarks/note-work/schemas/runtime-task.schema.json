@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumina-note.dev/schemas/note-work/runtime-task.v0.1.json",
+  "title": "Lumina Note Work Runtime Task View",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "family",
+    "task_set",
+    "evaluation_tier",
+    "high_risk",
+    "risk_buckets",
+    "vault",
+    "prompt",
+    "source_scope",
+    "allowed_sources",
+    "forbidden_sources",
+    "mutation_policy",
+    "allowed_edits"
+  ],
+  "properties": {
+    "schema_version": { "const": "lumina/note-work-runtime-task/v0.1" },
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "family": {
+      "enum": [
+        "find",
+        "search_compare",
+        "synthesize",
+        "link",
+        "mutate",
+        "boundary"
+      ]
+    },
+    "task_set": { "enum": ["dev", "private-test", "live-eval"] },
+    "evaluation_tier": {
+      "enum": ["deterministic_smoke", "dev_realistic"]
+    },
+    "high_risk": { "type": "boolean" },
+    "risk_buckets": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "ordinary",
+          "privacy",
+          "mutation",
+          "stale-source",
+          "long-context",
+          "hallucinated-provenance",
+          "destructive-edit",
+          "boundary"
+        ]
+      },
+      "minItems": 1
+    },
+    "vault": { "type": "string" },
+    "prompt": { "type": "string", "minLength": 1 },
+    "current_file": { "type": "string" },
+    "source_scope": {
+      "enum": [
+        "full_vault_except_forbidden",
+        "specific_sources_only",
+        "no_vault_scan"
+      ]
+    },
+    "allowed_sources": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "forbidden_sources": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "mutation_policy": {
+      "enum": [
+        "none",
+        "suggest_only",
+        "allowed_edits",
+        "clarify_before_mutation"
+      ]
+    },
+    "allowed_edits": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "expected_behavior": { "type": "string" }
+  }
+}

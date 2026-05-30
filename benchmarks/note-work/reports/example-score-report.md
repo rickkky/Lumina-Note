@@ -7,10 +7,10 @@ Fixture: `medium-synthetic-v0`
 
 ## Summary
 
-- Tasks scored: 60
-- High-risk tasks: 39
-- Mean task score: 0.9508
-- High-risk mean score: 0.9454
+- Tasks scored: 80
+- High-risk tasks: 54
+- Mean task score: 0.816
+- High-risk mean score: 0.8354
 - Privacy violations: 0
 - Forbidden source violations: 0
 - Total estimated cost USD: 0
@@ -19,12 +19,22 @@ Fixture: `medium-synthetic-v0`
 
 | Family | Count | Mean score | Source recall | Privacy score |
 | --- | ---: | ---: | ---: | ---: |
-| boundary | 8 | 1 | 1 | 1 |
-| find | 10 | 1 | 1 | 1 |
-| link | 10 | 0.937 | 1 | 1 |
-| mutate | 10 | 0.811 | 1 | 1 |
-| search_compare | 10 | 1 | 1 | 1 |
-| synthesize | 12 | 0.9639 | 0.9444 | 1 |
+| boundary | 10 | 0.88 | 0.9 | 1 |
+| find | 14 | 0.8107 | 0.8929 | 1 |
+| link | 13 | 0.8435 | 0.7821 | 1 |
+| mutate | 13 | 0.7692 | 0.8846 | 1 |
+| search_compare | 14 | 0.8682 | 0.8691 | 1 |
+| synthesize | 16 | 0.7506 | 0.75 | 1 |
+
+## Evaluation Tiers
+
+deterministic_smoke tasks check harness behavior and deterministic labels.
+dev_realistic tasks are the more meaningful note-work slice.
+
+| Tier | Count | Mean score | Source recall | Privacy score |
+| --- | ---: | ---: | ---: | ---: |
+| deterministic_smoke | 60 | 0.8393 | 0.8583 | 1 |
+| dev_realistic | 20 | 0.7462 | 0.7917 | 1 |
 
 ## High-Risk Slice
 
@@ -32,30 +42,31 @@ High-risk tasks are reported separately so failures are not hidden by ordinary t
 
 | Bucket | Count | Mean score | Privacy violations | Forbidden source violations |
 | --- | ---: | ---: | ---: | ---: |
-| boundary | 15 | 0.9973 | 0 | 0 |
-| destructive-edit | 3 | 1 | 0 | 0 |
-| hallucinated-provenance | 7 | 0.8671 | 0 | 0 |
-| long-context | 3 | 1 | 0 | 0 |
-| mutation | 15 | 0.8713 | 0 | 0 |
-| privacy | 10 | 0.996 | 0 | 0 |
-| stale-source | 11 | 0.9473 | 0 | 0 |
+| boundary | 18 | 0.8867 | 0 | 0 |
+| destructive-edit | 3 | 0.9867 | 0 | 0 |
+| hallucinated-provenance | 7 | 0.7549 | 0 | 0 |
+| long-context | 3 | 0.9533 | 0 | 0 |
+| mutation | 21 | 0.8067 | 0 | 0 |
+| privacy | 13 | 0.8605 | 0 | 0 |
+| stale-source | 21 | 0.8117 | 0 | 0 |
 
 ## Dimension Scores
 
-- Source recall: 0.9889
-- Source precision: 0.9667
-- Link recall: 0.9792
-- Mutation score: 0.685
+- Source recall: 0.8417
+- Source precision: 0.535
+- Link recall: 0.9242
+- Mutation score: 0.6538
 - Privacy score: 1
-- Average latency ms: 38.2
-- P95 latency ms: 64
+- Average latency ms: 139.7625
+- P95 latency ms: 186
 
 ## Failure Categories
 
-- mutation_expected_diff_missing: 7
-- source_miss: 2
-- source_precision_loss: 2
-- link_miss: 1
+- source_precision_loss: 70
+- source_miss: 27
+- mutation_expected_diff_missing: 10
+- boundary_violation: 4
+- link_miss: 4
 
 ## Reading Notes
 

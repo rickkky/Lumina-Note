@@ -1,10 +1,11 @@
 ---
 title: "Wiki Cleanup Triage"
 type: meeting
-source_profile_id: profile-collabora-docs-v0
+source_profile_id: profile-excalidraw-mcp-v0
 source_profile_ids:
+  - profile-excalidraw-mcp-v0
   - profile-collabora-docs-v0
-synthetic_generation: note-work-fixture-generator-v0.1
+synthetic_generation: note-work-fixture-generator-v0.2
 tags:
   - meeting
   - links
@@ -21,7 +22,7 @@ Fixture controls:
 - ordinary
 
 Profile-derived traits:
-- Folder and note type are derived from profile-collabora-docs-v0.
+- Folder and note type are derived from profile-excalidraw-mcp-v0, profile-collabora-docs-v0.
 - Link, stale, duplicate, or boundary structure is synthetic and reviewable.
 
 Deterministic review:

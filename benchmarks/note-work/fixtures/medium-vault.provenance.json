@@ -4,10 +4,10 @@
   "generated_by": {
     "is_synthetic": true,
     "generator": "codex-scripted-fixture",
-    "prompt_or_script_version": "note-work-fixture-generator-v0.1",
+    "prompt_or_script_version": "note-work-fixture-generator-v0.2",
     "review_status": "deterministic-reviewed"
   },
-  "note_count": 88,
+  "note_count": 112,
   "source_profile_ids": [
     "profile-collabora-docs-v0",
     "profile-openclaw-docs-v0",
@@ -88,10 +88,10 @@
       "path": "Concepts/Graph-Assisted Retrieval.md",
       "title": "Graph-Assisted Retrieval",
       "type": "concept",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-opencode-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-opencode-docs-v0"
+        "profile-opencode-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -117,8 +117,9 @@
       "path": "Concepts/Lexical Baseline.md",
       "title": "Lexical Baseline",
       "type": "concept",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-opencode-docs-v0",
       "source_profile_ids": [
+        "profile-opencode-docs-v0",
         "profile-collabora-docs-v0",
         "profile-openclaw-docs-v0"
       ],
@@ -146,8 +147,9 @@
       "path": "Concepts/WikiLink Hygiene.md",
       "title": "WikiLink Hygiene",
       "type": "concept",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
       "source_profile_ids": [
+        "profile-excalidraw-mcp-v0",
         "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
@@ -203,10 +205,10 @@
       "path": "Concepts/Boundary Consent.md",
       "title": "Boundary Consent",
       "type": "concept",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-openclaw-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
         "profile-openclaw-docs-v0",
+        "profile-collabora-docs-v0",
         "profile-opencode-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
@@ -317,10 +319,10 @@
       "path": "Concepts/Meeting Capture.md",
       "title": "Meeting Capture",
       "type": "concept",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-openclaw-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-openclaw-docs-v0"
+        "profile-openclaw-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -346,10 +348,10 @@
       "path": "Concepts/Project Memory.md",
       "title": "Project Memory",
       "type": "concept",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-openclaw-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-openclaw-docs-v0"
+        "profile-openclaw-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -403,8 +405,9 @@
       "path": "Concepts/Task Family Taxonomy.md",
       "title": "Task Family Taxonomy",
       "type": "concept",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-opencode-docs-v0",
       "source_profile_ids": [
+        "profile-opencode-docs-v0",
         "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
@@ -431,8 +434,9 @@
       "path": "Concepts/Offline Scoring.md",
       "title": "Offline Scoring",
       "type": "concept",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-opencode-docs-v0",
       "source_profile_ids": [
+        "profile-opencode-docs-v0",
         "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
@@ -459,10 +463,10 @@
       "path": "Concepts/Privacy Boundary.md",
       "title": "Privacy Boundary",
       "type": "concept",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-openclaw-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-openclaw-docs-v0"
+        "profile-openclaw-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -488,10 +492,10 @@
       "path": "Concepts/Backlink Gap.md",
       "title": "Backlink Gap",
       "type": "concept",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-excalidraw-mcp-v0"
+        "profile-excalidraw-mcp-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -573,10 +577,10 @@
       "path": "Concepts/Agent Runner Contract.md",
       "title": "Agent Runner Contract",
       "type": "concept",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-opencode-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-opencode-docs-v0"
+        "profile-opencode-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -659,10 +663,10 @@
       "path": "Projects/Graph Context Pilot.md",
       "title": "Graph Context Pilot",
       "type": "project",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-opencode-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-opencode-docs-v0"
+        "profile-opencode-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -716,10 +720,10 @@
       "path": "Projects/Plugin Runtime Notes.md",
       "title": "Plugin Runtime Notes",
       "type": "project",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-excalidraw-mcp-v0"
+        "profile-excalidraw-mcp-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -745,10 +749,10 @@
       "path": "Projects/Offline Benchmark Runner.md",
       "title": "Offline Benchmark Runner",
       "type": "project",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-opencode-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-opencode-docs-v0"
+        "profile-opencode-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -802,10 +806,10 @@
       "path": "Projects/Boundary UX Copy.md",
       "title": "Boundary UX Copy",
       "type": "project",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-openclaw-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-openclaw-docs-v0"
+        "profile-openclaw-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -859,8 +863,9 @@
       "path": "Projects/Wiki Cleanup Sprint.md",
       "title": "Wiki Cleanup Sprint",
       "type": "project",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
       "source_profile_ids": [
+        "profile-excalidraw-mcp-v0",
         "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
@@ -999,8 +1004,9 @@
       "path": "Daily/2026-05-14.md",
       "title": "Daily 2026-05-14",
       "type": "daily",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-openclaw-docs-v0",
       "source_profile_ids": [
+        "profile-openclaw-docs-v0",
         "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
@@ -1167,8 +1173,9 @@
       "path": "Daily/2026-05-20.md",
       "title": "Daily 2026-05-20",
       "type": "daily",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-opencode-docs-v0",
       "source_profile_ids": [
+        "profile-opencode-docs-v0",
         "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
@@ -1195,8 +1202,9 @@
       "path": "Daily/2026-05-21.md",
       "title": "Daily 2026-05-21",
       "type": "daily",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-openclaw-docs-v0",
       "source_profile_ids": [
+        "profile-openclaw-docs-v0",
         "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
@@ -1308,10 +1316,10 @@
       "path": "Meetings/Boundary Consent Review.md",
       "title": "Boundary Consent Review",
       "type": "meeting",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-openclaw-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-openclaw-docs-v0"
+        "profile-openclaw-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -1365,8 +1373,9 @@
       "path": "Meetings/Wiki Cleanup Triage.md",
       "title": "Wiki Cleanup Triage",
       "type": "meeting",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
       "source_profile_ids": [
+        "profile-excalidraw-mcp-v0",
         "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
@@ -1421,10 +1430,10 @@
       "path": "Meetings/Plugin Docs Sync.md",
       "title": "Plugin Docs Sync",
       "type": "meeting",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-excalidraw-mcp-v0"
+        "profile-excalidraw-mcp-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -1478,10 +1487,10 @@
       "path": "PDF/Local-First Notes Highlights.md",
       "title": "Local First Notes Highlights",
       "type": "pdf_derived",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-openclaw-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-openclaw-docs-v0"
+        "profile-openclaw-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -1563,10 +1572,10 @@
       "path": "PDF/Privacy Risk Survey.md",
       "title": "Privacy Risk Survey",
       "type": "pdf_derived",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-openclaw-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-openclaw-docs-v0"
+        "profile-openclaw-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -1620,10 +1629,10 @@
       "path": "Research/Graph Retrieval Current Assumptions.md",
       "title": "Graph Retrieval Current Assumptions",
       "type": "research",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-opencode-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-opencode-docs-v0"
+        "profile-opencode-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -1734,8 +1743,9 @@
       "path": "Research/Lexical Baseline Error Analysis.md",
       "title": "Lexical Baseline Error Analysis",
       "type": "research",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-opencode-docs-v0",
       "source_profile_ids": [
+        "profile-opencode-docs-v0",
         "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
@@ -1790,10 +1800,10 @@
       "path": "Research/Hallucinated Provenance Cases.md",
       "title": "Hallucinated Provenance Cases",
       "type": "research",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-opencode-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-opencode-docs-v0"
+        "profile-opencode-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -1819,10 +1829,10 @@
       "path": "Research/Boundary Consent Patterns.md",
       "title": "Boundary Consent Patterns",
       "type": "research",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-openclaw-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-openclaw-docs-v0"
+        "profile-openclaw-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -1848,10 +1858,10 @@
       "path": "wiki/Agent Runner Overview.md",
       "title": "Agent Runner Overview",
       "type": "generated_wiki",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-opencode-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-opencode-docs-v0"
+        "profile-opencode-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -2017,8 +2027,9 @@
       "path": "Tutorials/Add A Benchmark Task.md",
       "title": "Add A Benchmark Task",
       "type": "tutorial",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
       "source_profile_ids": [
+        "profile-excalidraw-mcp-v0",
         "profile-collabora-docs-v0",
         "profile-openclaw-docs-v0"
       ],
@@ -2046,8 +2057,9 @@
       "path": "Tutorials/Add A Fixture Note.md",
       "title": "Add A Fixture Note",
       "type": "tutorial",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
       "source_profile_ids": [
+        "profile-excalidraw-mcp-v0",
         "profile-collabora-docs-v0",
         "profile-openclaw-docs-v0"
       ],
@@ -2075,10 +2087,10 @@
       "path": "Reference/Runner Output Fields.md",
       "title": "Run Output Fields",
       "type": "reference",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-opencode-docs-v0",
       "source_profile_ids": [
-        "profile-collabora-docs-v0",
-        "profile-opencode-docs-v0"
+        "profile-opencode-docs-v0",
+        "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
       "traits_from_profiles": [
@@ -2104,8 +2116,9 @@
       "path": "Reference/Score Report Fields.md",
       "title": "Score Report Fields",
       "type": "reference",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-opencode-docs-v0",
       "source_profile_ids": [
+        "profile-opencode-docs-v0",
         "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
@@ -2132,8 +2145,9 @@
       "path": "Reference/Vault Folder Taxonomy.md",
       "title": "Vault Folder Taxonomy",
       "type": "reference",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
       "source_profile_ids": [
+        "profile-excalidraw-mcp-v0",
         "profile-collabora-docs-v0",
         "profile-openclaw-docs-v0",
         "profile-opencode-docs-v0"
@@ -2448,8 +2462,9 @@
       "path": "Private/Local Profile Boundary.md",
       "title": "Local Profile Boundary",
       "type": "private_boundary",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-openclaw-docs-v0",
       "source_profile_ids": [
+        "profile-openclaw-docs-v0",
         "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
@@ -2476,8 +2491,9 @@
       "path": "Private/Consented Dogfood Boundary.md",
       "title": "Consented Dogfood Boundary",
       "type": "private_boundary",
-      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_id": "profile-openclaw-docs-v0",
       "source_profile_ids": [
+        "profile-openclaw-docs-v0",
         "profile-collabora-docs-v0"
       ],
       "generation_method": "human-scripted synthetic note derived from real profile structure",
@@ -2522,6 +2538,688 @@
       "deterministic_gold_labels": {
         "anchor": "Anchor: Provider request and response payloads must never be committed to the benchmark.",
         "vault_relative_path": "Private/Provider Boundary Placeholder.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Reference/Collabora Integration Settings.md",
+      "title": "Collabora Integration Settings",
+      "type": "reference",
+      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_ids": [
+        "profile-collabora-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Local integration notes say both the app and document server must agree on SSL mode.",
+        "vault_relative_path": "Reference/Collabora Integration Settings.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Document Collaboration Rollout.md",
+      "title": "Document Collaboration Rollout",
+      "type": "project",
+      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_ids": [
+        "profile-collabora-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The rollout depends on integration settings, editing latency, and ownership of shared document sessions.",
+        "vault_relative_path": "Projects/Document Collaboration Rollout.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Meetings/Editing Latency Review.md",
+      "title": "Editing Latency Review",
+      "type": "meeting",
+      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_ids": [
+        "profile-collabora-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The latency review tied cursor jitter to shared editing state and socket ownership.",
+        "vault_relative_path": "Meetings/Editing Latency Review.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Research/Socket Ownership Notes.md",
+      "title": "Socket Ownership Notes",
+      "type": "research",
+      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_ids": [
+        "profile-collabora-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Socket ownership decides which process is responsible for document session state.",
+        "vault_relative_path": "Research/Socket Ownership Notes.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Archive/Legacy SSL Integration.md",
+      "title": "Legacy SSL Integration",
+      "type": "archive",
+      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_ids": [
+        "profile-collabora-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile",
+        "stale-source"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The old integration draft treated SSL as a server-only toggle.",
+        "vault_relative_path": "Archive/Legacy SSL Integration.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Tutorials/Build CODE Locally.md",
+      "title": "Build CODE Locally",
+      "type": "tutorial",
+      "source_profile_id": "profile-collabora-docs-v0",
+      "source_profile_ids": [
+        "profile-collabora-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The local build walkthrough separates build setup from integration endpoint configuration.",
+        "vault_relative_path": "Tutorials/Build CODE Locally.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Assistant Channel Onboarding.md",
+      "title": "Assistant Channel Onboarding",
+      "type": "project",
+      "source_profile_id": "profile-openclaw-docs-v0",
+      "source_profile_ids": [
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Channel onboarding requires gateway configuration before channel-specific pairing.",
+        "vault_relative_path": "Projects/Assistant Channel Onboarding.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Reference/Gateway Environment Map.md",
+      "title": "Gateway Environment Map",
+      "type": "reference",
+      "source_profile_id": "profile-openclaw-docs-v0",
+      "source_profile_ids": [
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Gateway environment values are operational settings and should not include channel credentials in notes.",
+        "vault_relative_path": "Reference/Gateway Environment Map.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Meetings/Personal Assistant Safety Review.md",
+      "title": "Personal Assistant Safety Review",
+      "type": "meeting",
+      "source_profile_id": "profile-openclaw-docs-v0",
+      "source_profile_ids": [
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile",
+        "privacy-boundary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The safety review separated public setup instructions from private user messages and channel credentials.",
+        "vault_relative_path": "Meetings/Personal Assistant Safety Review.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Archive/Old Channel Setup.md",
+      "title": "Old Channel Setup",
+      "type": "archive",
+      "source_profile_id": "profile-openclaw-docs-v0",
+      "source_profile_ids": [
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile",
+        "stale-source"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The old channel setup note put pairing before gateway readiness.",
+        "vault_relative_path": "Archive/Old Channel Setup.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Research/Hook Debugging Notes.md",
+      "title": "Hook Debugging Notes",
+      "type": "research",
+      "source_profile_id": "profile-openclaw-docs-v0",
+      "source_profile_ids": [
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile",
+        "privacy-boundary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Hook debugging should record event shape and timing, not private message payloads.",
+        "vault_relative_path": "Research/Hook Debugging Notes.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Daily/2026-05-22.md",
+      "title": "Daily 2026-05-22",
+      "type": "daily",
+      "source_profile_id": "profile-openclaw-docs-v0",
+      "source_profile_ids": [
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Today's assistant note says the rollout blocker is gateway readiness, not a channel bug.",
+        "vault_relative_path": "Daily/2026-05-22.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Reference/OpenCode Install Matrix.md",
+      "title": "OpenCode Install Matrix",
+      "type": "reference",
+      "source_profile_id": "profile-opencode-docs-v0",
+      "source_profile_ids": [
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The install matrix separates shell installer, package managers, and desktop app paths.",
+        "vault_relative_path": "Reference/OpenCode Install Matrix.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Terminal Agent Migration.md",
+      "title": "Terminal Agent Migration",
+      "type": "project",
+      "source_profile_id": "profile-opencode-docs-v0",
+      "source_profile_ids": [
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The migration plan tests build and plan agent modes against the same task output contract.",
+        "vault_relative_path": "Projects/Terminal Agent Migration.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Research/Localized README Drift.md",
+      "title": "Localized README Drift",
+      "type": "research",
+      "source_profile_id": "profile-opencode-docs-v0",
+      "source_profile_ids": [
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile",
+        "stale-source"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Localized README files may lag behind canonical install guidance.",
+        "vault_relative_path": "Research/Localized README Drift.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Meetings/Agent Permission Review.md",
+      "title": "Agent Permission Review",
+      "type": "meeting",
+      "source_profile_id": "profile-opencode-docs-v0",
+      "source_profile_ids": [
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile",
+        "mutation"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The permission review distinguishes analysis mode from write-capable build mode.",
+        "vault_relative_path": "Meetings/Agent Permission Review.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Archive/Old Desktop Install Notes.md",
+      "title": "Old Desktop Install Notes",
+      "type": "archive",
+      "source_profile_id": "profile-opencode-docs-v0",
+      "source_profile_ids": [
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile",
+        "stale-source"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The old desktop install note points to a beta path that is no longer the canonical install guidance.",
+        "vault_relative_path": "Archive/Old Desktop Install Notes.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Daily/2026-05-23.md",
+      "title": "Daily 2026-05-23",
+      "type": "daily",
+      "source_profile_id": "profile-opencode-docs-v0",
+      "source_profile_ids": [
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Today's agent migration note says plan mode should stay read-only during benchmark dry runs.",
+        "vault_relative_path": "Daily/2026-05-23.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Diagram MCP Launch.md",
+      "title": "Diagram MCP Launch",
+      "type": "project",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
+      "source_profile_ids": [
+        "profile-excalidraw-mcp-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The launch plan keeps remote connector setup separate from local build instructions.",
+        "vault_relative_path": "Projects/Diagram MCP Launch.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Reference/Remote Local MCP Options.md",
+      "title": "Remote Local MCP Options",
+      "type": "reference",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
+      "source_profile_ids": [
+        "profile-excalidraw-mcp-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Remote MCP use needs only a connector URL, while local use requires a built server path.",
+        "vault_relative_path": "Reference/Remote Local MCP Options.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Meetings/Diagram Tool Release Review.md",
+      "title": "Diagram Tool Release Review",
+      "type": "meeting",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
+      "source_profile_ids": [
+        "profile-excalidraw-mcp-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile",
+        "mutation"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The release review says packaging checks should not rewrite usage examples.",
+        "vault_relative_path": "Meetings/Diagram Tool Release Review.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Archive/Old Diagram Release Checklist.md",
+      "title": "Old Diagram Release Checklist",
+      "type": "archive",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
+      "source_profile_ids": [
+        "profile-excalidraw-mcp-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile",
+        "stale-source"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The old release checklist mixed build, pack, and deploy steps in one unchecked block.",
+        "vault_relative_path": "Archive/Old Diagram Release Checklist.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Research/Viewport Camera Notes.md",
+      "title": "Viewport Camera Notes",
+      "type": "research",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
+      "source_profile_ids": [
+        "profile-excalidraw-mcp-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Viewport camera notes describe smooth movement for interactive diagram inspection.",
+        "vault_relative_path": "Research/Viewport Camera Notes.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Isolated/Sketch Prompt Scratch.md",
+      "title": "Sketch Prompt Scratch",
+      "type": "isolated",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
+      "source_profile_ids": [
+        "profile-excalidraw-mcp-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "realistic-profile",
+        "isolated-note"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The sketch prompt scratch note has no links but belongs near diagram launch and viewport notes.",
+        "vault_relative_path": "Isolated/Sketch Prompt Scratch.md"
       },
       "safety": {
         "raw_private_content_committed": false,

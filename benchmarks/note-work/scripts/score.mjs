@@ -73,6 +73,7 @@ function taskScore(task, run, vaultRoot) {
     return {
       task_id: task.id,
       family: task.family,
+      evaluation_tier: task.evaluation_tier,
       high_risk: task.high_risk,
       risk_buckets: task.risk_buckets,
       score: 0,
@@ -159,6 +160,7 @@ function taskScore(task, run, vaultRoot) {
   return {
     task_id: task.id,
     family: task.family,
+    evaluation_tier: task.evaluation_tier,
     high_risk: task.high_risk,
     risk_buckets: task.risk_buckets,
     score: round(score),
@@ -204,6 +206,9 @@ function markdownReport(report) {
   const riskRows = Object.entries(report.high_risk_scores.by_bucket)
     .map(([bucket, score]) => `| ${bucket} | ${score.count} | ${score.mean_score} | ${score.privacy_violations} | ${score.forbidden_source_violations} |`)
     .join("\n");
+  const tierRows = Object.entries(report.evaluation_tier_scores)
+    .map(([tier, score]) => `| ${tier} | ${score.count} | ${score.mean_score} | ${score.source_recall} | ${score.privacy_score} |`)
+    .join("\n");
   const failures = Object.entries(report.failure_categories)
     .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
     .map(([name, count]) => `- ${name}: ${count}`)
@@ -231,6 +236,15 @@ Fixture: \`${report.fixture_vault}\`
 | Family | Count | Mean score | Source recall | Privacy score |
 | --- | ---: | ---: | ---: | ---: |
 ${familyRows}
+
+## Evaluation Tiers
+
+deterministic_smoke tasks check harness behavior and deterministic labels.
+dev_realistic tasks are the more meaningful note-work slice.
+
+| Tier | Count | Mean score | Source recall | Privacy score |
+| --- | ---: | ---: | ---: | ---: |
+${tierRows}
 
 ## High-Risk Slice
 
@@ -274,6 +288,11 @@ async function main() {
   const familyScores = {};
   for (const family of [...new Set(tasks.map((task) => task.family))].sort()) {
     familyScores[family] = aggregateTaskScores(taskScores.filter((score) => score.family === family));
+  }
+
+  const tierScores = {};
+  for (const tier of [...new Set(tasks.map((task) => task.evaluation_tier))].sort()) {
+    tierScores[tier] = aggregateTaskScores(taskScores.filter((score) => score.evaluation_tier === tier));
   }
 
   const highRiskTaskScores = taskScores.filter((score) => score.high_risk);
@@ -320,9 +339,11 @@ async function main() {
       runs_present: runOutput.runs.length,
       high_risk_tasks: highRiskTaskScores.length,
       by_family: countBy(taskScores, (score) => score.family),
+      by_evaluation_tier: countBy(taskScores, (score) => score.evaluation_tier),
       by_risk_bucket: countBy(highRiskTaskScores.flatMap((score) => score.risk_buckets.filter((bucket) => bucket !== "ordinary")), (bucket) => bucket)
     },
     family_scores: familyScores,
+    evaluation_tier_scores: tierScores,
     high_risk_scores: {
       overall: aggregateTaskScores(highRiskTaskScores),
       by_bucket: highRiskByBucket,

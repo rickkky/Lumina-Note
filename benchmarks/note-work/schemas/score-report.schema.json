@@ -15,6 +15,7 @@
     "summary",
     "sample_counts",
     "family_scores",
+    "evaluation_tier_scores",
     "high_risk_scores",
     "dimension_scores",
     "cost_latency",
@@ -49,6 +50,10 @@
       "additionalProperties": true
     },
     "family_scores": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "evaluation_tier_scores": {
       "type": "object",
       "additionalProperties": true
     },
