@@ -63,5 +63,6 @@ process.env.OPENCODE_DISABLE_CLAUDE_CODE_SKILLS = "1";
 // the private home deterministic before opencode scans it for ~/.opencode.
 fs.mkdirSync(runtimeHome, { recursive: true });
 
-// eslint-disable-next-line no-console
-console.log(`[opencode-xdg] isolated XDG base: ${base} home: ${runtimeHome}`);
+if (process.env.NODE_ENV === "development") {
+  console.log(`[opencode-xdg] isolated XDG base: ${base} home: ${runtimeHome}`);
+}

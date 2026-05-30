@@ -126,4 +126,6 @@ ipcRenderer.on('main-console', (_event, payload: MainLogPayload) => {
 })
 
 ipcRenderer.send('__preload_ready')
-console.log('[preload] __TAURI_INTERNALS__ shim installed')
+if (process.env.NODE_ENV === 'development') {
+  console.log('[preload] __TAURI_INTERNALS__ shim installed')
+}

@@ -70,6 +70,7 @@ CLAUDE.md
 .kiro/
 .codex/
 .wuu/
+.termcanvas/
 
 # Local Codex/skills scratch
 .tmp_codex_ext/

@@ -43,6 +43,8 @@ import { WikiManager } from "./wiki/manager.js";
 import { createMainWindowOptions } from "./window-config.js";
 import { handleDirtyWindowClose } from "./window-close.js";
 
+const isDevelopment = process.env.NODE_ENV === "development";
+
 // ── State ──────────────────────────────────────────────────────────────────
 let mainWindow: BrowserWindow | null = null;
 let dirtyFileCount = 0;
@@ -52,7 +54,9 @@ export function setDirtyFileCount(count: number): void {
 
 export default function createWindow(): BrowserWindow {
   const preloadPath = path.join(__dirname, "../preload/index.cjs");
-  console.log("[main] preload path:", preloadPath);
+  if (isDevelopment) {
+    console.log("[main] preload path:", preloadPath);
+  }
 
   const win = new BrowserWindow(createMainWindowOptions(preloadPath));
 
@@ -65,9 +69,11 @@ export default function createWindow(): BrowserWindow {
     console.error("[main] Preload script error:", error);
   });
 
-  win.webContents.on("did-finish-load", () => {
-    console.log("[main] renderer finished load");
-  });
+  if (isDevelopment) {
+    win.webContents.on("did-finish-load", () => {
+      console.log("[main] renderer finished load");
+    });
+  }
 
   if (process.env["ELECTRON_RENDERER_URL"]) {
     win.loadURL(process.env["ELECTRON_RENDERER_URL"]);
@@ -203,11 +209,15 @@ app.whenReady().then(() => {
       const handle = restart
         ? await restartOpencodeServer()
         : await startOpencodeServer();
-      console.log(
-        `[main] opencode server at ${handle.url}${
-          bridge ? ` (provider: ${bridge.summary})` : " (no provider configured)"
-        }`,
-      );
+      if (isDevelopment) {
+        console.log(
+          `[main] opencode server at ${handle.url}${
+            bridge
+              ? ` (provider: ${bridge.summary})`
+              : " (no provider configured)"
+          }`,
+        );
+      }
       return handle;
     })();
     trackOpencodeServerReadiness(startup);

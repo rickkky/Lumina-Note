@@ -54,6 +54,8 @@ import type { LLMConfig, LLMProviderType } from "@/services/llm";
 import { useAIStore, type RuntimeModelSelection } from "@/stores/useAIStore";
 import { invoke } from "@/lib/host";
 
+const logOpencodeDiagnostics = import.meta.env.DEV;
+
 export type AgentStatus =
   | "idle"
   | "running"
@@ -777,16 +779,17 @@ export const useOpencodeAgent = create<OpencodeAgentStore>((set, get) => {
   };
 
   const handleEvent = (event: Event) => {
-    // Temporary diagnostic — every SSE event the renderer receives. Makes
-    // "promptAsync 204 but nothing happens" self-diagnosing: if this log
-    // never fires for a given send, SSE connection is broken; if only
-    // session.status/idle fires, the server ran and returned empty; if
-    // session.error fires, the provider chain rejected the request.
-    console.log(
-      "[opencode-sse]",
-      event.type,
-      JSON.stringify((event as { properties?: unknown }).properties ?? {}).slice(0, 200),
-    );
+    if (logOpencodeDiagnostics) {
+      // Temporary diagnostic — every SSE event the renderer receives. Makes
+      // "promptAsync 204 but nothing happens" self-diagnosing in dev builds.
+      console.log(
+        "[opencode-sse]",
+        event.type,
+        JSON.stringify(
+          (event as { properties?: unknown }).properties ?? {},
+        ).slice(0, 200),
+      );
+    }
     // opencode emits `message.part.delta` for token-by-token streaming,
     // but @opencode-ai/sdk/client's bundled types snapshot predates that
     // event so it's not in the Event union. Handle it ahead of the typed
@@ -1114,11 +1117,15 @@ export const useOpencodeAgent = create<OpencodeAgentStore>((set, get) => {
           while (!controller.signal.aborted) {
             try {
               const client = await getOpencodeClient();
-              console.log("[opencode-sse] connecting…");
+              if (logOpencodeDiagnostics) {
+                console.log("[opencode-sse] connecting...");
+              }
               const result = await client.event.subscribe({
                 signal: controller.signal,
               });
-              console.log("[opencode-sse] connected");
+              if (logOpencodeDiagnostics) {
+                console.log("[opencode-sse] connected");
+              }
               reconnectAttempt = 0;
               for await (const event of result.stream) {
                 if (generation !== subscriptionGeneration || controller.signal.aborted) {
@@ -1128,14 +1135,20 @@ export const useOpencodeAgent = create<OpencodeAgentStore>((set, get) => {
               }
               if (generation !== subscriptionGeneration) break;
               if (controller.signal.aborted) break;
-              console.warn("[opencode-sse] stream ended; reconnecting…");
+              if (logOpencodeDiagnostics) {
+                console.warn("[opencode-sse] stream ended; reconnecting...");
+              }
             } catch (err) {
               if (generation !== subscriptionGeneration) break;
               if (controller.signal.aborted) {
-                console.log("[opencode-sse] aborted");
+                if (logOpencodeDiagnostics) {
+                  console.log("[opencode-sse] aborted");
+                }
                 break;
               }
-              console.warn("[opencode-sse] reconnectable failure", err);
+              if (logOpencodeDiagnostics) {
+                console.warn("[opencode-sse] reconnectable failure", err);
+              }
             }
 
             reconnectAttempt += 1;
@@ -1147,7 +1160,9 @@ export const useOpencodeAgent = create<OpencodeAgentStore>((set, get) => {
             return;
           }
           if (controller.signal.aborted) {
-            console.log("[opencode-sse] aborted");
+            if (logOpencodeDiagnostics) {
+              console.log("[opencode-sse] aborted");
+            }
             return;
           }
           reportError({
@@ -1417,10 +1432,11 @@ export const useOpencodeAgent = create<OpencodeAgentStore>((set, get) => {
             }),
           {
             onRetry: (attempt, _err, cls) => {
-              // eslint-disable-next-line no-console
-              console.warn(
-                `[lumina:retry] task.start attempt=${attempt + 1} reason=${cls.reason} trace=${traceId}`,
-              );
+              if (logOpencodeDiagnostics) {
+                console.warn(
+                  `[lumina:retry] task.start attempt=${attempt + 1} reason=${cls.reason} trace=${traceId}`,
+                );
+              }
             },
           },
         );
@@ -1521,7 +1537,9 @@ let vaultUnsubscribe: (() => void) | null = null;
 const silenceInit = (err: unknown) => {
   // Preload missing (tests) or server not yet reachable — both are transient
   // and should not surface as an unhandled rejection.
-  console.warn("[opencode] init listener error", err);
+  if (logOpencodeDiagnostics) {
+    console.warn("[opencode] init listener error", err);
+  }
 };
 
 type OpencodeServerInfo = {
