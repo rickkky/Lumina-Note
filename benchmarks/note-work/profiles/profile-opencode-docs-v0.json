@@ -1,0 +1,85 @@
+{
+  "schema_version": "lumina/note-work-profile/v0.1",
+  "id": "profile-opencode-docs-v0",
+  "source": {
+    "name": "OpenCode local third-party documentation snapshot",
+    "source_url": "https://github.com/anomalyco/opencode",
+    "visibility": "licensed",
+    "license_or_consent": "MIT license in third_party/opencode/LICENSE; fixture uses structural profile only.",
+    "profiled_paths": [
+      "third_party/opencode/README.md",
+      "third_party/opencode/README.*.md",
+      "third_party/opencode/CONTRIBUTING.md",
+      "third_party/opencode/specs/project.md",
+      "third_party/opencode/github/README.md"
+    ],
+    "profiled_at": "2026-05-31"
+  },
+  "profile_summary": "Agent documentation with localized duplicates, install references, built-in agent roles, and project/spec pages.",
+  "note_counts": {
+    "markdown_files_profiled": 25,
+    "localized_readmes": 18,
+    "root_docs": 4,
+    "specs": 1,
+    "github_docs": 1
+  },
+  "structure": {
+    "folder_taxonomy": [
+      "Root README pages for each localization",
+      "specs/ for design or project-level notes",
+      "github/ for integration docs"
+    ],
+    "note_type_mix": {
+      "reference": "Install, agent, and configuration sections are reference-like.",
+      "duplicate": "Localized README files intentionally duplicate structure.",
+      "concept": "Agent modes and permissions are repeated across the docs."
+    },
+    "approximate_note_length": "One long canonical README plus shorter integration/spec pages and many localized variants.",
+    "tag_patterns": [
+      "Language suffixes act as structural tags.",
+      "Headings separate install, desktop, agent, and configuration topics."
+    ],
+    "wikilink_patterns": [
+      "Markdown links point to product site, release pages, and local assets.",
+      "Localized duplicates often preserve link structure."
+    ],
+    "backlink_patterns": [
+      "Root README acts as a hub; translation pages are parallel rather than deeply linked.",
+      "Integration docs refer back to project conventions implicitly."
+    ],
+    "stale_contradictory_duplicated_patterns": [
+      "Localized files can lag behind the canonical README.",
+      "Install instructions are duplicated across package managers.",
+      "Agent permission wording appears in several places."
+    ],
+    "privacy_boundary": [
+      "Public agent docs contain no local task transcripts.",
+      "Benchmark agent-runner outputs must avoid hidden prompts and raw provider data."
+    ],
+    "task_pattern_examples": [
+      "Find runner contract requirements from agent docs.",
+      "Compare duplicated setup instructions.",
+      "Check whether an agent respected permission boundaries."
+    ]
+  },
+  "workflow_templates": [
+    "Connect agent runner interface docs to task outputs.",
+    "Distinguish canonical guidance from localized or stale duplicates.",
+    "Score whether an agent read only allowed source files."
+  ],
+  "fixture_influence": [
+    "Agent runner contract notes.",
+    "Permission and mutation boundary tasks.",
+    "Duplicate and stale source patterns."
+  ],
+  "safety_review": {
+    "raw_private_content_committed": false,
+    "provider_payloads_committed": false,
+    "reversible_anonymization_committed": false,
+    "known_exclusions": [
+      "No hidden agent prompts",
+      "No provider payloads",
+      "No local terminal transcripts"
+    ]
+  }
+}

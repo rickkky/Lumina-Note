@@ -1,0 +1,29 @@
+---
+title: "Benchmark Scoring Review"
+type: meeting
+source_profile_id: profile-lumina-docs-v0
+source_profile_ids:
+  - profile-lumina-docs-v0
+synthetic_generation: note-work-fixture-generator-v0.1
+tags:
+  - meeting
+  - scoring
+---
+# Benchmark Scoring Review
+
+Anchor: Scoring review rejected a single aggregate score as insufficient.
+
+Summary: The report must show family metrics, high-risk metrics, and failure categories.
+
+Related links: [[Offline Scoring]], [[Score Report Fields]], [[Task Family Taxonomy]]
+
+Fixture controls:
+- ordinary
+
+Profile-derived traits:
+- Folder and note type are derived from profile-lumina-docs-v0.
+- Link, stale, duplicate, or boundary structure is synthetic and reviewable.
+
+Deterministic review:
+- Gold labels can cite the Anchor line and this vault-relative path.
+- No raw private note text or provider payload is included.

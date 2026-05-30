@@ -1,0 +1,81 @@
+{
+  "schema_version": "lumina/note-work-profile/v0.1",
+  "id": "profile-excalidraw-mcp-v0",
+  "source": {
+    "name": "Excalidraw MCP App Server local third-party documentation snapshot",
+    "source_url": "https://github.com/antonpk1/excalidraw-mcp-app",
+    "visibility": "licensed",
+    "license_or_consent": "MIT license in thirdparty/excalidraw-mcp/package.json; fixture uses structural profile only.",
+    "profiled_paths": [
+      "thirdparty/excalidraw-mcp/README.md",
+      "thirdparty/excalidraw-mcp/package.json",
+      "thirdparty/excalidraw-mcp/CLAUDE.md"
+    ],
+    "profiled_at": "2026-05-31"
+  },
+  "profile_summary": "Small tool documentation with install options, local/remote deployment modes, usage examples, and a release checklist.",
+  "note_counts": {
+    "markdown_files_profiled": 2,
+    "package_metadata_files": 1,
+    "install_sections": 2,
+    "release_checklists": 1
+  },
+  "structure": {
+    "folder_taxonomy": [
+      "Root README for install and usage",
+      "Package metadata for runtime and dependency contract",
+      "Maintainer instruction file for development behavior"
+    ],
+    "note_type_mix": {
+      "tutorial": "Install options are step-by-step.",
+      "reference": "Package metadata defines commands and entrypoints.",
+      "checklist": "Release notes use a compact ordered checklist."
+    },
+    "approximate_note_length": "Small, direct docs of fewer than 150 lines.",
+    "tag_patterns": [
+      "Install modes and release steps act as coarse tags.",
+      "Usage examples are prompt-shaped."
+    ],
+    "wikilink_patterns": [
+      "External Markdown links connect to MCP Apps and release docs.",
+      "Internal links are sparse."
+    ],
+    "backlink_patterns": [
+      "Sparse backlinks; the README is the main hub.",
+      "Checklist items imply links to build and release commands."
+    ],
+    "stale_contradictory_duplicated_patterns": [
+      "Remote and local install modes can conflict if merged carelessly.",
+      "Release checklist commands are easy to mutate destructively."
+    ],
+    "privacy_boundary": [
+      "Public tool docs include no user vault content.",
+      "Benchmark visual/tool notes should remain synthetic and non-sensitive."
+    ],
+    "task_pattern_examples": [
+      "Create a compact checklist note from setup docs.",
+      "Avoid editing release checklist steps unless explicitly asked.",
+      "Connect a sparse tool note into a larger project graph."
+    ]
+  },
+  "workflow_templates": [
+    "Bridge sparse reference notes to related concepts.",
+    "Extract a checklist without altering source docs.",
+    "Keep tool and user data boundaries explicit."
+  ],
+  "fixture_influence": [
+    "Sparse notes and isolated notes in the fixture.",
+    "Checklist-style mutation checks.",
+    "Tool boundary and release-safety tasks."
+  ],
+  "safety_review": {
+    "raw_private_content_committed": false,
+    "provider_payloads_committed": false,
+    "reversible_anonymization_committed": false,
+    "known_exclusions": [
+      "No real diagrams",
+      "No deployment tokens",
+      "No external account data"
+    ]
+  }
+}

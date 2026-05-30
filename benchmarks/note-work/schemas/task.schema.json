@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumina-note.dev/schemas/note-work/task.v0.1.json",
+  "title": "Lumina Note Work Benchmark Task",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "family",
+    "task_set",
+    "high_risk",
+    "risk_buckets",
+    "vault",
+    "data_origin",
+    "source_profile_id",
+    "synthetic_generation",
+    "prompt",
+    "allowed_sources",
+    "expected_sources",
+    "expected_evidence",
+    "forbidden_sources",
+    "mutation_policy",
+    "allowed_edits",
+    "expected_edits",
+    "rubric",
+    "judge_policy"
+  ],
+  "properties": {
+    "schema_version": { "const": "lumina/note-work-task/v0.1" },
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "family": {
+      "enum": [
+        "find",
+        "search_compare",
+        "synthesize",
+        "link",
+        "mutate",
+        "boundary"
+      ]
+    },
+    "task_set": { "enum": ["dev", "private-test", "live-eval"] },
+    "high_risk": { "type": "boolean" },
+    "risk_buckets": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "ordinary",
+          "privacy",
+          "mutation",
+          "stale-source",
+          "long-context",
+          "hallucinated-provenance",
+          "destructive-edit",
+          "boundary"
+        ]
+      },
+      "minItems": 1
+    },
+    "vault": { "type": "string" },
+    "data_origin": {
+      "enum": [
+        "real_profile_derived_synthetic",
+        "public_fixture",
+        "expert_written_edge_case",
+        "anonymized_regression"
+      ]
+    },
+    "source_profile_id": { "type": "string" },
+    "synthetic_generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "is_synthetic",
+        "generator",
+        "prompt_or_script_version",
+        "review_status"
+      ],
+      "properties": {
+        "is_synthetic": { "type": "boolean" },
+        "generator": { "type": "string" },
+        "prompt_or_script_version": { "type": "string" },
+        "review_status": {
+          "enum": ["draft", "human-reviewed", "deterministic-reviewed"]
+        }
+      }
+    },
+    "prompt": { "type": "string", "minLength": 1 },
+    "current_file": { "type": "string" },
+    "allowed_sources": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "expected_sources": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "expected_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "snippet"],
+        "properties": {
+          "path": { "type": "string" },
+          "snippet": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "expected_links": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^\\[\\[[^\\]]+\\]\\]$" }
+    },
+    "forbidden_sources": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "mutation_policy": {
+      "enum": [
+        "none",
+        "suggest_only",
+        "allowed_edits",
+        "clarify_before_mutation"
+      ]
+    },
+    "allowed_edits": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "expected_edits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "check"],
+        "properties": {
+          "path": { "type": "string" },
+          "check": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "expected_behavior": { "type": "string" },
+    "rubric": {
+      "type": "object",
+      "additionalProperties": { "type": "number", "minimum": 0, "maximum": 1 },
+      "minProperties": 1
+    },
+    "judge_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["deterministic_checks", "llm_judge_allowed", "review_evidence_required"],
+      "properties": {
+        "deterministic_checks": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "llm_judge_allowed": { "type": "boolean" },
+        "review_evidence_required": { "type": "boolean" }
+      }
+    }
+  }
+}

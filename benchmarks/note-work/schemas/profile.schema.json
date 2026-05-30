@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumina-note.dev/schemas/note-work/profile.v0.1.json",
+  "title": "Lumina Note Work Real Knowledge Base Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "source",
+    "profile_summary",
+    "note_counts",
+    "structure",
+    "workflow_templates",
+    "fixture_influence",
+    "safety_review"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "lumina/note-work-profile/v0.1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^profile-[a-z0-9-]+-v0$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "source_url",
+        "visibility",
+        "license_or_consent",
+        "profiled_paths",
+        "profiled_at"
+      ],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "source_url": { "type": "string" },
+        "visibility": {
+          "enum": [
+            "public",
+            "licensed",
+            "project-committed",
+            "dogfood-local",
+            "anonymized"
+          ]
+        },
+        "license_or_consent": { "type": "string", "minLength": 1 },
+        "profiled_paths": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "profiled_at": { "type": "string", "minLength": 1 }
+      }
+    },
+    "profile_summary": { "type": "string", "minLength": 1 },
+    "note_counts": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "structure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "folder_taxonomy",
+        "note_type_mix",
+        "approximate_note_length",
+        "tag_patterns",
+        "wikilink_patterns",
+        "backlink_patterns",
+        "stale_contradictory_duplicated_patterns",
+        "privacy_boundary",
+        "task_pattern_examples"
+      ],
+      "properties": {
+        "folder_taxonomy": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "note_type_mix": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "approximate_note_length": { "type": "string", "minLength": 1 },
+        "tag_patterns": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "wikilink_patterns": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "backlink_patterns": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "stale_contradictory_duplicated_patterns": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "privacy_boundary": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "task_pattern_examples": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "workflow_templates": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1
+    },
+    "fixture_influence": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1
+    },
+    "safety_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_private_content_committed",
+        "provider_payloads_committed",
+        "reversible_anonymization_committed",
+        "known_exclusions"
+      ],
+      "properties": {
+        "raw_private_content_committed": { "const": false },
+        "provider_payloads_committed": { "const": false },
+        "reversible_anonymization_committed": { "const": false },
+        "known_exclusions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

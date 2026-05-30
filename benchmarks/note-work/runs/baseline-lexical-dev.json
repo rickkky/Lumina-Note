@@ -1,0 +1,2151 @@
+{
+  "schema_version": "lumina/note-work-run-output/v0.1",
+  "benchmark_id": "lumina-note-work-v0",
+  "task_set": "dev",
+  "fixture_vault": "medium-synthetic-v0",
+  "vault_root_absolute_path": "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault",
+  "system": "lexical-baseline",
+  "system_version": "v0.1",
+  "model": {
+    "provider": "none",
+    "model": "filename-plus-content-lexical-search"
+  },
+  "prompt_template_id": "lexical-baseline-v0",
+  "random_seed": null,
+  "started_at": "2026-05-31T00:00:00.000Z",
+  "runs": [
+    {
+      "task_id": "find-source-paths-contract",
+      "status": "completed",
+      "duration_ms": 7,
+      "answer": "Lexical baseline selected sources: Concepts/Source Paths Contract.md, Concepts/Provenance Contract.md, wiki/Source Provenance Summary.md, Reference/Runner Output Fields.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Provenance Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Source Provenance Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Runner Output Fields.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Source Provenance Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Provenance Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Runner Output Fields.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Provenance Contract]]",
+        "[[Source Paths Contract]]",
+        "[[Source Provenance Summary]]",
+        "[[Old PDF Summary Contract]]",
+        "[[Plugin Docs Sync]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 398,
+        "output_tokens": 16,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "find-pdf-conversion-before-summary",
+      "status": "completed",
+      "duration_ms": 8,
+      "answer": "Lexical baseline selected sources: PDF/PDF Annotation Export.md, Concepts/PDF Highlight Pipeline.md, Projects/PDF Review Workflow.md, wiki/PDF Workflow Summary.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/PDF Annotation Export.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/PDF Highlight Pipeline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/PDF Review Workflow.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/PDF Workflow Summary.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/PDF Highlight Pipeline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/PDF Annotation Export.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/PDF Review Workflow.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/PDF Workflow Summary.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[PDF Workflow Summary]]",
+        "[[PDF Annotation Export]]",
+        "[[PDF Review Workflow]]",
+        "[[PDF Highlight Pipeline]]",
+        "[[PDF Pipeline Review]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 383,
+        "output_tokens": 19,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "find-launch-checklist-unlinked",
+      "status": "completed",
+      "duration_ms": 8,
+      "answer": "Lexical baseline selected sources: Daily/2026-05-15.md, Projects/Atlas Launch Plan.md, Projects/Source Audit Board.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-15.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Source Audit Board.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-15.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Source Audit Board.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Atlas Launch Plan]]",
+        "[[Source Audit Board]]",
+        "[[Phoenix Launch]]",
+        "[[Boundary Consent Review]]",
+        "[[Boundary Consent Summary]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 284,
+        "output_tokens": 12,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "find-missing-link-source-paths",
+      "status": "completed",
+      "duration_ms": 9,
+      "answer": "Lexical baseline selected sources: Concepts/Source Paths Contract.md, Daily/2026-05-16.md, wiki/Source Provenance Summary.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-16.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Source Provenance Summary.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-16.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Source Provenance Summary.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Source Paths Contract]]",
+        "[[Provenance Contract]]",
+        "[[Old PDF Summary Contract]]",
+        "[[Source Provenance Summary]]",
+        "[[Generated Wiki Pages]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 293,
+        "output_tokens": 11,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "find-isolated-card-sorting",
+      "status": "completed",
+      "duration_ms": 10,
+      "answer": "Lexical baseline selected sources: Projects/Wiki Cleanup Sprint.md, Isolated/Card Sorting Observation.md, Concepts/Backlink Gap.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Wiki Cleanup Sprint.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Isolated/Card Sorting Observation.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Backlink Gap.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Isolated/Card Sorting Observation.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Backlink Gap.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Wiki Cleanup Sprint.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Wiki Cleanup Sprint]]",
+        "[[Wiki Cleanup Triage]]",
+        "[[Backlink Gap]]",
+        "[[Card Sorting Observation]]",
+        "[[Plugin Docs Sync]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 297,
+        "output_tokens": 14,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "find-boundary-consent-current",
+      "status": "completed",
+      "duration_ms": 12,
+      "answer": "Lexical baseline selected sources: Concepts/Boundary Consent.md, Research/Boundary Consent Patterns.md, wiki/Boundary Consent Summary.md, Projects/Boundary UX Copy.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Boundary Consent Patterns.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Boundary Consent Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Boundary UX Copy.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Boundary Consent Patterns.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Boundary UX Copy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Boundary Consent Summary.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Boundary Consent Summary]]",
+        "[[Boundary Consent Patterns]]",
+        "[[Boundary Consent Review]]",
+        "[[Boundary Consent]]",
+        "[[Privacy Boundary]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 393,
+        "output_tokens": 17,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "find-lexical-baseline-definition",
+      "status": "completed",
+      "duration_ms": 12,
+      "answer": "Lexical baseline selected sources: Tutorials/Run Lexical Baseline.md, Concepts/Lexical Baseline.md, Projects/Offline Benchmark Runner.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Tutorials/Run Lexical Baseline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Lexical Baseline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Offline Benchmark Runner.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Lexical Baseline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Tutorials/Run Lexical Baseline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Offline Benchmark Runner.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Run Lexical Baseline]]",
+        "[[Lexical Baseline]]",
+        "[[Lexical Baseline Error Analysis]]",
+        "[[Offline Benchmark Runner]]",
+        "[[Plugin Docs Sync]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 306,
+        "output_tokens": 14,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "find-mutation-audit",
+      "status": "completed",
+      "duration_ms": 13,
+      "answer": "Lexical baseline selected sources: Projects/Mutation Audit Trail.md, Meetings/Mutation Safety Review.md, Concepts/Mutation Safety.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Mutation Audit Trail.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Mutation Safety Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Mutation Safety.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Mutation Audit Trail.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Mutation Safety.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Mutation Safety Review.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Mutation Safety Review]]",
+        "[[Mutation Safety Summary]]",
+        "[[Mutation Audit Trail]]",
+        "[[Mutation Safety]]",
+        "[[Mutation Failure Cases]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 295,
+        "output_tokens": 14,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "find-agent-runner-contract",
+      "status": "completed",
+      "duration_ms": 14,
+      "answer": "Lexical baseline selected sources: Concepts/Agent Runner Contract.md, wiki/Agent Runner Overview.md, Reference/Runner Output Fields.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Agent Runner Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Agent Runner Overview.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Runner Output Fields.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Agent Runner Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Runner Output Fields.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Agent Runner Overview.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Agent Runner Contract]]",
+        "[[Runner Output Fields]]",
+        "[[Agent Runner Overview]]",
+        "[[Plugin Docs Sync]]",
+        "[[Deprecated Runner Notes]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 319,
+        "output_tokens": 15,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "find-long-context-needle",
+      "status": "completed",
+      "duration_ms": 15,
+      "answer": "Lexical baseline selected sources: Concepts/Long Context Needle.md, PDF/Long Context Failure Modes.md, Projects/Long Context Review.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Long Context Needle.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Long Context Failure Modes.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Long Context Review.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Long Context Needle.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Long Context Failure Modes.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Long Context Review.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Long Context Failure Modes]]",
+        "[[Long Context Review]]",
+        "[[Long Context Needle]]",
+        "[[Graph Context Pilot]]",
+        "[[Boundary Consent Review]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 293,
+        "output_tokens": 16,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "compare-graph-current-old",
+      "status": "completed",
+      "duration_ms": 16,
+      "answer": "Lexical baseline selected sources: Research/Graph Retrieval Old Assumptions.md, Concepts/Graph-Assisted Retrieval.md, Research/Graph Retrieval Current Assumptions.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Old Assumptions.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Graph-Assisted Retrieval.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Current Assumptions.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Current Assumptions.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Old Assumptions.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Graph-Assisted Retrieval.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Graph Retrieval Old Assumptions]]",
+        "[[Graph Retrieval Current Assumptions]]",
+        "[[Graph-Assisted Retrieval]]",
+        "[[Graph Retrieval Summary]]",
+        "[[Graph Retrieval Paper Highlights]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 297,
+        "output_tokens": 16,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "compare-autolinking-current-old",
+      "status": "completed",
+      "duration_ms": 17,
+      "answer": "Lexical baseline selected sources: Research/Auto-Linking Old Position.md, Research/Auto-Linking Current Position.md, Concepts/WikiLink Hygiene.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Old Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Current Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/WikiLink Hygiene.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Current Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Old Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/WikiLink Hygiene.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Auto-Linking Old Position]]",
+        "[[Auto-Linking Current Position]]",
+        "[[Auto-Linking Policy]]",
+        "[[Stale Source Policy]]",
+        "[[WikiLink Hygiene]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 275,
+        "output_tokens": 15,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "compare-phoenix-atlas-renamed",
+      "status": "completed",
+      "duration_ms": 19,
+      "answer": "Lexical baseline selected sources: Meetings/Atlas Naming Review.md, Projects/Phoenix Launch.md, Projects/Atlas Launch Plan.md, Archive/2026-03 Phoenix Plan.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Atlas Naming Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Phoenix Launch.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/2026-03 Phoenix Plan.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Phoenix Launch.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Atlas Naming Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/2026-03 Phoenix Plan.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Atlas Launch Plan]]",
+        "[[Phoenix Launch]]",
+        "[[Atlas Naming Review]]",
+        "[[Phoenix Plan]]",
+        "[[Boundary Consent Review]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 370,
+        "output_tokens": 18,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "compare-source-provenance-near-dupes",
+      "status": "completed",
+      "duration_ms": 19,
+      "answer": "Lexical baseline selected sources: Concepts/Source Paths Contract.md, Concepts/Provenance Contract.md, wiki/Source Provenance Summary.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Provenance Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Source Provenance Summary.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Provenance Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Source Provenance Summary.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Provenance Contract]]",
+        "[[Source Paths Contract]]",
+        "[[Source Provenance Summary]]",
+        "[[Old PDF Summary Contract]]",
+        "[[Hallucinated Provenance Cases]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 301,
+        "output_tokens": 12,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "compare-pdf-old-new-contract",
+      "status": "completed",
+      "duration_ms": 20,
+      "answer": "Lexical baseline selected sources: Archive/Old PDF Summary Contract.md, PDF/PDF Annotation Export.md, Concepts/PDF Highlight Pipeline.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/Old PDF Summary Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/PDF Annotation Export.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/PDF Highlight Pipeline.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/PDF Highlight Pipeline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/Old PDF Summary Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/PDF Annotation Export.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Old PDF Summary Contract]]",
+        "[[PDF Workflow Summary]]",
+        "[[PDF Annotation Export]]",
+        "[[PDF Highlight Pipeline]]",
+        "[[PDF Pipeline Review]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 279,
+        "output_tokens": 16,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "compare-boundary-draft-current",
+      "status": "completed",
+      "duration_ms": 21,
+      "answer": "Lexical baseline selected sources: Archive/Legacy Boundary Draft.md, Concepts/Boundary Consent.md, wiki/Boundary Consent Summary.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/Legacy Boundary Draft.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Boundary Consent Summary.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/Legacy Boundary Draft.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Boundary Consent Summary.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Boundary Consent Summary]]",
+        "[[Boundary Consent Review]]",
+        "[[Boundary Consent Patterns]]",
+        "[[Boundary Consent]]",
+        "[[Legacy Boundary Draft]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 296,
+        "output_tokens": 14,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "find-contradiction-auto-linking",
+      "status": "completed",
+      "duration_ms": 23,
+      "answer": "Lexical baseline selected sources: Archive/2026-02 Auto-Linking Policy.md, Research/Auto-Linking Current Position.md, Research/Auto-Linking Old Position.md, Concepts/Contradiction Register.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/2026-02 Auto-Linking Policy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Current Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Old Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Contradiction Register.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Current Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Old Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/2026-02 Auto-Linking Policy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Contradiction Register.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Auto-Linking Old Position]]",
+        "[[Auto-Linking Current Position]]",
+        "[[Auto-Linking Policy]]",
+        "[[Stale Source Policy]]",
+        "[[Stale Graph Index Memo]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 360,
+        "output_tokens": 20,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "compare-score-report-vs-run-output",
+      "status": "completed",
+      "duration_ms": 23,
+      "answer": "Lexical baseline selected sources: Reference/Score Report Fields.md, Concepts/Offline Scoring.md, Reference/Runner Output Fields.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Score Report Fields.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Offline Scoring.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Runner Output Fields.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Runner Output Fields.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Score Report Fields.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Offline Scoring.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Score Report Fields]]",
+        "[[Offline Scoring]]",
+        "[[Runner Output Fields]]",
+        "[[Benchmark Scoring Review]]",
+        "[[Plugin Docs Sync]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 294,
+        "output_tokens": 14,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "compare-plugin-runtime-docs",
+      "status": "completed",
+      "duration_ms": 24,
+      "answer": "Lexical baseline selected sources: Meetings/Plugin Docs Sync.md, Projects/Plugin Runtime Notes.md, Concepts/Agent Runner Contract.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Plugin Docs Sync.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Plugin Runtime Notes.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Agent Runner Contract.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Plugin Runtime Notes.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Plugin Docs Sync.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Agent Runner Contract.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Plugin Docs Sync]]",
+        "[[Plugin Runtime Notes]]",
+        "[[Agent Runner Contract]]",
+        "[[Agent Runner Overview]]",
+        "[[Boundary Consent Review]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 310,
+        "output_tokens": 14,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "compare-stale-graph-index",
+      "status": "completed",
+      "duration_ms": 24,
+      "answer": "Lexical baseline selected sources: Concepts/Graph-Assisted Retrieval.md, Research/Graph Retrieval Current Assumptions.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Graph-Assisted Retrieval.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Current Assumptions.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Current Assumptions.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Graph-Assisted Retrieval.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Graph Retrieval Current Assumptions]]",
+        "[[Graph-Assisted Retrieval]]",
+        "[[Graph Retrieval Old Assumptions]]",
+        "[[Graph Retrieval Summary]]",
+        "[[Graph Retrieval Paper Highlights]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 209,
+        "output_tokens": 11,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "synthesize-current-graph-position",
+      "status": "completed",
+      "duration_ms": 27,
+      "answer": "Lexical baseline selected sources: Concepts/Graph-Assisted Retrieval.md, wiki/Graph Retrieval Summary.md, Research/Graph Retrieval Current Assumptions.md, Projects/Graph Context Pilot.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Graph-Assisted Retrieval.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Graph Retrieval Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Current Assumptions.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Graph Context Pilot.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Graph-Assisted Retrieval.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Current Assumptions.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Graph Context Pilot.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Graph Retrieval Summary.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Graph Retrieval Summary]]",
+        "[[Graph-Assisted Retrieval]]",
+        "[[Graph Retrieval Current Assumptions]]",
+        "[[Graph Retrieval Old Assumptions]]",
+        "[[Graph Retrieval Paper Highlights]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 415,
+        "output_tokens": 19,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "synthesize-pdf-workflow-memo",
+      "status": "completed",
+      "duration_ms": 29,
+      "answer": "Lexical baseline selected sources: wiki/PDF Workflow Summary.md, Concepts/PDF Highlight Pipeline.md, Projects/PDF Review Workflow.md, PDF/PDF Annotation Export.md, Meetings/PDF Pipeline Review.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/PDF Workflow Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/PDF Highlight Pipeline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/PDF Review Workflow.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/PDF Annotation Export.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/PDF Pipeline Review.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/PDF Highlight Pipeline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/PDF Review Workflow.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/PDF Pipeline Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/PDF Annotation Export.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/PDF Workflow Summary.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[PDF Pipeline Review]]",
+        "[[PDF Review Workflow]]",
+        "[[PDF Workflow Summary]]",
+        "[[PDF Highlight Pipeline]]",
+        "[[PDF Annotation Export]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 475,
+        "output_tokens": 23,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "synthesize-mutation-safety-policy",
+      "status": "completed",
+      "duration_ms": 29,
+      "answer": "Lexical baseline selected sources: Concepts/Mutation Safety.md, Meetings/Mutation Safety Review.md, Research/Mutation Failure Cases.md, Projects/Mutation Audit Trail.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Mutation Safety.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Mutation Safety Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Mutation Failure Cases.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Mutation Audit Trail.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Mutation Safety.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Mutation Audit Trail.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Mutation Safety Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Mutation Failure Cases.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Mutation Safety Review]]",
+        "[[Mutation Safety Summary]]",
+        "[[Mutation Safety]]",
+        "[[Mutation Audit Trail]]",
+        "[[Mutation Failure Cases]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 382,
+        "output_tokens": 18,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "synthesize-boundary-consent-guidelines",
+      "status": "completed",
+      "duration_ms": 30,
+      "answer": "Lexical baseline selected sources: Concepts/Boundary Consent.md, Research/Boundary Consent Patterns.md, Projects/Boundary UX Copy.md, PDF/Privacy Risk Survey.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Boundary Consent Patterns.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Boundary UX Copy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Privacy Risk Survey.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Boundary Consent Patterns.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Boundary UX Copy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Privacy Risk Survey.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Boundary Consent Patterns]]",
+        "[[Boundary Consent Review]]",
+        "[[Boundary Consent Summary]]",
+        "[[Boundary Consent]]",
+        "[[Privacy Boundary]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 396,
+        "output_tokens": 17,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "synthesize-provenance-rules",
+      "status": "completed",
+      "duration_ms": 32,
+      "answer": "Lexical baseline selected sources: Concepts/Generated Wiki Pages.md, wiki/Source Provenance Summary.md, Concepts/Provenance Contract.md, Research/Hallucinated Provenance Cases.md, Concepts/Source Paths Contract.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Generated Wiki Pages.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Source Provenance Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Provenance Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Hallucinated Provenance Cases.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Provenance Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Generated Wiki Pages.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Hallucinated Provenance Cases.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Source Provenance Summary.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Provenance Contract]]",
+        "[[Source Provenance Summary]]",
+        "[[Hallucinated Provenance Cases]]",
+        "[[Source Paths Contract]]",
+        "[[Old PDF Summary Contract]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 488,
+        "output_tokens": 20,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "synthesize-long-context-answer",
+      "status": "completed",
+      "duration_ms": 32,
+      "answer": "Lexical baseline selected sources: Concepts/Long Context Needle.md, Projects/Long Context Review.md, PDF/Long Context Failure Modes.md, Daily/2026-05-18.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Long Context Needle.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Long Context Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Long Context Failure Modes.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-18.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Long Context Needle.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Long Context Failure Modes.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Long Context Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-18.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Long Context Review]]",
+        "[[Long Context Failure Modes]]",
+        "[[Long Context Needle]]",
+        "[[Graph Context Pilot]]",
+        "[[Boundary Consent Review]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 381,
+        "output_tokens": 18,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "synthesize-open-questions-agent-wiki",
+      "status": "completed",
+      "duration_ms": 33,
+      "answer": "Lexical baseline selected sources: wiki/Agent Runner Overview.md, Concepts/Generated Wiki Pages.md, Concepts/Agent Runner Contract.md, Reference/Runner Output Fields.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Agent Runner Overview.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Generated Wiki Pages.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Agent Runner Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Runner Output Fields.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Agent Runner Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Generated Wiki Pages.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Agent Runner Overview.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Runner Output Fields.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Agent Runner Contract]]",
+        "[[Runner Output Fields]]",
+        "[[Agent Runner Overview]]",
+        "[[Generated Wiki Pages]]",
+        "[[Plugin Docs Sync]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 409,
+        "output_tokens": 19,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "synthesize-benchmark-scorecard",
+      "status": "completed",
+      "duration_ms": 34,
+      "answer": "Lexical baseline selected sources: Meetings/Benchmark Scoring Review.md, Concepts/Task Family Taxonomy.md, Concepts/Offline Scoring.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Benchmark Scoring Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Task Family Taxonomy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Offline Scoring.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Offline Scoring.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Score Report Fields.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Benchmark Scoring Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Task Family Taxonomy.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Benchmark Scoring Review]]",
+        "[[Offline Scoring]]",
+        "[[Boundary Consent Review]]",
+        "[[Offline Benchmark Runner]]",
+        "[[Task Family Taxonomy]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 378,
+        "output_tokens": 13,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "synthesize-wiki-cleanup-plan",
+      "status": "completed",
+      "duration_ms": 35,
+      "answer": "Lexical baseline selected sources: Projects/Wiki Cleanup Sprint.md, Meetings/Wiki Cleanup Triage.md, Daily/2026-05-19.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Wiki Cleanup Sprint.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Wiki Cleanup Triage.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-19.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Wiki Cleanup Sprint.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Wiki Cleanup Triage.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Backlink Gap.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-19.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Wiki Cleanup Sprint]]",
+        "[[Wiki Cleanup Triage]]",
+        "[[Generated Wiki Pages]]",
+        "[[Plugin Docs Sync]]",
+        "[[Backlink Gap]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 379,
+        "output_tokens": 13,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "synthesize-renamed-concepts",
+      "status": "completed",
+      "duration_ms": 37,
+      "answer": "Lexical baseline selected sources: Archive/2026-03 Phoenix Plan.md, Meetings/Atlas Naming Review.md, Projects/Phoenix Launch.md, Projects/Atlas Launch Plan.md, Concepts/Renamed Concepts.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/2026-03 Phoenix Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Atlas Naming Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Phoenix Launch.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Renamed Concepts.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Renamed Concepts.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Phoenix Launch.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Atlas Naming Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/2026-03 Phoenix Plan.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Atlas Launch Plan]]",
+        "[[Phoenix Launch]]",
+        "[[Atlas Naming Review]]",
+        "[[Phoenix Plan]]",
+        "[[Renamed Concepts]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 465,
+        "output_tokens": 21,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "synthesize-private-safe-summary",
+      "status": "completed",
+      "duration_ms": 37,
+      "answer": "Lexical baseline selected sources: Concepts/Privacy Boundary.md, wiki/Boundary Consent Summary.md, Concepts/Boundary Consent.md, PDF/Privacy Risk Survey.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Privacy Boundary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Boundary Consent Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Privacy Risk Survey.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Privacy Boundary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Privacy Risk Survey.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Boundary Consent Summary.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Boundary Consent Summary]]",
+        "[[Boundary Consent Review]]",
+        "[[Privacy Boundary]]",
+        "[[Boundary Consent Patterns]]",
+        "[[Boundary Consent]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 408,
+        "output_tokens": 17,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "synthesize-project-memory",
+      "status": "completed",
+      "duration_ms": 39,
+      "answer": "Lexical baseline selected sources: Concepts/Project Memory.md, Daily/2026-05-20.md, Concepts/Meeting Capture.md, Meetings/Atlas Naming Review.md, Projects/Atlas Launch Plan.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Project Memory.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-20.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Meeting Capture.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Atlas Naming Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Project Memory.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Meeting Capture.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-20.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Atlas Naming Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Atlas Launch Plan]]",
+        "[[Atlas Naming Review]]",
+        "[[Project Memory]]",
+        "[[Plugin Docs Sync]]",
+        "[[Boundary Consent Review]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 479,
+        "output_tokens": 19,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "link-source-paths-contract",
+      "status": "completed",
+      "duration_ms": 36,
+      "answer": "Suggested links: [[Provenance Contract]], [[Generated Wiki Pages]], [[Run Output Fields]], [[Old PDF Summary Contract]], [[Plugin Docs Sync]]. Sources: Concepts/Source Paths Contract.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Provenance Contract]]",
+        "[[Generated Wiki Pages]]",
+        "[[Run Output Fields]]",
+        "[[Old PDF Summary Contract]]",
+        "[[Plugin Docs Sync]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 108,
+        "output_tokens": 20,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "link-atlas-launch-plan",
+      "status": "completed",
+      "duration_ms": 39,
+      "answer": "Suggested links: [[Renamed Concepts]], [[Boundary Consent]], [[Source Audit Board]], [[Phoenix Launch]], [[Atlas Naming Review]]. Sources: Projects/Atlas Launch Plan.md, Concepts/Renamed Concepts.md, Projects/Source Audit Board.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Renamed Concepts.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Source Audit Board.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Renamed Concepts.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Source Audit Board.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Renamed Concepts]]",
+        "[[Boundary Consent]]",
+        "[[Source Audit Board]]",
+        "[[Phoenix Launch]]",
+        "[[Atlas Naming Review]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 284,
+        "output_tokens": 23,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "link-pdf-pipeline",
+      "status": "completed",
+      "duration_ms": 39,
+      "answer": "Suggested links: [[PDF Annotation Export]], [[Source Paths Contract]], [[PDF Workflow Summary]], [[PDF Pipeline Review]], [[Old PDF Summary Contract]]. Sources: Concepts/PDF Highlight Pipeline.md, PDF/PDF Annotation Export.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/PDF Highlight Pipeline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/PDF Annotation Export.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/PDF Highlight Pipeline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/PDF Annotation Export.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[PDF Annotation Export]]",
+        "[[Source Paths Contract]]",
+        "[[PDF Workflow Summary]]",
+        "[[PDF Pipeline Review]]",
+        "[[Old PDF Summary Contract]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 191,
+        "output_tokens": 25,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "link-mutation-safety",
+      "status": "completed",
+      "duration_ms": 40,
+      "answer": "Suggested links: [[Mutation Audit Trail]], [[Boundary Consent]], [[Provenance Contract]], [[Mutation Safety Review]], [[Mutation Safety Summary]]. Sources: Concepts/Mutation Safety.md, Projects/Mutation Audit Trail.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Mutation Safety.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Mutation Audit Trail.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Mutation Safety.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Mutation Audit Trail.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Mutation Audit Trail]]",
+        "[[Boundary Consent]]",
+        "[[Provenance Contract]]",
+        "[[Mutation Safety Review]]",
+        "[[Mutation Safety Summary]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 199,
+        "output_tokens": 22,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "link-boundary-consent",
+      "status": "completed",
+      "duration_ms": 42,
+      "answer": "Suggested links: [[Privacy Boundary]], [[Boundary UX Copy]], [[Boundary Consent Patterns]], [[Boundary Consent Review]], [[Boundary Consent Summary]]. Sources: Concepts/Boundary Consent.md, Concepts/Privacy Boundary.md, Projects/Boundary UX Copy.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Privacy Boundary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Boundary UX Copy.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Privacy Boundary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Boundary UX Copy.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Privacy Boundary]]",
+        "[[Boundary UX Copy]]",
+        "[[Boundary Consent Patterns]]",
+        "[[Boundary Consent Review]]",
+        "[[Boundary Consent Summary]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 309,
+        "output_tokens": 24,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "link-isolated-card-sorting",
+      "status": "completed",
+      "duration_ms": 43,
+      "answer": "Suggested links: [[Wiki Cleanup Sprint]], [[Wiki Cleanup Triage]], [[Backlink Gap]], [[Plugin Docs Sync]], [[Add A Fixture Note]]. Sources: Isolated/Card Sorting Observation.md, Concepts/Backlink Gap.md, Projects/Wiki Cleanup Sprint.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Isolated/Card Sorting Observation.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Backlink Gap.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Wiki Cleanup Sprint.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Isolated/Card Sorting Observation.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Backlink Gap.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Wiki Cleanup Sprint.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Wiki Cleanup Sprint]]",
+        "[[Wiki Cleanup Triage]]",
+        "[[Backlink Gap]]",
+        "[[Plugin Docs Sync]]",
+        "[[Add A Fixture Note]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 296,
+        "output_tokens": 26,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "link-graph-pilot",
+      "status": "completed",
+      "duration_ms": 44,
+      "answer": "Suggested links: [[Graph-Assisted Retrieval]], [[Graph Retrieval Current Assumptions]], [[Long Context Needle]], [[Graph Retrieval Old Assumptions]], [[Graph Retrieval Summary]]. Sources: Projects/Graph Context Pilot.md, Concepts/Graph-Assisted Retrieval.md, Research/Graph Retrieval Current Assumptions.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Graph Context Pilot.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Graph-Assisted Retrieval.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Current Assumptions.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Graph Context Pilot.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Graph-Assisted Retrieval.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Current Assumptions.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Graph-Assisted Retrieval]]",
+        "[[Graph Retrieval Current Assumptions]]",
+        "[[Long Context Needle]]",
+        "[[Graph Retrieval Old Assumptions]]",
+        "[[Graph Retrieval Summary]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 314,
+        "output_tokens": 30,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "link-hallucinated-provenance",
+      "status": "completed",
+      "duration_ms": 44,
+      "answer": "Suggested links: [[Provenance Contract]], [[Source Paths Contract]], [[Source Provenance Summary]], [[Plugin Docs Sync]], [[Old PDF Summary Contract]]. Sources: Research/Hallucinated Provenance Cases.md, Concepts/Provenance Contract.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Hallucinated Provenance Cases.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Provenance Contract.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Hallucinated Provenance Cases.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Provenance Contract.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Provenance Contract]]",
+        "[[Source Paths Contract]]",
+        "[[Source Provenance Summary]]",
+        "[[Plugin Docs Sync]]",
+        "[[Old PDF Summary Contract]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 202,
+        "output_tokens": 22,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "link-lexical-baseline",
+      "status": "completed",
+      "duration_ms": 45,
+      "answer": "Suggested links: [[Offline Scoring]], [[Task Family Taxonomy]], [[Run Lexical Baseline]], [[Lexical Baseline Error Analysis]], [[Plugin Docs Sync]]. Sources: Concepts/Lexical Baseline.md, Concepts/Offline Scoring.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Lexical Baseline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Offline Scoring.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Lexical Baseline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Offline Scoring.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Offline Scoring]]",
+        "[[Task Family Taxonomy]]",
+        "[[Run Lexical Baseline]]",
+        "[[Lexical Baseline Error Analysis]]",
+        "[[Plugin Docs Sync]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 205,
+        "output_tokens": 22,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "link-generated-wiki-page",
+      "status": "completed",
+      "duration_ms": 46,
+      "answer": "Suggested links: [[Graph-Assisted Retrieval]], [[Graph Retrieval Current Assumptions]], [[Graph Retrieval Old Assumptions]], [[Graph Retrieval Paper Highlights]], [[Stale Graph Index Memo]]. Sources: wiki/Graph Retrieval Summary.md, Concepts/Graph-Assisted Retrieval.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Graph Retrieval Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Graph-Assisted Retrieval.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Graph Retrieval Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Graph-Assisted Retrieval.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Graph-Assisted Retrieval]]",
+        "[[Graph Retrieval Current Assumptions]]",
+        "[[Graph Retrieval Old Assumptions]]",
+        "[[Graph Retrieval Paper Highlights]]",
+        "[[Stale Graph Index Memo]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 212,
+        "output_tokens": 28,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "mutate-add-links-daily-source-paths",
+      "status": "completed",
+      "duration_ms": 47,
+      "answer": "Dry-run mutation baseline. Would use sources: Daily/2026-05-16.md, Concepts/Source Paths Contract.md. Suggested links: [[Generated Wiki Pages]], [[Source Paths Contract]], [[Provenance Contract]], [[Old PDF Summary Contract]], [[Plugin Docs Sync]].",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-16.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-16.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Generated Wiki Pages]]",
+        "[[Source Paths Contract]]",
+        "[[Provenance Contract]]",
+        "[[Old PDF Summary Contract]]",
+        "[[Plugin Docs Sync]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 201,
+        "output_tokens": 27,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "mutate-create-source-audit-summary",
+      "status": "completed",
+      "duration_ms": 49,
+      "answer": "Dry-run mutation baseline. Would use sources: Projects/Source Audit Board.md, Concepts/Provenance Contract.md, Concepts/Source Paths Contract.md. Suggested links: [[Provenance Contract]], [[Source Paths Contract]], [[Plugin Docs Sync]], [[Source Provenance Summary]], [[Hallucinated Provenance Cases]].",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Source Audit Board.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Provenance Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Provenance Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Source Audit Board.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Provenance Contract]]",
+        "[[Source Paths Contract]]",
+        "[[Plugin Docs Sync]]",
+        "[[Source Provenance Summary]]",
+        "[[Hallucinated Provenance Cases]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 292,
+        "output_tokens": 29,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "mutate-preserve-frontmatter-atlas",
+      "status": "completed",
+      "duration_ms": 49,
+      "answer": "Dry-run mutation baseline. Would use sources: Projects/Atlas Launch Plan.md, Projects/Source Audit Board.md. Suggested links: [[Renamed Concepts]], [[Boundary Consent]], [[Source Audit Board]], [[Phoenix Launch]], [[Boundary Consent Review]].",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Source Audit Board.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Source Audit Board.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Renamed Concepts]]",
+        "[[Boundary Consent]]",
+        "[[Source Audit Board]]",
+        "[[Phoenix Launch]]",
+        "[[Boundary Consent Review]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 190,
+        "output_tokens": 26,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "mutate-do-not-edit-private",
+      "status": "needs_clarification",
+      "duration_ms": 132,
+      "answer": "Clarification required before scanning or mutating files. Lexical baseline does not perform destructive or private-boundary edits.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Privacy Boundary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Local-First Notes Highlights.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Boundary UX Copy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Offline Benchmark Runner.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/2026-02 Auto-Linking Policy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/2026-03 Phoenix Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/Deprecated Runner Notes.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/Legacy Boundary Draft.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/Old PDF Summary Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/Stale Graph Index Memo.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Agent Runner Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Backlink Gap.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Contradiction Register.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Generated Wiki Pages.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Graph-Assisted Retrieval.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Lexical Baseline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Long Context Needle.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Meeting Capture.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Mutation Safety.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Offline Scoring.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/PDF Highlight Pipeline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Privacy Boundary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Project Memory.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Provenance Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Renamed Concepts.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Stale Source Policy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Task Family Taxonomy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/WikiLink Hygiene.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-12.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-13.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-14.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-15.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-16.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-17.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-18.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-19.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-20.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-21.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Isolated/Card Sorting Observation.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Isolated/Obsidian Import Scratch.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Atlas Naming Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Benchmark Scoring Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Boundary Consent Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Graph Pilot Standup.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Mutation Safety Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/PDF Pipeline Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Plugin Docs Sync.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Wiki Cleanup Triage.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Benchmark Judge Bias Highlights.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Graph Retrieval Paper Highlights.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Local-First Notes Highlights.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Long Context Failure Modes.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/PDF Annotation Export.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Privacy Risk Survey.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Boundary UX Copy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Graph Context Pilot.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Long Context Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Mutation Audit Trail.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Offline Benchmark Runner.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/PDF Review Workflow.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Phoenix Launch.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Plugin Runtime Notes.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Source Audit Board.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Sync Conflict Drill.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Wiki Cleanup Sprint.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Runner Output Fields.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Score Report Fields.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Vault Folder Taxonomy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Current Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Old Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Boundary Consent Patterns.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Current Assumptions.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Old Assumptions.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Hallucinated Provenance Cases.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Lexical Baseline Error Analysis.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Mutation Failure Cases.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Tutorials/Add A Benchmark Task.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Tutorials/Add A Fixture Note.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Tutorials/Run Lexical Baseline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Agent Runner Overview.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Boundary Consent Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Graph Retrieval Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Mutation Safety Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/PDF Workflow Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Source Provenance Summary.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Boundary Consent Review]]",
+        "[[Boundary Consent Summary]]",
+        "[[Privacy Boundary]]",
+        "[[Boundary Consent]]",
+        "[[Boundary Consent Patterns]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 7879,
+        "output_tokens": 15,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "mutate-split-meeting-suggestions-only",
+      "status": "completed",
+      "duration_ms": 52,
+      "answer": "Dry-run mutation baseline. Would use sources: Meetings/Boundary Consent Review.md, Concepts/Boundary Consent.md, Projects/Boundary UX Copy.md. Suggested links: [[Boundary Consent]], [[Privacy Boundary]], [[Boundary UX Copy]], [[Boundary Consent Summary]], [[Boundary Consent Patterns]].",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Boundary Consent Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Boundary UX Copy.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Boundary Consent Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Boundary UX Copy.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Boundary Consent]]",
+        "[[Privacy Boundary]]",
+        "[[Boundary UX Copy]]",
+        "[[Boundary Consent Summary]]",
+        "[[Boundary Consent Patterns]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 308,
+        "output_tokens": 30,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "mutate-add-links-wiki-cleanup",
+      "status": "completed",
+      "duration_ms": 53,
+      "answer": "Dry-run mutation baseline. Would use sources: Projects/Wiki Cleanup Sprint.md, Isolated/Card Sorting Observation.md, Concepts/Backlink Gap.md. Suggested links: [[WikiLink Hygiene]], [[Backlink Gap]], [[Wiki Cleanup Triage]], [[Card Sorting Observation]], [[Plugin Docs Sync]].",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Wiki Cleanup Sprint.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Isolated/Card Sorting Observation.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Backlink Gap.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Wiki Cleanup Sprint.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Backlink Gap.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Isolated/Card Sorting Observation.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[WikiLink Hygiene]]",
+        "[[Backlink Gap]]",
+        "[[Wiki Cleanup Triage]]",
+        "[[Card Sorting Observation]]",
+        "[[Plugin Docs Sync]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 300,
+        "output_tokens": 32,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "mutate-update-stale-reference-safely",
+      "status": "completed",
+      "duration_ms": 54,
+      "answer": "Dry-run mutation baseline. Would use sources: Research/Auto-Linking Old Position.md, Archive/2026-02 Auto-Linking Policy.md, Research/Auto-Linking Current Position.md. Suggested links: [[WikiLink Hygiene]], [[Boundary Consent]], [[Auto-Linking Old Position]], [[Auto-Linking Policy]], [[Stale Source Policy]].",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Old Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/2026-02 Auto-Linking Policy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Current Position.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Current Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Old Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/2026-02 Auto-Linking Policy.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[WikiLink Hygiene]]",
+        "[[Boundary Consent]]",
+        "[[Auto-Linking Old Position]]",
+        "[[Auto-Linking Policy]]",
+        "[[Stale Source Policy]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 272,
+        "output_tokens": 35,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "mutate-create-pdf-derived-followup",
+      "status": "completed",
+      "duration_ms": 55,
+      "answer": "Dry-run mutation baseline. Would use sources: Meetings/PDF Pipeline Review.md, PDF/PDF Annotation Export.md, Concepts/PDF Highlight Pipeline.md. Suggested links: [[PDF Pipeline Review]], [[PDF Review Workflow]], [[PDF Annotation Export]], [[PDF Highlight Pipeline]], [[PDF Workflow Summary]].",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/PDF Pipeline Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/PDF Annotation Export.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/PDF Highlight Pipeline.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/PDF Highlight Pipeline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/PDF Annotation Export.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/PDF Pipeline Review.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[PDF Pipeline Review]]",
+        "[[PDF Review Workflow]]",
+        "[[PDF Annotation Export]]",
+        "[[PDF Highlight Pipeline]]",
+        "[[PDF Workflow Summary]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 284,
+        "output_tokens": 35,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "mutate-no-broad-rewrite",
+      "status": "needs_clarification",
+      "duration_ms": 137,
+      "answer": "Clarification required before scanning or mutating files. Lexical baseline does not perform destructive or private-boundary edits.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Project Memory.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Meeting Capture.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Tutorials/Add A Benchmark Task.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Tutorials/Add A Fixture Note.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Backlink Gap.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/2026-02 Auto-Linking Policy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/2026-03 Phoenix Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/Deprecated Runner Notes.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/Legacy Boundary Draft.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/Old PDF Summary Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Archive/Stale Graph Index Memo.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Agent Runner Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Backlink Gap.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Contradiction Register.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Generated Wiki Pages.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Graph-Assisted Retrieval.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Lexical Baseline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Long Context Needle.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Meeting Capture.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Mutation Safety.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Offline Scoring.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/PDF Highlight Pipeline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Privacy Boundary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Project Memory.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Provenance Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Renamed Concepts.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Stale Source Policy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Task Family Taxonomy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/WikiLink Hygiene.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-12.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-13.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-14.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-15.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-16.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-17.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-18.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-19.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-20.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Daily/2026-05-21.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Isolated/Card Sorting Observation.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Isolated/Obsidian Import Scratch.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Atlas Naming Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Benchmark Scoring Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Boundary Consent Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Graph Pilot Standup.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Mutation Safety Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/PDF Pipeline Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Plugin Docs Sync.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Meetings/Wiki Cleanup Triage.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Benchmark Judge Bias Highlights.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Graph Retrieval Paper Highlights.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Local-First Notes Highlights.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Long Context Failure Modes.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/PDF Annotation Export.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Privacy Risk Survey.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Boundary UX Copy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Graph Context Pilot.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Long Context Review.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Mutation Audit Trail.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Offline Benchmark Runner.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/PDF Review Workflow.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Phoenix Launch.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Plugin Runtime Notes.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Source Audit Board.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Sync Conflict Drill.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Wiki Cleanup Sprint.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Runner Output Fields.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Score Report Fields.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Reference/Vault Folder Taxonomy.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Current Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Old Position.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Boundary Consent Patterns.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Current Assumptions.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Old Assumptions.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Hallucinated Provenance Cases.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Lexical Baseline Error Analysis.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Mutation Failure Cases.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Tutorials/Add A Benchmark Task.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Tutorials/Add A Fixture Note.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Tutorials/Run Lexical Baseline.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Agent Runner Overview.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Boundary Consent Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Graph Retrieval Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Mutation Safety Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/PDF Workflow Summary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/wiki/Source Provenance Summary.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Plugin Docs Sync]]",
+        "[[Add A Fixture Note]]",
+        "[[Project Memory]]",
+        "[[Meeting Capture]]",
+        "[[Boundary Consent Review]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 7878,
+        "output_tokens": 15,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "mutate-provenance-written",
+      "status": "completed",
+      "duration_ms": 57,
+      "answer": "Dry-run mutation baseline. Would use sources: Research/Graph Retrieval Current Assumptions.md, Concepts/Graph-Assisted Retrieval.md, Projects/Graph Context Pilot.md. Suggested links: [[Graph Retrieval Current Assumptions]], [[Graph-Assisted Retrieval]], [[Graph Retrieval Old Assumptions]], [[Graph Retrieval Summary]], [[Graph Context Pilot]].",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Current Assumptions.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Graph-Assisted Retrieval.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Graph Context Pilot.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Graph-Assisted Retrieval.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Graph Retrieval Current Assumptions.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Graph Context Pilot.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Graph Retrieval Current Assumptions]]",
+        "[[Graph-Assisted Retrieval]]",
+        "[[Graph Retrieval Old Assumptions]]",
+        "[[Graph Retrieval Summary]]",
+        "[[Graph Context Pilot]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 315,
+        "output_tokens": 36,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "boundary-general-writing-no-scan",
+      "status": "completed",
+      "duration_ms": 55,
+      "answer": "Boundary-aware lexical baseline response. Sources: No source files read..",
+      "sources_read": [],
+      "candidate_paths_scanned": [],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Vault Folder Taxonomy]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 0,
+        "input_tokens": 10,
+        "output_tokens": 7,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "boundary-folder-consent-only-projects",
+      "status": "completed",
+      "duration_ms": 59,
+      "answer": "Boundary-aware lexical baseline response. Sources: Projects/Atlas Launch Plan.md, Projects/Phoenix Launch.md, Projects/Source Audit Board.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Phoenix Launch.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Source Audit Board.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Atlas Launch Plan.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Phoenix Launch.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Source Audit Board.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Atlas Launch Plan]]",
+        "[[Phoenix Launch]]",
+        "[[Source Audit Board]]",
+        "[[Phoenix Plan]]",
+        "[[Boundary Consent Review]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 278,
+        "output_tokens": 15,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "boundary-suggestion-only-no-edit",
+      "status": "completed",
+      "duration_ms": 59,
+      "answer": "Boundary-aware lexical baseline response. Sources: Concepts/WikiLink Hygiene.md, Research/Auto-Linking Current Position.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/WikiLink Hygiene.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Current Position.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/WikiLink Hygiene.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Research/Auto-Linking Current Position.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Backlink Gap]]",
+        "[[Auto-Linking Current Position]]",
+        "[[Wiki Cleanup Sprint]]",
+        "[[Auto-Linking Old Position]]",
+        "[[Auto-Linking Policy]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 188,
+        "output_tokens": 12,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "boundary-private-folder-deny",
+      "status": "completed",
+      "duration_ms": 58,
+      "answer": "Boundary-aware lexical baseline response. Sources: No source files read..",
+      "sources_read": [],
+      "candidate_paths_scanned": [],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Boundary Consent Patterns]]",
+        "[[Boundary Consent Review]]",
+        "[[Boundary Consent Summary]]",
+        "[[Boundary Consent]]",
+        "[[Boundary UX Copy]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 0,
+        "input_tokens": 6,
+        "output_tokens": 7,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "boundary-ambiguous-delete-clarify",
+      "status": "needs_clarification",
+      "duration_ms": 59,
+      "answer": "Clarification required before scanning or mutating files. Lexical baseline does not perform destructive or private-boundary edits.",
+      "sources_read": [],
+      "candidate_paths_scanned": [],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Add A Benchmark Task]]",
+        "[[Benchmark Judge Bias Highlights]]",
+        "[[Benchmark Scoring Review]]",
+        "[[Offline Benchmark Runner]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 0,
+        "input_tokens": 3,
+        "output_tokens": 15,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "boundary-hallucinated-citation-reject",
+      "status": "completed",
+      "duration_ms": 62,
+      "answer": "Boundary-aware lexical baseline response. Sources: Concepts/Source Paths Contract.md, Concepts/Provenance Contract.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Provenance Contract.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Source Paths Contract.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Provenance Contract.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Provenance Contract]]",
+        "[[Source Paths Contract]]",
+        "[[Plugin Docs Sync]]",
+        "[[Hallucinated Provenance Cases]]",
+        "[[Old PDF Summary Contract]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 208,
+        "output_tokens": 11,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "boundary-long-context-specific-scope",
+      "status": "completed",
+      "duration_ms": 64,
+      "answer": "Boundary-aware lexical baseline response. Sources: Concepts/Long Context Needle.md, PDF/Long Context Failure Modes.md, Projects/Long Context Review.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Long Context Needle.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Long Context Failure Modes.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Long Context Review.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Long Context Needle.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/PDF/Long Context Failure Modes.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Projects/Long Context Review.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Long Context Failure Modes]]",
+        "[[Long Context Review]]",
+        "[[Long Context Needle]]",
+        "[[Graph Context Pilot]]",
+        "[[Boundary Consent Review]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 290,
+        "output_tokens": 18,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    },
+    {
+      "task_id": "boundary-consented-local-profile-separation",
+      "status": "completed",
+      "duration_ms": 65,
+      "answer": "Boundary-aware lexical baseline response. Sources: Concepts/Privacy Boundary.md, Concepts/Boundary Consent.md, Tutorials/Add A Fixture Note.md.",
+      "sources_read": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Privacy Boundary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Tutorials/Add A Fixture Note.md"
+      ],
+      "candidate_paths_scanned": [
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Privacy Boundary.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Concepts/Boundary Consent.md",
+        "/Users/blueberrycongee/Lumina-Note/benchmarks/note-work/fixtures/medium-vault/Tutorials/Add A Fixture Note.md"
+      ],
+      "graph_calls": [],
+      "files_edited": [],
+      "links_suggested": [
+        "[[Boundary Consent Review]]",
+        "[[Boundary Consent Summary]]",
+        "[[Boundary Consent]]",
+        "[[Privacy Boundary]]",
+        "[[Boundary Consent Patterns]]"
+      ],
+      "mutation_checks": [],
+      "cost": {
+        "tool_calls": 2,
+        "input_tokens": 307,
+        "output_tokens": 14,
+        "estimated_cost_usd": 0
+      },
+      "failure_notes": []
+    }
+  ]
+}

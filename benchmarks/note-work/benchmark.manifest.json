@@ -1,0 +1,47 @@
+{
+  "schema_version": "lumina/note-work-manifest/v0.1",
+  "id": "lumina-note-work-v0",
+  "name": "Lumina Note Work Benchmark v0",
+  "index_document": {
+    "absolute_path": "/Users/blueberrycongee/Lumina-Note/docs/note-work-benchmark-methodology.md",
+    "repo_relative_path": "docs/note-work-benchmark-methodology.md"
+  },
+  "schemas": {
+    "profile": "schemas/profile.schema.json",
+    "task": "schemas/task.schema.json",
+    "run_output": "schemas/run-output.schema.json",
+    "score_report": "schemas/score-report.schema.json"
+  },
+  "profiles": [
+    "profiles/profile-lumina-docs-v0.json",
+    "profiles/profile-openclaw-docs-v0.json",
+    "profiles/profile-opencode-docs-v0.json",
+    "profiles/profile-excalidraw-mcp-v0.json"
+  ],
+  "vaults": [
+    {
+      "id": "medium-synthetic-v0",
+      "path": "fixtures/medium-vault",
+      "provenance": "fixtures/medium-vault.provenance.json",
+      "expected_note_count_min": 60,
+      "expected_note_count_max": 120
+    }
+  ],
+  "task_sets": [
+    {
+      "id": "dev",
+      "path": "tasks/dev.json",
+      "expected_task_count_min": 50,
+      "expected_task_count_max": 80
+    }
+  ],
+  "default_run_output": "runs/baseline-lexical-dev.json",
+  "default_score_report_json": "reports/example-score-report.json",
+  "default_score_report_markdown": "reports/example-score-report.md",
+  "commands": {
+    "generate": "node benchmarks/note-work/scripts/generate-fixture.mjs",
+    "validate": "node benchmarks/note-work/scripts/validate.mjs",
+    "baseline": "node benchmarks/note-work/scripts/run-lexical-baseline.mjs",
+    "score": "node benchmarks/note-work/scripts/score.mjs"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lumina-note.dev/schemas/note-work/score-report.v0.1.json",
+  "title": "Lumina Note Work Score Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "benchmark_id",
+    "task_set",
+    "fixture_vault",
+    "run_output",
+    "generated_at",
+    "system",
+    "summary",
+    "sample_counts",
+    "family_scores",
+    "high_risk_scores",
+    "dimension_scores",
+    "cost_latency",
+    "failure_categories",
+    "task_scores",
+    "artifacts"
+  ],
+  "properties": {
+    "schema_version": { "const": "lumina/note-work-score-report/v0.1" },
+    "benchmark_id": { "type": "string" },
+    "task_set": { "type": "string" },
+    "fixture_vault": { "type": "string" },
+    "run_output": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "system": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "model", "prompt_template_id"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "model": { "type": "object" },
+        "prompt_template_id": { "type": "string" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "sample_counts": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "family_scores": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "high_risk_scores": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "dimension_scores": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "cost_latency": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "failure_categories": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "task_scores": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

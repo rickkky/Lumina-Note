@@ -1,0 +1,85 @@
+{
+  "schema_version": "lumina/note-work-profile/v0.1",
+  "id": "profile-openclaw-docs-v0",
+  "source": {
+    "name": "OpenClaw local third-party documentation snapshot",
+    "source_url": "https://github.com/openclaw/openclaw",
+    "visibility": "licensed",
+    "license_or_consent": "MIT license in third_party/moltbot/LICENSE; fixture uses structural profile only.",
+    "profiled_paths": [
+      "third_party/moltbot/README.md",
+      "third_party/moltbot/docs/*.md",
+      "third_party/moltbot/CONTRIBUTING.md",
+      "third_party/moltbot/SECURITY.md"
+    ],
+    "profiled_at": "2026-05-31"
+  },
+  "profile_summary": "A personal assistant documentation set with many topic-specific docs, setup flows, channel integrations, operational notes, and safety documentation.",
+  "note_counts": {
+    "markdown_files_profiled": 258,
+    "root_guides": 5,
+    "docs_topic_pages": 20,
+    "channel_or_tool_pages": 12,
+    "security_or_ops_pages": 4
+  },
+  "structure": {
+    "folder_taxonomy": [
+      "Root README and operational docs",
+      "docs/ topic pages for setup, tools, channels, hooks, and deployment",
+      "Nested component docs for app or companion packages"
+    ],
+    "note_type_mix": {
+      "tutorial": "Setup and onboarding pages are step-by-step.",
+      "reference": "Channel, hook, and environment pages define fields and commands.",
+      "operations": "Debugging, logging, VPS, and security pages describe safe operation.",
+      "concept": "Assistant and gateway concepts recur across pages."
+    },
+    "approximate_note_length": "Many short topic pages plus a long root README.",
+    "tag_patterns": [
+      "Topic pages are named by capability rather than by tag.",
+      "Operational pages group around install, runtime, and channel concerns."
+    ],
+    "wikilink_patterns": [
+      "Standard Markdown links connect docs and external references.",
+      "Repeated concepts appear without every page linking back to the canonical concept."
+    ],
+    "backlink_patterns": [
+      "README links outward to docs; topic pages rarely link back to every related page.",
+      "Security and deployment docs form implicit backlink clusters."
+    ],
+    "stale_contradictory_duplicated_patterns": [
+      "Root README quick starts overlap with detailed getting-started docs.",
+      "Install paths differ across channel and deployment pages.",
+      "Operational docs can lag behind root-level product positioning."
+    ],
+    "privacy_boundary": [
+      "Public docs may describe personal assistant workflows but do not include private user messages.",
+      "Benchmark fixture must not create realistic personal conversations or contact data."
+    ],
+    "task_pattern_examples": [
+      "Find which setup page is authoritative for a runtime setting.",
+      "Compare root quick start with a detailed operations page.",
+      "Synthesize safety constraints across setup and security docs."
+    ]
+  },
+  "workflow_templates": [
+    "Locate operational instructions across many small docs.",
+    "Compare stale quick-start guidance against current topic docs.",
+    "Summarize a personal assistant workflow without exposing user content."
+  ],
+  "fixture_influence": [
+    "Tutorial and reference notes under Tutorials/ and Reference/.",
+    "Boundary tasks about personal data and consent.",
+    "Near-duplicate setup guidance in project and archive notes."
+  ],
+  "safety_review": {
+    "raw_private_content_committed": false,
+    "provider_payloads_committed": false,
+    "reversible_anonymization_committed": false,
+    "known_exclusions": [
+      "No private messages",
+      "No channel credentials",
+      "No user contact data"
+    ]
+  }
+}

@@ -34,6 +34,10 @@
     "test:repro:flashcard": "vitest --run src/stores/useFlashcardStore.repro.test.ts src/components/flashcard/FlashcardView.repro.test.tsx src/components/flashcard/FlashcardReview.repro.test.tsx src/services/markdown/frontmatter.flashcard.repro.test.ts",
     "test:repro:flashcard:e2e": "FLASHCARD_E2E=1 vitest --run src/__tests__/flashcardReview.chromium.e2e.test.ts",
     "audit:button-tooltips": "node scripts/audit_button_tooltips.mjs",
+    "note-work:generate": "node benchmarks/note-work/scripts/generate-fixture.mjs",
+    "note-work:validate": "node benchmarks/note-work/scripts/validate.mjs",
+    "note-work:baseline": "node benchmarks/note-work/scripts/run-lexical-baseline.mjs",
+    "note-work:score": "node benchmarks/note-work/scripts/score.mjs",
     "bench": "vitest bench",
     "bench:run": "vitest bench --run"
   },

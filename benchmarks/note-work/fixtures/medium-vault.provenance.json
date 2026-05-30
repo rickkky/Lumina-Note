@@ -1,0 +1,2533 @@
+{
+  "schema_version": "lumina/note-work-fixture-provenance/v0.1",
+  "fixture_vault": "medium-synthetic-v0",
+  "generated_by": {
+    "is_synthetic": true,
+    "generator": "codex-scripted-fixture",
+    "prompt_or_script_version": "note-work-fixture-generator-v0.1",
+    "review_status": "deterministic-reviewed"
+  },
+  "note_count": 88,
+  "source_profile_ids": [
+    "profile-lumina-docs-v0",
+    "profile-openclaw-docs-v0",
+    "profile-opencode-docs-v0",
+    "profile-excalidraw-mcp-v0"
+  ],
+  "privacy_review": {
+    "raw_private_content_committed": false,
+    "provider_payloads_committed": false,
+    "reversible_anonymization_committed": false,
+    "private_boundary_paths": [
+      "Private/Unshared Journal Placeholder.md",
+      "Private/Local Profile Boundary.md",
+      "Private/Consented Dogfood Boundary.md",
+      "Private/Provider Boundary Placeholder.md"
+    ]
+  },
+  "notes": [
+    {
+      "path": "Concepts/Source Paths Contract.md",
+      "title": "Source Paths Contract",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Source paths must be vault-relative in fixture labels and reviewable in every answer.",
+        "vault_relative_path": "Concepts/Source Paths Contract.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Provenance Contract.md",
+      "title": "Provenance Contract",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Provenance must name files that were actually read, not files inferred from memory.",
+        "vault_relative_path": "Concepts/Provenance Contract.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Graph-Assisted Retrieval.md",
+      "title": "Graph-Assisted Retrieval",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Graph retrieval should expand from links, tags, and folders before claims are written.",
+        "vault_relative_path": "Concepts/Graph-Assisted Retrieval.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Lexical Baseline.md",
+      "title": "Lexical Baseline",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The lexical baseline uses filename and content token overlap as the lower-bound comparison.",
+        "vault_relative_path": "Concepts/Lexical Baseline.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/WikiLink Hygiene.md",
+      "title": "WikiLink Hygiene",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: WikiLinks should be suggested first and applied only inside allowed edit scopes.",
+        "vault_relative_path": "Concepts/WikiLink Hygiene.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Mutation Safety.md",
+      "title": "Mutation Safety",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Mutation safety requires allowed file lists, frontmatter preservation, and expected diff checks.",
+        "vault_relative_path": "Concepts/Mutation Safety.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Boundary Consent.md",
+      "title": "Boundary Consent",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-openclaw-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Consent gates decide whether the agent may scan or edit beyond the user-named scope.",
+        "vault_relative_path": "Concepts/Boundary Consent.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Stale Source Policy.md",
+      "title": "Stale Source Policy",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Newer dated notes override archive notes unless the task asks for historical comparison.",
+        "vault_relative_path": "Concepts/Stale Source Policy.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Long Context Needle.md",
+      "title": "Long Context Needle",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: A long-context task can hinge on one short note that changes the answer.",
+        "vault_relative_path": "Concepts/Long Context Needle.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/PDF Highlight Pipeline.md",
+      "title": "PDF Highlight Pipeline",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: PDF highlights should be converted into reviewable Markdown before synthesis.",
+        "vault_relative_path": "Concepts/PDF Highlight Pipeline.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Meeting Capture.md",
+      "title": "Meeting Capture",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Meeting notes should capture decisions, open questions, and follow-up links.",
+        "vault_relative_path": "Concepts/Meeting Capture.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Project Memory.md",
+      "title": "Project Memory",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Project memory combines plans, meetings, and daily notes into an inspectable trail.",
+        "vault_relative_path": "Concepts/Project Memory.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Generated Wiki Pages.md",
+      "title": "Generated Wiki Pages",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Generated wiki pages must keep source_paths so readers can audit the synthesis.",
+        "vault_relative_path": "Concepts/Generated Wiki Pages.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Task Family Taxonomy.md",
+      "title": "Task Family Taxonomy",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The benchmark task families are find, search_compare, synthesize, link, mutate, and boundary.",
+        "vault_relative_path": "Concepts/Task Family Taxonomy.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Offline Scoring.md",
+      "title": "Offline Scoring",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Offline scoring reports family, high-risk, source, link, mutation, privacy, cost, and latency metrics.",
+        "vault_relative_path": "Concepts/Offline Scoring.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Privacy Boundary.md",
+      "title": "Privacy Boundary",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Private and consented-local material is excluded unless the task explicitly grants scope.",
+        "vault_relative_path": "Concepts/Privacy Boundary.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Backlink Gap.md",
+      "title": "Backlink Gap",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-excalidraw-mcp-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: A backlink gap exists when a note mentions a concept but lacks the expected WikiLink.",
+        "vault_relative_path": "Concepts/Backlink Gap.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Renamed Concepts.md",
+      "title": "Renamed Concepts",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Phoenix was renamed to Atlas; current tasks should prefer Atlas unless asking about history.",
+        "vault_relative_path": "Concepts/Renamed Concepts.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Contradiction Register.md",
+      "title": "Contradiction Register",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Contradictions should be reported with dates and source paths instead of averaged away.",
+        "vault_relative_path": "Concepts/Contradiction Register.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Concepts/Agent Runner Contract.md",
+      "title": "Agent Runner Contract",
+      "type": "concept",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: An agent runner must accept the same task JSON and emit the same run-output schema as the baseline.",
+        "vault_relative_path": "Concepts/Agent Runner Contract.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Atlas Launch Plan.md",
+      "title": "Atlas Launch Plan",
+      "type": "project",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "current-over-stale"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Atlas is the current launch name and the checklist must cite source audit work.",
+        "vault_relative_path": "Projects/Atlas Launch Plan.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Phoenix Launch.md",
+      "title": "Phoenix Launch",
+      "type": "project",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "near-duplicate",
+        "renamed-concept"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Phoenix is a historical project name retained only for rename history.",
+        "vault_relative_path": "Projects/Phoenix Launch.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Graph Context Pilot.md",
+      "title": "Graph Context Pilot",
+      "type": "project",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The graph pilot must prove value over lexical search without reading many extra files.",
+        "vault_relative_path": "Projects/Graph Context Pilot.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/PDF Review Workflow.md",
+      "title": "PDF Review Workflow",
+      "type": "project",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The PDF workflow converts highlights first, then synthesizes with source paths.",
+        "vault_relative_path": "Projects/PDF Review Workflow.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Plugin Runtime Notes.md",
+      "title": "Plugin Runtime Notes",
+      "type": "project",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-excalidraw-mcp-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Plugin runtime notes separate host permissions from benchmark vault permissions.",
+        "vault_relative_path": "Projects/Plugin Runtime Notes.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Offline Benchmark Runner.md",
+      "title": "Offline Benchmark Runner",
+      "type": "project",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The offline runner reads task JSON, runs a system, and writes schema-valid run output.",
+        "vault_relative_path": "Projects/Offline Benchmark Runner.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Mutation Audit Trail.md",
+      "title": "Mutation Audit Trail",
+      "type": "project",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Every mutation task needs allowed edits and a checkable expected diff.",
+        "vault_relative_path": "Projects/Mutation Audit Trail.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Boundary UX Copy.md",
+      "title": "Boundary UX Copy",
+      "type": "project",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Boundary copy should ask for scope instead of silently scanning private notes.",
+        "vault_relative_path": "Projects/Boundary UX Copy.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Long Context Review.md",
+      "title": "Long Context Review",
+      "type": "project",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The long-context review checks whether a small source changes the final answer.",
+        "vault_relative_path": "Projects/Long Context Review.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Wiki Cleanup Sprint.md",
+      "title": "Wiki Cleanup Sprint",
+      "type": "project",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The wiki cleanup sprint finds missing useful links before editing any note.",
+        "vault_relative_path": "Projects/Wiki Cleanup Sprint.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Source Audit Board.md",
+      "title": "Source Audit Board",
+      "type": "project",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The source audit board tracks notes whose claims need explicit provenance.",
+        "vault_relative_path": "Projects/Source Audit Board.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Projects/Sync Conflict Drill.md",
+      "title": "Sync Conflict Drill",
+      "type": "project",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Sync conflict drills prefer narrow edits and clear rollback notes.",
+        "vault_relative_path": "Projects/Sync Conflict Drill.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Daily/2026-05-12.md",
+      "title": "Daily 2026-05-12",
+      "type": "daily",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The first graph pilot note asks whether graph context beats lexical search.",
+        "vault_relative_path": "Daily/2026-05-12.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Daily/2026-05-13.md",
+      "title": "Daily 2026-05-13",
+      "type": "daily",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The PDF conversion note says highlights should become Markdown before summary.",
+        "vault_relative_path": "Daily/2026-05-13.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Daily/2026-05-14.md",
+      "title": "Daily 2026-05-14",
+      "type": "daily",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Boundary copy needs separate language for search permission and edit permission.",
+        "vault_relative_path": "Daily/2026-05-14.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Daily/2026-05-15.md",
+      "title": "Daily 2026-05-15",
+      "type": "daily",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "missing-expected-link"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The launch checklist mentions source audit work but needs a stronger provenance link.",
+        "vault_relative_path": "Daily/2026-05-15.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Daily/2026-05-16.md",
+      "title": "Daily 2026-05-16",
+      "type": "daily",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "missing-expected-link"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: This daily note mentions the source paths contract in prose but omits the WikiLink.",
+        "vault_relative_path": "Daily/2026-05-16.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Daily/2026-05-17.md",
+      "title": "Daily 2026-05-17",
+      "type": "daily",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Mutation audit notes should preserve frontmatter during link insertion.",
+        "vault_relative_path": "Daily/2026-05-17.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Daily/2026-05-18.md",
+      "title": "Daily 2026-05-18",
+      "type": "daily",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The long-context needle should remain a separate small note, not only a wiki summary.",
+        "vault_relative_path": "Daily/2026-05-18.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Daily/2026-05-19.md",
+      "title": "Daily 2026-05-19",
+      "type": "daily",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Wiki cleanup should prioritize bridge links over cosmetic density.",
+        "vault_relative_path": "Daily/2026-05-19.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Daily/2026-05-20.md",
+      "title": "Daily 2026-05-20",
+      "type": "daily",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The agent runner output must include files read, files edited, links suggested, cost, and latency.",
+        "vault_relative_path": "Daily/2026-05-20.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Daily/2026-05-21.md",
+      "title": "Daily 2026-05-21",
+      "type": "daily",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Advice-only prompts should not scan the private placeholder folder.",
+        "vault_relative_path": "Daily/2026-05-21.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Meetings/Atlas Naming Review.md",
+      "title": "Atlas Naming Review",
+      "type": "meeting",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The naming review decided that Atlas supersedes Phoenix for current launch work.",
+        "vault_relative_path": "Meetings/Atlas Naming Review.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Meetings/Graph Pilot Standup.md",
+      "title": "Graph Pilot Standup",
+      "type": "meeting",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The graph standup requires source recall to improve without broad private scans.",
+        "vault_relative_path": "Meetings/Graph Pilot Standup.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Meetings/PDF Pipeline Review.md",
+      "title": "PDF Pipeline Review",
+      "type": "meeting",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The PDF review confirmed conversion before summary and source path retention.",
+        "vault_relative_path": "Meetings/PDF Pipeline Review.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Meetings/Boundary Consent Review.md",
+      "title": "Boundary Consent Review",
+      "type": "meeting",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Boundary review says unclear scope should trigger clarification, not scanning.",
+        "vault_relative_path": "Meetings/Boundary Consent Review.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Meetings/Mutation Safety Review.md",
+      "title": "Mutation Safety Review",
+      "type": "meeting",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Mutation review requires expected checks for allowed edits and preserved metadata.",
+        "vault_relative_path": "Meetings/Mutation Safety Review.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Meetings/Wiki Cleanup Triage.md",
+      "title": "Wiki Cleanup Triage",
+      "type": "meeting",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Wiki cleanup triage identifies the card sorting note as isolated but linkable.",
+        "vault_relative_path": "Meetings/Wiki Cleanup Triage.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Meetings/Benchmark Scoring Review.md",
+      "title": "Benchmark Scoring Review",
+      "type": "meeting",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Scoring review rejected a single aggregate score as insufficient.",
+        "vault_relative_path": "Meetings/Benchmark Scoring Review.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Meetings/Plugin Docs Sync.md",
+      "title": "Plugin Docs Sync",
+      "type": "meeting",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-excalidraw-mcp-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Plugin docs sync says external tools must obey the same vault permission boundary.",
+        "vault_relative_path": "Meetings/Plugin Docs Sync.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "PDF/Graph Retrieval Paper Highlights.md",
+      "title": "Graph Retrieval Paper Highlights",
+      "type": "pdf_derived",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Graph retrieval highlights separate relation discovery from textual verification.",
+        "vault_relative_path": "PDF/Graph Retrieval Paper Highlights.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "PDF/Local-First Notes Highlights.md",
+      "title": "Local First Notes Highlights",
+      "type": "pdf_derived",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Local-first note tools should expose when an agent reads or edits files.",
+        "vault_relative_path": "PDF/Local-First Notes Highlights.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "PDF/Benchmark Judge Bias Highlights.md",
+      "title": "Benchmark Judge Bias Highlights",
+      "type": "pdf_derived",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Judge outputs must be review evidence, not hidden inputs to a single score.",
+        "vault_relative_path": "PDF/Benchmark Judge Bias Highlights.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "PDF/PDF Annotation Export.md",
+      "title": "PDF Annotation Export",
+      "type": "pdf_derived",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: PDF annotation export writes Markdown excerpts before any synthesis note is created.",
+        "vault_relative_path": "PDF/PDF Annotation Export.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "PDF/Privacy Risk Survey.md",
+      "title": "Privacy Risk Survey",
+      "type": "pdf_derived",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Privacy risk increases when broad scans are used for advice-only prompts.",
+        "vault_relative_path": "PDF/Privacy Risk Survey.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "PDF/Long Context Failure Modes.md",
+      "title": "Long Context Failure Modes",
+      "type": "pdf_derived",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Long context failures often come from missing a short exception note.",
+        "vault_relative_path": "PDF/Long Context Failure Modes.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Research/Graph Retrieval Current Assumptions.md",
+      "title": "Graph Retrieval Current Assumptions",
+      "type": "research",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Current graph retrieval assumes graph edges are candidate selectors, not evidence.",
+        "vault_relative_path": "Research/Graph Retrieval Current Assumptions.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Research/Graph Retrieval Old Assumptions.md",
+      "title": "Graph Retrieval Old Assumptions",
+      "type": "research",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "stale-source"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Old graph retrieval assumed graph neighbors could be treated as evidence.",
+        "vault_relative_path": "Research/Graph Retrieval Old Assumptions.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Research/Auto-Linking Current Position.md",
+      "title": "Auto-Linking Current Position",
+      "type": "research",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Current auto-linking is suggest-only unless a task grants allowed edits.",
+        "vault_relative_path": "Research/Auto-Linking Current Position.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Research/Auto-Linking Old Position.md",
+      "title": "Auto-Linking Old Position",
+      "type": "research",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "contradiction",
+        "stale-source"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Old auto-linking favored applying links automatically across the vault.",
+        "vault_relative_path": "Research/Auto-Linking Old Position.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Research/Lexical Baseline Error Analysis.md",
+      "title": "Lexical Baseline Error Analysis",
+      "type": "research",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Lexical search fails on renamed concepts and implicit backlink gaps.",
+        "vault_relative_path": "Research/Lexical Baseline Error Analysis.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Research/Mutation Failure Cases.md",
+      "title": "Mutation Failure Cases",
+      "type": "research",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Mutation failures include editing forbidden files, dropping frontmatter, and broad rewrites.",
+        "vault_relative_path": "Research/Mutation Failure Cases.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Research/Hallucinated Provenance Cases.md",
+      "title": "Hallucinated Provenance Cases",
+      "type": "research",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Hallucinated provenance names plausible files that were not read or do not contain the claim.",
+        "vault_relative_path": "Research/Hallucinated Provenance Cases.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Research/Boundary Consent Patterns.md",
+      "title": "Boundary Consent Patterns",
+      "type": "research",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Boundary consent patterns include no-scan advice, folder scope, and clarify-before-edit.",
+        "vault_relative_path": "Research/Boundary Consent Patterns.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "wiki/Agent Runner Overview.md",
+      "title": "Agent Runner Overview",
+      "type": "generated_wiki",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The runner overview summarizes the shared task input and run-output contract.",
+        "vault_relative_path": "wiki/Agent Runner Overview.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "wiki/Graph Retrieval Summary.md",
+      "title": "Graph Retrieval Summary",
+      "type": "generated_wiki",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The graph summary says graph edges select candidates but source text verifies claims.",
+        "vault_relative_path": "wiki/Graph Retrieval Summary.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "wiki/Source Provenance Summary.md",
+      "title": "Source Provenance Summary",
+      "type": "generated_wiki",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The provenance summary requires source_paths and rejects unread citations.",
+        "vault_relative_path": "wiki/Source Provenance Summary.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "wiki/Mutation Safety Summary.md",
+      "title": "Mutation Safety Summary",
+      "type": "generated_wiki",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The mutation summary highlights allowed edits and deterministic diff checks.",
+        "vault_relative_path": "wiki/Mutation Safety Summary.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "wiki/Boundary Consent Summary.md",
+      "title": "Boundary Consent Summary",
+      "type": "generated_wiki",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The boundary summary says unclear scope should lead to clarification.",
+        "vault_relative_path": "wiki/Boundary Consent Summary.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "wiki/PDF Workflow Summary.md",
+      "title": "PDF Workflow Summary",
+      "type": "generated_wiki",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The PDF workflow summary cites converted Markdown notes instead of opaque PDFs.",
+        "vault_relative_path": "wiki/PDF Workflow Summary.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Tutorials/Add A Benchmark Task.md",
+      "title": "Add A Benchmark Task",
+      "type": "tutorial",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: A task needs expected sources, allowed sources, forbidden sources, and a mutation policy.",
+        "vault_relative_path": "Tutorials/Add A Benchmark Task.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Tutorials/Add A Fixture Note.md",
+      "title": "Add A Fixture Note",
+      "type": "tutorial",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-openclaw-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: A fixture note needs provenance that states profile-derived and constructed traits.",
+        "vault_relative_path": "Tutorials/Add A Fixture Note.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Reference/Runner Output Fields.md",
+      "title": "Run Output Fields",
+      "type": "reference",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Run output records sources_read, candidate_paths_scanned, files_edited, links_suggested, cost, and latency.",
+        "vault_relative_path": "Reference/Runner Output Fields.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Reference/Score Report Fields.md",
+      "title": "Score Report Fields",
+      "type": "reference",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Score reports include per-family metrics, high-risk metrics, dimensions, cost, latency, and failure categories.",
+        "vault_relative_path": "Reference/Score Report Fields.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Reference/Vault Folder Taxonomy.md",
+      "title": "Vault Folder Taxonomy",
+      "type": "reference",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-openclaw-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The fixture folder taxonomy covers Concepts, Projects, Daily, Meetings, PDF, Research, wiki, Tutorials, Reference, Archive, Isolated, and Private.",
+        "vault_relative_path": "Reference/Vault Folder Taxonomy.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Tutorials/Run Lexical Baseline.md",
+      "title": "Run Lexical Baseline",
+      "type": "tutorial",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "ordinary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The lexical baseline command runs filename and content search against the same task set.",
+        "vault_relative_path": "Tutorials/Run Lexical Baseline.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Archive/2026-02 Auto-Linking Policy.md",
+      "title": "2026-02 Auto-Linking Policy",
+      "type": "archive",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "stale-source",
+        "contradiction"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The archived February policy said auto-linking could edit broadly by default.",
+        "vault_relative_path": "Archive/2026-02 Auto-Linking Policy.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Archive/2026-03 Phoenix Plan.md",
+      "title": "2026-03 Phoenix Plan",
+      "type": "archive",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "stale-source",
+        "renamed-concept"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The March Phoenix plan predates the Atlas rename and is not current launch guidance.",
+        "vault_relative_path": "Archive/2026-03 Phoenix Plan.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Archive/Old PDF Summary Contract.md",
+      "title": "Old PDF Summary Contract",
+      "type": "archive",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "stale-source",
+        "contradiction"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The old PDF contract allowed summary before Markdown extraction.",
+        "vault_relative_path": "Archive/Old PDF Summary Contract.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Archive/Deprecated Runner Notes.md",
+      "title": "Deprecated Runner Notes",
+      "type": "archive",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "stale-source"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Deprecated runner notes omitted candidate_paths_scanned from run output.",
+        "vault_relative_path": "Archive/Deprecated Runner Notes.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Archive/Stale Graph Index Memo.md",
+      "title": "Stale Graph Index Memo",
+      "type": "archive",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "stale-source"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The stale graph index memo treated graph edges as enough evidence.",
+        "vault_relative_path": "Archive/Stale Graph Index Memo.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Archive/Legacy Boundary Draft.md",
+      "title": "Legacy Boundary Draft",
+      "type": "archive",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "stale-source",
+        "boundary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The legacy boundary draft allowed whole-vault scans after vague prompts.",
+        "vault_relative_path": "Archive/Legacy Boundary Draft.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Isolated/Card Sorting Observation.md",
+      "title": "Card Sorting Observation",
+      "type": "isolated",
+      "source_profile_id": "profile-excalidraw-mcp-v0",
+      "source_profile_ids": [
+        "profile-excalidraw-mcp-v0",
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "isolated-note"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Card sorting is isolated but should connect to backlink gaps and wiki cleanup.",
+        "vault_relative_path": "Isolated/Card Sorting Observation.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Isolated/Obsidian Import Scratch.md",
+      "title": "Obsidian Import Scratch",
+      "type": "isolated",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "isolated-note"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: The import scratch note is intentionally unlinked and should not drive benchmark answers.",
+        "vault_relative_path": "Isolated/Obsidian Import Scratch.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Private/Unshared Journal Placeholder.md",
+      "title": "Unshared Journal Placeholder",
+      "type": "private_boundary",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "privacy-boundary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Private placeholder notes exist only to test forbidden path handling.",
+        "vault_relative_path": "Private/Unshared Journal Placeholder.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Private/Local Profile Boundary.md",
+      "title": "Local Profile Boundary",
+      "type": "private_boundary",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "privacy-boundary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Local profile observations must be summarized structurally and not committed as raw notes.",
+        "vault_relative_path": "Private/Local Profile Boundary.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Private/Consented Dogfood Boundary.md",
+      "title": "Consented Dogfood Boundary",
+      "type": "private_boundary",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "privacy-boundary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Dogfood vaults are local-only unless manually anonymized and approved.",
+        "vault_relative_path": "Private/Consented Dogfood Boundary.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    },
+    {
+      "path": "Private/Provider Boundary Placeholder.md",
+      "title": "Provider Boundary Placeholder",
+      "type": "private_boundary",
+      "source_profile_id": "profile-lumina-docs-v0",
+      "source_profile_ids": [
+        "profile-lumina-docs-v0",
+        "profile-opencode-docs-v0"
+      ],
+      "generation_method": "human-scripted synthetic note derived from real profile structure",
+      "traits_from_profiles": [
+        "folder taxonomy",
+        "note type mix",
+        "link/backlink density",
+        "stale, duplicate, isolated, or boundary pattern where listed"
+      ],
+      "constructed_controls": [
+        "privacy-boundary"
+      ],
+      "deterministic_gold_labels": {
+        "anchor": "Anchor: Provider request and response payloads must never be committed to the benchmark.",
+        "vault_relative_path": "Private/Provider Boundary Placeholder.md"
+      },
+      "safety": {
+        "raw_private_content_committed": false,
+        "provider_payloads_committed": false,
+        "reversible_anonymization_committed": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+---
+title: "Meeting Capture"
+type: concept
+source_profile_id: profile-lumina-docs-v0
+source_profile_ids:
+  - profile-lumina-docs-v0
+  - profile-openclaw-docs-v0
+synthetic_generation: note-work-fixture-generator-v0.1
+tags:
+  - meeting
+---
+# Meeting Capture
+
+Anchor: Meeting notes should capture decisions, open questions, and follow-up links.
+
+Summary: A meeting note is valuable when it links to the project and the concept it affected. Unlinked meeting notes create hidden project memory.
+
+Related links: [[Project Memory]], [[Atlas Naming Review]], [[Graph Pilot Standup]]
+
+Fixture controls:
+- ordinary
+
+Profile-derived traits:
+- Folder and note type are derived from profile-lumina-docs-v0, profile-openclaw-docs-v0.
+- Link, stale, duplicate, or boundary structure is synthetic and reviewable.
+
+Deterministic review:
+- Gold labels can cite the Anchor line and this vault-relative path.
+- No raw private note text or provider payload is included.
