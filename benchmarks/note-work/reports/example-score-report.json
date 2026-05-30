@@ -20,9 +20,10 @@
     "ungated_outcome_score": 0.7197,
     "hard_gate_pass_rate": 1,
     "blocking_failure_count": 0,
-    "scoring_model": "endpoint-primary-hard-gated-v0.2",
+    "scoring_model": "endpoint-primary-edit-gated-v0.3",
     "deterministic_only": true,
     "trajectory_metrics_are_diagnostics": true,
+    "read_scope_metrics_are_diagnostics": true,
     "hard_gates_enforced": true,
     "aggregate_score_is_not_release_gate": true,
     "high_risk_failures_reported_separately": true
@@ -326,6 +327,11 @@
     "hard_gates": {
       "hard_gate_pass_rate": 1,
       "blocking_failure_count": 0,
+      "mutation_forbidden_edit_count": 0,
+      "unrequested_mutation_count": 0,
+      "clarification_missing_count": 0
+    },
+    "source_scope_diagnostics": {
       "forbidden_source_violations": 0,
       "restricted_scope_violations": 0,
       "source_scope_violations": 0,
@@ -349,7 +355,8 @@
     },
     "scope": {
       "scope_score": 1,
-      "scope_violations": 0
+      "scope_violations": 0,
+      "scope_warnings": 0
     },
     "source": {
       "answer_source_recall": 0.8816,

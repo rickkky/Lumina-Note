@@ -482,11 +482,11 @@ async function main() {
     if (!scoreReport.family_scores || !scoreReport.high_risk_scores || !scoreReport.dimension_scores) {
       fail(`${manifest.default_score_report_json}: missing diagnostic score sections`);
     }
-    if (scoreReport.summary?.scoring_model !== "endpoint-primary-hard-gated-v0.2") {
-      fail(`${manifest.default_score_report_json}: score report must use endpoint-primary-hard-gated-v0.2`);
+    if (scoreReport.summary?.scoring_model !== "endpoint-primary-edit-gated-v0.3") {
+      fail(`${manifest.default_score_report_json}: score report must use endpoint-primary-edit-gated-v0.3`);
     }
-    if (scoreReport.summary?.trajectory_metrics_are_diagnostics !== true || scoreReport.summary?.hard_gates_enforced !== true) {
-      fail(`${manifest.default_score_report_json}: score report must mark trajectory metrics as diagnostics and enforce hard gates`);
+    if (scoreReport.summary?.trajectory_metrics_are_diagnostics !== true || scoreReport.summary?.read_scope_metrics_are_diagnostics !== true || scoreReport.summary?.hard_gates_enforced !== true) {
+      fail(`${manifest.default_score_report_json}: score report must mark trajectory/read-scope metrics as diagnostics and enforce edit hard gates`);
     }
   } else {
     warn(`default score report not found yet: ${manifest.default_score_report_json}`);

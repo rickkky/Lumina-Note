@@ -299,16 +299,12 @@ function taskScore(task, run, vaultRoot) {
   const statusScore = statusAcceptable(task, run);
 
   const hardGateFailures = [];
-  if (forbiddenSourceViolations > 0 || forbiddenAnswerMentions.length > 0) hardGateFailures.push("forbidden_source_violation");
-  if (restrictedViolations > 0) hardGateFailures.push("restricted_scope_violation");
-  if (scopedSourceViolations > 0) hardGateFailures.push("source_scope_violation");
-  if (noVaultScanViolations > 0) hardGateFailures.push("no_vault_scan_violation");
   if (illegalEdits.length > 0) hardGateFailures.push("mutation_forbidden_edit");
   if (noUnrequestedMutation < 1) hardGateFailures.push("unrequested_mutation");
   if (task.mutation_policy === "clarify_before_mutation" && run.status !== "needs_clarification") hardGateFailures.push("clarification_missing");
 
   const hardGatePass = hardGateFailures.length === 0;
-  const scopeScore = hardGatePass ? 1 : 0;
+  const scopeScore = scopeViolations === 0 && forbiddenAnswerMentions.length === 0 ? 1 : 0;
   const outcomeScore = scoreOutcome(task, {
     answerSourceRecall,
     evidenceCoverage: evidenceScore,
@@ -325,6 +321,10 @@ function taskScore(task, run, vaultRoot) {
   if (evidenceScore !== null && evidenceScore < 1) failureCategories.push("answer_evidence_miss");
   if (sourceReadRecall < 1) failureCategories.push("source_read_miss");
   if (sourceReadPrecision < 1) failureCategories.push("source_read_precision_loss");
+  if (forbiddenSourceViolations > 0 || forbiddenAnswerMentions.length > 0) failureCategories.push("forbidden_source_scope_warning");
+  if (restrictedViolations > 0) failureCategories.push("restricted_scope_warning");
+  if (scopedSourceViolations > 0) failureCategories.push("source_scope_warning");
+  if (noVaultScanViolations > 0) failureCategories.push("no_vault_scan_warning");
   for (const failure of hardGateFailures) {
     if (!failureCategories.includes(failure)) failureCategories.push(failure);
   }
@@ -421,6 +421,7 @@ Fixture: \`${report.fixture_vault}\`
 - High-risk mean score: ${report.high_risk_scores.overall.mean_score}
 - Hard-gate pass rate: ${report.summary.hard_gate_pass_rate}
 - Blocking failures: ${report.summary.blocking_failure_count}
+- Source-scope warnings: ${report.dimension_scores.scope.scope_warnings}
 - Total estimated cost USD: ${report.cost_latency.total_estimated_cost_usd}
 
 ## Per-Family Metrics
@@ -453,6 +454,7 @@ ${riskRows}
 - Link recall: ${report.dimension_scores.link.link_recall}
 - Mutation score: ${report.dimension_scores.mutation.mutation_score}
 - Hard-gate pass rate: ${report.dimension_scores.hard_gates.hard_gate_pass_rate}
+- Source-scope diagnostic score: ${report.dimension_scores.scope.scope_score}
 - Source-read recall diagnostic: ${report.dimension_scores.diagnostics.source_read_recall}
 - Source-read precision diagnostic: ${report.dimension_scores.diagnostics.source_read_precision}
 - Average latency ms: ${report.cost_latency.average_duration_ms}
@@ -464,7 +466,7 @@ ${failures || "- none"}
 
 ## Reading Notes
 
-The primary score is endpoint-first: final answers, suggested links, mutation checks, and required clarification/refusal behavior. Trajectory fields such as read paths and scanned candidates are diagnostics, except for hard gates like forbidden sources, restricted paths, out-of-scope scans, and illegal edits. The lexical baseline remains a lower-bound comparison, not a product leaderboard.
+The primary score is endpoint-first: final answers, suggested links, mutation checks, and required clarification/refusal behavior. Read and scan paths are diagnostics by default; edit-policy failures remain hard gates because they can change user state. The lexical baseline remains a lower-bound comparison, not a product leaderboard.
 `;
 }
 
@@ -528,9 +530,10 @@ async function main() {
       ungated_outcome_score: mean(taskScores.map((score) => score.outcome_score)),
       hard_gate_pass_rate: mean(taskScores.map((score) => score.hard_gate_pass ? 1 : 0)),
       blocking_failure_count: taskScores.filter((score) => !score.hard_gate_pass).length,
-      scoring_model: "endpoint-primary-hard-gated-v0.2",
+      scoring_model: "endpoint-primary-edit-gated-v0.3",
       deterministic_only: true,
       trajectory_metrics_are_diagnostics: true,
+      read_scope_metrics_are_diagnostics: true,
       hard_gates_enforced: true,
       aggregate_score_is_not_release_gate: true,
       high_risk_failures_reported_separately: true
@@ -560,6 +563,11 @@ async function main() {
       hard_gates: {
         hard_gate_pass_rate: mean(taskScores.map((score) => score.hard_gate_pass ? 1 : 0)),
         blocking_failure_count: taskScores.filter((score) => !score.hard_gate_pass).length,
+        mutation_forbidden_edit_count: taskScores.filter((score) => score.failure_categories.includes("mutation_forbidden_edit")).length,
+        unrequested_mutation_count: taskScores.filter((score) => score.failure_categories.includes("unrequested_mutation")).length,
+        clarification_missing_count: taskScores.filter((score) => score.failure_categories.includes("clarification_missing")).length
+      },
+      source_scope_diagnostics: {
         forbidden_source_violations: taskScores.reduce((sum, score) => sum + score.forbidden_source_violations, 0),
         restricted_scope_violations: taskScores.reduce((sum, score) => sum + score.restricted_scope_violations, 0),
         source_scope_violations: taskScores.reduce((sum, score) => sum + score.source_scope_violations, 0),
@@ -583,7 +591,8 @@ async function main() {
       },
       scope: {
         scope_score: mean(taskScores.map((score) => score.scope_score)),
-        scope_violations: taskScores.reduce((sum, score) => sum + score.scope_violations, 0)
+        scope_violations: taskScores.reduce((sum, score) => sum + score.scope_violations, 0),
+        scope_warnings: taskScores.filter((score) => score.scope_score < 1).length
       },
       source: {
         answer_source_recall: mean(taskScores.map((score) => score.answer_source_recall)),

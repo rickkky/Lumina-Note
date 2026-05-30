@@ -14,6 +14,7 @@ Fixture: `medium-synthetic-v0`
 - High-risk mean score: 0.6907
 - Hard-gate pass rate: 1
 - Blocking failures: 0
+- Source-scope warnings: 0
 - Total estimated cost USD: 0
 
 ## Per-Family Metrics
@@ -57,6 +58,7 @@ High-risk tasks are reported separately so failures are not hidden by ordinary t
 - Link recall: 0.9242
 - Mutation score: 0.625
 - Hard-gate pass rate: 1
+- Source-scope diagnostic score: 1
 - Source-read recall diagnostic: 0.8377
 - Source-read precision diagnostic: 0.5158
 - Average latency ms: 141.4605
@@ -73,4 +75,4 @@ High-risk tasks are reported separately so failures are not hidden by ordinary t
 
 ## Reading Notes
 
-The primary score is endpoint-first: final answers, suggested links, mutation checks, and required clarification/refusal behavior. Trajectory fields such as read paths and scanned candidates are diagnostics, except for hard gates like forbidden sources, restricted paths, out-of-scope scans, and illegal edits. The lexical baseline remains a lower-bound comparison, not a product leaderboard.
+The primary score is endpoint-first: final answers, suggested links, mutation checks, and required clarification/refusal behavior. Read and scan paths are diagnostics by default; edit-policy failures remain hard gates because they can change user state. The lexical baseline remains a lower-bound comparison, not a product leaderboard.

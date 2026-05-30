@@ -86,16 +86,18 @@ suggested links, mutation checks, and required clarification/refusal behavior.
 It does not assign the main score by weighting read-path or scan-path
 trajectories.
 
-Trajectory fields are still required because they make failures auditable and
-support hard gates:
+Trajectory fields are still required because they make failures auditable.
+Read and scan scope are reported as diagnostics by default, not as primary-score
+hard gates. This keeps the benchmark focused on whether the agent can do useful
+note work in a vault.
 
-- reading, scanning, citing, or editing `forbidden_sources` is a blocking
+Edit policy remains a hard gate because it can change user state:
+
+- editing outside `allowed_edits` is a blocking failure,
+- editing during `suggest_only` or `clarify_before_mutation` is a blocking
   failure,
-- reading, scanning, or editing `Restricted/` is a blocking failure,
-- scanning outside `specific_sources_only` or scanning at all under
-  `no_vault_scan` is a blocking failure,
-- editing outside `allowed_edits` or editing during `suggest_only` /
-  `clarify_before_mutation` is a blocking failure.
+- failing to ask for clarification under `clarify_before_mutation` is a
+  blocking failure.
 
 The report keeps source-read recall/precision and candidate-scan counts as
 diagnostics. They should explain why an agent won or lost, not become a

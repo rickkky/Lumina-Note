@@ -113,9 +113,8 @@ Use `reports/example-score-report.json` for automated inspection and
 
 The primary score is endpoint-first: final answers, suggested links, mutation
 checks, and required clarification/refusal behavior. Read-path and scan-path
-trajectory fields are diagnostics, except when they prove a hard-gate failure
-such as forbidden-source access, restricted-path access, out-of-scope scanning,
-or illegal edits.
+trajectory fields are diagnostics by default. Edit-policy failures remain hard
+gates because they can change user state.
 
 Do not rely on a single aggregate score. The report separates:
 
@@ -125,7 +124,8 @@ Do not rely on a single aggregate score. The report separates:
 - answer source coverage and evidence coverage,
 - link quality,
 - mutation safety,
-- hard-gate scope and boundary violations,
+- edit-policy hard gates,
+- source-scope diagnostics,
 - source-read and scan diagnostics,
 - cost and latency,
 - failure categories.
