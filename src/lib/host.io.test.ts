@@ -12,6 +12,7 @@ import {
   deleteFile,
   exists,
   getAppDataDir,
+  getFileVersion,
   joinPath,
   listDirectory,
   moveFile,
@@ -142,6 +143,23 @@ describe('host IO wrappers', () => {
     await readDir('/vault', { recursive: true });
 
     expect(invoke).toHaveBeenCalledWith('list_directory', { path: '/vault' });
+  });
+
+  it('preserves fractional mtime when building file versions', async () => {
+    vi.mocked(invoke).mockResolvedValueOnce({
+      size: 4,
+      mtime: 1234.5678,
+      atime: null,
+      birthtime: null,
+      isFile: true,
+      isDirectory: false,
+      isSymlink: false,
+    });
+
+    await expect(getFileVersion('/vault/note.md')).resolves.toEqual({
+      size: 4,
+      mtimeMs: 1234.5678,
+    });
   });
 
   it('routes rename through plugin:fs|rename', async () => {

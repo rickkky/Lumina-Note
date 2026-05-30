@@ -280,6 +280,7 @@ export async function copyFile(from: string, to: string): Promise<void> {
 export interface FileStat {
   size: number;
   mtime: Date | null;
+  mtimeMs: number | null;
   atime: Date | null;
   birthtime: Date | null;
   isFile: boolean;
@@ -316,9 +317,17 @@ export async function fsStat(path: string): Promise<FileStat> {
     const d = typeof v === "number" ? new Date(v) : new Date(v);
     return Number.isFinite(d.getTime()) ? d : null;
   };
+  const toEpochMs = (v: string | number | null): number | null => {
+    if (v == null) return null;
+    if (typeof v === "number") return Number.isFinite(v) ? v : null;
+    const d = new Date(v);
+    const time = d.getTime();
+    return Number.isFinite(time) ? time : null;
+  };
   return {
     size: raw.size,
     mtime: toDate(raw.mtime),
+    mtimeMs: toEpochMs(raw.mtime),
     atime: toDate(raw.atime),
     birthtime: toDate(raw.birthtime),
     isFile: raw.isFile,
@@ -330,10 +339,10 @@ export async function fsStat(path: string): Promise<FileStat> {
 export async function getFileVersion(path: string): Promise<FileVersion | null> {
   try {
     const stat = await fsStat(path);
-    if (!stat.isFile || !stat.mtime) return null;
+    if (!stat.isFile || stat.mtimeMs == null) return null;
     return {
       size: stat.size,
-      mtimeMs: stat.mtime.getTime(),
+      mtimeMs: stat.mtimeMs,
     };
   } catch {
     return null;
