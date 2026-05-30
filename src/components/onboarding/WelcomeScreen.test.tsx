@@ -117,7 +117,7 @@ describe("WelcomeScreen", () => {
 
   it("switches to create view when New is clicked", async () => {
     render(<WelcomeScreen onOpenVault={vi.fn()} onCreateVault={vi.fn()} />);
-    fireEvent.click(screen.getByRole("button", { name: "New" }));
+    fireEvent.click(screen.getByRole("button", { name: "Create New Vault" }));
     expect(
       await screen.findByRole("heading", {
         name: "Create New Vault",
@@ -129,7 +129,7 @@ describe("WelcomeScreen", () => {
 
   it("returns to welcome view when back arrow is clicked", async () => {
     render(<WelcomeScreen onOpenVault={vi.fn()} onCreateVault={vi.fn()} />);
-    fireEvent.click(screen.getByRole("button", { name: "New" }));
+    fireEvent.click(screen.getByRole("button", { name: "Create New Vault" }));
     await screen.findByRole("heading", { name: "Create New Vault", level: 2 });
     const backButton = await screen.findByRole("button", { name: /cancel/i });
     fireEvent.click(backButton);
@@ -143,7 +143,7 @@ describe("WelcomeScreen", () => {
     render(
       <WelcomeScreen onOpenVault={vi.fn()} onCreateVault={onCreateVault} />,
     );
-    fireEvent.click(screen.getByRole("button", { name: "New" }));
+    fireEvent.click(screen.getByRole("button", { name: "Create New Vault" }));
     const input = await screen.findByPlaceholderText("My Notes");
     fireEvent.change(input, {
       target: { value: "My Vault" },

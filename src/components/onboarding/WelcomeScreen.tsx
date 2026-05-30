@@ -119,9 +119,9 @@ export function WelcomeScreen({
           <LanguageSwitcher className="absolute top-4 right-4 z-10" showLabel />
         )}
 
-        <div className="flex-1 flex overflow-hidden">
+        <div className="flex-1 flex min-h-0 overflow-hidden">
           {/* Left sidebar: Recent vaults */}
-          <div className="w-[280px] shrink-0 border-r border-border bg-ui-surface flex flex-col">
+          <div className="w-[320px] shrink-0 border-r border-border bg-muted flex flex-col">
             <RecentVaultList
               vaults={vaults}
               onSelect={(path) => onOpenVault(path)}
@@ -131,7 +131,7 @@ export function WelcomeScreen({
           </div>
 
           {/* Right pane */}
-          <div className="flex-1 flex items-center justify-center px-6 py-10 overflow-y-auto">
+          <div className="flex-1 flex items-center justify-center px-10 py-10 overflow-y-auto">
             <AnimatePresence mode="wait">
               {view === "welcome" ? (
                 <motion.div
@@ -144,34 +144,33 @@ export function WelcomeScreen({
                       ? {}
                       : { opacity: 0, transition: { duration: 0.15 } }
                   }
-                  className="flex flex-col items-center gap-6 w-full max-w-[640px]"
+                  className="flex w-full max-w-[560px] -translate-y-7 flex-col"
                 >
                   {/* Logo */}
-                  <motion.div variants={fadeUpVariants}>
+                  <motion.div
+                    variants={fadeUpVariants}
+                    className="-translate-y-11 mb-[76px] flex items-center gap-[22px]"
+                  >
                     <img
                       src={logoUrl}
                       alt="Lumina Note"
-                      className="w-20 h-20"
+                      className="h-[68px] w-[68px] rounded-ui-xl"
                     />
-                  </motion.div>
 
-                  {/* Title */}
-                  <motion.h1
-                    variants={fadeUpVariants}
-                    className="text-3xl font-semibold tracking-tight text-foreground"
-                  >
-                    {t.welcome.title}
-                  </motion.h1>
+                    {/* Title */}
+                    <h1 className="text-[36px] font-semibold leading-tight tracking-normal text-foreground">
+                      {t.welcome.title}
+                    </h1>
+                  </motion.div>
 
                   {/* Action cards */}
                   <motion.div
                     variants={fadeUpVariants}
-                    className="w-full flex flex-col gap-3 mt-2"
+                    className="w-full flex flex-col gap-[18px]"
                   >
                     <ActionCard
                       icon={FolderOpen}
                       title={t.welcome.openFolder}
-                      description={t.welcome.selectFolder}
                       action={{
                         label: t.common.open,
                         variant: "primary",
@@ -182,7 +181,6 @@ export function WelcomeScreen({
                       <ActionCard
                         icon={FolderPlus}
                         title={t.welcome.createVault}
-                        description={t.welcome.createVaultDesc}
                         action={{
                           label: t.welcome.newVaultButton,
                           variant: "secondary",
@@ -204,7 +202,7 @@ export function WelcomeScreen({
                       : { opacity: 0, transition: { duration: 0.15 } }
                   }
                   transition={{ duration: 0.2, ease: [0.2, 0.9, 0.1, 1] }}
-                  className="flex flex-col items-center gap-6 w-full max-w-[640px]"
+                  className="flex flex-col items-center gap-6 w-full max-w-[560px] -translate-y-7"
                 >
                   {/* Back button */}
                   <div className="w-full">

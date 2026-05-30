@@ -4,31 +4,30 @@ import { FolderOpen } from "lucide-react";
 import { ActionCard } from "./ActionCard";
 
 describe("ActionCard", () => {
-  it("renders title, description, and button", () => {
+  it("renders the action row", () => {
     render(
       <ActionCard
         icon={FolderOpen}
         title="Open Folder"
-        description="Select an existing folder"
         action={{ label: "Open", variant: "primary", onClick: vi.fn() }}
       />,
     );
     expect(screen.getByText("Open Folder")).toBeInTheDocument();
-    expect(screen.getByText("Select an existing folder")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Open" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Open Folder" }),
+    ).toBeInTheDocument();
   });
 
-  it("calls onClick when button is clicked", () => {
+  it("calls onClick when the row is clicked", () => {
     const onClick = vi.fn();
     render(
       <ActionCard
         icon={FolderOpen}
         title="Open Folder"
-        description="Select an existing folder"
         action={{ label: "Open", variant: "primary", onClick }}
       />,
     );
-    fireEvent.click(screen.getByRole("button", { name: "Open" }));
+    fireEvent.click(screen.getByRole("button", { name: "Open Folder" }));
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 });

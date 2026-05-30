@@ -34,27 +34,36 @@ export function RecentVaultList({
 
   return (
     <div className="h-full flex flex-col">
-      <div className="px-4 py-3 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-        {t.welcome.recentVaults}
+      <div className="flex items-center justify-between gap-3 px-6 pt-6 pb-4">
+        <h2 className="text-sm font-semibold text-muted-foreground">
+          {t.welcome.recentVaults}
+        </h2>
+        {vaults.length > 0 && (
+          <button
+            onClick={onClear}
+            className="rounded-ui-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-background hover:text-foreground"
+          >
+            {t.welcome.clearHistory}
+          </button>
+        )}
       </div>
 
       {vaults.length === 0 ? (
-        <div className="flex-1 flex flex-col items-center justify-center px-4 text-muted-foreground">
-          <Folder className="w-8 h-8 mb-2 opacity-40" />
-          <span className="text-sm">{t.welcome.noRecentVaults}</span>
+        <div className="px-6 text-sm text-muted-foreground/70">
+          {t.welcome.noRecentVaults}
         </div>
       ) : (
         <motion.div
           variants={listVariants}
           initial="hidden"
           animate="visible"
-          className="flex-1 overflow-y-auto px-2"
+          className="flex-1 overflow-y-auto px-4"
         >
           {vaults.map((vault) => (
             <motion.div
               key={vault.path}
               variants={itemVariants}
-              className="group relative flex items-center gap-2 px-2 py-2 rounded-ui-md hover:bg-accent cursor-pointer transition-colors duration-100"
+              className="group relative flex cursor-pointer items-center gap-2 rounded-ui-md px-2 py-2 transition-colors duration-fast hover:bg-background"
               onClick={() => onSelect(vault.path)}
             >
               <Folder className="w-4 h-4 text-muted-foreground shrink-0" />
@@ -79,17 +88,6 @@ export function RecentVaultList({
             </motion.div>
           ))}
         </motion.div>
-      )}
-
-      {vaults.length > 0 && (
-        <div className="px-4 py-2 border-t border-border">
-          <button
-            onClick={onClear}
-            className="text-xs text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {t.welcome.clearHistory}
-          </button>
-        </div>
       )}
     </div>
   );

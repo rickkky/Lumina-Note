@@ -1,12 +1,13 @@
 import type { LucideIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ActionCardProps {
   icon: LucideIcon;
   title: string;
-  description: string;
+  description?: string;
   action: {
-    label: string;
+    label?: string;
     variant: "primary" | "secondary";
     onClick: () => void;
   };
@@ -15,26 +16,25 @@ interface ActionCardProps {
 export function ActionCard({
   icon: Icon,
   title,
-  description,
   action,
 }: ActionCardProps) {
   return (
-    <div className="group flex items-center gap-4 p-4 rounded-ui-lg border border-border bg-background hover:shadow-elev-1 transition-shadow duration-200">
-      <div className="w-10 h-10 rounded-ui-md bg-accent flex items-center justify-center shrink-0">
-        <Icon className="w-5 h-5 text-primary" />
-      </div>
-      <div className="flex-1 min-w-0">
-        <h3 className="text-sm font-medium text-foreground">{title}</h3>
-        <p className="text-xs text-muted-foreground mt-0.5">{description}</p>
-      </div>
-      <Button
-        variant={action.variant}
-        size="md"
-        onClick={action.onClick}
-        className="shrink-0"
-      >
-        {action.label}
-      </Button>
-    </div>
+    <button
+      type="button"
+      aria-label={title}
+      className={cn(
+        "group grid min-h-[66px] w-full grid-cols-[22px_minmax(0,1fr)_18px] items-center gap-3 rounded-ui-xl px-4 text-left",
+        "transition-[background-color,border-color,color,transform] duration-fast ease-out-subtle active:scale-[0.99]",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        action.variant === "primary"
+          ? "border border-primary bg-primary text-primary-foreground hover:bg-primary/90"
+          : "border border-border bg-background text-foreground hover:border-foreground/20 hover:bg-accent",
+      )}
+      onClick={action.onClick}
+    >
+      <Icon className="h-[22px] w-[22px] shrink-0" />
+      <span className="min-w-0 truncate text-base font-semibold">{title}</span>
+      <ChevronRight className="h-[18px] w-[18px] justify-self-end opacity-90 transition-transform duration-fast group-hover:translate-x-0.5" />
+    </button>
   );
 }
