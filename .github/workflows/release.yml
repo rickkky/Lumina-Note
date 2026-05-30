@@ -197,6 +197,9 @@ jobs:
       # Each matrix runner uploads ONLY its own platform artifacts plus the
       # matching `latest*.yml` electron-updater feed file. No two runners
       # touch the same filename, so concurrent uploads are race-free.
+      - name: Validate updater asset references
+        run: npm run release:validate-assets
+
       - name: Upload platform artifacts to draft release
         shell: bash
         env:

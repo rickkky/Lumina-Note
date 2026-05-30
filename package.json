@@ -19,6 +19,7 @@
     "build:vite": "tsc && vite build",
     "preview": "electron-vite preview",
     "release:prepare": "node scripts/release_prepare.mjs",
+    "release:validate-assets": "node scripts/validate_release_assets.mjs",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "dist:mac": "electron-builder --mac",
