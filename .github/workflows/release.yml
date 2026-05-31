@@ -5,16 +5,24 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: false
+
 jobs:
   check-changelog:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
 
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: lts/*
+          node-version-file: node-runtime-version.txt
 
       - name: Install dependencies
         run: npm ci
@@ -33,6 +41,7 @@ jobs:
   create-release:
     needs: check-changelog
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: write
     steps:
@@ -41,7 +50,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: lts/*
+          node-version-file: node-runtime-version.txt
 
       - name: Install dependencies
         run: npm ci
@@ -74,13 +83,14 @@ jobs:
             script: dist:linux
 
     runs-on: ${{ matrix.platform }}
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v6
 
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: lts/*
+          node-version-file: node-runtime-version.txt
           cache: 'npm'
 
       # Manual bun install with --retry-all-errors. The official
@@ -233,6 +243,7 @@ jobs:
   publish-release:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: write
     steps:
