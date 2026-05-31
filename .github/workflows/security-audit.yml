@@ -1,11 +1,14 @@
 name: Security Audit
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches:
       - main
       - master
+  schedule:
+    - cron: '17 9 * * 1'
 
 permissions:
   contents: read
