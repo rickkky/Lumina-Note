@@ -10,6 +10,7 @@ const requiredFamilies = new Set(["find", "search_compare", "synthesize", "link"
 const runtimeTaskForbiddenFields = new Set([
   "expected_sources",
   "expected_evidence",
+  "expected_answer_checks",
   "expected_links",
   "expected_edits",
   "rubric",
@@ -347,6 +348,28 @@ async function main() {
       if (!text.includes(evidence.snippet)) fail(`${task.id}: expected evidence snippet not found in ${evidence.path}`);
     }
 
+    for (const [checkIndex, check] of task.expected_answer_checks.entries()) {
+      const label = `${task.id}.expected_answer_checks[${checkIndex}]`;
+      if (check.type === "must_cite_source") {
+        if (!check.path) fail(`${label}: must_cite_source requires path`);
+      } else if (check.type === "must_include_terms") {
+        if (!check.path || !Array.isArray(check.terms) || check.terms.length === 0) {
+          fail(`${label}: must_include_terms requires path and terms`);
+        }
+        if (!Number.isInteger(check.min_matches) || check.min_matches < 1 || check.min_matches > check.terms.length) {
+          fail(`${label}: min_matches must be between 1 and terms.length`);
+        }
+      } else if (check.type === "must_link") {
+        if (!check.link) fail(`${label}: must_link requires link`);
+      } else if (check.type === "status_is") {
+        if (!check.status) fail(`${label}: status_is requires status`);
+      }
+      if (check.path) {
+        validateRelativePath(check.path, `${label}.path`);
+        if (!noteSet.has(check.path)) fail(`${label}: path not found: ${check.path}`);
+      }
+    }
+
     if (task.evaluation_tier === "dev_realistic") {
       const prompt = task.prompt.toLowerCase();
       for (const sourcePath of task.expected_sources) {
@@ -482,8 +505,8 @@ async function main() {
     if (!scoreReport.family_scores || !scoreReport.high_risk_scores || !scoreReport.dimension_scores) {
       fail(`${manifest.default_score_report_json}: missing diagnostic score sections`);
     }
-    if (scoreReport.summary?.scoring_model !== "endpoint-primary-edit-gated-v0.3") {
-      fail(`${manifest.default_score_report_json}: score report must use endpoint-primary-edit-gated-v0.3`);
+    if (scoreReport.summary?.scoring_model !== "endpoint-primary-deterministic-checks-v0.4") {
+      fail(`${manifest.default_score_report_json}: score report must use endpoint-primary-deterministic-checks-v0.4`);
     }
     if (scoreReport.summary?.trajectory_metrics_are_diagnostics !== true || scoreReport.summary?.read_scope_metrics_are_diagnostics !== true || scoreReport.summary?.hard_gates_enforced !== true) {
       fail(`${manifest.default_score_report_json}: score report must mark trajectory/read-scope metrics as diagnostics and enforce edit hard gates`);

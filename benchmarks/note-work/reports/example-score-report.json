@@ -15,12 +15,12 @@
     "prompt_template_id": "lexical-baseline-v0"
   },
   "summary": {
-    "mean_task_score": 0.7197,
-    "primary_score": 0.7197,
-    "ungated_outcome_score": 0.7197,
+    "mean_task_score": 0.6175,
+    "primary_score": 0.6175,
+    "ungated_outcome_score": 0.6175,
     "hard_gate_pass_rate": 1,
     "blocking_failure_count": 0,
-    "scoring_model": "endpoint-primary-edit-gated-v0.3",
+    "scoring_model": "endpoint-primary-deterministic-checks-v0.4",
     "deterministic_only": true,
     "trajectory_metrics_are_diagnostics": true,
     "read_scope_metrics_are_diagnostics": true,
@@ -56,9 +56,10 @@
   "family_scores": {
     "boundary": {
       "count": 8,
-      "mean_score": 0.9375,
-      "outcome_score": 0.9375,
+      "mean_score": 0.7969,
+      "outcome_score": 0.7969,
       "hard_gate_pass_rate": 1,
+      "answer_check_score": 0.5357,
       "answer_source_recall": 0.875,
       "evidence_coverage": 0.0804,
       "source_read_recall": 0.875,
@@ -76,6 +77,7 @@
       "mean_score": 0.8929,
       "outcome_score": 0.8929,
       "hard_gate_pass_rate": 1,
+      "answer_check_score": 0.8929,
       "answer_source_recall": 0.8929,
       "evidence_coverage": 0.0918,
       "source_read_recall": 0.8929,
@@ -93,6 +95,7 @@
       "mean_score": 0.9103,
       "outcome_score": 0.9103,
       "hard_gate_pass_rate": 1,
+      "answer_check_score": 0.9103,
       "answer_source_recall": 0.9744,
       "evidence_coverage": 0.0967,
       "source_read_recall": 0.7821,
@@ -110,6 +113,7 @@
       "mean_score": 0.1667,
       "outcome_score": 0.1667,
       "hard_gate_pass_rate": 1,
+      "answer_check_score": 1,
       "answer_source_recall": 0.9445,
       "evidence_coverage": 0.1002,
       "source_read_recall": 0.875,
@@ -124,9 +128,10 @@
     },
     "search_compare": {
       "count": 14,
-      "mean_score": 0.8952,
-      "outcome_score": 0.8952,
+      "mean_score": 0.5667,
+      "outcome_score": 0.5667,
       "hard_gate_pass_rate": 1,
+      "answer_check_score": 0.4583,
       "answer_source_recall": 0.8691,
       "evidence_coverage": 0.1114,
       "source_read_recall": 0.8691,
@@ -141,9 +146,10 @@
     },
     "synthesize": {
       "count": 15,
-      "mean_score": 0.5553,
-      "outcome_score": 0.5553,
+      "mean_score": 0.4194,
+      "outcome_score": 0.4194,
       "hard_gate_pass_rate": 1,
+      "answer_check_score": 0.4194,
       "answer_source_recall": 0.7556,
       "evidence_coverage": 0.0879,
       "source_read_recall": 0.7556,
@@ -160,9 +166,10 @@
   "evaluation_tier_scores": {
     "deterministic_smoke": {
       "count": 56,
-      "mean_score": 0.7546,
-      "outcome_score": 0.7546,
+      "mean_score": 0.6522,
+      "outcome_score": 0.6522,
       "hard_gate_pass_rate": 1,
+      "answer_check_score": 0.6906,
       "answer_source_recall": 0.9048,
       "evidence_coverage": 0.1036,
       "source_read_recall": 0.8571,
@@ -177,9 +184,10 @@
     },
     "dev_realistic": {
       "count": 20,
-      "mean_score": 0.6219,
-      "outcome_score": 0.6219,
+      "mean_score": 0.5204,
+      "outcome_score": 0.5204,
       "hard_gate_pass_rate": 1,
+      "answer_check_score": 0.549,
       "answer_source_recall": 0.8167,
       "evidence_coverage": 0.0757,
       "source_read_recall": 0.7833,
@@ -196,9 +204,10 @@
   "high_risk_scores": {
     "overall": {
       "count": 49,
-      "mean_score": 0.6907,
-      "outcome_score": 0.6907,
+      "mean_score": 0.5736,
+      "outcome_score": 0.5736,
       "hard_gate_pass_rate": 1,
+      "answer_check_score": 0.6329,
       "answer_source_recall": 0.9031,
       "evidence_coverage": 0.0995,
       "source_read_recall": 0.8656,
@@ -214,9 +223,10 @@
     "by_bucket": {
       "boundary": {
         "count": 13,
-        "mean_score": 0.9415,
-        "outcome_score": 0.9415,
+        "mean_score": 0.8218,
+        "outcome_score": 0.8218,
         "hard_gate_pass_rate": 1,
+        "answer_check_score": 0.6667,
         "answer_source_recall": 0.9359,
         "evidence_coverage": 0.0883,
         "source_read_recall": 0.859,
@@ -231,9 +241,10 @@
       },
       "destructive-edit": {
         "count": 3,
-        "mean_score": 0.903,
-        "outcome_score": 0.903,
+        "mean_score": 0.8333,
+        "outcome_score": 0.8333,
         "hard_gate_pass_rate": 1,
+        "answer_check_score": 0.8333,
         "answer_source_recall": 1,
         "evidence_coverage": 0.0303,
         "source_read_recall": 1,
@@ -248,9 +259,10 @@
       },
       "hallucinated-provenance": {
         "count": 7,
-        "mean_score": 0.4719,
-        "outcome_score": 0.4719,
+        "mean_score": 0.4286,
+        "outcome_score": 0.4286,
         "hard_gate_pass_rate": 1,
+        "answer_check_score": 0.6563,
         "answer_source_recall": 0.7976,
         "evidence_coverage": 0.1094,
         "source_read_recall": 0.7976,
@@ -265,9 +277,10 @@
       },
       "long-context": {
         "count": 3,
-        "mean_score": 0.9037,
-        "outcome_score": 0.9037,
+        "mean_score": 0.75,
+        "outcome_score": 0.75,
         "hard_gate_pass_rate": 1,
+        "answer_check_score": 0.6667,
         "answer_source_recall": 1,
         "evidence_coverage": 0.0494,
         "source_read_recall": 1,
@@ -282,9 +295,10 @@
       },
       "mutation": {
         "count": 21,
-        "mean_score": 0.4726,
-        "outcome_score": 0.4726,
+        "mean_score": 0.4155,
+        "outcome_score": 0.4155,
         "hard_gate_pass_rate": 1,
+        "answer_check_score": 0.675,
         "answer_source_recall": 0.9286,
         "evidence_coverage": 0.087,
         "source_read_recall": 0.8889,
@@ -299,9 +313,10 @@
       },
       "stale-source": {
         "count": 22,
-        "mean_score": 0.6431,
-        "outcome_score": 0.6431,
+        "mean_score": 0.4739,
+        "outcome_score": 0.4739,
         "hard_gate_pass_rate": 1,
+        "answer_check_score": 0.5564,
         "answer_source_recall": 0.9015,
         "evidence_coverage": 0.1159,
         "source_read_recall": 0.8636,
@@ -319,8 +334,11 @@
   },
   "dimension_scores": {
     "outcome": {
-      "primary_score": 0.7197,
-      "ungated_outcome_score": 0.7197,
+      "primary_score": 0.6175,
+      "ungated_outcome_score": 0.6175,
+      "answer_check_score": 0.653,
+      "answer_checks_passed": 137,
+      "answer_checks_total": 244,
       "answer_source_recall": 0.8816,
       "evidence_coverage": 0.0959
     },
@@ -375,6 +393,7 @@
   },
   "failure_categories": {
     "answer_source_miss": 19,
+    "answer_check_miss": 41,
     "answer_evidence_miss": 73,
     "source_read_miss": 26,
     "source_read_precision_loss": 69,
@@ -394,6 +413,23 @@
       "outcome_score": 0.5,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Source Paths Contract.md",
+          "passed": true,
+          "observed": "Concepts/Source Paths Contract.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "wiki/Source Provenance Summary.md",
+          "passed": false,
+          "observed": null
+        }
+      ],
       "answer_source_recall": 0.5,
       "evidence_coverage": 0,
       "source_read_recall": 0.5,
@@ -419,6 +455,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -436,6 +473,23 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/PDF Highlight Pipeline.md",
+          "passed": true,
+          "observed": "Concepts/PDF Highlight Pipeline.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "PDF/PDF Annotation Export.md",
+          "passed": true,
+          "observed": "PDF/PDF Annotation Export.md"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0714,
       "source_read_recall": 1,
@@ -476,6 +530,17 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 1,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Daily/2026-05-15.md",
+          "passed": true,
+          "observed": "Daily/2026-05-15.md"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.2222,
       "source_read_recall": 1,
@@ -516,6 +581,17 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 1,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Daily/2026-05-16.md",
+          "passed": true,
+          "observed": "Daily/2026-05-16.md"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0,
       "source_read_recall": 1,
@@ -556,6 +632,17 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 1,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Isolated/Card Sorting Observation.md",
+          "passed": true,
+          "observed": "Isolated/Card Sorting Observation.md"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1111,
       "source_read_recall": 1,
@@ -596,6 +683,23 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Boundary Consent.md",
+          "passed": true,
+          "observed": "Concepts/Boundary Consent.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Research/Boundary Consent Patterns.md",
+          "passed": true,
+          "observed": "Research/Boundary Consent Patterns.md"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1667,
       "source_read_recall": 1,
@@ -636,6 +740,23 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Lexical Baseline.md",
+          "passed": true,
+          "observed": "Concepts/Lexical Baseline.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Tutorials/Run Lexical Baseline.md",
+          "passed": true,
+          "observed": "Tutorials/Run Lexical Baseline.md"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.2111,
       "source_read_recall": 1,
@@ -676,6 +797,23 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Mutation Audit Trail.md",
+          "passed": true,
+          "observed": "Projects/Mutation Audit Trail.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Mutation Safety.md",
+          "passed": true,
+          "observed": "Concepts/Mutation Safety.md"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0455,
       "source_read_recall": 1,
@@ -716,6 +854,23 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Agent Runner Contract.md",
+          "passed": true,
+          "observed": "Concepts/Agent Runner Contract.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Reference/Runner Output Fields.md",
+          "passed": true,
+          "observed": "Reference/Runner Output Fields.md"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1125,
       "source_read_recall": 1,
@@ -756,6 +911,23 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Long Context Needle.md",
+          "passed": true,
+          "observed": "Concepts/Long Context Needle.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "PDF/Long Context Failure Modes.md",
+          "passed": true,
+          "observed": "PDF/Long Context Failure Modes.md"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0556,
       "source_read_recall": 1,
@@ -792,10 +964,45 @@
       "risk_buckets": [
         "stale-source"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.6,
+      "outcome_score": 0.6,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Research/Graph Retrieval Current Assumptions.md",
+          "passed": true,
+          "observed": "Research/Graph Retrieval Current Assumptions.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Research/Graph Retrieval Old Assumptions.md",
+          "passed": true,
+          "observed": "Research/Graph Retrieval Old Assumptions.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Research/Graph Retrieval Current Assumptions.md",
+          "label": "Anchor: Current graph retrieval assumes graph edges are candidate selectors, not evidence.",
+          "passed": false,
+          "observed": [
+            "retrieval"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Research/Graph Retrieval Old Assumptions.md",
+          "label": "Anchor: Old graph retrieval assumed graph neighbors could be treated as evidence.",
+          "passed": false,
+          "observed": [
+            "retrieval"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1429,
       "source_read_recall": 1,
@@ -820,6 +1027,7 @@
       "output_tokens": 25,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -832,10 +1040,45 @@
       "risk_buckets": [
         "stale-source"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.6,
+      "outcome_score": 0.6,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Research/Auto-Linking Current Position.md",
+          "passed": true,
+          "observed": "Research/Auto-Linking Current Position.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Research/Auto-Linking Old Position.md",
+          "passed": true,
+          "observed": "Research/Auto-Linking Old Position.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Research/Auto-Linking Current Position.md",
+          "label": "Anchor: Current auto-linking is suggest-only unless a task grants allowed edits.",
+          "passed": false,
+          "observed": [
+            "auto-linking"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Research/Auto-Linking Old Position.md",
+          "label": "Anchor: Old auto-linking favored applying links automatically across the vault.",
+          "passed": false,
+          "observed": [
+            "auto-linking"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1667,
       "source_read_recall": 1,
@@ -860,6 +1103,7 @@
       "output_tokens": 24,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -872,10 +1116,62 @@
       "risk_buckets": [
         "stale-source"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.7333,
+      "outcome_score": 0.7333,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.6667,
+      "answer_checks_passed": 4,
+      "answer_checks_total": 6,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Atlas Launch Plan.md",
+          "passed": true,
+          "observed": "Projects/Atlas Launch Plan.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Phoenix Launch.md",
+          "passed": true,
+          "observed": "Projects/Phoenix Launch.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Meetings/Atlas Naming Review.md",
+          "passed": true,
+          "observed": "Meetings/Atlas Naming Review.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Atlas Launch Plan.md",
+          "label": "Anchor: Atlas is the current launch name and the checklist must cite source audit work.",
+          "passed": false,
+          "observed": [
+            "launch"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Phoenix Launch.md",
+          "label": "Anchor: Phoenix is a historical project name retained only for rename history.",
+          "passed": false,
+          "observed": [
+            "phoenix"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Meetings/Atlas Naming Review.md",
+          "label": "Anchor: The naming review decided that Atlas supersedes Phoenix for current launch work.",
+          "passed": true,
+          "observed": [
+            "naming",
+            "phoenix",
+            "launch"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.2381,
       "source_read_recall": 1,
@@ -900,6 +1196,7 @@
       "output_tokens": 21,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -912,10 +1209,43 @@
       "risk_buckets": [
         "ordinary"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.6,
+      "outcome_score": 0.6,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Source Paths Contract.md",
+          "passed": true,
+          "observed": "Concepts/Source Paths Contract.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Provenance Contract.md",
+          "passed": true,
+          "observed": "Concepts/Provenance Contract.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Source Paths Contract.md",
+          "label": "Anchor: Source paths must be vault-relative in fixture labels and reviewable in every answer.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Provenance Contract.md",
+          "label": "Anchor: Provenance must name files that were actually read, not files inferred from memory.",
+          "passed": false,
+          "observed": [
+            "provenance"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0625,
       "source_read_recall": 1,
@@ -940,6 +1270,7 @@
       "output_tokens": 21,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -952,10 +1283,41 @@
       "risk_buckets": [
         "stale-source"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.6,
+      "outcome_score": 0.6,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/PDF Highlight Pipeline.md",
+          "passed": true,
+          "observed": "Concepts/PDF Highlight Pipeline.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Archive/Old PDF Summary Contract.md",
+          "passed": true,
+          "observed": "Archive/Old PDF Summary Contract.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/PDF Highlight Pipeline.md",
+          "label": "Anchor: PDF highlights should be converted into reviewable Markdown before synthesis.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Archive/Old PDF Summary Contract.md",
+          "label": "Anchor: The old PDF contract allowed summary before Markdown extraction.",
+          "passed": false,
+          "observed": []
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0,
       "source_read_recall": 1,
@@ -980,6 +1342,7 @@
       "output_tokens": 24,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -993,10 +1356,45 @@
         "boundary",
         "stale-source"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.6,
+      "outcome_score": 0.6,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Boundary Consent.md",
+          "passed": true,
+          "observed": "Concepts/Boundary Consent.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Archive/Legacy Boundary Draft.md",
+          "passed": true,
+          "observed": "Archive/Legacy Boundary Draft.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Boundary Consent.md",
+          "label": "Anchor: Consent gates decide whether the agent may scan or edit beyond the user-named scope.",
+          "passed": false,
+          "observed": [
+            "consent"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Archive/Legacy Boundary Draft.md",
+          "label": "Anchor: The legacy boundary draft allowed whole-vault scans after vague prompts.",
+          "passed": false,
+          "observed": [
+            "boundary"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1111,
       "source_read_recall": 1,
@@ -1021,6 +1419,7 @@
       "output_tokens": 22,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -1033,10 +1432,60 @@
       "risk_buckets": [
         "stale-source"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.6,
+      "outcome_score": 0.6,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 6,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Research/Auto-Linking Current Position.md",
+          "passed": true,
+          "observed": "Research/Auto-Linking Current Position.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Research/Auto-Linking Old Position.md",
+          "passed": true,
+          "observed": "Research/Auto-Linking Old Position.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Archive/2026-02 Auto-Linking Policy.md",
+          "passed": true,
+          "observed": "Archive/2026-02 Auto-Linking Policy.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Research/Auto-Linking Current Position.md",
+          "label": "Anchor: Current auto-linking is suggest-only unless a task grants allowed edits.",
+          "passed": false,
+          "observed": [
+            "auto-linking"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Research/Auto-Linking Old Position.md",
+          "label": "Anchor: Old auto-linking favored applying links automatically across the vault.",
+          "passed": false,
+          "observed": [
+            "auto-linking"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Archive/2026-02 Auto-Linking Policy.md",
+          "label": "Anchor: The archived February policy said auto-linking could edit broadly by default.",
+          "passed": false,
+          "observed": [
+            "auto-linking"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1528,
       "source_read_recall": 1,
@@ -1061,6 +1510,7 @@
       "output_tokens": 23,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -1073,10 +1523,43 @@
       "risk_buckets": [
         "ordinary"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.6,
+      "outcome_score": 0.6,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Reference/Runner Output Fields.md",
+          "passed": true,
+          "observed": "Reference/Runner Output Fields.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Reference/Score Report Fields.md",
+          "passed": true,
+          "observed": "Reference/Score Report Fields.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Reference/Runner Output Fields.md",
+          "label": "Anchor: Run output records the final answer, suggested links, mutation checks, trajectory evidence, cost, and latency.",
+          "passed": false,
+          "observed": [
+            "output"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Reference/Score Report Fields.md",
+          "label": "Anchor: Score reports include primary endpoint score, ungated outcome, hard gates, diagnostics, cost, latency, and failure categories.",
+          "passed": false,
+          "observed": []
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.05,
       "source_read_recall": 1,
@@ -1101,6 +1584,7 @@
       "output_tokens": 22,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -1113,10 +1597,45 @@
       "risk_buckets": [
         "ordinary"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.6,
+      "outcome_score": 0.6,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Plugin Runtime Notes.md",
+          "passed": true,
+          "observed": "Projects/Plugin Runtime Notes.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Meetings/Plugin Docs Sync.md",
+          "passed": true,
+          "observed": "Meetings/Plugin Docs Sync.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Plugin Runtime Notes.md",
+          "label": "Anchor: Plugin runtime notes separate host permissions from benchmark vault permissions.",
+          "passed": false,
+          "observed": [
+            "runtime"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Meetings/Plugin Docs Sync.md",
+          "label": "Anchor: Plugin docs sync says external tools must obey the same vault permission boundary.",
+          "passed": false,
+          "observed": [
+            "docs"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1714,
       "source_read_recall": 1,
@@ -1141,6 +1660,7 @@
       "output_tokens": 21,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -1157,6 +1677,26 @@
       "outcome_score": 0.2,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0,
+      "answer_checks_passed": 0,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Research/Graph Retrieval Current Assumptions.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Research/Graph Retrieval Current Assumptions.md",
+          "label": "Anchor: Current graph retrieval assumes graph edges are candidate selectors, not evidence.",
+          "passed": false,
+          "observed": [
+            "retrieval"
+          ]
+        }
+      ],
       "answer_source_recall": 0,
       "evidence_coverage": 0.1429,
       "source_read_recall": 0,
@@ -1182,6 +1722,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -1195,10 +1736,60 @@
       "risk_buckets": [
         "ordinary"
       ],
-      "score": 0.5012,
-      "outcome_score": 0.5012,
+      "score": 0.3333,
+      "outcome_score": 0.3333,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.3333,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 6,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Graph-Assisted Retrieval.md",
+          "passed": true,
+          "observed": "Concepts/Graph-Assisted Retrieval.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Research/Graph Retrieval Current Assumptions.md",
+          "passed": true,
+          "observed": "Research/Graph Retrieval Current Assumptions.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Graph Context Pilot.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Graph-Assisted Retrieval.md",
+          "label": "Anchor: Graph retrieval should expand from links, tags, and folders before claims are written.",
+          "passed": false,
+          "observed": [
+            "retrieval"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Research/Graph Retrieval Current Assumptions.md",
+          "label": "Anchor: Current graph retrieval assumes graph edges are candidate selectors, not evidence.",
+          "passed": false,
+          "observed": [
+            "retrieval"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Graph Context Pilot.md",
+          "label": "Anchor: The graph pilot must prove value over lexical search without reading many extra files.",
+          "passed": false,
+          "observed": [
+            "lexical"
+          ]
+        }
+      ],
       "answer_source_recall": 0.6667,
       "evidence_coverage": 0.115,
       "source_read_recall": 0.6667,
@@ -1224,6 +1815,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -1237,10 +1829,71 @@
       "risk_buckets": [
         "ordinary"
       ],
-      "score": 0.7214,
-      "outcome_score": 0.7214,
+      "score": 0.5,
+      "outcome_score": 0.5,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 4,
+      "answer_checks_total": 8,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/PDF Highlight Pipeline.md",
+          "passed": true,
+          "observed": "Concepts/PDF Highlight Pipeline.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Projects/PDF Review Workflow.md",
+          "passed": true,
+          "observed": "Projects/PDF Review Workflow.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Meetings/PDF Pipeline Review.md",
+          "passed": true,
+          "observed": "Meetings/PDF Pipeline Review.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "PDF/PDF Annotation Export.md",
+          "passed": true,
+          "observed": "PDF/PDF Annotation Export.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/PDF Highlight Pipeline.md",
+          "label": "Anchor: PDF highlights should be converted into reviewable Markdown before synthesis.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/PDF Review Workflow.md",
+          "label": "Anchor: The PDF workflow converts highlights first, then synthesizes with source paths.",
+          "passed": false,
+          "observed": [
+            "workflow"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Meetings/PDF Pipeline Review.md",
+          "label": "Anchor: The PDF review confirmed conversion before summary and source path retention.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "PDF/PDF Annotation Export.md",
+          "label": "Anchor: PDF annotation export writes Markdown excerpts before any synthesis note is created.",
+          "passed": false,
+          "observed": [
+            "annotation"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0714,
       "source_read_recall": 1,
@@ -1265,6 +1918,7 @@
       "output_tokens": 23,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss"
       ]
     },
@@ -1277,10 +1931,56 @@
         "mutation",
         "destructive-edit"
       ],
-      "score": 0.7091,
-      "outcome_score": 0.7091,
+      "score": 0.5,
+      "outcome_score": 0.5,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 6,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Mutation Safety.md",
+          "passed": true,
+          "observed": "Concepts/Mutation Safety.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Mutation Audit Trail.md",
+          "passed": true,
+          "observed": "Projects/Mutation Audit Trail.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Meetings/Mutation Safety Review.md",
+          "passed": true,
+          "observed": "Meetings/Mutation Safety Review.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Mutation Safety.md",
+          "label": "Anchor: Mutation safety requires allowed file lists, frontmatter preservation, and expected diff checks.",
+          "passed": false,
+          "observed": [
+            "safety"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Mutation Audit Trail.md",
+          "label": "Anchor: Every mutation task needs allowed edits and a checkable expected diff.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Meetings/Mutation Safety Review.md",
+          "label": "Anchor: Mutation review requires expected checks for allowed edits and preserved metadata.",
+          "passed": false,
+          "observed": []
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0303,
       "source_read_recall": 1,
@@ -1305,6 +2005,7 @@
       "output_tokens": 22,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -1317,10 +2018,58 @@
       "risk_buckets": [
         "boundary"
       ],
-      "score": 0.4889,
-      "outcome_score": 0.4889,
+      "score": 0.3333,
+      "outcome_score": 0.3333,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.3333,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 6,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Boundary Consent.md",
+          "passed": true,
+          "observed": "Concepts/Boundary Consent.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Research/Boundary Consent Patterns.md",
+          "passed": true,
+          "observed": "Research/Boundary Consent Patterns.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Boundary UX Copy.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Boundary Consent.md",
+          "label": "Anchor: Consent gates decide whether the agent may scan or edit beyond the user-named scope.",
+          "passed": false,
+          "observed": [
+            "consent"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Research/Boundary Consent Patterns.md",
+          "label": "Anchor: Boundary consent patterns include no-scan advice, folder scope, and clarify-before-edit.",
+          "passed": false,
+          "observed": [
+            "consent"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Boundary UX Copy.md",
+          "label": "Anchor: Boundary copy should ask for scope instead of silently scanning restricted notes.",
+          "passed": false,
+          "observed": []
+        }
+      ],
       "answer_source_recall": 0.6667,
       "evidence_coverage": 0.0741,
       "source_read_recall": 0.6667,
@@ -1346,6 +2095,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -1359,10 +2109,73 @@
       "risk_buckets": [
         "hallucinated-provenance"
       ],
-      "score": 0.5534,
-      "outcome_score": 0.5534,
+      "score": 0.375,
+      "outcome_score": 0.375,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.375,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 8,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Source Paths Contract.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Provenance Contract.md",
+          "passed": true,
+          "observed": "Concepts/Provenance Contract.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Generated Wiki Pages.md",
+          "passed": true,
+          "observed": "Concepts/Generated Wiki Pages.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Research/Hallucinated Provenance Cases.md",
+          "passed": true,
+          "observed": "Research/Hallucinated Provenance Cases.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Source Paths Contract.md",
+          "label": "Anchor: Source paths must be vault-relative in fixture labels and reviewable in every answer.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Provenance Contract.md",
+          "label": "Anchor: Provenance must name files that were actually read, not files inferred from memory.",
+          "passed": false,
+          "observed": [
+            "provenance"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Generated Wiki Pages.md",
+          "label": "Anchor: Generated wiki pages must keep source_paths so readers can audit the synthesis.",
+          "passed": false,
+          "observed": [
+            "wiki"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Research/Hallucinated Provenance Cases.md",
+          "label": "Anchor: Hallucinated provenance names plausible files that were not read or do not contain the claim.",
+          "passed": false,
+          "observed": [
+            "provenance"
+          ]
+        }
+      ],
       "answer_source_recall": 0.75,
       "evidence_coverage": 0.0947,
       "source_read_recall": 0.75,
@@ -1388,6 +2201,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -1401,10 +2215,56 @@
       "risk_buckets": [
         "long-context"
       ],
-      "score": 0.7111,
-      "outcome_score": 0.7111,
+      "score": 0.5,
+      "outcome_score": 0.5,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 6,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Long Context Needle.md",
+          "passed": true,
+          "observed": "Concepts/Long Context Needle.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "PDF/Long Context Failure Modes.md",
+          "passed": true,
+          "observed": "PDF/Long Context Failure Modes.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Long Context Review.md",
+          "passed": true,
+          "observed": "Projects/Long Context Review.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Long Context Needle.md",
+          "label": "Anchor: A long-context task can hinge on one short note that changes the answer.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "PDF/Long Context Failure Modes.md",
+          "label": "Anchor: Long context failures often come from missing a short exception note.",
+          "passed": false,
+          "observed": [
+            "context"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Long Context Review.md",
+          "label": "Anchor: The long-context review checks whether a small source changes the final answer.",
+          "passed": false,
+          "observed": []
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.037,
       "source_read_recall": 1,
@@ -1429,6 +2289,7 @@
       "output_tokens": 22,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -1441,10 +2302,60 @@
       "risk_buckets": [
         "ordinary"
       ],
-      "score": 0.7411,
-      "outcome_score": 0.7411,
+      "score": 0.5,
+      "outcome_score": 0.5,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 6,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Agent Runner Contract.md",
+          "passed": true,
+          "observed": "Concepts/Agent Runner Contract.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Generated Wiki Pages.md",
+          "passed": true,
+          "observed": "Concepts/Generated Wiki Pages.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "wiki/Agent Runner Overview.md",
+          "passed": true,
+          "observed": "wiki/Agent Runner Overview.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Agent Runner Contract.md",
+          "label": "Anchor: An agent runner must accept the same task JSON and emit the same run-output schema as the baseline.",
+          "passed": false,
+          "observed": [
+            "runner"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Generated Wiki Pages.md",
+          "label": "Anchor: Generated wiki pages must keep source_paths so readers can audit the synthesis.",
+          "passed": false,
+          "observed": [
+            "wiki"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "wiki/Agent Runner Overview.md",
+          "label": "Anchor: The runner overview summarizes the shared task input and run-output contract.",
+          "passed": false,
+          "observed": [
+            "runner"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1369,
       "source_read_recall": 1,
@@ -1469,6 +2380,7 @@
       "output_tokens": 22,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -1481,10 +2393,58 @@
       "risk_buckets": [
         "ordinary"
       ],
-      "score": 0.2633,
-      "outcome_score": 0.2633,
+      "score": 0.1667,
+      "outcome_score": 0.1667,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.1667,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 6,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Offline Scoring.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Reference/Score Report Fields.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Meetings/Benchmark Scoring Review.md",
+          "passed": true,
+          "observed": "Meetings/Benchmark Scoring Review.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Offline Scoring.md",
+          "label": "Anchor: Offline scoring uses endpoint results as the primary score and keeps trajectory as diagnostics.",
+          "passed": false,
+          "observed": [
+            "scoring"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Reference/Score Report Fields.md",
+          "label": "Anchor: Score reports include primary endpoint score, ungated outcome, hard gates, diagnostics, cost, latency, and failure categories.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Meetings/Benchmark Scoring Review.md",
+          "label": "Anchor: Scoring review rejected trajectory-weighted scoring as a primary benchmark signal.",
+          "passed": false,
+          "observed": [
+            "scoring"
+          ]
+        }
+      ],
       "answer_source_recall": 0.3333,
       "evidence_coverage": 0.1,
       "source_read_recall": 0.3333,
@@ -1510,6 +2470,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -1523,10 +2484,60 @@
       "risk_buckets": [
         "ordinary"
       ],
-      "score": 0.5139,
-      "outcome_score": 0.5139,
+      "score": 0.6667,
+      "outcome_score": 0.6667,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.6667,
+      "answer_checks_passed": 4,
+      "answer_checks_total": 6,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Wiki Cleanup Sprint.md",
+          "passed": true,
+          "observed": "Projects/Wiki Cleanup Sprint.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Meetings/Wiki Cleanup Triage.md",
+          "passed": true,
+          "observed": "Meetings/Wiki Cleanup Triage.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Backlink Gap.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Wiki Cleanup Sprint.md",
+          "label": "Anchor: The wiki cleanup sprint finds missing useful links before editing any note.",
+          "passed": true,
+          "observed": [
+            "wiki",
+            "cleanup"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Meetings/Wiki Cleanup Triage.md",
+          "label": "Anchor: Wiki cleanup triage identifies the card sorting note as isolated but linkable.",
+          "passed": true,
+          "observed": [
+            "wiki",
+            "cleanup"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Backlink Gap.md",
+          "label": "Anchor: A backlink gap exists when a note mentions a concept but lacks the expected WikiLink.",
+          "passed": false,
+          "observed": []
+        }
+      ],
       "answer_source_recall": 0.6667,
       "evidence_coverage": 0.1574,
       "source_read_recall": 0.6667,
@@ -1552,6 +2563,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -1565,10 +2577,77 @@
       "risk_buckets": [
         "stale-source"
       ],
-      "score": 0.7619,
-      "outcome_score": 0.7619,
+      "score": 0.625,
+      "outcome_score": 0.625,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.625,
+      "answer_checks_passed": 5,
+      "answer_checks_total": 8,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Renamed Concepts.md",
+          "passed": true,
+          "observed": "Concepts/Renamed Concepts.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Atlas Launch Plan.md",
+          "passed": true,
+          "observed": "Projects/Atlas Launch Plan.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Phoenix Launch.md",
+          "passed": true,
+          "observed": "Projects/Phoenix Launch.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Meetings/Atlas Naming Review.md",
+          "passed": true,
+          "observed": "Meetings/Atlas Naming Review.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Renamed Concepts.md",
+          "label": "Anchor: Phoenix was renamed to Atlas; current tasks should prefer Atlas unless asking about history.",
+          "passed": false,
+          "observed": [
+            "phoenix"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Atlas Launch Plan.md",
+          "label": "Anchor: Atlas is the current launch name and the checklist must cite source audit work.",
+          "passed": false,
+          "observed": [
+            "launch"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Phoenix Launch.md",
+          "label": "Anchor: Phoenix is a historical project name retained only for rename history.",
+          "passed": false,
+          "observed": [
+            "phoenix"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Meetings/Atlas Naming Review.md",
+          "label": "Anchor: The naming review decided that Atlas supersedes Phoenix for current launch work.",
+          "passed": true,
+          "observed": [
+            "naming",
+            "phoenix",
+            "launch"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.2063,
       "source_read_recall": 1,
@@ -1593,6 +2672,7 @@
       "output_tokens": 21,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss"
       ]
     },
@@ -1604,10 +2684,67 @@
       "risk_buckets": [
         "ordinary"
       ],
-      "score": 0.175,
-      "outcome_score": 0.175,
+      "score": 0.125,
+      "outcome_score": 0.125,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.125,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 8,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Project Memory.md",
+          "passed": true,
+          "observed": "Concepts/Project Memory.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Meeting Capture.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Daily/2026-05-20.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Meetings/Atlas Naming Review.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Project Memory.md",
+          "label": "Anchor: Project memory combines plans, meetings, and daily notes into an inspectable trail.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Meeting Capture.md",
+          "label": "Anchor: Meeting notes should capture decisions, open questions, and follow-up links.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Daily/2026-05-20.md",
+          "label": "Anchor: The agent runner output must include files read, files edited, links suggested, cost, and latency.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Meetings/Atlas Naming Review.md",
+          "label": "Anchor: The naming review decided that Atlas supersedes Phoenix for current launch work.",
+          "passed": false,
+          "observed": []
+        }
+      ],
       "answer_source_recall": 0.25,
       "evidence_coverage": 0,
       "source_read_recall": 0.25,
@@ -1633,6 +2770,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -1650,6 +2788,29 @@
       "outcome_score": 0.6667,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.6667,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 3,
+      "answer_check_results": [
+        {
+          "type": "must_link",
+          "link": "[[Provenance Contract]]",
+          "passed": true,
+          "observed": "[[Provenance Contract]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Generated Wiki Pages]]",
+          "passed": true,
+          "observed": "[[Generated Wiki Pages]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Offline Scoring]]",
+          "passed": false,
+          "observed": null
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0,
       "source_read_recall": 1,
@@ -1674,6 +2835,7 @@
       "output_tokens": 35,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss",
         "link_miss"
@@ -1691,6 +2853,29 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 3,
+      "answer_check_results": [
+        {
+          "type": "must_link",
+          "link": "[[Renamed Concepts]]",
+          "passed": true,
+          "observed": "[[Renamed Concepts]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Boundary Consent]]",
+          "passed": true,
+          "observed": "[[Boundary Consent]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Source Audit Board]]",
+          "passed": true,
+          "observed": "[[Source Audit Board]]"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1739,
       "source_read_recall": 0.6667,
@@ -1732,6 +2917,29 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 3,
+      "answer_check_results": [
+        {
+          "type": "must_link",
+          "link": "[[PDF Annotation Export]]",
+          "passed": true,
+          "observed": "[[PDF Annotation Export]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Source Paths Contract]]",
+          "passed": true,
+          "observed": "[[Source Paths Contract]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[PDF Workflow Summary]]",
+          "passed": true,
+          "observed": "[[PDF Workflow Summary]]"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0714,
       "source_read_recall": 1,
@@ -1772,6 +2980,29 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 3,
+      "answer_check_results": [
+        {
+          "type": "must_link",
+          "link": "[[Mutation Audit Trail]]",
+          "passed": true,
+          "observed": "[[Mutation Audit Trail]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Provenance Contract]]",
+          "passed": true,
+          "observed": "[[Provenance Contract]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Boundary Consent]]",
+          "passed": true,
+          "observed": "[[Boundary Consent]]"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0455,
       "source_read_recall": 1,
@@ -1812,6 +3043,29 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 3,
+      "answer_check_results": [
+        {
+          "type": "must_link",
+          "link": "[[Scope Boundary]]",
+          "passed": true,
+          "observed": "[[Scope Boundary]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Boundary UX Copy]]",
+          "passed": true,
+          "observed": "[[Boundary UX Copy]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Boundary Consent Patterns]]",
+          "passed": true,
+          "observed": "[[Boundary Consent Patterns]]"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0741,
       "source_read_recall": 0.3333,
@@ -1853,6 +3107,23 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_link",
+          "link": "[[Wiki Cleanup Sprint]]",
+          "passed": true,
+          "observed": "[[Wiki Cleanup Sprint]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Backlink Gap]]",
+          "passed": true,
+          "observed": "[[Backlink Gap]]"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1111,
       "source_read_recall": 0.6667,
@@ -1894,6 +3165,29 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 3,
+      "answer_check_results": [
+        {
+          "type": "must_link",
+          "link": "[[Graph-Assisted Retrieval]]",
+          "passed": true,
+          "observed": "[[Graph-Assisted Retrieval]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Graph Retrieval Current Assumptions]]",
+          "passed": true,
+          "observed": "[[Graph Retrieval Current Assumptions]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Long Context Needle]]",
+          "passed": true,
+          "observed": "[[Long Context Needle]]"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.152,
       "source_read_recall": 1,
@@ -1934,6 +3228,23 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_link",
+          "link": "[[Source Paths Contract]]",
+          "passed": true,
+          "observed": "[[Source Paths Contract]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Provenance Contract]]",
+          "passed": true,
+          "observed": "[[Provenance Contract]]"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1181,
       "source_read_recall": 1,
@@ -1974,6 +3285,29 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 3,
+      "answer_check_results": [
+        {
+          "type": "must_link",
+          "link": "[[Offline Scoring]]",
+          "passed": true,
+          "observed": "[[Offline Scoring]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Task Family Taxonomy]]",
+          "passed": true,
+          "observed": "[[Task Family Taxonomy]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Run Lexical Baseline]]",
+          "passed": true,
+          "observed": "[[Run Lexical Baseline]]"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1111,
       "source_read_recall": 0.5,
@@ -2015,6 +3349,23 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_link",
+          "link": "[[Graph-Assisted Retrieval]]",
+          "passed": true,
+          "observed": "[[Graph-Assisted Retrieval]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Graph Retrieval Current Assumptions]]",
+          "passed": true,
+          "observed": "[[Graph Retrieval Current Assumptions]]"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.2381,
       "source_read_recall": 1,
@@ -2055,6 +3406,10 @@
       "outcome_score": 0,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": null,
+      "answer_checks_passed": 0,
+      "answer_checks_total": 0,
+      "answer_check_results": [],
       "answer_source_recall": 1,
       "evidence_coverage": 0,
       "source_read_recall": 1,
@@ -2097,6 +3452,10 @@
       "outcome_score": 0,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": null,
+      "answer_checks_passed": 0,
+      "answer_checks_total": 0,
+      "answer_check_results": [],
       "answer_source_recall": 0.6667,
       "evidence_coverage": 0.0833,
       "source_read_recall": 0.6667,
@@ -2142,6 +3501,10 @@
       "outcome_score": 0,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": null,
+      "answer_checks_passed": 0,
+      "answer_checks_total": 0,
+      "answer_check_results": [],
       "answer_source_recall": 1,
       "evidence_coverage": 0.2054,
       "source_read_recall": 0.5,
@@ -2185,6 +3548,10 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": null,
+      "answer_checks_passed": 0,
+      "answer_checks_total": 0,
+      "answer_check_results": [],
       "answer_source_recall": 1,
       "evidence_coverage": 0.037,
       "source_read_recall": 0.6667,
@@ -2226,6 +3593,10 @@
       "outcome_score": 0,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": null,
+      "answer_checks_passed": 0,
+      "answer_checks_total": 0,
+      "answer_check_results": [],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1111,
       "source_read_recall": 1,
@@ -2268,6 +3639,10 @@
       "outcome_score": 0,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": null,
+      "answer_checks_passed": 0,
+      "answer_checks_total": 0,
+      "answer_check_results": [],
       "answer_source_recall": 1,
       "evidence_coverage": 0.2083,
       "source_read_recall": 1,
@@ -2310,6 +3685,10 @@
       "outcome_score": 0,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": null,
+      "answer_checks_passed": 0,
+      "answer_checks_total": 0,
+      "answer_check_results": [],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0476,
       "source_read_recall": 1,
@@ -2353,6 +3732,17 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 1,
+      "answer_check_results": [
+        {
+          "type": "status_is",
+          "status": "needs_clarification",
+          "passed": true,
+          "observed": "needs_clarification"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": null,
       "source_read_recall": 1,
@@ -2391,6 +3781,10 @@
       "outcome_score": 0,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": null,
+      "answer_checks_passed": 0,
+      "answer_checks_total": 0,
+      "answer_check_results": [],
       "answer_source_recall": 0.6667,
       "evidence_coverage": 0.1217,
       "source_read_recall": 0.6667,
@@ -2434,6 +3828,10 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": null,
+      "answer_checks_passed": 0,
+      "answer_checks_total": 0,
+      "answer_check_results": [],
       "answer_source_recall": 1,
       "evidence_coverage": null,
       "source_read_recall": 1,
@@ -2467,10 +3865,46 @@
       "risk_buckets": [
         "boundary"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.875,
+      "outcome_score": 0.875,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.75,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Atlas Launch Plan.md",
+          "passed": true,
+          "observed": "Projects/Atlas Launch Plan.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Source Audit Board.md",
+          "passed": true,
+          "observed": "Projects/Source Audit Board.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Atlas Launch Plan.md",
+          "label": "Anchor: Atlas is the current launch name and the checklist must cite source audit work.",
+          "passed": true,
+          "observed": [
+            "launch",
+            "audit"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Source Audit Board.md",
+          "label": "Anchor: The source audit board tracks notes whose claims need explicit provenance.",
+          "passed": false,
+          "observed": [
+            "audit"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.2054,
       "source_read_recall": 1,
@@ -2495,6 +3929,7 @@
       "output_tokens": 15,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss"
       ]
     },
@@ -2507,10 +3942,41 @@
         "boundary",
         "mutation"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.75,
+      "outcome_score": 0.75,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/WikiLink Hygiene.md",
+          "passed": true,
+          "observed": "Concepts/WikiLink Hygiene.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Research/Auto-Linking Current Position.md",
+          "passed": true,
+          "observed": "Research/Auto-Linking Current Position.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/WikiLink Hygiene.md",
+          "label": "Anchor: WikiLinks should be suggested first and applied only inside allowed edit scopes.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Research/Auto-Linking Current Position.md",
+          "label": "Anchor: Current auto-linking is suggest-only unless a task grants allowed edits.",
+          "passed": false,
+          "observed": []
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0,
       "source_read_recall": 1,
@@ -2535,6 +4001,7 @@
       "output_tokens": 22,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -2553,6 +4020,17 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 1,
+      "answer_check_results": [
+        {
+          "type": "status_is",
+          "status": "needs_clarification",
+          "passed": true,
+          "observed": "needs_clarification"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": null,
       "source_read_recall": 1,
@@ -2586,10 +4064,43 @@
       "risk_buckets": [
         "hallucinated-provenance"
       ],
-      "score": 0.75,
-      "outcome_score": 0.75,
+      "score": 0.625,
+      "outcome_score": 0.625,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.25,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Source Paths Contract.md",
+          "passed": true,
+          "observed": "Concepts/Source Paths Contract.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Provenance Contract.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Source Paths Contract.md",
+          "label": "Anchor: Source paths must be vault-relative in fixture labels and reviewable in every answer.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Provenance Contract.md",
+          "label": "Anchor: Provenance must name files that were actually read, not files inferred from memory.",
+          "passed": false,
+          "observed": [
+            "provenance"
+          ]
+        }
+      ],
       "answer_source_recall": 0.5,
       "evidence_coverage": 0.0625,
       "source_read_recall": 0.5,
@@ -2615,6 +4126,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -2629,10 +4141,43 @@
         "long-context",
         "boundary"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.75,
+      "outcome_score": 0.75,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Concepts/Long Context Needle.md",
+          "passed": true,
+          "observed": "Concepts/Long Context Needle.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "PDF/Long Context Failure Modes.md",
+          "passed": true,
+          "observed": "PDF/Long Context Failure Modes.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Concepts/Long Context Needle.md",
+          "label": "Anchor: A long-context task can hinge on one short note that changes the answer.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "PDF/Long Context Failure Modes.md",
+          "label": "Anchor: Long context failures often come from missing a short exception note.",
+          "passed": false,
+          "observed": [
+            "context"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0556,
       "source_read_recall": 1,
@@ -2657,6 +4202,7 @@
       "output_tokens": 18,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss"
       ]
     },
@@ -2672,6 +4218,23 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Reference/Collabora Integration Settings.md",
+          "passed": true,
+          "observed": "Reference/Collabora Integration Settings.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Archive/Legacy SSL Integration.md",
+          "passed": true,
+          "observed": "Archive/Legacy SSL Integration.md"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0839,
       "source_read_recall": 1,
@@ -2708,10 +4271,41 @@
       "risk_buckets": [
         "ordinary"
       ],
-      "score": 0.6,
-      "outcome_score": 0.6,
+      "score": 0.4,
+      "outcome_score": 0.4,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.25,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Meetings/Editing Latency Review.md",
+          "passed": true,
+          "observed": "Meetings/Editing Latency Review.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Research/Socket Ownership Notes.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Meetings/Editing Latency Review.md",
+          "label": "Summary: A reviewer noted that cursor movement looked like a rendering issue, but the follow-up pointed to shared editing state and connection ownership.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Research/Socket Ownership Notes.md",
+          "label": "Summary: The research note says ownership confusion can create duplicated updates, stale cursors, and hard-to-debug collaboration failures.",
+          "passed": false,
+          "observed": []
+        }
+      ],
       "answer_source_recall": 0.5,
       "evidence_coverage": 0.0455,
       "source_read_recall": 0.5,
@@ -2737,6 +4331,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -2750,10 +4345,54 @@
       "risk_buckets": [
         "stale-source"
       ],
-      "score": 0.2424,
-      "outcome_score": 0.2424,
+      "score": 0.1667,
+      "outcome_score": 0.1667,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.1667,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 6,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Document Collaboration Rollout.md",
+          "passed": true,
+          "observed": "Projects/Document Collaboration Rollout.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Reference/Collabora Integration Settings.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Research/Socket Ownership Notes.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Document Collaboration Rollout.md",
+          "label": "Summary: The rollout note tracks risks for a collaborative document editor: endpoint configuration, latency during edits, and who owns socket state during document handoff.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Reference/Collabora Integration Settings.md",
+          "label": "Summary: The setting that matters is not the port alone; the browser-side integration and the document server endpoint must use matching HTTP or HTTPS assumptions.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Research/Socket Ownership Notes.md",
+          "label": "Summary: The research note says ownership confusion can create duplicated updates, stale cursors, and hard-to-debug collaboration failures.",
+          "passed": false,
+          "observed": []
+        }
+      ],
       "answer_source_recall": 0.3333,
       "evidence_coverage": 0.0303,
       "source_read_recall": 0.3333,
@@ -2779,6 +4418,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -2796,6 +4436,29 @@
       "outcome_score": 0.6667,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.6667,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 3,
+      "answer_check_results": [
+        {
+          "type": "must_link",
+          "link": "[[Collabora Integration Settings]]",
+          "passed": true,
+          "observed": "[[Collabora Integration Settings]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Editing Latency Review]]",
+          "passed": true,
+          "observed": "[[Editing Latency Review]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Socket Ownership Notes]]",
+          "passed": false,
+          "observed": null
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0479,
       "source_read_recall": 1,
@@ -2820,6 +4483,7 @@
       "output_tokens": 36,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss",
         "link_miss"
@@ -2838,6 +4502,10 @@
       "outcome_score": 0,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": null,
+      "answer_checks_passed": 0,
+      "answer_checks_total": 0,
+      "answer_check_results": [],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0839,
       "source_read_recall": 1,
@@ -2879,6 +4547,23 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Assistant Channel Onboarding.md",
+          "passed": true,
+          "observed": "Projects/Assistant Channel Onboarding.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Daily/2026-05-22.md",
+          "passed": true,
+          "observed": "Daily/2026-05-22.md"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0556,
       "source_read_recall": 1,
@@ -2915,10 +4600,41 @@
       "risk_buckets": [
         "stale-source"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.6,
+      "outcome_score": 0.6,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Assistant Channel Onboarding.md",
+          "passed": true,
+          "observed": "Projects/Assistant Channel Onboarding.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Archive/Old Channel Setup.md",
+          "passed": true,
+          "observed": "Archive/Old Channel Setup.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Assistant Channel Onboarding.md",
+          "label": "Summary: The onboarding note tracks a staged rollout for messaging channels, with gateway setup first and per-channel pairing second.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Archive/Old Channel Setup.md",
+          "label": "Summary: This archive conflicts with the current onboarding order and is included to test stale setup guidance.",
+          "passed": false,
+          "observed": []
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0,
       "source_read_recall": 1,
@@ -2943,6 +4659,7 @@
       "output_tokens": 22,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -2955,10 +4672,56 @@
       "risk_buckets": [
         "stale-source"
       ],
-      "score": 0.7111,
-      "outcome_score": 0.7111,
+      "score": 0.5,
+      "outcome_score": 0.5,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 6,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Assistant Channel Onboarding.md",
+          "passed": true,
+          "observed": "Projects/Assistant Channel Onboarding.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Daily/2026-05-22.md",
+          "passed": true,
+          "observed": "Daily/2026-05-22.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Archive/Old Channel Setup.md",
+          "passed": true,
+          "observed": "Archive/Old Channel Setup.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Assistant Channel Onboarding.md",
+          "label": "Summary: The onboarding note tracks a staged rollout for messaging channels, with gateway setup first and per-channel pairing second.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Daily/2026-05-22.md",
+          "label": "Summary: The daily entry mentions a channel rollout blocker without naming a conversation or contact.",
+          "passed": false,
+          "observed": [
+            "channel"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Archive/Old Channel Setup.md",
+          "label": "Summary: This archive conflicts with the current onboarding order and is included to test stale setup guidance.",
+          "passed": false,
+          "observed": []
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.037,
       "source_read_recall": 1,
@@ -2983,6 +4746,7 @@
       "output_tokens": 20,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -2996,10 +4760,41 @@
         "boundary",
         "mutation"
       ],
-      "score": 0.75,
-      "outcome_score": 0.75,
+      "score": 0.625,
+      "outcome_score": 0.625,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.25,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Assistant Channel Onboarding.md",
+          "passed": true,
+          "observed": "Projects/Assistant Channel Onboarding.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Reference/Gateway Environment Map.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Assistant Channel Onboarding.md",
+          "label": "Summary: The onboarding note tracks a staged rollout for messaging channels, with gateway setup first and per-channel pairing second.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Reference/Gateway Environment Map.md",
+          "label": "Summary: This reference maps runtime environment names to safe descriptions. Secrets and channel tokens are intentionally excluded.",
+          "passed": false,
+          "observed": []
+        }
+      ],
       "answer_source_recall": 0.5,
       "evidence_coverage": 0.0417,
       "source_read_recall": 0.5,
@@ -3025,6 +4820,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -3042,6 +4838,29 @@
       "outcome_score": 1,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 1,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 3,
+      "answer_check_results": [
+        {
+          "type": "must_link",
+          "link": "[[Hook Debugging Notes]]",
+          "passed": true,
+          "observed": "[[Hook Debugging Notes]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Assistant Channel Onboarding]]",
+          "passed": true,
+          "observed": "[[Assistant Channel Onboarding]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Personal Assistant Safety Review]]",
+          "passed": true,
+          "observed": "[[Personal Assistant Safety Review]]"
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1136,
       "source_read_recall": 0.6667,
@@ -3083,6 +4902,23 @@
       "outcome_score": 0.5,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Reference/OpenCode Install Matrix.md",
+          "passed": true,
+          "observed": "Reference/OpenCode Install Matrix.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Research/Localized README Drift.md",
+          "passed": false,
+          "observed": null
+        }
+      ],
       "answer_source_recall": 0.5,
       "evidence_coverage": 0.0871,
       "source_read_recall": 0.5,
@@ -3108,6 +4944,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -3121,10 +4958,61 @@
       "risk_buckets": [
         "mutation"
       ],
-      "score": 0.7333,
-      "outcome_score": 0.7333,
+      "score": 0.6,
+      "outcome_score": 0.6,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 6,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Meetings/Agent Permission Review.md",
+          "passed": true,
+          "observed": "Meetings/Agent Permission Review.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Terminal Agent Migration.md",
+          "passed": true,
+          "observed": "Projects/Terminal Agent Migration.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Daily/2026-05-23.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Meetings/Agent Permission Review.md",
+          "label": "Summary: The review says a runner should not infer write permission from a task that only asks for analysis.",
+          "passed": true,
+          "observed": [
+            "runner",
+            "permission"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Terminal Agent Migration.md",
+          "label": "Summary: The migration note tracks a terminal agent move where permission modes and output evidence have to stay comparable.",
+          "passed": false,
+          "observed": [
+            "permission"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Daily/2026-05-23.md",
+          "label": "Summary: The daily note connects permission review to the migration work without exposing real terminal transcripts.",
+          "passed": false,
+          "observed": [
+            "permission"
+          ]
+        }
+      ],
       "answer_source_recall": 0.6667,
       "evidence_coverage": 0.1626,
       "source_read_recall": 0.6667,
@@ -3150,6 +5038,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -3164,10 +5053,58 @@
         "stale-source",
         "mutation"
       ],
-      "score": 0.7325,
-      "outcome_score": 0.7325,
+      "score": 0.5,
+      "outcome_score": 0.5,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 6,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Terminal Agent Migration.md",
+          "passed": true,
+          "observed": "Projects/Terminal Agent Migration.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Reference/OpenCode Install Matrix.md",
+          "passed": true,
+          "observed": "Reference/OpenCode Install Matrix.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Meetings/Agent Permission Review.md",
+          "passed": true,
+          "observed": "Meetings/Agent Permission Review.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Terminal Agent Migration.md",
+          "label": "Summary: The migration note tracks a terminal agent move where permission modes and output evidence have to stay comparable.",
+          "passed": false,
+          "observed": [
+            "permission"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Reference/OpenCode Install Matrix.md",
+          "label": "Summary: The reference note avoids treating localized setup snippets as authoritative when the canonical install matrix has moved.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Meetings/Agent Permission Review.md",
+          "label": "Summary: The review says a runner should not infer write permission from a task that only asks for analysis.",
+          "passed": false,
+          "observed": [
+            "permission"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1082,
       "source_read_recall": 1,
@@ -3192,6 +5129,7 @@
       "output_tokens": 21,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -3209,6 +5147,10 @@
       "outcome_score": 0,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": null,
+      "answer_checks_passed": 0,
+      "answer_checks_total": 0,
+      "answer_check_results": [],
       "answer_source_recall": 1,
       "evidence_coverage": 0.0909,
       "source_read_recall": 1,
@@ -3247,10 +5189,45 @@
         "boundary",
         "mutation"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.75,
+      "outcome_score": 0.75,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Terminal Agent Migration.md",
+          "passed": true,
+          "observed": "Projects/Terminal Agent Migration.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Meetings/Agent Permission Review.md",
+          "passed": true,
+          "observed": "Meetings/Agent Permission Review.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Terminal Agent Migration.md",
+          "label": "Summary: The migration note tracks a terminal agent move where permission modes and output evidence have to stay comparable.",
+          "passed": false,
+          "observed": [
+            "permission"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Meetings/Agent Permission Review.md",
+          "label": "Summary: The review says a runner should not infer write permission from a task that only asks for analysis.",
+          "passed": false,
+          "observed": [
+            "permission"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1169,
       "source_read_recall": 1,
@@ -3275,6 +5252,7 @@
       "output_tokens": 22,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -3291,6 +5269,23 @@
       "outcome_score": 0.5,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Reference/Remote Local MCP Options.md",
+          "passed": true,
+          "observed": "Reference/Remote Local MCP Options.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Diagram MCP Launch.md",
+          "passed": false,
+          "observed": null
+        }
+      ],
       "answer_source_recall": 0.5,
       "evidence_coverage": 0.0625,
       "source_read_recall": 0.5,
@@ -3316,6 +5311,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -3329,10 +5325,45 @@
       "risk_buckets": [
         "stale-source"
       ],
-      "score": 1,
-      "outcome_score": 1,
+      "score": 0.6,
+      "outcome_score": 0.6,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 2,
+      "answer_checks_total": 4,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Meetings/Diagram Tool Release Review.md",
+          "passed": true,
+          "observed": "Meetings/Diagram Tool Release Review.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Archive/Old Diagram Release Checklist.md",
+          "passed": true,
+          "observed": "Archive/Old Diagram Release Checklist.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Meetings/Diagram Tool Release Review.md",
+          "label": "Summary: The review keeps release checklist edits separate from documentation examples and viewport behavior notes.",
+          "passed": false,
+          "observed": [
+            "release"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Archive/Old Diagram Release Checklist.md",
+          "label": "Summary: This archive is stale because the current release review separates packaging checks from deployment instructions.",
+          "passed": false,
+          "observed": [
+            "release"
+          ]
+        }
+      ],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1125,
       "source_read_recall": 1,
@@ -3357,6 +5388,7 @@
       "output_tokens": 25,
       "estimated_cost_usd": 0,
       "failure_categories": [
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_precision_loss"
       ]
@@ -3369,10 +5401,59 @@
       "risk_buckets": [
         "ordinary"
       ],
-      "score": 0.5028,
-      "outcome_score": 0.5028,
+      "score": 0.5,
+      "outcome_score": 0.5,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 3,
+      "answer_checks_total": 6,
+      "answer_check_results": [
+        {
+          "type": "must_cite_source",
+          "path": "Projects/Diagram MCP Launch.md",
+          "passed": true,
+          "observed": "Projects/Diagram MCP Launch.md"
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Reference/Remote Local MCP Options.md",
+          "passed": false,
+          "observed": null
+        },
+        {
+          "type": "must_cite_source",
+          "path": "Research/Viewport Camera Notes.md",
+          "passed": true,
+          "observed": "Research/Viewport Camera Notes.md"
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Projects/Diagram MCP Launch.md",
+          "label": "Summary: The diagram tool launch note tracks install modes, release packaging, and viewport behavior for interactive diagrams.",
+          "passed": true,
+          "observed": [
+            "tool",
+            "launch"
+          ]
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Reference/Remote Local MCP Options.md",
+          "label": "Summary: The reference note distinguishes remote connector setup from local build-from-source setup.",
+          "passed": false,
+          "observed": []
+        },
+        {
+          "type": "must_include_terms",
+          "path": "Research/Viewport Camera Notes.md",
+          "label": "Summary: The research note is sparse but useful as a bridge between release review and user-facing diagram behavior.",
+          "passed": false,
+          "observed": [
+            "release"
+          ]
+        }
+      ],
       "answer_source_recall": 0.6667,
       "evidence_coverage": 0.1204,
       "source_read_recall": 0.6667,
@@ -3398,6 +5479,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss"
@@ -3415,6 +5497,23 @@
       "outcome_score": 0.5,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": 0.5,
+      "answer_checks_passed": 1,
+      "answer_checks_total": 2,
+      "answer_check_results": [
+        {
+          "type": "must_link",
+          "link": "[[Diagram MCP Launch]]",
+          "passed": true,
+          "observed": "[[Diagram MCP Launch]]"
+        },
+        {
+          "type": "must_link",
+          "link": "[[Viewport Camera Notes]]",
+          "passed": false,
+          "observed": null
+        }
+      ],
       "answer_source_recall": 0.6667,
       "evidence_coverage": 0,
       "source_read_recall": 0.3333,
@@ -3440,6 +5539,7 @@
       "estimated_cost_usd": 0,
       "failure_categories": [
         "answer_source_miss",
+        "answer_check_miss",
         "answer_evidence_miss",
         "source_read_miss",
         "source_read_precision_loss",
@@ -3459,6 +5559,10 @@
       "outcome_score": 0,
       "hard_gate_pass": true,
       "hard_gate_failures": [],
+      "answer_check_score": null,
+      "answer_checks_passed": 0,
+      "answer_checks_total": 0,
+      "answer_check_results": [],
       "answer_source_recall": 1,
       "evidence_coverage": 0.1125,
       "source_read_recall": 1,

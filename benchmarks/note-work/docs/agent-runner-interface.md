@@ -21,6 +21,7 @@ The runtime task view intentionally omits:
 
 - `expected_sources`
 - `expected_evidence`
+- `expected_answer_checks`
 - `expected_links`
 - `expected_edits`
 - `rubric`
@@ -85,6 +86,11 @@ The primary score is endpoint-first. The scorer looks at the final answer,
 suggested links, mutation checks, and required clarification/refusal behavior.
 It does not assign the main score by weighting read-path or scan-path
 trajectories.
+
+Open-ended answer quality is represented only through deterministic answer
+checks in the gold task file. v0 supports objective checks such as cited source
+paths, required terms, expected WikiLinks, and required status. Human preference
+or LLM-as-judge output is not part of the primary score.
 
 Trajectory fields are still required because they make failures auditable.
 Read and scan scope are reported as diagnostics by default, not as primary-score

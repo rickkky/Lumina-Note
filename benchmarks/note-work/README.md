@@ -71,11 +71,12 @@ node benchmarks/note-work/scripts/validate.mjs
 3. Set `evaluation_tier` to `deterministic_smoke` for harness checks or `dev_realistic` for natural note-work cases.
 4. Fill `source_scope`, `expected_sources`, `allowed_sources`, `forbidden_sources`, `mutation_policy`, and an endpoint-oriented `rubric`.
 5. Add `expected_evidence` snippets that appear in the fixture Markdown.
-6. For link tasks, add `expected_links`.
-7. For mutate tasks, add `allowed_edits` and `expected_edits` when edits are allowed. Use `clarify_before_mutation` for destructive or ambiguous requests.
-8. Mark high-risk tasks with `high_risk: true` and risk buckets such as `mutation`, `stale-source`, `long-context`, `hallucinated-provenance`, `destructive-edit`, or `boundary`.
-9. Regenerate `tasks/dev.runtime.json` with `npm run note-work:generate`. Do not hand-copy gold labels into the runtime view.
-10. Run `npm run note-work:validate`.
+6. Add deterministic `expected_answer_checks` for objective answer requirements such as cited source paths, required terms, expected links, or required clarification status.
+7. For link tasks, add `expected_links`.
+8. For mutate tasks, add `allowed_edits` and `expected_edits` when edits are allowed. Use `clarify_before_mutation` for destructive or ambiguous requests.
+9. Mark high-risk tasks with `high_risk: true` and risk buckets such as `mutation`, `stale-source`, `long-context`, `hallucinated-provenance`, `destructive-edit`, or `boundary`.
+10. Regenerate `tasks/dev.runtime.json` with `npm run note-work:generate`. Do not hand-copy gold labels into the runtime view.
+11. Run `npm run note-work:validate`.
 
 ## Running Baselines
 
@@ -121,6 +122,7 @@ Do not rely on a single aggregate score. The report separates:
 - per-family metrics,
 - deterministic smoke versus dev-realistic metrics,
 - high-risk metrics,
+- deterministic answer checks,
 - answer source coverage and evidence coverage,
 - link quality,
 - mutation safety,

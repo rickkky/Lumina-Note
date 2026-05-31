@@ -175,6 +175,44 @@ function linkMentionedInAnswer(answer, link) {
     || normalizeText(answer).includes(normalizeText(title));
 }
 
+function answerCheckResults(task, run) {
+  const answer = run.answer ?? "";
+  const answerTokens = new Set(lexicalTokens(answer));
+  const suggestedLinks = run.links_suggested ?? [];
+  return (task.expected_answer_checks ?? []).map((check) => {
+    let passed = false;
+    let observed = null;
+    if (check.type === "must_cite_source") {
+      passed = answerMentionsPath(answer, check.path);
+      observed = passed ? check.path : null;
+    } else if (check.type === "must_include_terms") {
+      const matchedTerms = check.terms.filter((term) => answerTokens.has(normalizeText(term)));
+      observed = matchedTerms;
+      passed = matchedTerms.length >= (check.min_matches ?? check.terms.length);
+    } else if (check.type === "must_link") {
+      passed = suggestedLinks.includes(check.link) || linkMentionedInAnswer(answer, check.link);
+      observed = passed ? check.link : null;
+    } else if (check.type === "status_is") {
+      passed = run.status === check.status;
+      observed = run.status;
+    }
+    return {
+      type: check.type,
+      path: check.path,
+      link: check.link,
+      status: check.status,
+      label: check.label,
+      passed,
+      observed
+    };
+  });
+}
+
+function answerCheckScore(results) {
+  if (results.length === 0) return null;
+  return results.filter((result) => result.passed).length / results.length;
+}
+
 function taskSourceScope(task) {
   if (task.source_scope) return task.source_scope;
   if (task.expected_sources.length === 0 && task.allowed_sources.length === 0) return "no_vault_scan";
@@ -191,10 +229,10 @@ function statusAcceptable(task, run) {
 }
 
 function scoreOutcome(task, metrics) {
-  if (task.family === "find") return metrics.answerSourceRecall;
-  if (task.family === "search_compare") return (metrics.answerSourceRecall * 0.8) + (metrics.staleAnswerScore * 0.2);
+  if (task.family === "find") return metrics.answerCheckScore ?? metrics.answerSourceRecall;
+  if (task.family === "search_compare") return ((metrics.answerCheckScore ?? metrics.answerSourceRecall) * 0.8) + (metrics.staleAnswerScore * 0.2);
   if (task.family === "synthesize") {
-    return (metrics.answerSourceRecall * 0.7) + ((metrics.evidenceCoverage ?? metrics.answerSourceRecall) * 0.3);
+    return metrics.answerCheckScore ?? ((metrics.answerSourceRecall * 0.7) + ((metrics.evidenceCoverage ?? metrics.answerSourceRecall) * 0.3));
   }
   if (task.family === "link") return metrics.linkRecall ?? 0;
   if (task.family === "mutate") {
@@ -202,7 +240,7 @@ function scoreOutcome(task, metrics) {
     return metrics.mutationPolicyOutcome;
   }
   if (task.expected_sources.length > 0) {
-    return (metrics.answerSourceRecall * 0.5) + (metrics.mutationPolicyOutcome * 0.25) + (metrics.statusScore * 0.25);
+    return ((metrics.answerCheckScore ?? metrics.answerSourceRecall) * 0.5) + (metrics.mutationPolicyOutcome * 0.25) + (metrics.statusScore * 0.25);
   }
   return (metrics.mutationPolicyOutcome * 0.5) + (metrics.statusScore * 0.5);
 }
@@ -219,6 +257,10 @@ function taskScore(task, run, vaultRoot) {
       outcome_score: 0,
       hard_gate_pass: false,
       hard_gate_failures: ["no_run"],
+      answer_check_score: (task.expected_answer_checks ?? []).length === 0 ? null : 0,
+      answer_checks_passed: 0,
+      answer_checks_total: (task.expected_answer_checks ?? []).length,
+      answer_check_results: [],
       answer_source_recall: task.expected_sources.length === 0 ? 1 : 0,
       evidence_coverage: task.expected_evidence.length === 0 ? null : 0,
       source_read_recall: 0,
@@ -294,6 +336,8 @@ function taskScore(task, run, vaultRoot) {
 
   const answerSourceRecall = expectedSourceAnswerRecall(task, answer);
   const evidenceScore = evidenceCoverage(task, answer);
+  const checkResults = answerCheckResults(task, run);
+  const checksScore = answerCheckScore(checkResults);
   const forbiddenAnswerMentions = answerMentionsForbidden(task, answer);
   const staleAnswerScore = forbiddenAnswerMentions.length === 0 ? 1 : 0;
   const statusScore = statusAcceptable(task, run);
@@ -311,6 +355,7 @@ function taskScore(task, run, vaultRoot) {
     linkRecall,
     expectedEditMatch,
     mutationPolicyOutcome,
+    answerCheckScore: checksScore,
     staleAnswerScore,
     statusScore
   });
@@ -318,6 +363,7 @@ function taskScore(task, run, vaultRoot) {
 
   const failureCategories = [];
   if (answerSourceRecall < 1) failureCategories.push("answer_source_miss");
+  if (checksScore !== null && checksScore < 1) failureCategories.push("answer_check_miss");
   if (evidenceScore !== null && evidenceScore < 1) failureCategories.push("answer_evidence_miss");
   if (sourceReadRecall < 1) failureCategories.push("source_read_miss");
   if (sourceReadPrecision < 1) failureCategories.push("source_read_precision_loss");
@@ -343,6 +389,10 @@ function taskScore(task, run, vaultRoot) {
     outcome_score: round(outcomeScore),
     hard_gate_pass: hardGatePass,
     hard_gate_failures: hardGateFailures,
+    answer_check_score: checksScore === null ? null : round(checksScore),
+    answer_checks_passed: checkResults.filter((result) => result.passed).length,
+    answer_checks_total: checkResults.length,
+    answer_check_results: checkResults,
     answer_source_recall: round(answerSourceRecall),
     evidence_coverage: evidenceScore === null ? null : round(evidenceScore),
     source_read_recall: round(sourceReadRecall),
@@ -376,6 +426,7 @@ function aggregateTaskScores(taskScores) {
     mean_score: mean(taskScores.map((entry) => entry.score)),
     outcome_score: mean(taskScores.map((entry) => entry.outcome_score)),
     hard_gate_pass_rate: mean(taskScores.map((entry) => entry.hard_gate_pass ? 1 : 0)),
+    answer_check_score: mean(taskScores.map((entry) => entry.answer_check_score)),
     answer_source_recall: mean(taskScores.map((entry) => entry.answer_source_recall)),
     evidence_coverage: mean(taskScores.map((entry) => entry.evidence_coverage)),
     source_read_recall: mean(taskScores.map((entry) => entry.source_read_recall)),
@@ -392,7 +443,7 @@ function aggregateTaskScores(taskScores) {
 
 function markdownReport(report) {
   const familyRows = Object.entries(report.family_scores)
-    .map(([family, score]) => `| ${family} | ${score.count} | ${score.mean_score} | ${score.outcome_score} | ${score.hard_gate_pass_rate} | ${score.answer_source_recall} |`)
+    .map(([family, score]) => `| ${family} | ${score.count} | ${score.mean_score} | ${score.outcome_score} | ${score.hard_gate_pass_rate} | ${score.answer_check_score} | ${score.answer_source_recall} |`)
     .join("\n");
   const riskRows = Object.entries(report.high_risk_scores.by_bucket)
     .map(([bucket, score]) => `| ${bucket} | ${score.count} | ${score.mean_score} | ${score.hard_gate_pass_rate} | ${score.blocking_failure_count} |`)
@@ -426,8 +477,8 @@ Fixture: \`${report.fixture_vault}\`
 
 ## Per-Family Metrics
 
-| Family | Count | Primary score | Ungated outcome | Hard-gate pass rate | Answer source recall |
-| --- | ---: | ---: | ---: | ---: | ---: |
+| Family | Count | Primary score | Ungated outcome | Hard-gate pass rate | Answer check score | Answer source recall |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
 ${familyRows}
 
 ## Evaluation Tiers
@@ -450,6 +501,7 @@ ${riskRows}
 ## Dimension Scores
 
 - Answer source recall: ${report.dimension_scores.outcome.answer_source_recall}
+- Answer check score: ${report.dimension_scores.outcome.answer_check_score}
 - Evidence coverage: ${report.dimension_scores.outcome.evidence_coverage}
 - Link recall: ${report.dimension_scores.link.link_recall}
 - Mutation score: ${report.dimension_scores.mutation.mutation_score}
@@ -530,7 +582,7 @@ async function main() {
       ungated_outcome_score: mean(taskScores.map((score) => score.outcome_score)),
       hard_gate_pass_rate: mean(taskScores.map((score) => score.hard_gate_pass ? 1 : 0)),
       blocking_failure_count: taskScores.filter((score) => !score.hard_gate_pass).length,
-      scoring_model: "endpoint-primary-edit-gated-v0.3",
+      scoring_model: "endpoint-primary-deterministic-checks-v0.4",
       deterministic_only: true,
       trajectory_metrics_are_diagnostics: true,
       read_scope_metrics_are_diagnostics: true,
@@ -557,6 +609,9 @@ async function main() {
       outcome: {
         primary_score: mean(taskScores.map((score) => score.score)),
         ungated_outcome_score: mean(taskScores.map((score) => score.outcome_score)),
+        answer_check_score: mean(taskScores.map((score) => score.answer_check_score)),
+        answer_checks_passed: taskScores.reduce((sum, score) => sum + score.answer_checks_passed, 0),
+        answer_checks_total: taskScores.reduce((sum, score) => sum + score.answer_checks_total, 0),
         answer_source_recall: mean(taskScores.map((score) => score.answer_source_recall)),
         evidence_coverage: mean(taskScores.map((score) => score.evidence_coverage))
       },

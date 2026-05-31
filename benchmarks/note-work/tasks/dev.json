@@ -40,6 +40,16 @@
         "snippet": "Anchor: The provenance summary requires source_paths and rejects unread citations."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Source Paths Contract.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "wiki/Source Provenance Summary.md"
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -103,6 +113,16 @@
         "snippet": "Anchor: PDF annotation export writes Markdown excerpts before any synthesis note is created."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/PDF Highlight Pipeline.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "PDF/PDF Annotation Export.md"
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -158,6 +178,12 @@
       {
         "path": "Daily/2026-05-15.md",
         "snippet": "Anchor: The launch checklist mentions source audit work but needs a stronger provenance link."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Daily/2026-05-15.md"
       }
     ],
     "forbidden_sources": [
@@ -217,6 +243,12 @@
         "snippet": "Anchor: This daily note mentions the source paths contract in prose but omits the WikiLink."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Daily/2026-05-16.md"
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -272,6 +304,12 @@
       {
         "path": "Isolated/Card Sorting Observation.md",
         "snippet": "Anchor: Card sorting is isolated but should connect to backlink gaps and wiki cleanup."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Isolated/Card Sorting Observation.md"
       }
     ],
     "forbidden_sources": [
@@ -337,6 +375,16 @@
         "snippet": "Anchor: Boundary consent patterns include no-scan advice, folder scope, and clarify-before-edit."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Boundary Consent.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Research/Boundary Consent Patterns.md"
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -397,6 +445,16 @@
       {
         "path": "Tutorials/Run Lexical Baseline.md",
         "snippet": "Anchor: The lexical baseline command runs filename and content search against the same task set."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Lexical Baseline.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Tutorials/Run Lexical Baseline.md"
       }
     ],
     "forbidden_sources": [
@@ -461,6 +519,16 @@
         "snippet": "Anchor: Mutation safety requires allowed file lists, frontmatter preservation, and expected diff checks."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Mutation Audit Trail.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Mutation Safety.md"
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -521,6 +589,16 @@
       {
         "path": "Reference/Runner Output Fields.md",
         "snippet": "Anchor: Run output records the final answer, suggested links, mutation checks, trajectory evidence, cost, and latency."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Agent Runner Contract.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Reference/Runner Output Fields.md"
       }
     ],
     "forbidden_sources": [
@@ -585,6 +663,16 @@
         "snippet": "Anchor: Long context failures often come from missing a short exception note."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Long Context Needle.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "PDF/Long Context Failure Modes.md"
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -645,6 +733,44 @@
       {
         "path": "Research/Graph Retrieval Old Assumptions.md",
         "snippet": "Anchor: Old graph retrieval assumed graph neighbors could be treated as evidence."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Research/Graph Retrieval Current Assumptions.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Research/Graph Retrieval Old Assumptions.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Research/Graph Retrieval Current Assumptions.md",
+        "terms": [
+          "graph",
+          "retrieval",
+          "assumes",
+          "edges",
+          "candidate",
+          "selectors"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Current graph retrieval assumes graph edges are candidate selectors, not evidence."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Research/Graph Retrieval Old Assumptions.md",
+        "terms": [
+          "graph",
+          "retrieval",
+          "assumed",
+          "neighbors",
+          "could",
+          "treated"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Old graph retrieval assumed graph neighbors could be treated as evidence."
       }
     ],
     "forbidden_sources": [
@@ -708,6 +834,44 @@
       {
         "path": "Research/Auto-Linking Old Position.md",
         "snippet": "Anchor: Old auto-linking favored applying links automatically across the vault."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Research/Auto-Linking Current Position.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Research/Auto-Linking Old Position.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Research/Auto-Linking Current Position.md",
+        "terms": [
+          "auto-linking",
+          "suggest-only",
+          "unless",
+          "grants",
+          "allowed",
+          "edits"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Current auto-linking is suggest-only unless a task grants allowed edits."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Research/Auto-Linking Old Position.md",
+        "terms": [
+          "auto-linking",
+          "favored",
+          "applying",
+          "links",
+          "automatically",
+          "vault"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Old auto-linking favored applying links automatically across the vault."
       }
     ],
     "forbidden_sources": [
@@ -779,6 +943,62 @@
         "snippet": "Anchor: The naming review decided that Atlas supersedes Phoenix for current launch work."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Atlas Launch Plan.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Phoenix Launch.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Meetings/Atlas Naming Review.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Atlas Launch Plan.md",
+        "terms": [
+          "atlas",
+          "launch",
+          "name",
+          "checklist",
+          "cite",
+          "audit"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Atlas is the current launch name and the checklist must cite source audit work."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Phoenix Launch.md",
+        "terms": [
+          "phoenix",
+          "historical",
+          "project",
+          "name",
+          "retained",
+          "rename"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Phoenix is a historical project name retained only for rename history."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Meetings/Atlas Naming Review.md",
+        "terms": [
+          "naming",
+          "decided",
+          "atlas",
+          "supersedes",
+          "phoenix",
+          "launch"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: The naming review decided that Atlas supersedes Phoenix for current launch work."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -840,6 +1060,43 @@
       {
         "path": "Concepts/Provenance Contract.md",
         "snippet": "Anchor: Provenance must name files that were actually read, not files inferred from memory."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Source Paths Contract.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Provenance Contract.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Source Paths Contract.md",
+        "terms": [
+          "vault-relative",
+          "fixture",
+          "labels",
+          "reviewable",
+          "every"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Source paths must be vault-relative in fixture labels and reviewable in every answer."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Provenance Contract.md",
+        "terms": [
+          "provenance",
+          "name",
+          "files",
+          "were",
+          "actually",
+          "read"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Provenance must name files that were actually read, not files inferred from memory."
       }
     ],
     "forbidden_sources": [
@@ -905,6 +1162,42 @@
         "snippet": "Anchor: The old PDF contract allowed summary before Markdown extraction."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/PDF Highlight Pipeline.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Archive/Old PDF Summary Contract.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/PDF Highlight Pipeline.md",
+        "terms": [
+          "highlights",
+          "should",
+          "converted",
+          "reviewable",
+          "markdown",
+          "synthesis"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: PDF highlights should be converted into reviewable Markdown before synthesis."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Archive/Old PDF Summary Contract.md",
+        "terms": [
+          "contract",
+          "allowed",
+          "markdown",
+          "extraction"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: The old PDF contract allowed summary before Markdown extraction."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -967,6 +1260,44 @@
       {
         "path": "Archive/Legacy Boundary Draft.md",
         "snippet": "Anchor: The legacy boundary draft allowed whole-vault scans after vague prompts."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Boundary Consent.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Archive/Legacy Boundary Draft.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Boundary Consent.md",
+        "terms": [
+          "consent",
+          "gates",
+          "decide",
+          "whether",
+          "scan",
+          "edit"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Consent gates decide whether the agent may scan or edit beyond the user-named scope."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Archive/Legacy Boundary Draft.md",
+        "terms": [
+          "legacy",
+          "boundary",
+          "draft",
+          "allowed",
+          "whole-vault",
+          "scans"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: The legacy boundary draft allowed whole-vault scans after vague prompts."
       }
     ],
     "forbidden_sources": [
@@ -1038,6 +1369,62 @@
         "snippet": "Anchor: The archived February policy said auto-linking could edit broadly by default."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Research/Auto-Linking Current Position.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Research/Auto-Linking Old Position.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Archive/2026-02 Auto-Linking Policy.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Research/Auto-Linking Current Position.md",
+        "terms": [
+          "auto-linking",
+          "suggest-only",
+          "unless",
+          "grants",
+          "allowed",
+          "edits"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Current auto-linking is suggest-only unless a task grants allowed edits."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Research/Auto-Linking Old Position.md",
+        "terms": [
+          "auto-linking",
+          "favored",
+          "applying",
+          "links",
+          "automatically",
+          "vault"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Old auto-linking favored applying links automatically across the vault."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Archive/2026-02 Auto-Linking Policy.md",
+        "terms": [
+          "archived",
+          "february",
+          "said",
+          "auto-linking",
+          "could",
+          "edit"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: The archived February policy said auto-linking could edit broadly by default."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -1099,6 +1486,44 @@
       {
         "path": "Reference/Score Report Fields.md",
         "snippet": "Anchor: Score reports include primary endpoint score, ungated outcome, hard gates, diagnostics, cost, latency, and failure categories."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Reference/Runner Output Fields.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Reference/Score Report Fields.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Reference/Runner Output Fields.md",
+        "terms": [
+          "output",
+          "records",
+          "final",
+          "suggested",
+          "links",
+          "mutation"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Run output records the final answer, suggested links, mutation checks, trajectory evidence, cost, and latency."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Reference/Score Report Fields.md",
+        "terms": [
+          "score",
+          "reports",
+          "include",
+          "primary",
+          "endpoint",
+          "ungated"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Score reports include primary endpoint score, ungated outcome, hard gates, diagnostics, cost, latency, and failure categories."
       }
     ],
     "forbidden_sources": [
@@ -1164,6 +1589,44 @@
         "snippet": "Anchor: Plugin docs sync says external tools must obey the same vault permission boundary."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Plugin Runtime Notes.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Meetings/Plugin Docs Sync.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Plugin Runtime Notes.md",
+        "terms": [
+          "plugin",
+          "runtime",
+          "separate",
+          "host",
+          "permissions",
+          "vault"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Plugin runtime notes separate host permissions from benchmark vault permissions."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Meetings/Plugin Docs Sync.md",
+        "terms": [
+          "plugin",
+          "docs",
+          "sync",
+          "external",
+          "tools",
+          "obey"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Plugin docs sync says external tools must obey the same vault permission boundary."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -1219,6 +1682,26 @@
       {
         "path": "Research/Graph Retrieval Current Assumptions.md",
         "snippet": "Anchor: Current graph retrieval assumes graph edges are candidate selectors, not evidence."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Research/Graph Retrieval Current Assumptions.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Research/Graph Retrieval Current Assumptions.md",
+        "terms": [
+          "graph",
+          "retrieval",
+          "assumes",
+          "edges",
+          "candidate",
+          "selectors"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Current graph retrieval assumes graph edges are candidate selectors, not evidence."
       }
     ],
     "forbidden_sources": [
@@ -1289,6 +1772,62 @@
       {
         "path": "Projects/Graph Context Pilot.md",
         "snippet": "Anchor: The graph pilot must prove value over lexical search without reading many extra files."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Graph-Assisted Retrieval.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Research/Graph Retrieval Current Assumptions.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Graph Context Pilot.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Graph-Assisted Retrieval.md",
+        "terms": [
+          "graph",
+          "retrieval",
+          "should",
+          "expand",
+          "links",
+          "tags"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Graph retrieval should expand from links, tags, and folders before claims are written."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Research/Graph Retrieval Current Assumptions.md",
+        "terms": [
+          "graph",
+          "retrieval",
+          "assumes",
+          "edges",
+          "candidate",
+          "selectors"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Current graph retrieval assumes graph edges are candidate selectors, not evidence."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Graph Context Pilot.md",
+        "terms": [
+          "graph",
+          "pilot",
+          "prove",
+          "value",
+          "over",
+          "lexical"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: The graph pilot must prove value over lexical search without reading many extra files."
       }
     ],
     "forbidden_sources": [
@@ -1366,6 +1905,77 @@
         "snippet": "Anchor: PDF annotation export writes Markdown excerpts before any synthesis note is created."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/PDF Highlight Pipeline.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Projects/PDF Review Workflow.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Meetings/PDF Pipeline Review.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "PDF/PDF Annotation Export.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/PDF Highlight Pipeline.md",
+        "terms": [
+          "highlights",
+          "should",
+          "converted",
+          "reviewable",
+          "markdown",
+          "synthesis"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: PDF highlights should be converted into reviewable Markdown before synthesis."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/PDF Review Workflow.md",
+        "terms": [
+          "workflow",
+          "converts",
+          "highlights",
+          "first",
+          "then",
+          "synthesizes"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: The PDF workflow converts highlights first, then synthesizes with source paths."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Meetings/PDF Pipeline Review.md",
+        "terms": [
+          "confirmed",
+          "conversion",
+          "retention"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: The PDF review confirmed conversion before summary and source path retention."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "PDF/PDF Annotation Export.md",
+        "terms": [
+          "annotation",
+          "export",
+          "writes",
+          "markdown",
+          "excerpts",
+          "synthesis"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: PDF annotation export writes Markdown excerpts before any synthesis note is created."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -1436,6 +2046,62 @@
         "snippet": "Anchor: Mutation review requires expected checks for allowed edits and preserved metadata."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Mutation Safety.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Mutation Audit Trail.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Meetings/Mutation Safety Review.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Mutation Safety.md",
+        "terms": [
+          "mutation",
+          "safety",
+          "requires",
+          "allowed",
+          "file",
+          "lists"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Mutation safety requires allowed file lists, frontmatter preservation, and expected diff checks."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Mutation Audit Trail.md",
+        "terms": [
+          "every",
+          "mutation",
+          "needs",
+          "allowed",
+          "edits",
+          "checkable"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Every mutation task needs allowed edits and a checkable expected diff."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Meetings/Mutation Safety Review.md",
+        "terms": [
+          "mutation",
+          "requires",
+          "expected",
+          "allowed",
+          "edits",
+          "preserved"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Mutation review requires expected checks for allowed edits and preserved metadata."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -1503,6 +2169,62 @@
       {
         "path": "Projects/Boundary UX Copy.md",
         "snippet": "Anchor: Boundary copy should ask for scope instead of silently scanning restricted notes."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Boundary Consent.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Research/Boundary Consent Patterns.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Boundary UX Copy.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Boundary Consent.md",
+        "terms": [
+          "consent",
+          "gates",
+          "decide",
+          "whether",
+          "scan",
+          "edit"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Consent gates decide whether the agent may scan or edit beyond the user-named scope."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Research/Boundary Consent Patterns.md",
+        "terms": [
+          "boundary",
+          "consent",
+          "patterns",
+          "include",
+          "no-scan",
+          "advice"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Boundary consent patterns include no-scan advice, folder scope, and clarify-before-edit."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Boundary UX Copy.md",
+        "terms": [
+          "boundary",
+          "copy",
+          "should",
+          "scope",
+          "instead",
+          "silently"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Boundary copy should ask for scope instead of silently scanning restricted notes."
       }
     ],
     "forbidden_sources": [
@@ -1580,6 +2302,79 @@
         "snippet": "Anchor: Hallucinated provenance names plausible files that were not read or do not contain the claim."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Source Paths Contract.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Provenance Contract.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Generated Wiki Pages.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Research/Hallucinated Provenance Cases.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Source Paths Contract.md",
+        "terms": [
+          "vault-relative",
+          "fixture",
+          "labels",
+          "reviewable",
+          "every"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Source paths must be vault-relative in fixture labels and reviewable in every answer."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Provenance Contract.md",
+        "terms": [
+          "provenance",
+          "name",
+          "files",
+          "were",
+          "actually",
+          "read"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Provenance must name files that were actually read, not files inferred from memory."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Generated Wiki Pages.md",
+        "terms": [
+          "generated",
+          "wiki",
+          "pages",
+          "keep",
+          "readers",
+          "audit"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Generated wiki pages must keep source_paths so readers can audit the synthesis."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Research/Hallucinated Provenance Cases.md",
+        "terms": [
+          "hallucinated",
+          "provenance",
+          "names",
+          "plausible",
+          "files",
+          "were"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Hallucinated provenance names plausible files that were not read or do not contain the claim."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -1647,6 +2442,59 @@
       {
         "path": "Projects/Long Context Review.md",
         "snippet": "Anchor: The long-context review checks whether a small source changes the final answer."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Long Context Needle.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "PDF/Long Context Failure Modes.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Long Context Review.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Long Context Needle.md",
+        "terms": [
+          "long-context",
+          "hinge",
+          "short",
+          "changes"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: A long-context task can hinge on one short note that changes the answer."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "PDF/Long Context Failure Modes.md",
+        "terms": [
+          "long",
+          "context",
+          "failures",
+          "often",
+          "come",
+          "missing"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Long context failures often come from missing a short exception note."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Long Context Review.md",
+        "terms": [
+          "long-context",
+          "whether",
+          "small",
+          "changes",
+          "final"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: The long-context review checks whether a small source changes the final answer."
       }
     ],
     "forbidden_sources": [
@@ -1718,6 +2566,62 @@
         "snippet": "Anchor: The runner overview summarizes the shared task input and run-output contract."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Agent Runner Contract.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Generated Wiki Pages.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "wiki/Agent Runner Overview.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Agent Runner Contract.md",
+        "terms": [
+          "runner",
+          "accept",
+          "same",
+          "json",
+          "emit",
+          "run-output"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: An agent runner must accept the same task JSON and emit the same run-output schema as the baseline."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Generated Wiki Pages.md",
+        "terms": [
+          "generated",
+          "wiki",
+          "pages",
+          "keep",
+          "readers",
+          "audit"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Generated wiki pages must keep source_paths so readers can audit the synthesis."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "wiki/Agent Runner Overview.md",
+        "terms": [
+          "runner",
+          "overview",
+          "summarizes",
+          "shared",
+          "input",
+          "run-output"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: The runner overview summarizes the shared task input and run-output contract."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -1787,6 +2691,61 @@
         "snippet": "Anchor: Scoring review rejected trajectory-weighted scoring as a primary benchmark signal."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Offline Scoring.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Reference/Score Report Fields.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Meetings/Benchmark Scoring Review.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Offline Scoring.md",
+        "terms": [
+          "offline",
+          "scoring",
+          "uses",
+          "endpoint",
+          "results",
+          "primary"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Offline scoring uses endpoint results as the primary score and keeps trajectory as diagnostics."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Reference/Score Report Fields.md",
+        "terms": [
+          "score",
+          "reports",
+          "include",
+          "primary",
+          "endpoint",
+          "ungated"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Score reports include primary endpoint score, ungated outcome, hard gates, diagnostics, cost, latency, and failure categories."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Meetings/Benchmark Scoring Review.md",
+        "terms": [
+          "scoring",
+          "rejected",
+          "trajectory-weighted",
+          "primary",
+          "signal"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Scoring review rejected trajectory-weighted scoring as a primary benchmark signal."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -1854,6 +2813,62 @@
       {
         "path": "Concepts/Backlink Gap.md",
         "snippet": "Anchor: A backlink gap exists when a note mentions a concept but lacks the expected WikiLink."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Wiki Cleanup Sprint.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Meetings/Wiki Cleanup Triage.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Backlink Gap.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Wiki Cleanup Sprint.md",
+        "terms": [
+          "wiki",
+          "cleanup",
+          "sprint",
+          "finds",
+          "missing",
+          "useful"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: The wiki cleanup sprint finds missing useful links before editing any note."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Meetings/Wiki Cleanup Triage.md",
+        "terms": [
+          "wiki",
+          "cleanup",
+          "triage",
+          "identifies",
+          "card",
+          "sorting"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Wiki cleanup triage identifies the card sorting note as isolated but linkable."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Backlink Gap.md",
+        "terms": [
+          "backlink",
+          "exists",
+          "mentions",
+          "concept",
+          "lacks",
+          "expected"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: A backlink gap exists when a note mentions a concept but lacks the expected WikiLink."
       }
     ],
     "forbidden_sources": [
@@ -1931,6 +2946,80 @@
         "snippet": "Anchor: The naming review decided that Atlas supersedes Phoenix for current launch work."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Renamed Concepts.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Atlas Launch Plan.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Phoenix Launch.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Meetings/Atlas Naming Review.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Renamed Concepts.md",
+        "terms": [
+          "phoenix",
+          "renamed",
+          "atlas",
+          "tasks",
+          "should",
+          "prefer"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Phoenix was renamed to Atlas; current tasks should prefer Atlas unless asking about history."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Atlas Launch Plan.md",
+        "terms": [
+          "atlas",
+          "launch",
+          "name",
+          "checklist",
+          "cite",
+          "audit"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Atlas is the current launch name and the checklist must cite source audit work."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Phoenix Launch.md",
+        "terms": [
+          "phoenix",
+          "historical",
+          "project",
+          "name",
+          "retained",
+          "rename"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Phoenix is a historical project name retained only for rename history."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Meetings/Atlas Naming Review.md",
+        "terms": [
+          "naming",
+          "decided",
+          "atlas",
+          "supersedes",
+          "phoenix",
+          "launch"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: The naming review decided that Atlas supersedes Phoenix for current launch work."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -2006,6 +3095,80 @@
         "snippet": "Anchor: The naming review decided that Atlas supersedes Phoenix for current launch work."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Project Memory.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Meeting Capture.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Daily/2026-05-20.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Meetings/Atlas Naming Review.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Project Memory.md",
+        "terms": [
+          "project",
+          "memory",
+          "combines",
+          "plans",
+          "meetings",
+          "daily"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Project memory combines plans, meetings, and daily notes into an inspectable trail."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Meeting Capture.md",
+        "terms": [
+          "meeting",
+          "should",
+          "capture",
+          "decisions",
+          "open",
+          "questions"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Meeting notes should capture decisions, open questions, and follow-up links."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Daily/2026-05-20.md",
+        "terms": [
+          "runner",
+          "output",
+          "include",
+          "files",
+          "read",
+          "edited"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: The agent runner output must include files read, files edited, links suggested, cost, and latency."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Meetings/Atlas Naming Review.md",
+        "terms": [
+          "naming",
+          "decided",
+          "atlas",
+          "supersedes",
+          "phoenix",
+          "launch"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: The naming review decided that Atlas supersedes Phoenix for current launch work."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -2061,6 +3224,20 @@
       {
         "path": "Concepts/Source Paths Contract.md",
         "snippet": "Anchor: Source paths must be vault-relative in fixture labels and reviewable in every answer."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_link",
+        "link": "[[Provenance Contract]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Generated Wiki Pages]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Offline Scoring]]"
       }
     ],
     "expected_links": [
@@ -2136,6 +3313,20 @@
         "snippet": "Anchor: The source audit board tracks notes whose claims need explicit provenance."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_link",
+        "link": "[[Renamed Concepts]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Boundary Consent]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Source Audit Board]]"
+      }
+    ],
     "expected_links": [
       "[[Renamed Concepts]]",
       "[[Boundary Consent]]",
@@ -2203,6 +3394,20 @@
         "snippet": "Anchor: PDF annotation export writes Markdown excerpts before any synthesis note is created."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_link",
+        "link": "[[PDF Annotation Export]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Source Paths Contract]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[PDF Workflow Summary]]"
+      }
+    ],
     "expected_links": [
       "[[PDF Annotation Export]]",
       "[[Source Paths Contract]]",
@@ -2268,6 +3473,20 @@
       {
         "path": "Projects/Mutation Audit Trail.md",
         "snippet": "Anchor: Every mutation task needs allowed edits and a checkable expected diff."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_link",
+        "link": "[[Mutation Audit Trail]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Provenance Contract]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Boundary Consent]]"
       }
     ],
     "expected_links": [
@@ -2343,6 +3562,20 @@
         "snippet": "Anchor: Boundary copy should ask for scope instead of silently scanning restricted notes."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_link",
+        "link": "[[Scope Boundary]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Boundary UX Copy]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Boundary Consent Patterns]]"
+      }
+    ],
     "expected_links": [
       "[[Scope Boundary]]",
       "[[Boundary UX Copy]]",
@@ -2414,6 +3647,16 @@
       {
         "path": "Projects/Wiki Cleanup Sprint.md",
         "snippet": "Anchor: The wiki cleanup sprint finds missing useful links before editing any note."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_link",
+        "link": "[[Wiki Cleanup Sprint]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Backlink Gap]]"
       }
     ],
     "expected_links": [
@@ -2488,6 +3731,20 @@
         "snippet": "Anchor: Current graph retrieval assumes graph edges are candidate selectors, not evidence."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_link",
+        "link": "[[Graph-Assisted Retrieval]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Graph Retrieval Current Assumptions]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Long Context Needle]]"
+      }
+    ],
     "expected_links": [
       "[[Graph-Assisted Retrieval]]",
       "[[Graph Retrieval Current Assumptions]]",
@@ -2555,6 +3812,16 @@
         "snippet": "Anchor: Provenance must name files that were actually read, not files inferred from memory."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_link",
+        "link": "[[Source Paths Contract]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Provenance Contract]]"
+      }
+    ],
     "expected_links": [
       "[[Source Paths Contract]]",
       "[[Provenance Contract]]"
@@ -2619,6 +3886,20 @@
       {
         "path": "Concepts/Offline Scoring.md",
         "snippet": "Anchor: Offline scoring uses endpoint results as the primary score and keeps trajectory as diagnostics."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_link",
+        "link": "[[Offline Scoring]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Task Family Taxonomy]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Run Lexical Baseline]]"
       }
     ],
     "expected_links": [
@@ -2688,6 +3969,16 @@
         "snippet": "Anchor: Graph retrieval should expand from links, tags, and folders before claims are written."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_link",
+        "link": "[[Graph-Assisted Retrieval]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Graph Retrieval Current Assumptions]]"
+      }
+    ],
     "expected_links": [
       "[[Graph-Assisted Retrieval]]",
       "[[Graph Retrieval Current Assumptions]]"
@@ -2754,6 +4045,7 @@
         "snippet": "Anchor: Source paths must be vault-relative in fixture labels and reviewable in every answer."
       }
     ],
+    "expected_answer_checks": [],
     "expected_links": [
       "[[Source Paths Contract]]"
     ],
@@ -2832,6 +4124,7 @@
         "snippet": "Anchor: The source audit board tracks notes whose claims need explicit provenance."
       }
     ],
+    "expected_answer_checks": [],
     "expected_links": [
       "[[Source Paths Contract]]",
       "[[Provenance Contract]]"
@@ -2906,6 +4199,7 @@
         "snippet": "Anchor: The source audit board tracks notes whose claims need explicit provenance."
       }
     ],
+    "expected_answer_checks": [],
     "expected_links": [
       "[[Source Audit Board]]"
     ],
@@ -2985,6 +4279,7 @@
         "snippet": "Anchor: Boundary copy should ask for scope instead of silently scanning restricted notes."
       }
     ],
+    "expected_answer_checks": [],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -3053,6 +4348,7 @@
         "snippet": "Anchor: Card sorting is isolated but should connect to backlink gaps and wiki cleanup."
       }
     ],
+    "expected_answer_checks": [],
     "expected_links": [
       "[[Backlink Gap]]",
       "[[Card Sorting Observation]]"
@@ -3133,6 +4429,7 @@
         "snippet": "Anchor: The archived February policy said auto-linking could edit broadly by default."
       }
     ],
+    "expected_answer_checks": [],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -3208,6 +4505,7 @@
         "snippet": "Anchor: The PDF review confirmed conversion before summary and source path retention."
       }
     ],
+    "expected_answer_checks": [],
     "expected_links": [
       "[[PDF Highlight Pipeline]]",
       "[[PDF Annotation Export]]"
@@ -3267,6 +4565,12 @@
     "allowed_sources": [],
     "expected_sources": [],
     "expected_evidence": [],
+    "expected_answer_checks": [
+      {
+        "type": "status_is",
+        "status": "needs_clarification"
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -3336,6 +4640,7 @@
         "snippet": "Anchor: The graph pilot must prove value over lexical search without reading many extra files."
       }
     ],
+    "expected_answer_checks": [],
     "expected_links": [
       "[[Graph-Assisted Retrieval]]",
       "[[Graph Retrieval Current Assumptions]]"
@@ -3393,6 +4698,7 @@
     "allowed_sources": [],
     "expected_sources": [],
     "expected_evidence": [],
+    "expected_answer_checks": [],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -3454,6 +4760,44 @@
       {
         "path": "Projects/Source Audit Board.md",
         "snippet": "Anchor: The source audit board tracks notes whose claims need explicit provenance."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Atlas Launch Plan.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Source Audit Board.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Atlas Launch Plan.md",
+        "terms": [
+          "atlas",
+          "launch",
+          "name",
+          "checklist",
+          "cite",
+          "audit"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Atlas is the current launch name and the checklist must cite source audit work."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Source Audit Board.md",
+        "terms": [
+          "audit",
+          "board",
+          "tracks",
+          "whose",
+          "claims",
+          "need"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: The source audit board tracks notes whose claims need explicit provenance."
       }
     ],
     "forbidden_sources": [
@@ -3520,6 +4864,44 @@
         "snippet": "Anchor: Current auto-linking is suggest-only unless a task grants allowed edits."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/WikiLink Hygiene.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Research/Auto-Linking Current Position.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/WikiLink Hygiene.md",
+        "terms": [
+          "wikilinks",
+          "should",
+          "suggested",
+          "first",
+          "applied",
+          "inside"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: WikiLinks should be suggested first and applied only inside allowed edit scopes."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Research/Auto-Linking Current Position.md",
+        "terms": [
+          "auto-linking",
+          "suggest-only",
+          "unless",
+          "grants",
+          "allowed",
+          "edits"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Current auto-linking is suggest-only unless a task grants allowed edits."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -3569,6 +4951,12 @@
     "allowed_sources": [],
     "expected_sources": [],
     "expected_evidence": [],
+    "expected_answer_checks": [
+      {
+        "type": "status_is",
+        "status": "needs_clarification"
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -3629,6 +5017,43 @@
       {
         "path": "Concepts/Provenance Contract.md",
         "snippet": "Anchor: Provenance must name files that were actually read, not files inferred from memory."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Source Paths Contract.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Provenance Contract.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Source Paths Contract.md",
+        "terms": [
+          "vault-relative",
+          "fixture",
+          "labels",
+          "reviewable",
+          "every"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Source paths must be vault-relative in fixture labels and reviewable in every answer."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Provenance Contract.md",
+        "terms": [
+          "provenance",
+          "name",
+          "files",
+          "were",
+          "actually",
+          "read"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Provenance must name files that were actually read, not files inferred from memory."
       }
     ],
     "forbidden_sources": [
@@ -3695,6 +5120,42 @@
         "snippet": "Anchor: Long context failures often come from missing a short exception note."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Concepts/Long Context Needle.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "PDF/Long Context Failure Modes.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Concepts/Long Context Needle.md",
+        "terms": [
+          "long-context",
+          "hinge",
+          "short",
+          "changes"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: A long-context task can hinge on one short note that changes the answer."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "PDF/Long Context Failure Modes.md",
+        "terms": [
+          "long",
+          "context",
+          "failures",
+          "often",
+          "come",
+          "missing"
+        ],
+        "min_matches": 2,
+        "label": "Anchor: Long context failures often come from missing a short exception note."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -3758,6 +5219,16 @@
         "snippet": "Summary: This archived note is stale because the current integration settings require both sides of the local integration to agree on the URL scheme."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Reference/Collabora Integration Settings.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Archive/Legacy SSL Integration.md"
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -3818,6 +5289,44 @@
       {
         "path": "Research/Socket Ownership Notes.md",
         "snippet": "Summary: The research note says ownership confusion can create duplicated updates, stale cursors, and hard-to-debug collaboration failures."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Meetings/Editing Latency Review.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Research/Socket Ownership Notes.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Meetings/Editing Latency Review.md",
+        "terms": [
+          "reviewer",
+          "noted",
+          "cursor",
+          "movement",
+          "looked",
+          "like"
+        ],
+        "min_matches": 2,
+        "label": "Summary: A reviewer noted that cursor movement looked like a rendering issue, but the follow-up pointed to shared editing state and connection ownership."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Research/Socket Ownership Notes.md",
+        "terms": [
+          "research",
+          "ownership",
+          "confusion",
+          "create",
+          "duplicated",
+          "updates"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The research note says ownership confusion can create duplicated updates, stale cursors, and hard-to-debug collaboration failures."
       }
     ],
     "forbidden_sources": [
@@ -3889,6 +5398,62 @@
         "snippet": "Summary: The research note says ownership confusion can create duplicated updates, stale cursors, and hard-to-debug collaboration failures."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Document Collaboration Rollout.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Reference/Collabora Integration Settings.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Research/Socket Ownership Notes.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Document Collaboration Rollout.md",
+        "terms": [
+          "rollout",
+          "tracks",
+          "risks",
+          "collaborative",
+          "document",
+          "editor"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The rollout note tracks risks for a collaborative document editor: endpoint configuration, latency during edits, and who owns socket state during document handoff."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Reference/Collabora Integration Settings.md",
+        "terms": [
+          "setting",
+          "matters",
+          "port",
+          "alone",
+          "browser-side",
+          "integration"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The setting that matters is not the port alone; the browser-side integration and the document server endpoint must use matching HTTP or HTTPS assumptions."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Research/Socket Ownership Notes.md",
+        "terms": [
+          "research",
+          "ownership",
+          "confusion",
+          "create",
+          "duplicated",
+          "updates"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The research note says ownership confusion can create duplicated updates, stale cursors, and hard-to-debug collaboration failures."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -3956,6 +5521,20 @@
       {
         "path": "Meetings/Editing Latency Review.md",
         "snippet": "Summary: A reviewer noted that cursor movement looked like a rendering issue, but the follow-up pointed to shared editing state and connection ownership."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_link",
+        "link": "[[Collabora Integration Settings]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Editing Latency Review]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Socket Ownership Notes]]"
       }
     ],
     "expected_links": [
@@ -4026,6 +5605,7 @@
         "snippet": "Summary: This archived note is stale because the current integration settings require both sides of the local integration to agree on the URL scheme."
       }
     ],
+    "expected_answer_checks": [],
     "expected_links": [
       "[[Legacy SSL Integration]]"
     ],
@@ -4098,6 +5678,16 @@
         "snippet": "Summary: The daily entry mentions a channel rollout blocker without naming a conversation or contact."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Assistant Channel Onboarding.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Daily/2026-05-22.md"
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -4158,6 +5748,44 @@
       {
         "path": "Archive/Old Channel Setup.md",
         "snippet": "Summary: This archive conflicts with the current onboarding order and is included to test stale setup guidance."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Assistant Channel Onboarding.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Archive/Old Channel Setup.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Assistant Channel Onboarding.md",
+        "terms": [
+          "onboarding",
+          "tracks",
+          "staged",
+          "rollout",
+          "messaging",
+          "channels"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The onboarding note tracks a staged rollout for messaging channels, with gateway setup first and per-channel pairing second."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Archive/Old Channel Setup.md",
+        "terms": [
+          "archive",
+          "conflicts",
+          "onboarding",
+          "order",
+          "included",
+          "test"
+        ],
+        "min_matches": 2,
+        "label": "Summary: This archive conflicts with the current onboarding order and is included to test stale setup guidance."
       }
     ],
     "forbidden_sources": [
@@ -4229,6 +5857,62 @@
         "snippet": "Summary: This archive conflicts with the current onboarding order and is included to test stale setup guidance."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Assistant Channel Onboarding.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Daily/2026-05-22.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Archive/Old Channel Setup.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Assistant Channel Onboarding.md",
+        "terms": [
+          "onboarding",
+          "tracks",
+          "staged",
+          "rollout",
+          "messaging",
+          "channels"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The onboarding note tracks a staged rollout for messaging channels, with gateway setup first and per-channel pairing second."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Daily/2026-05-22.md",
+        "terms": [
+          "daily",
+          "entry",
+          "mentions",
+          "channel",
+          "rollout",
+          "blocker"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The daily entry mentions a channel rollout blocker without naming a conversation or contact."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Archive/Old Channel Setup.md",
+        "terms": [
+          "archive",
+          "conflicts",
+          "onboarding",
+          "order",
+          "included",
+          "test"
+        ],
+        "min_matches": 2,
+        "label": "Summary: This archive conflicts with the current onboarding order and is included to test stale setup guidance."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -4290,6 +5974,44 @@
       {
         "path": "Reference/Gateway Environment Map.md",
         "snippet": "Summary: This reference maps runtime environment names to safe descriptions. Secrets and channel tokens are intentionally excluded."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Assistant Channel Onboarding.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Reference/Gateway Environment Map.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Assistant Channel Onboarding.md",
+        "terms": [
+          "onboarding",
+          "tracks",
+          "staged",
+          "rollout",
+          "messaging",
+          "channels"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The onboarding note tracks a staged rollout for messaging channels, with gateway setup first and per-channel pairing second."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Reference/Gateway Environment Map.md",
+        "terms": [
+          "reference",
+          "maps",
+          "runtime",
+          "environment",
+          "names",
+          "safe"
+        ],
+        "min_matches": 2,
+        "label": "Summary: This reference maps runtime environment names to safe descriptions. Secrets and channel tokens are intentionally excluded."
       }
     ],
     "forbidden_sources": [
@@ -4361,6 +6083,20 @@
         "snippet": "Summary: The onboarding note tracks a staged rollout for messaging channels, with gateway setup first and per-channel pairing second."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_link",
+        "link": "[[Hook Debugging Notes]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Assistant Channel Onboarding]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Personal Assistant Safety Review]]"
+      }
+    ],
     "expected_links": [
       "[[Hook Debugging Notes]]",
       "[[Assistant Channel Onboarding]]",
@@ -4426,6 +6162,16 @@
       {
         "path": "Research/Localized README Drift.md",
         "snippet": "Summary: The research note is a stale-source trap: translation structure is useful, but current install facts should come from canonical guidance."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Reference/OpenCode Install Matrix.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Research/Localized README Drift.md"
       }
     ],
     "forbidden_sources": [
@@ -4494,6 +6240,62 @@
       {
         "path": "Daily/2026-05-23.md",
         "snippet": "Summary: The daily note connects permission review to the migration work without exposing real terminal transcripts."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Meetings/Agent Permission Review.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Terminal Agent Migration.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Daily/2026-05-23.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Meetings/Agent Permission Review.md",
+        "terms": [
+          "runner",
+          "should",
+          "infer",
+          "write",
+          "permission",
+          "asks"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The review says a runner should not infer write permission from a task that only asks for analysis."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Terminal Agent Migration.md",
+        "terms": [
+          "migration",
+          "tracks",
+          "terminal",
+          "move",
+          "permission",
+          "modes"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The migration note tracks a terminal agent move where permission modes and output evidence have to stay comparable."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Daily/2026-05-23.md",
+        "terms": [
+          "daily",
+          "connects",
+          "permission",
+          "migration",
+          "work",
+          "exposing"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The daily note connects permission review to the migration work without exposing real terminal transcripts."
       }
     ],
     "forbidden_sources": [
@@ -4566,6 +6368,62 @@
         "snippet": "Summary: The review says a runner should not infer write permission from a task that only asks for analysis."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Terminal Agent Migration.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Reference/OpenCode Install Matrix.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Meetings/Agent Permission Review.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Terminal Agent Migration.md",
+        "terms": [
+          "migration",
+          "tracks",
+          "terminal",
+          "move",
+          "permission",
+          "modes"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The migration note tracks a terminal agent move where permission modes and output evidence have to stay comparable."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Reference/OpenCode Install Matrix.md",
+        "terms": [
+          "reference",
+          "avoids",
+          "treating",
+          "localized",
+          "setup",
+          "snippets"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The reference note avoids treating localized setup snippets as authoritative when the canonical install matrix has moved."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Meetings/Agent Permission Review.md",
+        "terms": [
+          "runner",
+          "should",
+          "infer",
+          "write",
+          "permission",
+          "asks"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The review says a runner should not infer write permission from a task that only asks for analysis."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -4630,6 +6488,7 @@
         "snippet": "Summary: The reference note avoids treating localized setup snippets as authoritative when the canonical install matrix has moved."
       }
     ],
+    "expected_answer_checks": [],
     "expected_links": [
       "[[OpenCode Install Matrix]]"
     ],
@@ -4702,6 +6561,44 @@
         "snippet": "Summary: The review says a runner should not infer write permission from a task that only asks for analysis."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Terminal Agent Migration.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Meetings/Agent Permission Review.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Terminal Agent Migration.md",
+        "terms": [
+          "migration",
+          "tracks",
+          "terminal",
+          "move",
+          "permission",
+          "modes"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The migration note tracks a terminal agent move where permission modes and output evidence have to stay comparable."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Meetings/Agent Permission Review.md",
+        "terms": [
+          "runner",
+          "should",
+          "infer",
+          "write",
+          "permission",
+          "asks"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The review says a runner should not infer write permission from a task that only asks for analysis."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -4765,6 +6662,16 @@
         "snippet": "Summary: The diagram tool launch note tracks install modes, release packaging, and viewport behavior for interactive diagrams."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Reference/Remote Local MCP Options.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Diagram MCP Launch.md"
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -4825,6 +6732,44 @@
       {
         "path": "Archive/Old Diagram Release Checklist.md",
         "snippet": "Summary: This archive is stale because the current release review separates packaging checks from deployment instructions."
+      }
+    ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Meetings/Diagram Tool Release Review.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Archive/Old Diagram Release Checklist.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Meetings/Diagram Tool Release Review.md",
+        "terms": [
+          "keeps",
+          "release",
+          "checklist",
+          "edits",
+          "separate",
+          "documentation"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The review keeps release checklist edits separate from documentation examples and viewport behavior notes."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Archive/Old Diagram Release Checklist.md",
+        "terms": [
+          "archive",
+          "stale",
+          "because",
+          "release",
+          "separates",
+          "packaging"
+        ],
+        "min_matches": 2,
+        "label": "Summary: This archive is stale because the current release review separates packaging checks from deployment instructions."
       }
     ],
     "forbidden_sources": [
@@ -4896,6 +6841,62 @@
         "snippet": "Summary: The research note is sparse but useful as a bridge between release review and user-facing diagram behavior."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_cite_source",
+        "path": "Projects/Diagram MCP Launch.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Reference/Remote Local MCP Options.md"
+      },
+      {
+        "type": "must_cite_source",
+        "path": "Research/Viewport Camera Notes.md"
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Projects/Diagram MCP Launch.md",
+        "terms": [
+          "diagram",
+          "tool",
+          "launch",
+          "tracks",
+          "install",
+          "modes"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The diagram tool launch note tracks install modes, release packaging, and viewport behavior for interactive diagrams."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Reference/Remote Local MCP Options.md",
+        "terms": [
+          "reference",
+          "distinguishes",
+          "remote",
+          "connector",
+          "setup",
+          "local"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The reference note distinguishes remote connector setup from local build-from-source setup."
+      },
+      {
+        "type": "must_include_terms",
+        "path": "Research/Viewport Camera Notes.md",
+        "terms": [
+          "research",
+          "sparse",
+          "useful",
+          "bridge",
+          "between",
+          "release"
+        ],
+        "min_matches": 2,
+        "label": "Summary: The research note is sparse but useful as a bridge between release review and user-facing diagram behavior."
+      }
+    ],
     "forbidden_sources": [
       "Restricted/Unshared Journal Placeholder.md",
       "Restricted/Local Profile Boundary.md",
@@ -4965,6 +6966,16 @@
         "snippet": "Summary: The research note is sparse but useful as a bridge between release review and user-facing diagram behavior."
       }
     ],
+    "expected_answer_checks": [
+      {
+        "type": "must_link",
+        "link": "[[Diagram MCP Launch]]"
+      },
+      {
+        "type": "must_link",
+        "link": "[[Viewport Camera Notes]]"
+      }
+    ],
     "expected_links": [
       "[[Diagram MCP Launch]]",
       "[[Viewport Camera Notes]]"
@@ -5032,6 +7043,7 @@
         "snippet": "Summary: The reference note distinguishes remote connector setup from local build-from-source setup."
       }
     ],
+    "expected_answer_checks": [],
     "expected_links": [
       "[[Remote Local MCP Options]]"
     ],

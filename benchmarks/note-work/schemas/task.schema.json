@@ -21,6 +21,7 @@
     "allowed_sources",
     "expected_sources",
     "expected_evidence",
+    "expected_answer_checks",
     "forbidden_sources",
     "mutation_policy",
     "allowed_edits",
@@ -115,6 +116,36 @@
         "properties": {
           "path": { "type": "string" },
           "snippet": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "expected_answer_checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "enum": [
+              "must_cite_source",
+              "must_include_terms",
+              "must_link",
+              "status_is"
+            ]
+          },
+          "path": { "type": "string" },
+          "terms": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "minItems": 1
+          },
+          "min_matches": { "type": "integer", "minimum": 1 },
+          "link": { "type": "string", "pattern": "^\\[\\[[^\\]]+\\]\\]$" },
+          "status": {
+            "enum": ["completed", "refused", "needs_clarification", "error"]
+          },
+          "label": { "type": "string" }
         }
       }
     },

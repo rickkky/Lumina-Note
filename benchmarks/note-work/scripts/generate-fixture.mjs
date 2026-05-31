@@ -565,6 +565,86 @@ const scopedSourceTaskIds = new Set([
   "boundary-long-context-specific-scope"
 ]);
 
+const answerCheckStopwords = new Set([
+  "about",
+  "across",
+  "agent",
+  "anchor",
+  "answer",
+  "before",
+  "benchmark",
+  "check",
+  "checks",
+  "current",
+  "does",
+  "from",
+  "gold",
+  "into",
+  "must",
+  "note",
+  "notes",
+  "only",
+  "path",
+  "paths",
+  "policy",
+  "review",
+  "rule",
+  "says",
+  "source",
+  "sources",
+  "summary",
+  "task",
+  "that",
+  "the",
+  "their",
+  "these",
+  "this",
+  "those",
+  "what",
+  "when",
+  "where",
+  "which",
+  "with",
+  "without"
+]);
+
+function answerCheckTerms(text) {
+  return Array.from(new Set((text.toLowerCase().match(/[a-z0-9-]+/g) ?? [])
+    .filter((token) => token.length >= 4 && !answerCheckStopwords.has(token))))
+    .slice(0, 6);
+}
+
+function expectedAnswerChecksFor(input, expectedSources, expectedEvidence) {
+  if (input.expected_answer_checks) return input.expected_answer_checks;
+  const checks = [];
+  if (["find", "search_compare", "synthesize", "boundary"].includes(input.family)) {
+    for (const sourcePath of expectedSources) {
+      checks.push({ type: "must_cite_source", path: sourcePath });
+    }
+  }
+  if (["search_compare", "synthesize", "boundary"].includes(input.family)) {
+    for (const evidence of expectedEvidence) {
+      const terms = answerCheckTerms(evidence.snippet);
+      if (terms.length > 0) {
+        checks.push({
+          type: "must_include_terms",
+          path: evidence.path,
+          terms,
+          min_matches: Math.min(2, terms.length),
+          label: evidence.snippet
+        });
+      }
+    }
+  }
+  for (const link of input.expected_links ?? []) {
+    if (input.family === "link") checks.push({ type: "must_link", link });
+  }
+  if (input.mutation_policy === "clarify_before_mutation") {
+    checks.push({ type: "status_is", status: "needs_clarification" });
+  }
+  return checks;
+}
+
 function sourceProfileFor(paths) {
   for (const sourcePath of paths) {
     const entry = noteByPath.get(sourcePath);
@@ -607,6 +687,7 @@ function makeTask(input) {
     allowed_sources: allowed,
     expected_sources: expected,
     expected_evidence: expectedEvidence,
+    expected_answer_checks: expectedAnswerChecksFor(input, expected, expectedEvidence),
     ...(input.expected_links ? { expected_links: input.expected_links } : {}),
     forbidden_sources: input.forbidden_sources ?? [
       "Restricted/Unshared Journal Placeholder.md",
