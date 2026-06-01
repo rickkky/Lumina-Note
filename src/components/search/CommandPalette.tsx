@@ -436,11 +436,17 @@ export function CommandPalette({ isOpen, mode, onClose, onModeChange }: CommandP
                         data-index={index}
                         data-selected={index === selectedIndex ? true : undefined}
                         onClick={() => executeItem(index)}
+                        // Hover/selected mirror the `Row` primitive
+                        // (src/components/ui/row.tsx). `hover:bg-foreground/5`
+                        // is required in image-skin mode — `hover:bg-muted`
+                        // is invisible there because `--muted` and
+                        // `--popover` derive from the same hue with only
+                        // ~3 lightness units of separation.
                         className={cn(
                           "w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors",
                           index === selectedIndex
                             ? "bg-accent text-accent-foreground"
-                            : "hover:bg-muted"
+                            : "hover:bg-foreground/5"
                         )}
                       >
                         <span className={cn("text-muted-foreground", isFeatured && "text-primary/80")}>
@@ -484,7 +490,7 @@ export function CommandPalette({ isOpen, mode, onClose, onModeChange }: CommandP
                         "w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors",
                         index === selectedIndex 
                           ? "bg-accent text-accent-foreground" 
-                          : "hover:bg-muted"
+                          : "hover:bg-foreground/5"
                       )}
                     >
                       <FileText size={16} className="text-muted-foreground shrink-0" />
