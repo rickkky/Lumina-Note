@@ -656,8 +656,8 @@ export default {
 
   // 顶部功能栏
   ribbon: {
-    commandPaletteTrigger: "命令面板 (Ctrl+P) — 一键唤起所有功能",
-    commandPaletteNewBadge: "项功能尚未尝试",
+    commandMenuTrigger: "命令面板 (Ctrl+P) — 一键唤起所有功能",
+    commandMenuNewBadge: "项功能尚未尝试",
     globalSearch: "全局搜索 (Ctrl+Shift+F)",
     aiChatMain: "AI 聊天（主视图）",
     fileEditor: "文件编辑器",
@@ -1080,12 +1080,14 @@ export default {
     close: "关闭",
   },
 
-  // 命令面板
-  commandPalette: {
+  // 命令菜单
+  commandMenu: {
     newNote: "新建笔记",
     newNoteDesc: "创建新的 Markdown 笔记",
-    quickOpen: "快速打开",
-    quickOpenDesc: "搜索并打开笔记",
+    newChat: "New Chat",
+    newChatDesc: "Start a fresh agent conversation",
+    openSkillManager: "Open Skill Manager",
+    openSkillManagerDesc: "Manage registered skills",
     toggleLeftSidebar: "切换左侧边栏",
     toggleLeftSidebarDesc: "显示/隐藏文件树",
     toggleRightSidebar: "切换右侧边栏",
@@ -1101,20 +1103,22 @@ export default {
     notSelected: "未选择",
     globalSearch: "全局搜索",
     globalSearchDesc: "在所有笔记中搜索内容",
-    commandPlaceholder: "输入命令...",
-    filePlaceholder: "输入文件名搜索...",
-    searchPlaceholder: "搜索笔记内容...",
-    commands: "命令",
-    files: "文件",
+    placeholder: "Type a command, file, or skill…",
     noResults: "没有找到匹配项",
     select: "选择",
     confirm: "确认",
-    switchMode: "切换模式",
     close: "关闭",
     discoverSection: "精选",
     recentSection: "最近使用",
     allCommandsSection: "全部命令",
     newBadge: "新",
+    groups: {
+      actions: "Actions",
+      navigation: "Navigation",
+      sessions: "Sessions",
+      skills: "Skills",
+      files: "Files",
+    },
   },
 
   // 标签栏

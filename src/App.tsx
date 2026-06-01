@@ -21,10 +21,8 @@ import { SplitEditor } from "@/components/layout/SplitEditor";
 import { useFileStore } from "@/stores/useFileStore";
 import { useUIStore } from "@/stores/useUIStore";
 import { useNoteIndexStore } from "@/stores/useNoteIndexStore";
-import {
-  CommandPalette,
-  PaletteMode,
-} from "@/components/search/CommandPalette";
+// Legacy CommandPalette import removed — Cmd+P now goes through the
+// unified <CommandMenuProvider/> in src/components/ui.
 import { TabBar } from "@/components/layout/TabBar";
 import { DiffView } from "@/components/effects/DiffView";
 import { ExtensionsCenterView } from "@/components/extensions/ExtensionsCenterModal";
@@ -337,8 +335,6 @@ function App() {
 
   // Get active tab
   const activeTab = activeTabIndex >= 0 ? tabs[activeTabIndex] : null;
-  const [paletteOpen, setPaletteOpen] = useState(false);
-  const [paletteMode, setPaletteMode] = useState<PaletteMode>("command");
   const [isLoadingVault, setIsLoadingVault] = useState(false);
   const [welcomePreview, setWelcomePreview] = useState(false);
   const welcomeTapRef = useRef<{
@@ -353,8 +349,7 @@ function App() {
   }, [vaultPath, createNewFile]);
 
   const handleQuickOpenFromNewTab = useCallback(() => {
-    setPaletteMode("file");
-    setPaletteOpen(true);
+    window.dispatchEvent(new CustomEvent("open-command-menu"));
   }, []);
 
   // Keep the workspace home concrete even when no persisted tab state exists.
@@ -878,22 +873,6 @@ function App() {
         return;
       }
 
-      // Ctrl+P: Command palette
-      if (isCtrl && e.key === "p") {
-        e.preventDefault();
-        setPaletteMode("command");
-        setPaletteOpen(true);
-        return;
-      }
-
-      // Ctrl+O: Quick open file
-      if (isCtrl && e.key === "o") {
-        e.preventDefault();
-        setPaletteMode("file");
-        setPaletteOpen(true);
-        return;
-      }
-
       // Ctrl+N: New file
       if (isCtrl && e.key === "n") {
         e.preventDefault();
@@ -969,7 +948,9 @@ function App() {
     [setVaultPath],
   );
 
-  // Listen for window-level entry actions dispatched from top-level chrome
+  // Listen for window-level entry actions dispatched from top-level chrome.
+  // The command menu (Cmd+P) is opened via <CommandMenuProvider/>'s own
+  // keydown + `open-command-menu` event listener.
   useEffect(() => {
     const onOpenVault = () => handleOpenVault();
     const onOpenSearch = () => {
@@ -977,16 +958,13 @@ function App() {
       if (!ui.leftSidebarOpen) ui.setLeftSidebarOpen(true);
       ui.setLeftSidebarMode("search");
     };
-    const onOpenCommandPalette = () => setPaletteOpen(true);
     window.addEventListener("open-vault", onOpenVault);
     window.addEventListener("open-global-search", onOpenSearch);
-    window.addEventListener("open-command-palette", onOpenCommandPalette);
     return () => {
       window.removeEventListener("open-vault", onOpenVault);
       window.removeEventListener("open-global-search", onOpenSearch);
-      window.removeEventListener("open-command-palette", onOpenCommandPalette);
     };
-  }, [handleOpenVault, setPaletteOpen]);
+  }, [handleOpenVault]);
 
   useEffect(() => {
     if (!vaultPath) return;
@@ -1163,215 +1141,217 @@ function App() {
           ref={layoutRef}
           className="flex-1 flex overflow-hidden transition-colors duration-300"
         >
-        <div className="flex min-h-0 flex-shrink-0 flex-col">
-          {showMacLeftPaneTopBar ? <MacLeftPaneTopBar /> : null}
+          <div className="flex min-h-0 flex-shrink-0 flex-col">
+            {showMacLeftPaneTopBar ? <MacLeftPaneTopBar /> : null}
 
-          <div className="flex min-h-0 flex-1">
-            {/* Left Ribbon (Icon Bar) */}
-            <div ref={ribbonRef} className="flex-shrink-0">
-              <Ribbon
-                showMacTrafficLightSafeArea={showMacRibbonTrafficLightSafeArea}
-                flushTopSpacing={showMacLeftPaneTopBar}
-              />
-            </div>
+            <div className="flex min-h-0 flex-1">
+              {/* Left Ribbon (Icon Bar) */}
+              <div ref={ribbonRef} className="flex-shrink-0">
+                <Ribbon
+                  showMacTrafficLightSafeArea={
+                    showMacRibbonTrafficLightSafeArea
+                  }
+                  flushTopSpacing={showMacLeftPaneTopBar}
+                />
+              </div>
 
-            {/* Left Sidebar (File Tree) */}
-            <div
-              data-side="left"
-              data-open={leftSidebarOpen ? "true" : "false"}
-              className={`app-sidebar-shell flex-shrink-0 ${
-                leftSidebarOpen ? "opacity-100" : "opacity-0"
-              }`}
-              style={{ width: leftSidebarOpen ? leftSidebarWidth : 0 }}
-            >
+              {/* Left Sidebar (File Tree) */}
               <div
-                className="app-sidebar-inner"
-                style={{ width: leftSidebarWidth }}
+                data-side="left"
+                data-open={leftSidebarOpen ? "true" : "false"}
+                className={`app-sidebar-shell flex-shrink-0 ${
+                  leftSidebarOpen ? "opacity-100" : "opacity-0"
+                }`}
+                style={{ width: leftSidebarOpen ? leftSidebarWidth : 0 }}
               >
-                <DevProfiler id="Sidebar">
-                  <PanelErrorBoundary label="Sidebar">
-                    <Sidebar
-                      onSwitchVault={() => useFileStore.getState().clearVault()}
-                    />
-                  </PanelErrorBoundary>
-                </DevProfiler>
+                <div
+                  className="app-sidebar-inner"
+                  style={{ width: leftSidebarWidth }}
+                >
+                  <DevProfiler id="Sidebar">
+                    <PanelErrorBoundary label="Sidebar">
+                      <Sidebar
+                        onSwitchVault={() =>
+                          useFileStore.getState().clearVault()
+                        }
+                      />
+                    </PanelErrorBoundary>
+                  </DevProfiler>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Left Resize Handle - VS Code 风格，始终显示，可拖拽展开/折叠 */}
-        <div className="relative flex-shrink-0 h-full z-20 bg-popover dark:bg-background">
-          <ResizeHandle
-            direction="left"
-            onResize={handleLeftResize}
-            onDoubleClick={toggleLeftSidebar}
-          />
-        </div>
+          {/* Left Resize Handle - VS Code 风格，始终显示，可拖拽展开/折叠 */}
+          <div className="relative flex-shrink-0 h-full z-20 bg-popover dark:bg-background">
+            <ResizeHandle
+              direction="left"
+              onResize={handleLeftResize}
+              onDoubleClick={toggleLeftSidebar}
+            />
+          </div>
 
-        {/* Main content - switches between Editor, Graph, Split, Diff and AI Chat based on state */}
-        <main
-          className={`relative flex flex-col overflow-hidden min-w-0 bg-popover dark:bg-background transition-[width,opacity] duration-200 ${
-            isMainCollapsed
-              ? "flex-none w-0 opacity-0 pointer-events-none"
-              : "flex-1 w-auto opacity-100"
-          }`}
-        >
-          <PanelErrorBoundary label="Editor">
-            <div className="flex h-full min-h-0 flex-col bg-popover dark:bg-background">
-              <TabBar />
-              <div className="flex min-h-0 flex-1 overflow-hidden">
-                {pendingDiff && activeTab?.type !== "ai-chat" ? (
-                  // Show diff view when there's a pending AI edit (non chat context)
-                  <DiffViewWrapper />
-                ) : activeTab?.type === "pdf" && activeTab.path ? (
-                  // PDF 标签页
-                  <div className={MAIN_CONTENT_PANE_CLASS}>
-                    <PDFViewer filePath={activeTab.path} className="flex-1" />
-                  </div>
-                ) : activeTab?.type === "image" && activeTab.path ? (
-                  <div className={MAIN_CONTENT_PANE_CLASS}>
-                    <ImageViewer filePath={activeTab.path} className="flex-1" />
-                  </div>
-                ) : activeTab?.type === "diagram" && activeTab.path ? (
-                  <div
-                    className={`${MAIN_CONTENT_PANE_CLASS}${isDarkMode ? " !bg-[hsl(var(--diagram-surface))]" : ""}`}
-                  >
-                    <Suspense
-                      fallback={
-                        <div className="flex flex-1 items-center justify-center text-ui-control text-muted-foreground">
-                          {t.diagramView.loadingEditor}
-                        </div>
-                      }
-                    >
-                      <DiagramView
-                        key={activeTab.path}
+          {/* Main content - switches between Editor, Graph, Split, Diff and AI Chat based on state */}
+          <main
+            className={`relative flex flex-col overflow-hidden min-w-0 bg-popover dark:bg-background transition-[width,opacity] duration-200 ${
+              isMainCollapsed
+                ? "flex-none w-0 opacity-0 pointer-events-none"
+                : "flex-1 w-auto opacity-100"
+            }`}
+          >
+            <PanelErrorBoundary label="Editor">
+              <div className="flex h-full min-h-0 flex-col bg-popover dark:bg-background">
+                <TabBar />
+                <div className="flex min-h-0 flex-1 overflow-hidden">
+                  {pendingDiff && activeTab?.type !== "ai-chat" ? (
+                    // Show diff view when there's a pending AI edit (non chat context)
+                    <DiffViewWrapper />
+                  ) : activeTab?.type === "pdf" && activeTab.path ? (
+                    // PDF 标签页
+                    <div className={MAIN_CONTENT_PANE_CLASS}>
+                      <PDFViewer filePath={activeTab.path} className="flex-1" />
+                    </div>
+                  ) : activeTab?.type === "image" && activeTab.path ? (
+                    <div className={MAIN_CONTENT_PANE_CLASS}>
+                      <ImageViewer
                         filePath={activeTab.path}
-                        externalContent={activeTab.content || undefined}
                         className="flex-1"
                       />
-                    </Suspense>
-                  </div>
-                ) : activeTab?.type === "image-manager" ? (
-                  <div className={MAIN_CONTENT_PANE_CLASS}>
-                    <ImageManagerView />
-                  </div>
-                ) : activeTab?.type === "extensions-center" ? (
-                  <div className={MAIN_CONTENT_PANE_CLASS}>
-                    <ExtensionsCenterView
-                      initialTab={activeTab.extensionsCenterTab ?? "plugins"}
-                    />
-                  </div>
-                ) : activeTab?.type === "plugin-view" ? (
-                  <div className={MAIN_CONTENT_PANE_CLASS}>
-                    <PluginViewPane
-                      title={activeTab.name}
-                      html={activeTab.pluginViewHtml || "<p>Empty plugin view</p>"}
-                      scopeId={activeTab.pluginViewType}
-                      onAction={(action, data) => {
-                        const scopedType = activeTab.pluginViewType;
-                        if (!scopedType) return;
-                        const actions = pluginRuntime.getTabActions(scopedType);
-                        const handler = actions[action];
-                        if (handler) {
-                          void handler(data);
-                        } else {
-                          console.warn(
-                            `[PluginViewPane] No handler for action "${action}" on tab type "${scopedType}"`,
-                          );
+                    </div>
+                  ) : activeTab?.type === "diagram" && activeTab.path ? (
+                    <div
+                      className={`${MAIN_CONTENT_PANE_CLASS}${isDarkMode ? " !bg-[hsl(var(--diagram-surface))]" : ""}`}
+                    >
+                      <Suspense
+                        fallback={
+                          <div className="flex flex-1 items-center justify-center text-ui-control text-muted-foreground">
+                            {t.diagramView.loadingEditor}
+                          </div>
                         }
-                      }}
+                      >
+                        <DiagramView
+                          key={activeTab.path}
+                          filePath={activeTab.path}
+                          externalContent={activeTab.content || undefined}
+                          className="flex-1"
+                        />
+                      </Suspense>
+                    </div>
+                  ) : activeTab?.type === "image-manager" ? (
+                    <div className={MAIN_CONTENT_PANE_CLASS}>
+                      <ImageManagerView />
+                    </div>
+                  ) : activeTab?.type === "extensions-center" ? (
+                    <div className={MAIN_CONTENT_PANE_CLASS}>
+                      <ExtensionsCenterView
+                        initialTab={activeTab.extensionsCenterTab ?? "plugins"}
+                      />
+                    </div>
+                  ) : activeTab?.type === "plugin-view" ? (
+                    <div className={MAIN_CONTENT_PANE_CLASS}>
+                      <PluginViewPane
+                        title={activeTab.name}
+                        html={
+                          activeTab.pluginViewHtml || "<p>Empty plugin view</p>"
+                        }
+                        scopeId={activeTab.pluginViewType}
+                        onAction={(action, data) => {
+                          const scopedType = activeTab.pluginViewType;
+                          if (!scopedType) return;
+                          const actions =
+                            pluginRuntime.getTabActions(scopedType);
+                          const handler = actions[action];
+                          if (handler) {
+                            void handler(data);
+                          } else {
+                            console.warn(
+                              `[PluginViewPane] No handler for action "${action}" on tab type "${scopedType}"`,
+                            );
+                          }
+                        }}
+                      />
+                    </div>
+                  ) : activeTab?.type === "ai-chat" ? (
+                    // 主视图区 AI 聊天标签页，交给 Editor 内部根据 tab 类型渲染
+                    <Editor />
+                  ) : splitView && currentFile ? (
+                    // Show split editor when enabled
+                    <SplitEditor />
+                  ) : activeTab?.type === "graph" ||
+                    activeTab?.type === "isolated-graph" ? (
+                    // 图谱标签页
+                    <EditorWithGraph
+                      onCreateNewFile={handleCreateFileFromNewTab}
+                      onQuickOpen={handleQuickOpenFromNewTab}
                     />
-                  </div>
-                ) : activeTab?.type === "ai-chat" ? (
-                  // 主视图区 AI 聊天标签页，交给 Editor 内部根据 tab 类型渲染
-                  <Editor />
-                ) : splitView && currentFile ? (
-                  // Show split editor when enabled
-                  <SplitEditor />
-                ) : activeTab?.type === "graph" ||
-                  activeTab?.type === "isolated-graph" ? (
-                  // 图谱标签页
-                  <EditorWithGraph
-                    onCreateNewFile={handleCreateFileFromNewTab}
-                    onQuickOpen={handleQuickOpenFromNewTab}
-                  />
-                ) : activeTab?.type === "file" ? (
-                  // 文件编辑
-                  <Editor />
-                ) : (
-                  // 空状态或其他标签页类型 - 统一使用 EditorWithGraph 保持 TabBar 一致
-                  <EditorWithGraph
-                    onCreateNewFile={handleCreateFileFromNewTab}
-                    onQuickOpen={handleQuickOpenFromNewTab}
-                  />
-                )}
+                  ) : activeTab?.type === "file" ? (
+                    // 文件编辑
+                    <Editor />
+                  ) : (
+                    // 空状态或其他标签页类型 - 统一使用 EditorWithGraph 保持 TabBar 一致
+                    <EditorWithGraph
+                      onCreateNewFile={handleCreateFileFromNewTab}
+                      onQuickOpen={handleQuickOpenFromNewTab}
+                    />
+                  )}
+                </div>
               </div>
-            </div>
-          </PanelErrorBoundary>
-        </main>
+            </PanelErrorBoundary>
+          </main>
 
-        {isMainCollapsed ? (
-          <CollapsedMainSidebarControls
-            leftSidebarOpen={leftSidebarOpen}
-            rightSidebarOpen={rightSidebarOpen}
-            leftSidebarLabel={leftSidebarToggleLabel}
-            rightSidebarLabel={rightSidebarToggleLabel}
-            onToggleLeftSidebar={toggleLeftSidebar}
-            onToggleRightSidebar={toggleRightSidebar}
-          />
-        ) : null}
+          {isMainCollapsed ? (
+            <CollapsedMainSidebarControls
+              leftSidebarOpen={leftSidebarOpen}
+              rightSidebarOpen={rightSidebarOpen}
+              leftSidebarLabel={leftSidebarToggleLabel}
+              rightSidebarLabel={rightSidebarToggleLabel}
+              onToggleLeftSidebar={toggleLeftSidebar}
+              onToggleRightSidebar={toggleRightSidebar}
+            />
+          ) : null}
 
-        {/* Right Resize Handle - VS Code 风格，始终显示，可拖拽展开/折叠 */}
-        <div className="relative flex-shrink-0 h-full z-20 bg-popover">
-          <ResizeHandle
-            direction="right"
-            onResize={handleRightResize}
-            onDoubleClick={toggleRightSidebar}
-          />
-        </div>
+          {/* Right Resize Handle - VS Code 风格，始终显示，可拖拽展开/折叠 */}
+          <div className="relative flex-shrink-0 h-full z-20 bg-popover">
+            <ResizeHandle
+              direction="right"
+              onResize={handleRightResize}
+              onDoubleClick={toggleRightSidebar}
+            />
+          </div>
 
-        {/* Right Sidebar */}
-        <div
-          data-side="right"
-          data-open={rightSidebarOpen ? "true" : "false"}
-          className={`app-sidebar-shell ${
-            rightSidebarOpen ? "opacity-100" : "opacity-0"
-          } ${isMainCollapsed && rightSidebarOpen ? "min-w-0 flex-1" : "flex-shrink-0"}`}
-          style={{
-            width:
-              rightSidebarOpen && !isMainCollapsed
-                ? rightSidebarWidth
-                : rightSidebarOpen
-                  ? undefined
-                  : 0,
-          }}
-        >
+          {/* Right Sidebar */}
           <div
-            className="app-sidebar-inner"
+            data-side="right"
+            data-open={rightSidebarOpen ? "true" : "false"}
+            className={`app-sidebar-shell ${
+              rightSidebarOpen ? "opacity-100" : "opacity-0"
+            } ${isMainCollapsed && rightSidebarOpen ? "min-w-0 flex-1" : "flex-shrink-0"}`}
             style={{
               width:
-                isMainCollapsed && rightSidebarOpen
-                  ? "100%"
-                  : rightSidebarWidth,
+                rightSidebarOpen && !isMainCollapsed
+                  ? rightSidebarWidth
+                  : rightSidebarOpen
+                    ? undefined
+                    : 0,
             }}
           >
-            <DevProfiler id="RightPanel">
-              <RightPanel />
-            </DevProfiler>
+            <div
+              className="app-sidebar-inner"
+              style={{
+                width:
+                  isMainCollapsed && rightSidebarOpen
+                    ? "100%"
+                    : rightSidebarWidth,
+              }}
+            >
+              <DevProfiler id="RightPanel">
+                <RightPanel />
+              </DevProfiler>
+            </div>
           </div>
         </div>
-        </div>
 
-        {/* Command Palette */}
-        <CommandPalette
-          isOpen={paletteOpen}
-          mode={paletteMode}
-          onClose={() => setPaletteOpen(false)}
-          onModeChange={setPaletteMode}
-        />
-
-        {/* Cmd+K command palette */}
+        {/* Command Menu (Cmd+P) */}
         <CommandMenuProvider />
         <CommandMenu />
 

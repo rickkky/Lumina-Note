@@ -1,32 +1,38 @@
 import { useEffect } from "react";
-import { Plus, Settings as SettingsIcon, PanelLeft, PanelRight } from "lucide-react";
-import { useCommandMenu, type CommandItem } from "@/stores/useCommandMenu";
-import { useUIStore } from "@/stores/useUIStore";
-import { useOpencodeAgent } from "@/stores/useOpencodeAgent";
+import { useCommandMenu } from "@/stores/useCommandMenu";
+import {
+  useAppActionsSource,
+  useAppFilesSource,
+  useAppNavigationSource,
+  useAppPluginsSource,
+} from "./command-menu/sources";
+
+const OPEN_COMMAND_MENU_EVENT = "open-command-menu";
 
 /**
- * CommandMenuProvider — installs the global Cmd/Ctrl+K shortcut and
- * registers the baseline set of app-level commands (new chat, open
- * settings, toggle sidebars). Other feature hooks register their own
- * commands via useCommandMenu.registerSource.
+ * CommandMenuProvider — installs the global Cmd/Ctrl+P shortcut and
+ * registers the four built-in app sources (actions, navigation, files,
+ * plugins). Mount once at the App root, above any route switch.
  *
- * Mount once at the App root, above any route switch.
+ * Other feature hooks can call `useCommandMenu.registerSource(id, items)`
+ * from anywhere in the tree to add their own commands.
  */
 export function CommandMenuProvider() {
-  const { toggle, registerSource, unregisterSource } = useCommandMenu();
-  const toggleLeftSidebar = useUIStore((s) => s.toggleLeftSidebar);
-  const toggleRightSidebar = useUIStore((s) => s.toggleRightSidebar);
-  const setSkillManagerOpen = useUIStore((s) => s.setSkillManagerOpen);
-  const newSession = useOpencodeAgent((s) => s.newSession);
+  const { toggle, setOpen, registerSource, unregisterSource } =
+    useCommandMenu();
+  const actions = useAppActionsSource();
+  const navigation = useAppNavigationSource();
+  const files = useAppFilesSource();
+  const plugins = useAppPluginsSource();
 
-  // Cmd/Ctrl+K — open/close the palette.
+  // Cmd/Ctrl+P — open/close the palette.
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       const isMod = e.metaKey || e.ctrlKey;
       if (!isMod) return;
-      if (e.key !== "k" && e.key !== "K") return;
-      // Don't intercept Cmd+K inside a text input that already handles it
-      // (e.g. Markdown link insertion in the editor).
+      if (e.key !== "p" && e.key !== "P") return;
+      // Don't fire inside a text input that already handles it (e.g. the
+      // editor's own Cmd+P for print).
       const target = e.target as HTMLElement | null;
       if (target?.closest?.(".cm-editor, .ProseMirror")) return;
       e.preventDefault();
@@ -36,58 +42,32 @@ export function CommandMenuProvider() {
     return () => document.removeEventListener("keydown", handleKey);
   }, [toggle]);
 
-  // Register the baseline commands.
+  // External open trigger (Ribbon click, future menu items).
   useEffect(() => {
-    const items: CommandItem[] = [
-      {
-        id: "action.new-chat",
-        group: "actions",
-        title: "New chat",
-        description: "Start a fresh agent conversation",
-        icon: <Plus size={16} />,
-        shortcut: "⌘N",
-        keywords: ["new", "chat", "conversation", "session"],
-        run: () => {
-          void newSession();
-        },
-      },
-      {
-        id: "nav.open-skill-manager",
-        group: "navigation",
-        title: "Open skill manager",
-        description: "Manage registered skills",
-        icon: <SettingsIcon size={16} />,
-        keywords: ["skill", "manager"],
-        run: () => setSkillManagerOpen(true),
-      },
-      {
-        id: "nav.toggle-left-sidebar",
-        group: "navigation",
-        title: "Toggle left sidebar",
-        icon: <PanelLeft size={16} />,
-        shortcut: "⌘B",
-        keywords: ["sidebar", "left", "navigation", "explorer"],
-        run: () => toggleLeftSidebar(),
-      },
-      {
-        id: "nav.toggle-right-sidebar",
-        group: "navigation",
-        title: "Toggle right sidebar",
-        icon: <PanelRight size={16} />,
-        keywords: ["sidebar", "right", "outline"],
-        run: () => toggleRightSidebar(),
-      },
-    ];
-    registerSource("app.baseline", items);
-    return () => unregisterSource("app.baseline");
-  }, [
-    newSession,
-    registerSource,
-    setSkillManagerOpen,
-    toggleLeftSidebar,
-    toggleRightSidebar,
-    unregisterSource,
-  ]);
+    const onOpen = () => setOpen(true);
+    window.addEventListener(OPEN_COMMAND_MENU_EVENT, onOpen);
+    return () => window.removeEventListener(OPEN_COMMAND_MENU_EVENT, onOpen);
+  }, [setOpen]);
+
+  useEffect(() => {
+    registerSource("app.actions", actions);
+    return () => unregisterSource("app.actions");
+  }, [actions, registerSource, unregisterSource]);
+
+  useEffect(() => {
+    registerSource("app.navigation", navigation);
+    return () => unregisterSource("app.navigation");
+  }, [navigation, registerSource, unregisterSource]);
+
+  useEffect(() => {
+    registerSource("app.files", files);
+    return () => unregisterSource("app.files");
+  }, [files, registerSource, unregisterSource]);
+
+  useEffect(() => {
+    registerSource("app.plugins", plugins);
+    return () => unregisterSource("app.plugins");
+  }, [plugins, registerSource, unregisterSource]);
 
   return null;
 }

@@ -656,8 +656,8 @@ export default {
 
   // 頂部功能列
   ribbon: {
-    commandPaletteTrigger: "命令面板 (Ctrl+P) — 一鍵喚起所有功能",
-    commandPaletteNewBadge: "項功能尚未嘗試",
+    commandMenuTrigger: "命令面板 (Ctrl+P) — 一鍵喚起所有功能",
+    commandMenuNewBadge: "項功能尚未嘗試",
     globalSearch: "全域搜尋 (Ctrl+Shift+F)",
     aiChatMain: "AI 聊天（主視圖）",
     fileEditor: "檔案編輯器",
@@ -1304,12 +1304,14 @@ export default {
     close: "關閉",
   },
 
-  // 命令面板
-  commandPalette: {
+  // 命令選單
+  commandMenu: {
     newNote: "新增筆記",
     newNoteDesc: "建立新的 Markdown 筆記",
-    quickOpen: "快速開啟",
-    quickOpenDesc: "搜尋並開啟筆記",
+    newChat: "New Chat",
+    newChatDesc: "Start a fresh agent conversation",
+    openSkillManager: "Open Skill Manager",
+    openSkillManagerDesc: "Manage registered skills",
     toggleLeftSidebar: "切換左側邊欄",
     toggleLeftSidebarDesc: "顯示/隱藏檔案樹",
     toggleRightSidebar: "切換右側邊欄",
@@ -1325,20 +1327,22 @@ export default {
     notSelected: "未選擇",
     globalSearch: "全域搜尋",
     globalSearchDesc: "在所有筆記中搜尋內容",
-    commandPlaceholder: "輸入命令...",
-    filePlaceholder: "輸入檔案名搜尋...",
-    searchPlaceholder: "搜尋筆記內容...",
-    commands: "命令",
-    files: "檔案",
+    placeholder: "Type a command, file, or skill…",
     noResults: "沒有找到匹配項",
     select: "選擇",
     confirm: "確認",
-    switchMode: "切換模式",
     close: "關閉",
     discoverSection: "精選",
     recentSection: "最近使用",
     allCommandsSection: "全部命令",
     newBadge: "新",
+    groups: {
+      actions: "Actions",
+      navigation: "Navigation",
+      sessions: "Sessions",
+      skills: "Skills",
+      files: "Files",
+    },
   },
 
   // 標籤列

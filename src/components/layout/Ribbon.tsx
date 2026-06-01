@@ -337,10 +337,10 @@ export function Ribbon({
               tries each featured capability. */}
           <button
             onClick={() => {
-              window.dispatchEvent(new CustomEvent("open-command-palette"));
+              window.dispatchEvent(new CustomEvent("open-command-menu"));
             }}
             className="w-9 h-9 ui-icon-btn relative hover:!bg-primary/10 hover:!text-primary"
-            title={t.ribbon.commandPaletteTrigger}
+            title={t.ribbon.commandMenuTrigger}
           >
             <Command size={20} />
             {unseenFeatured > 0 && (
@@ -350,7 +350,7 @@ export function Ribbon({
                   className="absolute top-1 right-1 w-2 h-2 rounded-full bg-primary"
                 />
                 <span className="sr-only">
-                  {unseenFeatured} {t.ribbon.commandPaletteNewBadge}
+                  {unseenFeatured} {t.ribbon.commandMenuNewBadge}
                 </span>
               </>
             )}

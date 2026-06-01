@@ -670,9 +670,9 @@ export default {
 
   // Ribbon tooltips
   ribbon: {
-    commandPaletteTrigger:
+    commandMenuTrigger:
       "Command Palette (Ctrl+P) — every action, one tap away",
-    commandPaletteNewBadge: "features you haven't tried yet",
+    commandMenuNewBadge: "features you haven't tried yet",
     globalSearch: "Global Search (Ctrl+Shift+F)",
     aiChatMain: "AI Chat (Main View)",
     fileEditor: "File Editor",
@@ -1105,12 +1105,14 @@ export default {
     close: "Close",
   },
 
-  // Command Palette
-  commandPalette: {
+  // Command Menu
+  commandMenu: {
     newNote: "New Note",
     newNoteDesc: "Create new Markdown note",
-    quickOpen: "Quick Open",
-    quickOpenDesc: "Search and open notes",
+    newChat: "New Chat",
+    newChatDesc: "Start a fresh agent conversation",
+    openSkillManager: "Open Skill Manager",
+    openSkillManagerDesc: "Manage registered skills",
     toggleLeftSidebar: "Toggle Left Sidebar",
     toggleLeftSidebarDesc: "Show/hide file tree",
     toggleRightSidebar: "Toggle Right Sidebar",
@@ -1126,20 +1128,22 @@ export default {
     notSelected: "Not selected",
     globalSearch: "Global Search",
     globalSearchDesc: "Search all note contents",
-    commandPlaceholder: "Type a command...",
-    filePlaceholder: "Search file name...",
-    searchPlaceholder: "Search note contents...",
-    commands: "Commands",
-    files: "Files",
+    placeholder: "Type a command, file, or skill…",
     noResults: "No matches found",
     select: "Select",
     confirm: "Confirm",
-    switchMode: "Switch mode",
     close: "Close",
     discoverSection: "Discover",
     recentSection: "Recently used",
     allCommandsSection: "All commands",
     newBadge: "New",
+    groups: {
+      actions: "Actions",
+      navigation: "Navigation",
+      sessions: "Sessions",
+      skills: "Skills",
+      files: "Files",
+    },
   },
 
   // Tab Bar

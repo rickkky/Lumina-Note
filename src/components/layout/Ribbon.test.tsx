@@ -54,8 +54,8 @@ vi.mock("@/stores/useLocaleStore", () => ({
         title: "Graph",
       },
       ribbon: {
-        commandPaletteTrigger: "Command Palette",
-        commandPaletteNewBadge: "New",
+        commandMenuTrigger: "Command Palette",
+        commandMenuNewBadge: "New",
         globalSearch: "Global Search",
         aiChatMain: "AI Chat",
         fileEditor: "Files",
@@ -188,9 +188,9 @@ describe("Ribbon", () => {
     expect(
       screen.getByTestId("mac-ribbon-traffic-lights-safe-area"),
     ).not.toHaveClass("border-r");
-    expect(screen.getByTestId("mac-ribbon-traffic-lights-safe-area")).not.toHaveClass(
-      "shadow-[0_1px_0_hsl(var(--border)/0.5)]",
-    );
+    expect(
+      screen.getByTestId("mac-ribbon-traffic-lights-safe-area"),
+    ).not.toHaveClass("shadow-[0_1px_0_hsl(var(--border)/0.5)]");
     expect(screen.getByTestId("ribbon-content")).not.toHaveClass(
       "shadow-[inset_-1px_0_0_hsl(var(--border)/0.6)]",
     );
@@ -213,7 +213,9 @@ describe("Ribbon", () => {
 
     const commandButton = screen.getByTitle("Command Palette");
     expect(commandButton).toHaveTextContent("3 New");
-    expect(commandButton.querySelector(".animate-ping")).not.toBeInTheDocument();
+    expect(
+      commandButton.querySelector(".animate-ping"),
+    ).not.toBeInTheDocument();
     expect(
       commandButton.querySelectorAll(
         ".absolute.top-1.right-1.w-2.h-2.rounded-full.bg-primary",

@@ -663,9 +663,9 @@ export default {
 
   // リボン
   ribbon: {
-    commandPaletteTrigger:
+    commandMenuTrigger:
       "コマンドパレット (Ctrl+P) — すべての機能をワンタップで",
-    commandPaletteNewBadge: "件の未体験機能",
+    commandMenuNewBadge: "件の未体験機能",
     globalSearch: "全体検索 (Ctrl+Shift+F)",
     aiChatMain: "AI チャット（メインビュー）",
     fileEditor: "ファイルエディタ",
@@ -1332,12 +1332,14 @@ export default {
     close: "閉じる",
   },
 
-  // コマンドパレット
-  commandPalette: {
+  // コマンドメニュー
+  commandMenu: {
     newNote: "新規ノート",
     newNoteDesc: "新しい Markdown ノートを作成",
-    quickOpen: "クイックオープン",
-    quickOpenDesc: "ノートを検索して開く",
+    newChat: "New Chat",
+    newChatDesc: "Start a fresh agent conversation",
+    openSkillManager: "Open Skill Manager",
+    openSkillManagerDesc: "Manage registered skills",
     toggleLeftSidebar: "左サイドバー切替",
     toggleLeftSidebarDesc: "ファイルツリーの表示/非表示",
     toggleRightSidebar: "右サイドバー切替",
@@ -1353,20 +1355,22 @@ export default {
     notSelected: "未選択",
     globalSearch: "グローバル検索",
     globalSearchDesc: "すべてのノートで内容を検索",
-    commandPlaceholder: "コマンドを入力...",
-    filePlaceholder: "ファイル名で検索...",
-    searchPlaceholder: "ノート内容を検索...",
-    commands: "コマンド",
-    files: "ファイル",
+    placeholder: "Type a command, file, or skill…",
     noResults: "一致する項目がありません",
     select: "選択",
     confirm: "確認",
-    switchMode: "モード切替",
     close: "閉じる",
     discoverSection: "ピックアップ",
     recentSection: "最近の操作",
     allCommandsSection: "すべてのコマンド",
     newBadge: "新着",
+    groups: {
+      actions: "Actions",
+      navigation: "Navigation",
+      sessions: "Sessions",
+      skills: "Skills",
+      files: "Files",
+    },
   },
 
   // タブバー
